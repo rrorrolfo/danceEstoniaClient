@@ -9,6 +9,8 @@ class ResultsContainer extends Component {
     return (
       <Container>
         <ResultCard />
+        <ResultCard />
+        <ResultCard />
       </Container>
     );
   }
