@@ -33,15 +33,16 @@
   font-size: 1.75rem;
 }
 
-.ctas-container {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
+.category-cta {
+  background-color: var(--blue-estonia);
+  flex-basis: 45%;
+  margin-top: 25px;
 }
 
-.cta-style {
-  margin-top: 25px;
-  margin-bottom: 15px;
-  background-color: var(--blue-estonia);
-  margin-right: 25px;
+.category-cta:first-child {
+  margin-right: 5%;
+}
+
+.category-cta a {
+  color: #fff;
 }

@@ -1,8 +1,8 @@
 import React from 'react';
-import { Jumbotron, Button, Container, ButtonGroup } from 'react-bootstrap';
+import { Jumbotron, Container, Nav } from 'react-bootstrap';
 import './jumbotron.css';
 
-const MainJumbotron = () => {
+const MainJumbotron = ({ match }) => {
   return (
     <Jumbotron>
       <div className="overlay" />
@@ -11,10 +11,18 @@ const MainJumbotron = () => {
           Find the best dancing events in Estonia
         </h1>
         <p>Find the best dancing events in Estonia</p>
-        <ButtonGroup className="mt-3 ctas-container">
-          <Button className="cta-style">Events</Button>
-          <Button className="cta-style">Festivals</Button>
-        </ButtonGroup>
+        <Nav
+          defaultActiveKey={`/${match.params.category}`}
+          as="ul"
+          className="justify-content-center"
+        >
+          <Nav.Item as="li" className="category-cta">
+            <Nav.Link href="/events">Events</Nav.Link>
+          </Nav.Item>
+          <Nav.Item as="li" className="category-cta">
+            <Nav.Link href="/festivals">Festivals</Nav.Link>
+          </Nav.Item>
+        </Nav>
       </Container>
     </Jumbotron>
   );
