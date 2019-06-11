@@ -4,11 +4,11 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import App from './containers/App';
-import eventsReducer from './reducers/events';
+import appReducer from './reducers';
 /* import * as serviceWorker from './serviceWorker/serviceWorker'; */
 
 const store = createStore(
-  eventsReducer,
+  appReducer,
   compose(
     applyMiddleware(thunk),
     window.devToolsExtension && window.devToolsExtension()
