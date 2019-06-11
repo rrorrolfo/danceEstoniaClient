@@ -1,7 +1,9 @@
+/* eslint-disable react/destructuring-assignment */
 import React, { Component } from 'react';
 import { Container } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { fetchEvents } from '../../actions/events';
+import { fetchFestivals } from '../../actions/festivals';
 import NavigationTabs from '../../components/tabs';
 import ResultCard from '../../components/resultCard';
 
@@ -9,8 +11,8 @@ class ResultsContainer extends Component {
   state = {};
 
   componentDidMount() {
-    // eslint-disable-next-line react/destructuring-assignment
     this.props.fetchEvents();
+    this.props.fetchFestivals();
   }
 
   render() {
@@ -28,12 +30,13 @@ class ResultsContainer extends Component {
 }
 
 const mapStateToProps = state => {
-  return { events: state.events };
+  return { events: state.events, festivals: state.festivals };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchEvents: () => dispatch(fetchEvents())
+    fetchEvents: () => dispatch(fetchEvents()),
+    fetchFestivals: () => dispatch(fetchFestivals())
   };
 };
 
