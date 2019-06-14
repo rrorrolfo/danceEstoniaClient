@@ -1,5 +1,5 @@
-import axios from 'axios';
 import * as eventsActionTypes from '../actionTypes/events';
+import apiRequest from '../requests/requests';
 
 export const fetchedStarted = () => {
   return {
@@ -25,12 +25,11 @@ export const fetchEvents = () => {
   return dispatch => {
     dispatch(fetchedStarted());
 
-    axios
-      .get('http://localhost:5000/events')
-      .then(response => {
-        const events = response.data;
-        dispatch(fetchedSuccess(events));
-      })
+    apiRequest({
+      method: 'GET',
+      url: 'http://localhost:5000/events'
+    })
+      .then(events => dispatch(fetchedSuccess(events)))
       .catch(error => dispatch(fetchedFailure(error)));
   };
 };
