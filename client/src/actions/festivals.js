@@ -27,7 +27,7 @@ export const fetchFestivals = () => {
 
     apiRequest({
       method: 'GET',
-      url: 'http://localhost:5000/festivals'
+      endPoint: '/festivals'
     })
       .then(festivals => dispatch(fetchedSuccess(festivals)))
       .catch(error => dispatch(fetchedFailure(error)));
