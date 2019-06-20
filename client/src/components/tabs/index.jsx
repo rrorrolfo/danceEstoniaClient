@@ -1,20 +1,20 @@
 import React from 'react';
 import Nav from 'react-bootstrap/Nav';
 
-const NavigationTabs = () => {
+const NavigationTabs = ({ category }) => {
   return (
     <Nav fill justify variant="tabs" defaultActiveKey="/home" as="ul">
       <Nav.Item as="li">
-        <Nav.Link href="/">All</Nav.Link>
+        <Nav.Link href={`/${category}`}>All</Nav.Link>
       </Nav.Item>
       <Nav.Item as="li">
-        <Nav.Link href="/">Salsa</Nav.Link>
+        <Nav.Link href={`/${category}/salsa`}>Salsa</Nav.Link>
       </Nav.Item>
       <Nav.Item as="li">
-        <Nav.Link href="/">Bachata</Nav.Link>
+        <Nav.Link href={`/${category}/bachata`}>Bachata</Nav.Link>
       </Nav.Item>
       <Nav.Item as="li">
-        <Nav.Link href="/">Kizomba</Nav.Link>
+        <Nav.Link href={`/${category}/kizomba`}>Kizomba</Nav.Link>
       </Nav.Item>
     </Nav>
   );

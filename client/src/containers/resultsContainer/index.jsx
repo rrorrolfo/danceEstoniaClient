@@ -2,6 +2,7 @@
 import React, { useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import { Route } from 'react-router-dom';
 import { fetchEvents } from '../../actions/events';
 import { fetchFestivals } from '../../actions/festivals';
 import NavigationTabs from '../../components/tabs';
@@ -31,12 +32,28 @@ const ResultsContainer = ({
 
   return (
     <Container>
-      <NavigationTabs />
-      <Container className="results-container">
-        {match.params.category === 'events'
-          ? displayResults(events)
-          : displayResults(festivals)}
-      </Container>
+      <NavigationTabs category={match.params.category} />
+      <Route
+        path={`/${match.params.category}`}
+        exact
+        render={() => (
+          <Container className="results-container">
+            {match.params.category === 'events'
+              ? displayResults(events)
+              : displayResults(festivals)}
+          </Container>
+        )}
+      />
+      <Route
+        path={`/${match.params.category}/:style`}
+        render={() => (
+          <Container className="results-container">
+            {match.params.category === 'events'
+              ? displayResults(events)
+              : displayResults(festivals)}
+          </Container>
+        )}
+      />
     </Container>
   );
 };
