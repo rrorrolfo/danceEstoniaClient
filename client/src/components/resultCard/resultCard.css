@@ -17,6 +17,7 @@
 
 .result-card-details {
   position: relative;
+  margin-bottom: 0;
 }
 
 .result-card-details::before {
@@ -27,4 +28,13 @@
   background-color: var(--blue-estonia);
   position: absolute;
   top: -7.5px;
+}
+
+.result-card-data {
+  border: 1px solid red;
+  margin: 0;
+}
+
+.result-card-description {
+  margin-top: 20px;
 }

@@ -6,26 +6,26 @@ import { fetchEvents } from '../../actions/events';
 import NavigationTabs from '../../components/tabs';
 import ResultCard from '../../components/resultCard';
 
-const ResultsContainer = ({ getEvents }) => {
+const ResultsContainer = ({ getEvents, events }) => {
   useEffect(() => {
     getEvents();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const displayResults = events.map(event => (
+    <ResultCard result={event} key={event._id} />
+  ));
+
   return (
     <Container>
       <NavigationTabs />
-      <Container className="results-container">
-        <ResultCard />
-        <ResultCard />
-        <ResultCard />
-      </Container>
+      <Container className="results-container">{displayResults}</Container>
     </Container>
   );
 };
 
 const mapStateToProps = state => {
-  return { events: state.events, festivals: state.festivals };
+  return { events: state.events.events };
 };
 
 const mapDispatchToProps = dispatch => {
