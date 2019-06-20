@@ -13,18 +13,12 @@ const App = () => {
         <Route path="/" exact render={() => <Redirect to="/events" />} />
         <Route
           path="/:category"
-          render={({ match }) =>
-            match.params.category === 'events' ||
-            match.params.category === 'festivals' ? (
-              <React.Fragment>
-                <MainJumbotron match={match} />
-                <ResultsContainer />
-              </React.Fragment>
-            ) : (
-              // Should be redirected to not found route
-              <Redirect to="/events" />
-            )
-          }
+          render={({ match }) => (
+            <React.Fragment>
+              <MainJumbotron match={match} />
+              <ResultsContainer match={match} />
+            </React.Fragment>
+          )}
         />
       </div>
     </BrowserRouter>
