@@ -3,23 +3,22 @@ import React, { useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
-import { fetchEvents } from '../../actions/events';
-import { fetchFestivals } from '../../actions/festivals';
 import NavigationTabs from '../../components/tabs';
 import ResultCard from '../../components/resultCard';
 
 const ResultsContainer = ({
-  getEvents,
-  getFestivals,
+  fetchEvents,
+  fetchFestivals,
   events,
   festivals,
   match
 }) => {
+  const { category } = match.params;
   useEffect(() => {
-    if (match.params.category === 'events') {
-      getEvents();
-    } else {
-      getFestivals();
+    if (category === 'events') {
+      fetchEvents();
+    } else if (category === 'festivals') {
+      fetchFestivals();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -32,23 +31,27 @@ const ResultsContainer = ({
 
   return (
     <Container>
-      <NavigationTabs category={match.params.category} />
+      <NavigationTabs
+        category={category}
+        fetchEvents={fetchEvents}
+        fetchFestivals={fetchFestivals}
+      />
       <Route
-        path={`/${match.params.category}`}
+        path={`/${category}`}
         exact
         render={() => (
           <Container className="results-container">
-            {match.params.category === 'events'
+            {category === 'events'
               ? displayResults(events)
               : displayResults(festivals)}
           </Container>
         )}
       />
       <Route
-        path={`/${match.params.category}/:style`}
+        path={`/${category}/:style`}
         render={() => (
           <Container className="results-container">
-            {match.params.category === 'events'
+            {category === 'events'
               ? displayResults(events)
               : displayResults(festivals)}
           </Container>
@@ -62,14 +65,4 @@ const mapStateToProps = state => {
   return { events: state.events.events, festivals: state.festivals.festivals };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    getEvents: () => dispatch(fetchEvents()),
-    getFestivals: () => dispatch(fetchFestivals())
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ResultsContainer);
+export default connect(mapStateToProps)(ResultsContainer);
