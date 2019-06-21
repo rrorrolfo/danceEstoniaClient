@@ -1,8 +1,9 @@
 import React from 'react';
 import { Jumbotron, Container, Nav } from 'react-bootstrap';
+import { NavLink } from 'react-router-dom';
 import './jumbotron.css';
 
-const MainJumbotron = ({ match }) => {
+const MainJumbotron = ({ match, fetchEvents, fetchFestivals }) => {
   return (
     <Jumbotron>
       <div className="overlay" />
@@ -17,10 +18,14 @@ const MainJumbotron = ({ match }) => {
           className="justify-content-center"
         >
           <Nav.Item as="li" className="category-cta">
-            <Nav.Link href="/events">Events</Nav.Link>
+            <NavLink to="/events" onClick={() => fetchEvents()}>
+              Events
+            </NavLink>
           </Nav.Item>
           <Nav.Item as="li" className="category-cta">
-            <Nav.Link href="/festivals">Festivals</Nav.Link>
+            <NavLink to="/festivals" onClick={() => fetchFestivals()}>
+              Festivals
+            </NavLink>
           </Nav.Item>
         </Nav>
       </Container>
