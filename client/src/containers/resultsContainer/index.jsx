@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Container } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import NavigationTabs from '../../components/tabs';
-import ResultCard from '../../components/resultCard';
+import SearchResults from '../../components/searchResults';
 
 const ResultsContainer = ({
   fetchEvents,
@@ -13,21 +13,6 @@ const ResultsContainer = ({
   events,
   festivals
 }) => {
-  useEffect(() => {
-    if (category === 'events') {
-      fetchEvents();
-    } else if (category === 'festivals') {
-      fetchFestivals();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const displayResults = results => {
-    return results.map(result => (
-      <ResultCard result={result} key={result._id} />
-    ));
-  };
-
   return (
     <Container>
       <NavigationTabs
@@ -39,21 +24,24 @@ const ResultsContainer = ({
         path={`/${category}`}
         exact
         render={() => (
-          <Container className="results-container">
-            {category === 'events'
-              ? displayResults(events)
-              : displayResults(festivals)}
-          </Container>
+          <SearchResults
+            results={category === 'events' ? events : festivals}
+            category={category}
+            fetchEvents={fetchEvents}
+            fetchFestivals={fetchFestivals}
+          />
         )}
       />
       <Route
         path={`/${category}/:style`}
-        render={() => (
-          <Container className="results-container">
-            {category === 'events'
-              ? displayResults(events)
-              : displayResults(festivals)}
-          </Container>
+        render={({ match }) => (
+          <SearchResults
+            results={category === 'events' ? events : festivals}
+            match={match}
+            category={category}
+            fetchEvents={fetchEvents}
+            fetchFestivals={fetchFestivals}
+          />
         )}
       />
     </Container>
