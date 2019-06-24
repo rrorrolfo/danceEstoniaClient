@@ -3,7 +3,7 @@ import { Jumbotron, Container, Nav } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import './jumbotron.css';
 
-const MainJumbotron = ({ match, fetchEvents, fetchFestivals }) => {
+const MainJumbotron = ({ category, fetchEvents, fetchFestivals }) => {
   return (
     <Jumbotron>
       <div className="overlay" />
@@ -13,7 +13,7 @@ const MainJumbotron = ({ match, fetchEvents, fetchFestivals }) => {
         </h1>
         <p>Find the best dancing events in Estonia</p>
         <Nav
-          defaultActiveKey={`/${match.params.category}`}
+          defaultActiveKey={`/${category}`}
           as="ul"
           className="justify-content-center"
         >
