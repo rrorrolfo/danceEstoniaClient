@@ -1,10 +1,11 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import EventsRoutes from './EventsRoutes';
 import FestivalsRoutes from './FestivalsRoutes';
 import NotFound from '../components/notFound';
 
-const AppRoutes = ({ fetchEvents, fetchFestivals }) => {
+const AppRoutes = ({ fetchEvents = null, fetchFestivals = null }) => {
   return (
     <Switch>
       <Route path="/" exact render={() => <Redirect to="/events" />} />
@@ -30,6 +31,16 @@ const AppRoutes = ({ fetchEvents, fetchFestivals }) => {
       <Route render={() => <Redirect to="/notfound" />} />
     </Switch>
   );
+};
+
+AppRoutes.propTypes = {
+  fetchEvents: PropTypes.func,
+  fetchFestivals: PropTypes.func
+};
+
+AppRoutes.defaultProps = {
+  fetchEvents: null,
+  fetchFestivals: null
 };
 
 export default AppRoutes;

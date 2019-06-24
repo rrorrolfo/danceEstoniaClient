@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card, ListGroup, ListGroupItem } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 import './resultCard.css';
 
 const ResultCard = ({ result }) => {
@@ -36,6 +37,15 @@ const ResultCard = ({ result }) => {
       </Card.Body>
     </Card>
   );
+};
+
+ResultCard.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
+  result: PropTypes.object
+};
+
+ResultCard.defaultProps = {
+  result: null
 };
 
 export default ResultCard;

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Jumbotron, Container, Nav } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import './jumbotron.css';
 
 const MainJumbotron = ({ category, fetchEvents, fetchFestivals }) => {
@@ -31,6 +32,17 @@ const MainJumbotron = ({ category, fetchEvents, fetchFestivals }) => {
       </Container>
     </Jumbotron>
   );
+};
+
+Jumbotron.propTypes = {
+  category: PropTypes.oneOf(['events', 'festivals']).isRequired,
+  fetchEvents: PropTypes.func,
+  fetchFestivals: PropTypes.func
+};
+
+Jumbotron.defaultProps = {
+  fetchEvents: null,
+  fetchFestivals: null
 };
 
 export default MainJumbotron;

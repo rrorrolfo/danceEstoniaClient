@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import MainJumbotron from '../components/jumbotron';
 import ResultsContainer from '../containers/resultsContainer';
 
@@ -23,6 +24,16 @@ const FestivalsRoutes = ({ fetchEvents, fetchFestivals }) => {
       )}
     />
   );
+};
+
+FestivalsRoutes.propTypes = {
+  fetchEvents: PropTypes.func,
+  fetchFestivals: PropTypes.func
+};
+
+FestivalsRoutes.defaultProps = {
+  fetchEvents: null,
+  fetchFestivals: null
 };
 
 export default FestivalsRoutes;

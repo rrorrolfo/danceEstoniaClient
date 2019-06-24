@@ -1,4 +1,3 @@
-/* eslint-disable react/destructuring-assignment */
 import React, { useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import { connect } from 'react-redux';
@@ -8,11 +7,11 @@ import NavigationTabs from '../../components/tabs';
 import ResultCard from '../../components/resultCard';
 
 const ResultsContainer = ({
-  fetchEvents = null,
-  fetchFestivals = null,
+  fetchEvents,
+  fetchFestivals,
   category,
-  events = null,
-  festivals = null
+  events,
+  festivals
 }) => {
   useEffect(() => {
     if (category === 'events') {
@@ -68,9 +67,16 @@ const mapStateToProps = state => {
 ResultsContainer.propTypes = {
   fetchEvents: PropTypes.func,
   fetchFestivals: PropTypes.func,
-  category: PropTypes.string.isRequired,
-  events: PropTypes.array,
-  festivals: PropTypes.array
+  category: PropTypes.oneOf(['events', 'festivals']).isRequired,
+  events: PropTypes.arrayOf(PropTypes.object),
+  festivals: PropTypes.arrayOf(PropTypes.object)
+};
+
+ResultsContainer.defaultProps = {
+  fetchEvents: null,
+  fetchFestivals: null,
+  events: null,
+  festivals: null
 };
 
 export default connect(mapStateToProps)(ResultsContainer);
