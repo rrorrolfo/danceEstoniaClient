@@ -3,17 +3,17 @@ import React, { useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import NavigationTabs from '../../components/tabs';
 import ResultCard from '../../components/resultCard';
 
 const ResultsContainer = ({
-  fetchEvents,
-  fetchFestivals,
-  events,
-  festivals,
-  match
+  fetchEvents = null,
+  fetchFestivals = null,
+  category,
+  events = null,
+  festivals = null
 }) => {
-  const { category } = match.params;
   useEffect(() => {
     if (category === 'events') {
       fetchEvents();
@@ -63,6 +63,14 @@ const ResultsContainer = ({
 
 const mapStateToProps = state => {
   return { events: state.events.events, festivals: state.festivals.festivals };
+};
+
+ResultsContainer.propTypes = {
+  fetchEvents: PropTypes.func,
+  fetchFestivals: PropTypes.func,
+  category: PropTypes.string.isRequired,
+  events: PropTypes.array,
+  festivals: PropTypes.array
 };
 
 export default connect(mapStateToProps)(ResultsContainer);
