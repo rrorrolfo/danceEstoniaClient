@@ -35,14 +35,11 @@ const MainJumbotron = ({ category, fetchEvents, fetchFestivals }) => {
 };
 
 Jumbotron.propTypes = {
-  category: PropTypes.oneOf(['events', 'festivals']).isRequired,
-  fetchEvents: PropTypes.func,
-  fetchFestivals: PropTypes.func
+  category: PropTypes.oneOf(['events', 'festivals'])
 };
 
 Jumbotron.defaultProps = {
-  fetchEvents: null,
-  fetchFestivals: null
+  category: null
 };
 
 export default MainJumbotron;
