@@ -1,28 +1,52 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import MainJumbotron from '../components/jumbotron';
 import ResultsContainer from '../containers/resultsContainer';
+import EventDetails from '../components/eventDetails';
 
 const EventsRoutes = ({ fetchEvents, fetchFestivals }) => {
   return (
-    <Route
-      path="/"
-      render={({ match }) => (
-        <React.Fragment>
-          <MainJumbotron
-            fetchEvents={fetchEvents}
-            fetchFestivals={fetchFestivals}
-          />
-          <ResultsContainer
-            match={match}
-            fetchEvents={fetchEvents}
-            fetchFestivals={fetchFestivals}
-            category="events"
-          />
-        </React.Fragment>
-      )}
-    />
+    <Switch>
+      <Route
+        path="/events"
+        exact
+        render={({ match }) => (
+          <React.Fragment>
+            <MainJumbotron
+              fetchEvents={fetchEvents}
+              fetchFestivals={fetchFestivals}
+            />
+            <ResultsContainer
+              match={match}
+              fetchEvents={fetchEvents}
+              fetchFestivals={fetchFestivals}
+              category="events"
+            />
+          </React.Fragment>
+        )}
+      />
+      <Route
+        path="/events/:category"
+        exact
+        render={({ match }) => (
+          <React.Fragment>
+            <MainJumbotron
+              fetchEvents={fetchEvents}
+              fetchFestivals={fetchFestivals}
+            />
+            <ResultsContainer
+              match={match}
+              fetchEvents={fetchEvents}
+              fetchFestivals={fetchFestivals}
+              category="events"
+            />
+          </React.Fragment>
+        )}
+      />
+      <Route path="/events/:category/:id" exact component={EventDetails} />
+      <Route render={() => <Redirect to="/notfound" />} />
+    </Switch>
   );
 };
 
