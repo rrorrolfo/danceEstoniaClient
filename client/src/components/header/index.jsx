@@ -9,19 +9,19 @@ const Header = React.memo(() => (
     <Navbar.Collapse id="basic-navbar-nav">
       <Nav className="mr-auto">
         <NavDropdown title="Events" id="basic-nav-dropdown">
-          <NavDropdown.Item href="#">All</NavDropdown.Item>
-          <NavDropdown.Item href="#">Salsa</NavDropdown.Item>
-          <NavDropdown.Item href="#">Bachata</NavDropdown.Item>
-          <NavDropdown.Item href="#">Kizomba</NavDropdown.Item>
+          <NavDropdown.Item href="/events">All</NavDropdown.Item>
+          <NavDropdown.Item href="/events/salsa">Salsa</NavDropdown.Item>
+          <NavDropdown.Item href="/events/bachata">Bachata</NavDropdown.Item>
+          <NavDropdown.Item href="/events/kizomba">Kizomba</NavDropdown.Item>
         </NavDropdown>
         <NavDropdown title="Festivals" id="basic-nav-dropdown">
-          <NavDropdown.Item href="#">All</NavDropdown.Item>
-          <NavDropdown.Item href="#">Salsa</NavDropdown.Item>
-          <NavDropdown.Item href="#">Bachata</NavDropdown.Item>
-          <NavDropdown.Item href="#">Kizomba</NavDropdown.Item>
+          <NavDropdown.Item href="/festivals">All</NavDropdown.Item>
+          <NavDropdown.Item href="/festivals/salsa">Salsa</NavDropdown.Item>
+          <NavDropdown.Item href="/festivals/bachata">Bachata</NavDropdown.Item>
+          <NavDropdown.Item href="/festivals/kizomba">Kizomba</NavDropdown.Item>
         </NavDropdown>
-        <Nav.Link href="#">Shop</Nav.Link>
         <Nav.Link href="#">Store</Nav.Link>
+        <Nav.Link href="#">Contact</Nav.Link>
       </Nav>
     </Navbar.Collapse>
   </Navbar>
