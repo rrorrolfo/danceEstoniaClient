@@ -45,7 +45,11 @@ const FestivalsRoutes = ({ fetchEvents, fetchFestivals }) => {
         )}
       />
 
-      <Route path="/festivals/:category/:id" exact component={EventDetails} />
+      <Route
+        path="/festivals/:category/:id"
+        exact
+        render={({ match }) => <EventDetails match={match} />}
+      />
       <Route render={() => <Redirect to="/notfound" />} />
     </Switch>
   );

@@ -11,7 +11,7 @@ const SearchResults = ({
   fetchFestivals
 }) => {
   useEffect(() => {
-    if (match) {
+    if (match.params.style) {
       if (category === 'events') {
         fetchEvents(`/events/${match.params.style}`);
       } else {
@@ -25,7 +25,12 @@ const SearchResults = ({
   }, []);
   const displayResults = resultsToDisplay => {
     return resultsToDisplay.map(result => (
-      <ResultCard result={result} key={result._id} />
+      <ResultCard
+        result={result}
+        category={category}
+        key={result._id}
+        match={match}
+      />
     ));
   };
   return (

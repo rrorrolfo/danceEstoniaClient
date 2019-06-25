@@ -24,9 +24,10 @@ const ResultsContainer = ({
         <Route
           path={`/${category}`}
           exact
-          render={() => (
+          render={({ match }) => (
             <SearchResults
               results={category === 'events' ? events : festivals}
+              match={match}
               category={category}
               fetchEvents={fetchEvents}
               fetchFestivals={fetchFestivals}

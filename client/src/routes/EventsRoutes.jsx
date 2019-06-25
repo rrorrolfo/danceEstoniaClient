@@ -44,7 +44,11 @@ const EventsRoutes = ({ fetchEvents, fetchFestivals }) => {
           </React.Fragment>
         )}
       />
-      <Route path="/events/:category/:id" exact component={EventDetails} />
+      <Route
+        path="/events/:category/:id"
+        exact
+        render={({ match }) => <EventDetails match={match} />}
+      />
       <Route render={() => <Redirect to="/notfound" />} />
     </Switch>
   );
