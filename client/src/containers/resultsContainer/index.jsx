@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import NavigationTabs from '../../components/tabs';
 import SearchResults from '../../components/searchResults';
@@ -20,30 +20,32 @@ const ResultsContainer = ({
         fetchEvents={fetchEvents}
         fetchFestivals={fetchFestivals}
       />
-      <Route
-        path={`/${category}`}
-        exact
-        render={() => (
-          <SearchResults
-            results={category === 'events' ? events : festivals}
-            category={category}
-            fetchEvents={fetchEvents}
-            fetchFestivals={fetchFestivals}
-          />
-        )}
-      />
-      <Route
-        path={`/${category}/:style`}
-        render={({ match }) => (
-          <SearchResults
-            results={category === 'events' ? events : festivals}
-            match={match}
-            category={category}
-            fetchEvents={fetchEvents}
-            fetchFestivals={fetchFestivals}
-          />
-        )}
-      />
+      <Switch>
+        <Route
+          path={`/${category}`}
+          exact
+          render={() => (
+            <SearchResults
+              results={category === 'events' ? events : festivals}
+              category={category}
+              fetchEvents={fetchEvents}
+              fetchFestivals={fetchFestivals}
+            />
+          )}
+        />
+        <Route
+          path={`/${category}/:style`}
+          render={({ match }) => (
+            <SearchResults
+              results={category === 'events' ? events : festivals}
+              match={match}
+              category={category}
+              fetchEvents={fetchEvents}
+              fetchFestivals={fetchFestivals}
+            />
+          )}
+        />
+      </Switch>
     </Container>
   );
 };
