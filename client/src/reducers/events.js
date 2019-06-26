@@ -2,6 +2,7 @@ import * as eventsActionTypes from '../actionTypes/events';
 
 const initialState = {
   events: [],
+  singleEvent: null,
   fetching: false,
   errors: null
 };
@@ -19,6 +20,13 @@ const eventsReducer = (state = initialState, action) => {
         ...state,
         fetching: false,
         events: action.events
+      };
+
+    case eventsActionTypes.FETCH_SINGLE_EVENT_SUCCESS:
+      return {
+        ...state,
+        fetching: false,
+        singleEvent: action.event
       };
 
     case eventsActionTypes.FETCH_FAILURE:

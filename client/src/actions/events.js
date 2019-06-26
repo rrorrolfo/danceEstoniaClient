@@ -33,3 +33,23 @@ export const fetchEvents = (endPoint = '/events') => {
       .catch(error => dispatch(fetchedFailure(error)));
   };
 };
+
+export const fetchSingleEventSuccess = event => {
+  return {
+    type: eventsActionTypes.FETCH_SINGLE_EVENT_SUCCESS,
+    event
+  };
+};
+
+export const fetchSingleEvent = endPoint => {
+  return dispatch => {
+    dispatch(fetchedStarted());
+
+    apiRequest({
+      method: 'GET',
+      endPoint
+    })
+      .then(event => dispatch(fetchSingleEventSuccess(event)))
+      .catch(error => dispatch(fetchedFailure(error)));
+  };
+};
