@@ -11,7 +11,7 @@ const store = createStore(
   appReducer,
   compose(
     applyMiddleware(thunk),
-    window.devToolsExtension && window.devToolsExtension()
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__()
   )
 );
 
