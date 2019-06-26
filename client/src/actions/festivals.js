@@ -33,3 +33,23 @@ export const fetchFestivals = (endPoint = '/festivals') => {
       .catch(error => dispatch(fetchedFailure(error)));
   };
 };
+
+export const fetchSingleFestivalSuccess = festival => {
+  return {
+    type: festivalsActionTypes.FETCH_SINGLE_FESTIVAL_SUCCESS,
+    festival
+  };
+};
+
+export const fetchSingleFestival = endPoint => {
+  return dispatch => {
+    dispatch(fetchedStarted());
+
+    apiRequest({
+      method: 'GET',
+      endPoint
+    })
+      .then(event => dispatch(fetchSingleFestivalSuccess(event)))
+      .catch(error => dispatch(fetchedFailure(error)));
+  };
+};

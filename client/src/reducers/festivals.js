@@ -2,6 +2,7 @@ import * as festivalsActionTypes from '../actionTypes/festivals';
 
 const initialState = {
   festivals: [],
+  singleFestival: null,
   fetching: false,
   errors: null
 };
@@ -19,6 +20,13 @@ const festivalsReducer = (state = initialState, action) => {
         ...state,
         fetching: false,
         festivals: action.festivals
+      };
+
+    case festivalsActionTypes.FETCH_SINGLE_FESTIVAL_SUCCESS:
+      return {
+        ...state,
+        fetching: false,
+        singleFestival: action.festival
       };
 
     case festivalsActionTypes.FETCH_FAILURE:
