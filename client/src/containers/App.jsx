@@ -3,18 +3,28 @@ import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { fetchEvents } from '../actions/events';
-import { fetchFestivals } from '../actions/festivals';
+import { fetchEvents, fetchSingleEvent } from '../actions/events';
+import { fetchFestivals, fetchSingleFestival } from '../actions/festivals';
 import Header from '../components/header';
 import AppRoutes from '../routes';
 import './app.css';
 
-const App = ({ fetchEvents, fetchFestivals }) => {
+const App = ({
+  fetchEvents,
+  fetchFestivals,
+  fetchSingleEvent,
+  fetchSingleFestival
+}) => {
   return (
     <BrowserRouter>
       <div>
         <Header />
-        <AppRoutes fetchEvents={fetchEvents} fetchFestivals={fetchFestivals} />
+        <AppRoutes
+          fetchEvents={fetchEvents}
+          fetchFestivals={fetchFestivals}
+          fetchSingleEvent={fetchSingleEvent}
+          fetchSingleFestival={fetchSingleFestival}
+        />
       </div>
     </BrowserRouter>
   );
@@ -22,17 +32,16 @@ const App = ({ fetchEvents, fetchFestivals }) => {
 
 const mapDispatchToProps = {
   fetchEvents,
-  fetchFestivals
+  fetchFestivals,
+  fetchSingleEvent,
+  fetchSingleFestival
 };
 
 App.propTypes = {
-  fetchEvents: PropTypes.func,
-  fetchFestivals: PropTypes.func
-};
-
-App.defaultProps = {
-  fetchEvents: null,
-  fetchFestivals: null
+  fetchEvents: PropTypes.func.isRequired,
+  fetchFestivals: PropTypes.func.isRequired,
+  fetchSingleEvent: PropTypes.func.isRequired,
+  fetchSingleFestival: PropTypes.func.isRequired
 };
 
 export default connect(

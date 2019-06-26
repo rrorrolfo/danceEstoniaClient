@@ -5,7 +5,12 @@ import EventsRoutes from './EventsRoutes';
 import FestivalsRoutes from './FestivalsRoutes';
 import NotFound from '../components/notFound';
 
-const AppRoutes = ({ fetchEvents = null, fetchFestivals = null }) => {
+const AppRoutes = ({
+  fetchEvents,
+  fetchFestivals,
+  fetchSingleEvent,
+  fetchSingleFestival
+}) => {
   return (
     <Switch>
       <Route path="/" exact render={() => <Redirect to="/events" />} />
@@ -15,6 +20,7 @@ const AppRoutes = ({ fetchEvents = null, fetchFestivals = null }) => {
           <EventsRoutes
             fetchEvents={fetchEvents}
             fetchFestivals={fetchFestivals}
+            fetchSingleEvent={fetchSingleEvent}
           />
         )}
       />
@@ -24,6 +30,7 @@ const AppRoutes = ({ fetchEvents = null, fetchFestivals = null }) => {
           <FestivalsRoutes
             fetchEvents={fetchEvents}
             fetchFestivals={fetchFestivals}
+            fetchSingleFestival={fetchSingleFestival}
           />
         )}
       />
@@ -34,13 +41,10 @@ const AppRoutes = ({ fetchEvents = null, fetchFestivals = null }) => {
 };
 
 AppRoutes.propTypes = {
-  fetchEvents: PropTypes.func,
-  fetchFestivals: PropTypes.func
-};
-
-AppRoutes.defaultProps = {
-  fetchEvents: null,
-  fetchFestivals: null
+  fetchEvents: PropTypes.func.isRequired,
+  fetchFestivals: PropTypes.func.isRequired,
+  fetchSingleEvent: PropTypes.func.isRequired,
+  fetchSingleFestival: PropTypes.func.isRequired
 };
 
 export default AppRoutes;

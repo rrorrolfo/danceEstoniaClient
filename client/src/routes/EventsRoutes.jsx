@@ -5,7 +5,7 @@ import MainJumbotron from '../components/jumbotron';
 import ResultsContainer from '../containers/resultsContainer';
 import EventDetails from '../components/eventDetails';
 
-const EventsRoutes = ({ fetchEvents, fetchFestivals }) => {
+const EventsRoutes = ({ fetchEvents, fetchFestivals, fetchSingleEvent }) => {
   return (
     <Switch>
       <Route
@@ -47,7 +47,13 @@ const EventsRoutes = ({ fetchEvents, fetchFestivals }) => {
       <Route
         path="/events/:category/:id"
         exact
-        render={({ match }) => <EventDetails match={match} />}
+        render={({ match }) => (
+          <EventDetails
+            match={match}
+            actionOnMount={fetchSingleEvent}
+            category="events"
+          />
+        )}
       />
       <Route render={() => <Redirect to="/notfound" />} />
     </Switch>
@@ -55,13 +61,9 @@ const EventsRoutes = ({ fetchEvents, fetchFestivals }) => {
 };
 
 EventsRoutes.propTypes = {
-  fetchEvents: PropTypes.func,
-  fetchFestivals: PropTypes.func
-};
-
-EventsRoutes.defaultProps = {
-  fetchEvents: null,
-  fetchFestivals: null
+  fetchEvents: PropTypes.func.isRequired,
+  fetchFestivals: PropTypes.func.isRequired,
+  fetchSingleEvent: PropTypes.func.isRequired
 };
 
 export default EventsRoutes;
