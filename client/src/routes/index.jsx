@@ -1,6 +1,10 @@
+/* eslint-disable no-shadow */
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { fetchEvents, fetchSingleEvent } from '../actions/events';
+import { fetchFestivals, fetchSingleFestival } from '../actions/festivals';
 import EventsRoutes from './EventsRoutes';
 import FestivalsRoutes from './FestivalsRoutes';
 import NotFound from '../components/notFound';
@@ -47,4 +51,14 @@ AppRoutes.propTypes = {
   fetchSingleFestival: PropTypes.func.isRequired
 };
 
-export default AppRoutes;
+const mapDispatchToProps = {
+  fetchEvents,
+  fetchFestivals,
+  fetchSingleEvent,
+  fetchSingleFestival
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(AppRoutes);
