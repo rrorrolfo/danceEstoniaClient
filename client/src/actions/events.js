@@ -34,6 +34,26 @@ export const fetchEvents = (endPoint = '/events') => {
   };
 };
 
+export const fetchEventsByStyleSuccess = events => {
+  return {
+    type: eventsActionTypes.FETCH_EVENTS_BY_STYLE_SUCCESS,
+    events
+  };
+};
+
+export const fetchEventsByStyle = endPoint => {
+  return dispatch => {
+    dispatch(fetchedStarted());
+
+    apiRequest({
+      method: 'GET',
+      endPoint
+    })
+      .then(events => dispatch(fetchEventsByStyleSuccess(events)))
+      .catch(error => dispatch(fetchedFailure(error)));
+  };
+};
+
 export const fetchSingleEventSuccess = event => {
   return {
     type: eventsActionTypes.FETCH_SINGLE_EVENT_SUCCESS,
