@@ -6,11 +6,15 @@ import PropTypes from 'prop-types';
 const NavigationTabs = ({
   category,
   fetchEvents,
-  fetchFestivalsByStyle,
-  fetchFestivals
+  fetchEventsByStyle,
+  fetchFestivals,
+  fetchFestivalsByStyle
 }) => {
   const fetchNewResults = (cat, style = '') => {
     if (category === 'events') {
+      if (style) {
+        return fetchEventsByStyle(`/${cat}/${style}`);
+      }
       fetchEvents(`/${cat}/${style}`);
     } else if (category === 'festivals') {
       if (style) {
@@ -58,11 +62,13 @@ const NavigationTabs = ({
 NavigationTabs.propTypes = {
   category: PropTypes.oneOf(['events', 'festivals']).isRequired,
   fetchEvents: PropTypes.func.isRequired,
+  fetchEventsByStyle: PropTypes.func,
   fetchFestivals: PropTypes.func.isRequired,
   fetchFestivalsByStyle: PropTypes.func
 };
 
 NavigationTabs.defaultProps = {
+  fetchEventsByStyle: null,
   fetchFestivalsByStyle: null
 };
 

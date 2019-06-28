@@ -3,7 +3,11 @@ import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { fetchEvents, fetchSingleEvent } from '../actions/events';
+import {
+  fetchEvents,
+  fetchEventsByStyle,
+  fetchSingleEvent
+} from '../actions/events';
 import {
   fetchFestivals,
   fetchFestivalsByStyle,
@@ -15,6 +19,7 @@ import NotFound from '../components/notFound';
 
 const AppRoutes = ({
   fetchEvents,
+  fetchEventsByStyle,
   fetchFestivals,
   fetchFestivalsByStyle,
   fetchSingleEvent,
@@ -28,6 +33,7 @@ const AppRoutes = ({
         render={() => (
           <EventsRoutes
             fetchEvents={fetchEvents}
+            fetchEventsByStyle={fetchEventsByStyle}
             fetchFestivals={fetchFestivals}
             fetchSingleEvent={fetchSingleEvent}
           />
@@ -52,6 +58,7 @@ const AppRoutes = ({
 
 AppRoutes.propTypes = {
   fetchEvents: PropTypes.func.isRequired,
+  fetchEventsByStyle: PropTypes.func.isRequired,
   fetchFestivals: PropTypes.func.isRequired,
   fetchFestivalsByStyle: PropTypes.func.isRequired,
   fetchSingleEvent: PropTypes.func.isRequired,
@@ -60,6 +67,7 @@ AppRoutes.propTypes = {
 
 const mapDispatchToProps = {
   fetchEvents,
+  fetchEventsByStyle,
   fetchFestivals,
   fetchFestivalsByStyle,
   fetchSingleEvent,

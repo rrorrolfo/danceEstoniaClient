@@ -8,6 +8,7 @@ import SearchResults from '../../components/searchResults';
 
 const ResultsContainer = ({
   fetchEvents,
+  fetchEventsByStyle,
   fetchFestivals,
   fetchFestivalsByStyle,
   category,
@@ -20,6 +21,7 @@ const ResultsContainer = ({
       <NavigationTabs
         category={category}
         fetchEvents={fetchEvents}
+        fetchEventsByStyle={fetchEventsByStyle}
         fetchFestivals={fetchFestivals}
         fetchFestivalsByStyle={fetchFestivalsByStyle}
       />
@@ -45,6 +47,7 @@ const ResultsContainer = ({
               match={match}
               category={category}
               fetchEvents={fetchEvents}
+              fetchEventsByStyle={fetchEventsByStyle}
               fetchFestivals={fetchFestivals}
               fetchFestivalsByStyle={fetchFestivalsByStyle}
             />
@@ -65,6 +68,7 @@ const mapStateToProps = state => {
 
 ResultsContainer.propTypes = {
   fetchEvents: PropTypes.func.isRequired,
+  fetchEventsByStyle: PropTypes.func,
   fetchFestivals: PropTypes.func.isRequired,
   fetchFestivalsByStyle: PropTypes.func,
   category: PropTypes.oneOf(['events', 'festivals']).isRequired,
@@ -75,6 +79,7 @@ ResultsContainer.propTypes = {
 
 ResultsContainer.defaultProps = {
   events: null,
+  fetchEventsByStyle: null,
   festivals: null,
   fetchFestivalsByStyle: null,
   festivalsByStyle: null
