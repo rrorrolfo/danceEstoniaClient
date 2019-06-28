@@ -8,14 +8,15 @@ const SearchResults = ({
   match,
   category,
   fetchEvents,
-  fetchFestivals
+  fetchFestivals,
+  fetchFestivalsByStyle
 }) => {
   useEffect(() => {
     if (match.params.style) {
       if (category === 'events') {
         fetchEvents(`/events/${match.params.style}`);
       } else {
-        fetchFestivals(`/festivals/${match.params.style}`);
+        fetchFestivalsByStyle(`/festivals/${match.params.style}`);
       }
     } else if (category === 'events') {
       fetchEvents();
@@ -41,8 +42,9 @@ const SearchResults = ({
 };
 
 SearchResults.propTypes = {
-  fetchEvents: PropTypes.func,
-  fetchFestivals: PropTypes.func,
+  fetchEvents: PropTypes.func.isRequired,
+  fetchFestivals: PropTypes.func.isRequired,
+  fetchFestivalsByStyle: PropTypes.func.isRequired,
   category: PropTypes.oneOf(['events', 'festivals']).isRequired,
   results: PropTypes.arrayOf(PropTypes.object),
   // eslint-disable-next-line react/forbid-prop-types
@@ -50,8 +52,6 @@ SearchResults.propTypes = {
 };
 
 SearchResults.defaultProps = {
-  fetchEvents: null,
-  fetchFestivals: null,
   results: null,
   match: null
 };

@@ -8,6 +8,7 @@ import EventDetails from '../components/eventDetails';
 const FestivalsRoutes = ({
   fetchEvents,
   fetchFestivals,
+  fetchFestivalsByStyle,
   fetchSingleFestival
 }) => {
   return (
@@ -25,6 +26,7 @@ const FestivalsRoutes = ({
               match={match}
               fetchEvents={fetchEvents}
               fetchFestivals={fetchFestivals}
+              fetchFestivalsByStyle={fetchFestivalsByStyle}
               category="festivals"
             />
           </React.Fragment>
@@ -43,6 +45,7 @@ const FestivalsRoutes = ({
               match={match}
               fetchEvents={fetchEvents}
               fetchFestivals={fetchFestivals}
+              fetchFestivalsByStyle={fetchFestivalsByStyle}
               category="festivals"
             />
           </React.Fragment>
@@ -68,6 +71,7 @@ const FestivalsRoutes = ({
 FestivalsRoutes.propTypes = {
   fetchEvents: PropTypes.func.isRequired,
   fetchFestivals: PropTypes.func.isRequired,
+  fetchFestivalsByStyle: PropTypes.func.isRequired,
   fetchSingleFestival: PropTypes.func.isRequired
 };
 
