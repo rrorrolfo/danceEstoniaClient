@@ -66,7 +66,7 @@ const mapStateToProps = state => {
 ResultsContainer.propTypes = {
   fetchEvents: PropTypes.func.isRequired,
   fetchFestivals: PropTypes.func.isRequired,
-  fetchFestivalsByStyle: PropTypes.func.isRequired,
+  fetchFestivalsByStyle: PropTypes.func,
   category: PropTypes.oneOf(['events', 'festivals']).isRequired,
   events: PropTypes.arrayOf(PropTypes.object),
   festivals: PropTypes.arrayOf(PropTypes.object),
@@ -76,6 +76,7 @@ ResultsContainer.propTypes = {
 ResultsContainer.defaultProps = {
   events: null,
   festivals: null,
+  fetchFestivalsByStyle: null,
   festivalsByStyle: null
 };
 

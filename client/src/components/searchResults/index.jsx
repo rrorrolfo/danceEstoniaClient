@@ -44,7 +44,7 @@ const SearchResults = ({
 SearchResults.propTypes = {
   fetchEvents: PropTypes.func.isRequired,
   fetchFestivals: PropTypes.func.isRequired,
-  fetchFestivalsByStyle: PropTypes.func.isRequired,
+  fetchFestivalsByStyle: PropTypes.func,
   category: PropTypes.oneOf(['events', 'festivals']).isRequired,
   results: PropTypes.arrayOf(PropTypes.object),
   // eslint-disable-next-line react/forbid-prop-types
@@ -53,7 +53,8 @@ SearchResults.propTypes = {
 
 SearchResults.defaultProps = {
   results: null,
-  match: null
+  match: null,
+  fetchFestivalsByStyle: null
 };
 
 export default SearchResults;

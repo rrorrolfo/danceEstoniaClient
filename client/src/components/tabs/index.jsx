@@ -18,6 +18,7 @@ const NavigationTabs = ({
       }
       fetchFestivals(`/${cat}/${style}`);
     }
+    return true;
   };
   return (
     <Nav fill justify variant="tabs" defaultActiveKey="/home" as="ul">
@@ -58,7 +59,11 @@ NavigationTabs.propTypes = {
   category: PropTypes.oneOf(['events', 'festivals']).isRequired,
   fetchEvents: PropTypes.func.isRequired,
   fetchFestivals: PropTypes.func.isRequired,
-  fetchFestivalsByStyle: PropTypes.func.isRequired
+  fetchFestivalsByStyle: PropTypes.func
+};
+
+NavigationTabs.defaultProps = {
+  fetchFestivalsByStyle: null
 };
 
 export default NavigationTabs;
