@@ -34,6 +34,26 @@ export const fetchFestivals = (endPoint = '/festivals') => {
   };
 };
 
+export const fetchFestivalsByStyleSuccess = festivals => {
+  return {
+    type: festivalsActionTypes.FETCH_FESTIVALS_BY_STYLE_SUCCESS,
+    festivals
+  };
+};
+
+export const fetchFestivalsByStyle = endPoint => {
+  return dispatch => {
+    dispatch(fetchedStarted());
+
+    apiRequest({
+      method: 'GET',
+      endPoint
+    })
+      .then(festivals => dispatch(fetchFestivalsByStyleSuccess(festivals)))
+      .catch(error => dispatch(fetchedFailure(error)));
+  };
+};
+
 export const fetchSingleFestivalSuccess = festival => {
   return {
     type: festivalsActionTypes.FETCH_SINGLE_FESTIVAL_SUCCESS,
@@ -49,7 +69,7 @@ export const fetchSingleFestival = endPoint => {
       method: 'GET',
       endPoint
     })
-      .then(event => dispatch(fetchSingleFestivalSuccess(event)))
+      .then(festival => dispatch(fetchSingleFestivalSuccess(festival)))
       .catch(error => dispatch(fetchedFailure(error)));
   };
 };
