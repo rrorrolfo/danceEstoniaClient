@@ -23,7 +23,9 @@ const AppRoutes = ({
   fetchFestivals,
   fetchFestivalsByStyle,
   fetchSingleEvent,
-  fetchSingleFestival
+  fetchSingleFestival,
+  singleEvent,
+  singleFestival
 }) => {
   return (
     <Switch>
@@ -36,6 +38,7 @@ const AppRoutes = ({
             fetchEventsByStyle={fetchEventsByStyle}
             fetchFestivals={fetchFestivals}
             fetchSingleEvent={fetchSingleEvent}
+            singleEvent={singleEvent}
           />
         )}
       />
@@ -47,6 +50,7 @@ const AppRoutes = ({
             fetchFestivals={fetchFestivals}
             fetchFestivalsByStyle={fetchFestivalsByStyle}
             fetchSingleFestival={fetchSingleFestival}
+            singleFestival={singleFestival}
           />
         )}
       />
@@ -56,13 +60,11 @@ const AppRoutes = ({
   );
 };
 
-AppRoutes.propTypes = {
-  fetchEvents: PropTypes.func.isRequired,
-  fetchEventsByStyle: PropTypes.func.isRequired,
-  fetchFestivals: PropTypes.func.isRequired,
-  fetchFestivalsByStyle: PropTypes.func.isRequired,
-  fetchSingleEvent: PropTypes.func.isRequired,
-  fetchSingleFestival: PropTypes.func.isRequired
+const mapStateToProps = state => {
+  return {
+    singleEvent: state.events.singleEvent,
+    singleFestival: state.festivals.singleFestival
+  };
 };
 
 const mapDispatchToProps = {
@@ -74,7 +76,25 @@ const mapDispatchToProps = {
   fetchSingleFestival
 };
 
+AppRoutes.propTypes = {
+  fetchEvents: PropTypes.func.isRequired,
+  fetchEventsByStyle: PropTypes.func.isRequired,
+  fetchFestivals: PropTypes.func.isRequired,
+  fetchFestivalsByStyle: PropTypes.func.isRequired,
+  fetchSingleEvent: PropTypes.func.isRequired,
+  fetchSingleFestival: PropTypes.func.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  singleEvent: PropTypes.object,
+  // eslint-disable-next-line react/forbid-prop-types
+  singleFestival: PropTypes.object
+};
+
+AppRoutes.defaultProps = {
+  singleEvent: null,
+  singleFestival: null
+};
+
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(AppRoutes);

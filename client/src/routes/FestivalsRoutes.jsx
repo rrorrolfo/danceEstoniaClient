@@ -9,7 +9,8 @@ const FestivalsRoutes = ({
   fetchEvents,
   fetchFestivals,
   fetchFestivalsByStyle,
-  fetchSingleFestival
+  fetchSingleFestival,
+  singleFestival
 }) => {
   return (
     <Switch>
@@ -60,6 +61,7 @@ const FestivalsRoutes = ({
             match={match}
             actionOnMount={fetchSingleFestival}
             category="festivals"
+            singleFestival={singleFestival}
           />
         )}
       />
@@ -72,7 +74,13 @@ FestivalsRoutes.propTypes = {
   fetchEvents: PropTypes.func.isRequired,
   fetchFestivals: PropTypes.func.isRequired,
   fetchFestivalsByStyle: PropTypes.func.isRequired,
-  fetchSingleFestival: PropTypes.func.isRequired
+  fetchSingleFestival: PropTypes.func.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  singleFestival: PropTypes.object
+};
+
+FestivalsRoutes.defaultProps = {
+  singleFestival: null
 };
 
 export default FestivalsRoutes;
