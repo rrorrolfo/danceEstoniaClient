@@ -13,6 +13,7 @@ const ResultsContainer = ({
   fetchFestivalsByStyle,
   category,
   events,
+  eventsByStyle,
   festivals,
   festivalsByStyle
 }) => {
@@ -43,7 +44,7 @@ const ResultsContainer = ({
           path={`/${category}/:style`}
           render={({ match }) => (
             <SearchResults
-              results={category === 'events' ? events : festivalsByStyle}
+              results={category === 'events' ? eventsByStyle : festivalsByStyle}
               match={match}
               category={category}
               fetchEvents={fetchEvents}
@@ -61,6 +62,7 @@ const ResultsContainer = ({
 const mapStateToProps = state => {
   return {
     events: state.events.events,
+    eventsByStyle: state.events.eventsByStyle,
     festivals: state.festivals.festivals,
     festivalsByStyle: state.festivals.festivalsByStyle
   };
@@ -73,12 +75,14 @@ ResultsContainer.propTypes = {
   fetchFestivalsByStyle: PropTypes.func,
   category: PropTypes.oneOf(['events', 'festivals']).isRequired,
   events: PropTypes.arrayOf(PropTypes.object),
+  eventsByStyle: PropTypes.arrayOf(PropTypes.object),
   festivals: PropTypes.arrayOf(PropTypes.object),
   festivalsByStyle: PropTypes.arrayOf(PropTypes.object)
 };
 
 ResultsContainer.defaultProps = {
   events: null,
+  eventsByStyle: null,
   fetchEventsByStyle: null,
   festivals: null,
   fetchFestivalsByStyle: null,
