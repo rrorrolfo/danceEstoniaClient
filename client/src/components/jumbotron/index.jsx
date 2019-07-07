@@ -13,11 +13,10 @@ const MainJumbotron = ({ category, fetchEvents, fetchFestivals }) => {
           Find the best dancing events in Estonia
         </h1>
         <Nav
-          defaultActiveKey={`/events}`}
+          defaultActiveKey={`/${category}}`}
           as="ul"
           className="justify-content-center"
         >
-          {console.log(category)}
           <Nav.Item as="li" className="category-cta">
             <NavLink to="/events" onClick={() => fetchEvents()}>
               Parties & Events
