@@ -6,21 +6,21 @@ import './jumbotron.css';
 
 const MainJumbotron = ({ category, fetchEvents, fetchFestivals }) => {
   return (
-    <Jumbotron>
+    <Jumbotron className="main-jumbotron">
       <div className="overlay" />
       <Container className="welcoming-wrapper">
         <h1 className="welcoming-title">
           Find the best dancing events in Estonia
         </h1>
-        <p>Find the best dancing events in Estonia</p>
         <Nav
-          defaultActiveKey={`/${category}`}
+          defaultActiveKey={`/events}`}
           as="ul"
           className="justify-content-center"
         >
+          {console.log(category)}
           <Nav.Item as="li" className="category-cta">
             <NavLink to="/events" onClick={() => fetchEvents()}>
-              Events
+              Parties & Events
             </NavLink>
           </Nav.Item>
           <Nav.Item as="li" className="category-cta">
