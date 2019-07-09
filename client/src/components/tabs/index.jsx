@@ -25,30 +25,21 @@ const NavigationTabs = ({
     }
     return true;
   };
-  const resetActiveLink = () => {
-    document.querySelector('.tab-link a').className = '';
-  };
   return (
-    <Nav
-      fill
-      justify
-      variant="tabs"
-      as="ul"
-      className="navigation-tabs"
-      defaultActiveKey="/festivals/kizomba"
-    >
+    <Nav fill justify variant="tabs" as="ul" className="navigation-tabs">
       <Nav.Item as="li" className="tab-link">
-        <NavLink to={`/${category}`} onClick={() => fetchNewResults(category)}>
+        <NavLink
+          exact
+          to={`/${category}`}
+          onClick={() => fetchNewResults(category)}
+        >
           All
         </NavLink>
       </Nav.Item>
       <Nav.Item as="li" className="tab-link">
         <NavLink
           to={`/${category}/salsa`}
-          onClick={() => {
-            resetActiveLink();
-            fetchNewResults(category, 'salsa');
-          }}
+          onClick={() => fetchNewResults(category, 'salsa')}
         >
           Salsa
         </NavLink>
@@ -56,10 +47,7 @@ const NavigationTabs = ({
       <Nav.Item as="li" className="tab-link">
         <NavLink
           to={`/${category}/bachata`}
-          onClick={() => {
-            resetActiveLink();
-            fetchNewResults(category, 'bachata');
-          }}
+          onClick={() => fetchNewResults(category, 'bachata')}
         >
           Bachata
         </NavLink>
@@ -67,10 +55,7 @@ const NavigationTabs = ({
       <Nav.Item as="li" className="tab-link">
         <NavLink
           to={`/${category}/kizomba`}
-          onClick={() => {
-            resetActiveLink();
-            fetchNewResults(category, 'kizomba');
-          }}
+          onClick={() => fetchNewResults(category, 'kizomba')}
         >
           Kizomba
         </NavLink>
