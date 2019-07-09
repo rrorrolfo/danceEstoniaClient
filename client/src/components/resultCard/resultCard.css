@@ -1,14 +1,25 @@
 .result-card {
   margin-bottom: 25px;
+  max-height: 430px;
+  max-width: 400px;
+}
+
+.result-card a {
+  color: #000;
 }
 
 .result-card:hover {
   box-shadow: 0 5px 12px 2px rgba(0, 0, 0, 0.2);
 }
 
+.result-card a:hover {
+  text-decoration: none;
+}
+
 .result-card-img {
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 36px));
   -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 36px));
+  max-height: 226px;
 }
 
 .result-card-body {
@@ -31,8 +42,7 @@
 }
 
 .result-card-data {
-  border: 1px solid red;
-  margin: 0;
+  margin: 2.5px 0;
 }
 
 .result-card-description {
