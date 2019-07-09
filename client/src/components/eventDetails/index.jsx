@@ -1,20 +1,26 @@
 import React, { useEffect } from 'react';
 import { Container } from 'react-bootstrap';
+import { Map, GoogleApiWrapper } from 'google-maps-react';
 import PropTypes from 'prop-types';
 import './eventDetails.css';
+import mapsApiKey from '../../config/config';
 
 const EventDetails = ({
   match,
   category,
   actionOnMount,
   singleEvent,
-  singleFestival
+  singleFestival,
+  google
 }) => {
   const { style, id } = match.params;
   useEffect(() => {
     actionOnMount(`/${category}/${style}/${id}`);
   }, []);
   const selectedEvent = category === 'events' ? singleEvent : singleFestival;
+  const mapStyles = {
+    height: '400px'
+  };
   return selectedEvent ? (
     <React.Fragment>
       <Container
@@ -42,9 +48,9 @@ const EventDetails = ({
             ? selectedEvent.website
             : selectedEvent.fbEvent}
         </p>
-        <p className="event-ticke-price">{selectedEvent.ticketPrice}</p>
+        <p className="event-ticket-price">{selectedEvent.ticketPrice}</p>
         <p className="event-description">{selectedEvent.description}</p>
-        <p>map</p>
+        <Map google={google} zoom={8} style={mapStyles} className="map" />
       </Container>
     </React.Fragment>
   ) : null;
@@ -66,4 +72,4 @@ EventDetails.defaultProps = {
   singleFestival: null
 };
 
-export default EventDetails;
+export default GoogleApiWrapper({ apiKey: mapsApiKey })(EventDetails);
