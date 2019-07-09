@@ -2,6 +2,7 @@ import React from 'react';
 import Nav from 'react-bootstrap/Nav';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import './tabs.css';
 
 const NavigationTabs = ({
   category,
@@ -24,33 +25,52 @@ const NavigationTabs = ({
     }
     return true;
   };
+  const resetActiveLink = () => {
+    document.querySelector('.tab-link a').className = '';
+  };
   return (
-    <Nav fill justify variant="tabs" defaultActiveKey="/home" as="ul">
-      <Nav.Item as="li">
+    <Nav
+      fill
+      justify
+      variant="tabs"
+      as="ul"
+      className="navigation-tabs"
+      defaultActiveKey="/festivals/kizomba"
+    >
+      <Nav.Item as="li" className="tab-link">
         <NavLink to={`/${category}`} onClick={() => fetchNewResults(category)}>
           All
         </NavLink>
       </Nav.Item>
-      <Nav.Item as="li">
+      <Nav.Item as="li" className="tab-link">
         <NavLink
           to={`/${category}/salsa`}
-          onClick={() => fetchNewResults(category, 'salsa')}
+          onClick={() => {
+            resetActiveLink();
+            fetchNewResults(category, 'salsa');
+          }}
         >
           Salsa
         </NavLink>
       </Nav.Item>
-      <Nav.Item as="li">
+      <Nav.Item as="li" className="tab-link">
         <NavLink
           to={`/${category}/bachata`}
-          onClick={() => fetchNewResults(category, 'bachata')}
+          onClick={() => {
+            resetActiveLink();
+            fetchNewResults(category, 'bachata');
+          }}
         >
           Bachata
         </NavLink>
       </Nav.Item>
-      <Nav.Item as="li">
+      <Nav.Item as="li" className="tab-link">
         <NavLink
           to={`/${category}/kizomba`}
-          onClick={() => fetchNewResults(category, 'kizomba')}
+          onClick={() => {
+            resetActiveLink();
+            fetchNewResults(category, 'kizomba');
+          }}
         >
           Kizomba
         </NavLink>
