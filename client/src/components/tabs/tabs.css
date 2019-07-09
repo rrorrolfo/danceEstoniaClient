@@ -1,5 +1,6 @@
 .navigation-tabs {
   color: var(--blue-estonia);
+  border-bottom: none;
 }
 
 .tab-link .active {
@@ -15,6 +16,5 @@
 
 .tab-link a:hover {
   border: 1px solid var(--blue-estonia);
-  border-bottom: none;
   text-decoration: none;
 }
