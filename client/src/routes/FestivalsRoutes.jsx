@@ -22,6 +22,7 @@ const FestivalsRoutes = ({
             <MainJumbotron
               fetchEvents={fetchEvents}
               fetchFestivals={fetchFestivals}
+              category="festivals"
             />
             <ResultsContainer
               match={match}
@@ -41,6 +42,8 @@ const FestivalsRoutes = ({
             <MainJumbotron
               fetchEvents={fetchEvents}
               fetchFestivals={fetchFestivals}
+              category="festivals"
+              match={match}
             />
             <ResultsContainer
               match={match}
