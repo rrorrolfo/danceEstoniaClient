@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { Container } from 'react-bootstrap';
-import { Map, GoogleApiWrapper } from 'google-maps-react';
 import PropTypes from 'prop-types';
 import './eventDetails.css';
 import mapsApiKey from '../../config/config';
@@ -10,16 +9,19 @@ const EventDetails = ({
   category,
   actionOnMount,
   singleEvent,
-  singleFestival,
-  google
+  singleFestival
 }) => {
   const { style, id } = match.params;
   useEffect(() => {
     actionOnMount(`/${category}/${style}/${id}`);
   }, []);
   const selectedEvent = category === 'events' ? singleEvent : singleFestival;
-  const mapStyles = {
-    height: '400px'
+  const formatMapSrc = () => {
+    const regex = /\s/gi;
+    const mapSRC = `${selectedEvent.venueOfEvent}, ${
+      selectedEvent.venueAddress
+    }, ${selectedEvent.cityOfEvent}, ${selectedEvent.countryOfEvent}`;
+    return mapSRC.replace(regex, '+');
   };
   return selectedEvent ? (
     <React.Fragment>
@@ -50,7 +52,15 @@ const EventDetails = ({
         </p>
         <p className="event-ticket-price">{selectedEvent.ticketPrice}</p>
         <p className="event-description">{selectedEvent.description}</p>
-        <Map google={google} zoom={8} style={mapStyles} className="map" />
+        <iframe
+          src={`https://www.google.com/maps/embed/v1/place?key=${mapsApiKey}
+    &q=${formatMapSrc()}`}
+          title="test"
+          width="100%"
+          height="450"
+          frameBorder="0"
+          allowFullScreen
+        />
       </Container>
     </React.Fragment>
   ) : null;
@@ -72,4 +82,4 @@ EventDetails.defaultProps = {
   singleFestival: null
 };
 
-export default GoogleApiWrapper({ apiKey: mapsApiKey })(EventDetails);
+export default EventDetails;
