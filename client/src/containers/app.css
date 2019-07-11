@@ -17,3 +17,20 @@
 .centered {
   text-align: center;
 }
+
+/********* Footer *********/
+
+.footer {
+  padding: 25px;
+  border-top: 1px solid var(--blue-estonia);
+  background-color: var(--blue-estonia);
+}
+
+.copyright {
+  margin: 0;
+  color: #fff;
+}
+
+.copyright span {
+  margin-left: 5px;
+}
