@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import MainJumbotron from '../components/jumbotron';
 import ResultsContainer from '../containers/resultsContainer';
 import EventDetails from '../components/eventDetails';
+import Footer from '../components/footer';
 
 const EventsRoutes = ({
   fetchEvents,
@@ -31,6 +32,7 @@ const EventsRoutes = ({
               fetchFestivals={fetchFestivals}
               category="events"
             />
+            <Footer />
           </React.Fragment>
         )}
       />
@@ -52,6 +54,7 @@ const EventsRoutes = ({
               fetchFestivals={fetchFestivals}
               category="events"
             />
+            <Footer />
           </React.Fragment>
         )}
       />
@@ -59,12 +62,15 @@ const EventsRoutes = ({
         path="/events/:category/:id"
         exact
         render={({ match }) => (
-          <EventDetails
-            match={match}
-            actionOnMount={fetchSingleEvent}
-            category="events"
-            singleEvent={singleEvent}
-          />
+          <React.Fragment>
+            <EventDetails
+              match={match}
+              actionOnMount={fetchSingleEvent}
+              category="events"
+              singleEvent={singleEvent}
+            />
+            <Footer />
+          </React.Fragment>
         )}
       />
       <Route render={() => <Redirect to="/notfound" />} />
