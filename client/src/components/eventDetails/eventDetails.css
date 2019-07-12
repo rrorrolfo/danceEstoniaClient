@@ -2,9 +2,40 @@
   min-height: 350px;
 }
 
-.event-details-container {
-  padding-top: 25px;
+.event-details-main-container {
+  padding: 25px 25px;
+  border: 1px solid red;
 }
 
+.event-info-container {
+  display: flex;
+}
+
+/* .event-info-container p {
+  margin-bottom: 10px;
+} */
+
 .event-title {
+}
+
+.event-styles,
+.event-venue,
+.event-date,
+.event-time,
+.event-social-links,
+.event-ticket-price {
+  margin: 5px 0;
+}
+
+.event-venue {
+}
+
+.event-date {
+}
+
+.event-ticket-price {
+}
+
+.event-description {
+  margin: 25px 0;
 }
