@@ -9,7 +9,9 @@ import {
   clock,
   tickets,
   website,
-  coupleDancing
+  coupleDancing,
+  venue,
+  mark
 } from '../../assets/icons';
 
 const EventDetails = ({
@@ -51,12 +53,14 @@ const EventDetails = ({
           <p className="event-styles">{selectedEvent.styles.join(', ')}</p>
         </div>
         <div className="event-info-container">
-          {hotel()}
-          <p className="event-venue">
-            {`${selectedEvent.venueOfEvent}, ${selectedEvent.venueAddress}, ${
-              selectedEvent.cityOfEvent
-            }, ${selectedEvent.countryOfEvent}`}
-          </p>
+          {category === 'events' ? venue() : hotel()}
+          <p className="event-venue">{`${selectedEvent.venueOfEvent}`}</p>
+        </div>
+        <div className="event-info-container">
+          {mark()}
+          {`${selectedEvent.venueAddress}, ${selectedEvent.cityOfEvent}, ${
+            selectedEvent.countryOfEvent
+          }`}
         </div>
         <div className="event-info-container">
           {calendar()}

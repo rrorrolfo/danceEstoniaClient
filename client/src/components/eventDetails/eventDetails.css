@@ -4,18 +4,11 @@
 
 .event-details-main-container {
   padding: 25px 25px;
-  border: 1px solid red;
+  /* border: 1px solid red; */
 }
 
 .event-info-container {
   display: flex;
-}
-
-/* .event-info-container p {
-  margin-bottom: 10px;
-} */
-
-.event-title {
 }
 
 .event-styles,
@@ -27,6 +20,9 @@
   margin: 5px 0;
 }
 
+/* .event-title {
+}
+
 .event-venue {
 }
 
@@ -34,7 +30,7 @@
 }
 
 .event-ticket-price {
-}
+} */
 
 .event-description {
   margin: 25px 0;
