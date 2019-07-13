@@ -3,6 +3,14 @@ import { Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './resultCard.css';
+import {
+  venue,
+  clock,
+  calendar,
+  coupleDancing,
+  mark,
+  hotel
+} from '../../assets/icons';
 
 const ResultCard = ({ result, match, category }) => {
   const { style } = match.params;
@@ -22,18 +30,36 @@ const ResultCard = ({ result, match, category }) => {
         />
         <Card.Body className="result-card-body">
           <Card.Title>{result.name}</Card.Title>
-          <Card.Text className="result-card-details">
-            {result.dateOfEvent}
+          {category === 'festivals' ? (
+            <Card.Text className="result-card-details">
+              {calendar('no-margin-top')}
+              {result.dateOfEvent}
+            </Card.Text>
+          ) : null}
+          <Card.Text
+            className={
+              category === 'events' ? 'result-card-details' : 'result-card-data'
+            }
+          >
+            {category === 'events'
+              ? venue('no-margin-top')
+              : hotel('no-margin-top')}
+            {`${result.venueOfEvent}`}
           </Card.Text>
+          {category === 'events' ? (
+            <Card.Text className="result-card-data">
+              {clock('no-margin-top')}
+              {`${result.timeOfEvent || null} `}
+            </Card.Text>
+          ) : null}
           <Card.Text className="result-card-data">
-            {`${result.venueOfEvent} ${result.timeOfEvent || null} `}
-          </Card.Text>
-          <Card.Text className="result-card-data">
+            {mark('no-margin-top')}
             {`${result.venueAddress}, ${result.cityOfEvent}, ${
               result.countryOfEvent
             }`}
           </Card.Text>
-          <Card.Text className="result-card-description">
+          <Card.Text className="result-card-data">
+            {coupleDancing('no-margin-top')}
             {result.styles.join(', ')}
           </Card.Text>
         </Card.Body>

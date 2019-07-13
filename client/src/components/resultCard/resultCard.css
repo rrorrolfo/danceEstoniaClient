@@ -29,6 +29,7 @@
 .result-card-details {
   position: relative;
   margin-bottom: 0;
+  padding-top: 5px;
 }
 
 .result-card-details::before {
@@ -45,6 +46,8 @@
   margin: 2.5px 0;
 }
 
-.result-card-description {
-  margin-top: 20px;
+p.result-card-data,
+p.result-card-details {
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
