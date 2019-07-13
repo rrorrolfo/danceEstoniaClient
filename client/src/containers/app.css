@@ -20,26 +20,39 @@
 
 /********* Icons *********/
 
-#calendar,
-#clock,
-#tickets,
-#website {
+.calendar,
+.clock,
+.tickets,
+.website,
+.venue {
   width: 20px;
   height: 20px;
   margin-right: 12px;
   margin-top: 5px;
 }
 
-#couple-dancing,
-#hotel {
+.couple-dancing,
+.hotel {
   width: 25px;
   height: 25px;
   margin-right: 10px;
   margin-top: 1.5px;
 }
 
-#hotel {
+.hotel {
   margin-right: 9px;
+}
+
+.mark {
+  height: 27.5px;
+  width: 27.5px;
+  margin-left: -2.5px;
+  margin-right: 6.5px;
+  background-color: #fff;
+}
+
+.no-margin-top {
+  margin-top: 0;
 }
 
 /********* Footer *********/
