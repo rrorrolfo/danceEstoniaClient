@@ -1,10 +1,10 @@
 import React from 'react';
 
-export const venue = () => {
+export const venue = customClass => {
   return (
     <svg
       version="1.1"
-      className="venue"
+      className={`venue ${customClass}`}
       x="0px"
       y="0px"
       viewBox="0 0 503.607 503.607"
@@ -91,9 +91,15 @@ export const venue = () => {
   );
 };
 
-export const mark = () => {
+export const mark = customClass => {
   return (
-    <svg version="1.1" className="mark" x="0px" y="0px" viewBox="0 0 512 512">
+    <svg
+      version="1.1"
+      className={`mark ${customClass}`}
+      x="0px"
+      y="0px"
+      viewBox="0 0 512 512"
+    >
       <g>
         <g>
           <path
@@ -133,11 +139,11 @@ export const mark = () => {
   );
 };
 
-export const coupleDancing = () => {
+export const coupleDancing = customClass => {
   return (
     <svg
       version="1.1"
-      className="couple-dancing"
+      className={`couple-dancing ${customClass}`}
       x="0px"
       y="0px"
       viewBox="0 0 34.81 34.81"
@@ -190,11 +196,11 @@ export const coupleDancing = () => {
   );
 };
 
-export const website = () => {
+export const website = customClass => {
   return (
     <svg
       version="1.1"
-      className="website"
+      className={`website ${customClass}`}
       x="0px"
       y="0px"
       viewBox="0 0 512 512"
@@ -276,11 +282,11 @@ export const website = () => {
   );
 };
 
-export const tickets = () => {
+export const tickets = customClass => {
   return (
     <svg
       version="1.1"
-      className="tickets"
+      className={`tickets ${customClass}`}
       x="0px"
       y="0px"
       viewBox="0 0 512 512"
@@ -326,11 +332,11 @@ export const tickets = () => {
   );
 };
 
-export const clock = () => {
+export const clock = customClass => {
   return (
     <svg
       version="1.1"
-      className="clock"
+      className={`clock ${customClass}`}
       x="0px"
       y="0px"
       viewBox="0 0 97.16 97.16"
@@ -366,11 +372,11 @@ export const clock = () => {
   );
 };
 
-export const calendar = () => {
+export const calendar = customClass => {
   return (
     <svg
       version="1.1"
-      className="calendar"
+      className={`calendar ${customClass}`}
       x="0px"
       y="0px"
       viewBox="0 0 29.121 29.121"
@@ -489,9 +495,15 @@ export const calendar = () => {
   );
 };
 
-export const hotel = () => {
+export const hotel = customClass => {
   return (
-    <svg version="1.1" className="hotel" x="0px" y="0px" viewBox="0 0 512 512">
+    <svg
+      version="1.1"
+      className={`hotel ${customClass}`}
+      x="0px"
+      y="0px"
+      viewBox="0 0 512 512"
+    >
       <g>
         <g>
           <path
