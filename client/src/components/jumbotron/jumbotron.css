@@ -1,5 +1,5 @@
 .main-jumbotron {
-  padding: 8rem 2rem 4rem;
+  padding: 6rem 2rem 4rem;
   background-image: url('../../assets/img/ikiz-festival.jpg');
   background-size: cover;
   background-repeat: no-repeat;
@@ -30,7 +30,7 @@
 }
 
 .welcoming-title {
-  font-size: 2.5rem;
+  font-size: 2rem;
 }
 
 .category-cta {
@@ -49,9 +49,9 @@
   text-decoration: none;
 }
 
-.category-cta:first-child {
+/* .category-cta:first-child {
   margin-right: 5%;
-}
+} */
 
 .main-jumbotron .active {
   /* Add styling for active state */
@@ -72,4 +72,8 @@
 .category-cta a:active {
   background-color: #e5ecf1;
   color: var(--blue-estonia);
+}
+
+.justify-content-center {
+  flex-direction: column;
 }
