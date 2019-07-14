@@ -3,7 +3,7 @@
 }
 
 .event-details-main-container {
-  padding: 25px 25px;
+  padding: 0 25px 25px;
   /* border: 1px solid red; */
 }
 
@@ -34,4 +34,24 @@
 
 .event-description {
   margin: 25px 0;
+}
+
+/*** Breacrumb***/
+.breadcrumb {
+  padding-left: 30px;
+  background-color: #fff;
+  padding-bottom: 0;
+}
+
+/******* Media queries *******/
+@media (min-width: 992px) {
+  .event-img {
+    height: 55vh;
+  }
+
+  /*** Breacrumb***/
+  .breadcrumb {
+    padding-left: 50px;
+    margin: 0 auto;
+  }
 }
