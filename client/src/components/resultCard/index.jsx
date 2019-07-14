@@ -3,6 +3,7 @@ import { Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './resultCard.css';
+import { arrayToUpperCase } from '../../utils';
 import {
   venue,
   clock,
@@ -63,7 +64,7 @@ const ResultCard = ({ result, match, category }) => {
             </Card.Text>
             <Card.Text className="result-card-data">
               {coupleDancing('no-margin-top')}
-              {result.styles.join(', ')}
+              {arrayToUpperCase(result.styles)}
             </Card.Text>
           </Card.Body>
         </div>
