@@ -18,3 +18,24 @@
   border: 1px solid var(--blue-estonia);
   text-decoration: none;
 }
+
+/********* Media queries ********/
+
+@media (min-width: 768px) {
+  .navigation-tabs {
+    max-width: 690px;
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 992px) {
+  .navigation-tabs {
+    max-width: 100%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .navigation-tabs {
+    max-width: 80%;
+  }
+}

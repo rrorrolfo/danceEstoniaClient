@@ -35,7 +35,7 @@ const MainJumbotron = ({ category, fetchEvents, fetchFestivals, match }) => {
             : simpleTitle()}
         </h1>
         <Nav
-          defaultActiveKey={`/${category}}`}
+          activeKey={`/${category}}`}
           as="ul"
           className="justify-content-center"
         >

@@ -51,3 +51,47 @@ p.result-card-details {
   margin-top: 5px;
   margin-bottom: 5px;
 }
+
+/********* Media queries ********/
+
+@media (min-width: 768px) {
+  .result-card-data-container {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .result-card {
+    max-width: 100%;
+    border-bottom: none;
+    border-left: none;
+  }
+
+  .result-card-body {
+    padding-top: 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  .result-card-img {
+    width: 60%;
+    min-width: 60%;
+    max-height: 270px;
+  }
+}
+
+@media (min-width: 992px) {
+  .result-card-img {
+    max-height: 310px;
+    width: 60%;
+    min-width: 60%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .result-card {
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

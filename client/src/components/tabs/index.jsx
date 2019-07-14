@@ -26,7 +26,7 @@ const NavigationTabs = ({
     return true;
   };
   return (
-    <Nav fill justify variant="tabs" as="ul" className="navigation-tabs">
+    <Nav justify variant="tabs" as="ul" className="navigation-tabs">
       <Nav.Item as="li" className="tab-link">
         <NavLink
           exact

@@ -49,12 +49,7 @@
   text-decoration: none;
 }
 
-/* .category-cta:first-child {
-  margin-right: 5%;
-} */
-
 .main-jumbotron .active {
-  /* Add styling for active state */
   border-radius: 10px;
 }
 
@@ -69,11 +64,31 @@
   border-radius: 10px;
 }
 
-.category-cta a:active {
-  background-color: #e5ecf1;
-  color: var(--blue-estonia);
-}
-
 .justify-content-center {
   flex-direction: column;
+}
+
+/********* Media queries ********/
+
+@media (min-width: 768px) {
+  .main-jumbotron {
+    padding-top: 8em;
+    height: 50vh;
+  }
+
+  .welcoming-title {
+    font-size: 2.5rem;
+  }
+
+  .justify-content-center {
+    flex-direction: row;
+  }
+
+  .category-cta {
+    max-width: 329px;
+  }
+
+  .category-cta:first-child {
+    margin-right: 5%;
+  }
 }
