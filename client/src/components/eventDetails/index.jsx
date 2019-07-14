@@ -3,6 +3,8 @@ import { Container } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import './eventDetails.css';
 import mapsApiKey from '../../config/config';
+import Breadcrumbs from '../breadcrumbs';
+import { firstLetterToUppercase, arrayToUpperCase } from '../../utils';
 import {
   hotel,
   calendar,
@@ -21,9 +23,9 @@ const EventDetails = ({
   singleEvent,
   singleFestival
 }) => {
-  const { style, id } = match.params;
+  const { id } = match.params;
   useEffect(() => {
-    actionOnMount(`/${category}/${style}/${id}`);
+    actionOnMount(`/${category}/${match.params.category}/${id}`);
   }, []);
   const selectedEvent = category === 'events' ? singleEvent : singleFestival;
   const formatMapSrc = () => {
@@ -33,6 +35,7 @@ const EventDetails = ({
     }, ${selectedEvent.cityOfEvent}, ${selectedEvent.countryOfEvent}`;
     return mapSRC.replace(regex, '+');
   };
+
   return selectedEvent ? (
     <React.Fragment>
       <Container
@@ -43,14 +46,22 @@ const EventDetails = ({
             selectedEvent.imageURL
           })`,
           backgroundRepeat: 'no-repeat',
-          backgroundSize: 'cover'
+          backgroundSize: 'cover',
+          backgroundPosition: '50% 50%'
         }}
+      />
+      <Breadcrumbs
+        category={firstLetterToUppercase(category)}
+        dancingStyle={firstLetterToUppercase(match.params.category)}
+        eventName={selectedEvent.name}
       />
       <Container className="event-details-main-container">
         <h1 className="event-title centered">{selectedEvent.name}</h1>
         <div className="event-info-container">
           {coupleDancing()}
-          <p className="event-styles">{selectedEvent.styles.join(', ')}</p>
+          <p className="event-styles">
+            {arrayToUpperCase(selectedEvent.styles)}
+          </p>
         </div>
         <div className="event-info-container">
           {category === 'events' ? venue() : hotel()}
