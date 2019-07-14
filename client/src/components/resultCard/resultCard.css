@@ -2,6 +2,8 @@
   margin-bottom: 25px;
   max-height: 430px;
   max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .result-card a {
@@ -91,7 +93,5 @@ p.result-card-details {
 @media (min-width: 1200px) {
   .result-card {
     max-width: 80%;
-    margin-left: auto;
-    margin-right: auto;
   }
 }
