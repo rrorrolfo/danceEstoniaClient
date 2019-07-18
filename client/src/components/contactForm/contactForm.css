@@ -1,0 +1,51 @@
+.contact-form-container {
+  margin-top: 56px;
+  padding-top: 20px;
+}
+
+.contact-title {
+  color: var(--blue-estonia);
+  margin-top: 25px;
+}
+
+.contact-form {
+  margin-top: 50px;
+}
+
+.contact-data {
+  flex-direction: column;
+}
+
+.input-decoration {
+  background-color: transparent;
+  border-color: var(--blue-estonia);
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+
+.input-decoration::placeholder {
+  color: var(--blue-estonia);
+}
+
+.input-decoration::-webkit-input-placeholder {
+  color: var(--blue-estonia);
+}
+
+.input-decoration::-moz-placeholder {
+  color: var(--blue-estonia);
+}
+
+.contact-form-submit {
+  background-color: transparent;
+  color: var(--blue-estonia);
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  padding: 10px 50px;
+  margin-top: 50px;
+}
+
+.message-input::placeholder {
+  padding-top: auto;
+}
