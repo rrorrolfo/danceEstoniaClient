@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Form, Col, Button } from 'react-bootstrap';
 import Footer from '../footer';
+import { emailRequest } from '../../requests/requests';
 import './contactForm.css';
 
 const ContactForm = () => {
@@ -75,11 +76,27 @@ const ContactForm = () => {
         return null;
     }
   };
+
+  const handleSubmit = event => {
+    // do validations when user clicks submit
+    event.preventDefault();
+    if (validName && validEmail && validMessage) {
+      emailRequest({
+        nombre: name,
+        email,
+        subject: 'DanceEstonia Contact',
+        message
+      })
+        // handle responses
+        .then(response => console.log(response))
+        .catch(error => console.log(error));
+    }
+  };
   return (
     <React.Fragment>
       <Container className="contact-form-container full-vh-height">
         <h1 className="centered contact-title">Get in contact with us</h1>
-        <Form className="contact-form">
+        <Form className="contact-form" onSubmit={e => handleSubmit(e)}>
           <Form.Row className="contact-data">
             <Form.Group as={Col} controlId="formGridPassword">
               <Form.Label className="isHidden">Name</Form.Label>
