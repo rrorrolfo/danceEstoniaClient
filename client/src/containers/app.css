@@ -19,6 +19,10 @@
   display: none;
 }
 
+.full-vh-height {
+  min-height: calc(100vh - 121px);
+}
+
 /********* Icons *********/
 
 .calendar,
@@ -55,7 +59,7 @@
 /********* Footer *********/
 
 .footer {
-  padding: 25px;
+  padding: 20px;
   border-top: 1px solid var(--blue-estonia);
   background-color: var(--blue-estonia);
 }
