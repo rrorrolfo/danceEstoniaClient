@@ -49,3 +49,16 @@
 .message-input::placeholder {
   padding-top: auto;
 }
+
+/********* Media Queries *********/
+@media (min-width: 992px) {
+  .contact-form-container {
+    max-width: 70%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .contact-form-container {
+    max-width: 60%;
+  }
+}
