@@ -21,7 +21,7 @@ const Header = React.memo(() => (
           <NavDropdown.Item href="/festivals/kizomba">Kizomba</NavDropdown.Item>
         </NavDropdown>
         <Nav.Link href="#">Shop</Nav.Link>
-        <Nav.Link href="#">Contact</Nav.Link>
+        <Nav.Link href="/contact">Contact</Nav.Link>
       </Nav>
     </Navbar.Collapse>
   </Navbar>
