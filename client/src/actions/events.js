@@ -1,5 +1,5 @@
 import * as eventsActionTypes from '../actionTypes/events';
-import apiRequest from '../requests/requests';
+import { apiRequest } from '../requests/requests';
 
 export const fetchedStarted = () => {
   return {

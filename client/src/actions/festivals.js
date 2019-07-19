@@ -1,5 +1,5 @@
 import * as festivalsActionTypes from '../actionTypes/festivals';
-import apiRequest from '../requests/requests';
+import { apiRequest } from '../requests/requests';
 
 export const fetchedStarted = () => {
   return {
