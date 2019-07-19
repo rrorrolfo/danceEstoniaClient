@@ -38,12 +38,14 @@
   flex-basis: 45%;
   margin-top: 25px;
   border-radius: 10px;
-  border: 1px solid #fff;
+  width: 282px;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .category-cta a {
   display: block;
-  padding: 5px 0;
+  padding: 10px 0;
   font-size: 1.15rem;
   color: #fff;
   text-decoration: none;
@@ -90,5 +92,8 @@
 
   .category-cta:first-child {
     margin-right: 5%;
+  }
+  .category-cta:last-child {
+    margin-left: 0;
   }
 }
