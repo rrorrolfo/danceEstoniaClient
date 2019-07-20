@@ -30,6 +30,9 @@ const ContactForm = () => {
   const emailField = React.createRef();
   const messageField = React.createRef();
 
+  // Message sending status
+  const [isSendingMessage, toggleSendingStatus] = useState(false);
+
   /**
    * @param {string} field - name attribute value of the input that will be targeted to be performed a text validation upon.
    */
@@ -104,6 +107,7 @@ const ContactForm = () => {
     validationReducer('message');
     // api call
     if (validName && validEmail && validMessage) {
+      toggleSendingStatus(true);
       emailRequest({
         nombre: name,
         email,
@@ -113,12 +117,15 @@ const ContactForm = () => {
         .then(response => {
           if (response === 'success') {
             toggleMessageStatus(true);
+            toggleSendingStatus(false);
           } else {
             toggleMessageError(true);
+            toggleSendingStatus(false);
           }
         })
         .catch(error => {
           toggleMessageError(true);
+          toggleSendingStatus(false);
           console.log(error);
         });
     }
@@ -191,8 +198,9 @@ const ContactForm = () => {
             variant="primary"
             type="submit"
             className="contact-form-submit"
+            disabled={isSendingMessage}
           >
-            Submit
+            {isSendingMessage ? 'Sending...' : 'Submit'}
           </Button>
         </Form>
         <Container className={messageSent ? 'successMessage' : 'isHidden'}>
