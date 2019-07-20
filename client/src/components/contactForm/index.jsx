@@ -22,7 +22,13 @@ const ContactForm = () => {
   const [messageSent, toggleMessageStatus] = useState(false);
   const [messageError, toggleMessageError] = useState(false);
 
+  // Number of rows for the message field textarea
   const [textareaRows, updateTextarearows] = useState(1);
+
+  // References to input fields
+  const nameField = React.createRef();
+  const emailField = React.createRef();
+  const messageField = React.createRef();
 
   /**
    * @param {string} field - name attribute value of the input that will be targeted to be performed a text validation upon.
@@ -38,7 +44,6 @@ const ContactForm = () => {
         toggleValidMessage(false);
         return false;
       }
-
       toggleInvalidName(true);
       toggleValidName(false);
       return false;
@@ -67,18 +72,25 @@ const ContactForm = () => {
     return true;
   };
 
-  const handleChange = (callback, newValue, fieldToValidate) => {
-    callback(newValue);
+  /**
+   * @param {string} fieldTovalidate - name attribute value of the input that will be targeted to be performed the correspondant validation upon.
+   */
+  const validationReducer = fieldToValidate => {
     switch (fieldToValidate) {
       case 'name':
-        return validateEmptyField(newValue);
+        return validateEmptyField(nameField.current.value);
       case 'email':
-        return validateEmail(newValue);
+        return validateEmail(emailField.current.value);
       case 'message':
-        return validateEmptyField(newValue, 20, true);
+        return validateEmptyField(messageField.current.value, 20, true);
       default:
         return null;
     }
+  };
+
+  const handleChange = (callback, newValue, fieldToValidate) => {
+    callback(newValue);
+    validationReducer(fieldToValidate);
   };
 
   const handleSubmit = event => {
@@ -86,7 +98,11 @@ const ContactForm = () => {
     // Reset response messages
     toggleMessageStatus(false);
     toggleMessageError(false);
-    // do validations when user clicks submit
+    // Validate all fields
+    validationReducer('name');
+    validationReducer('email');
+    validationReducer('message');
+    // api call
     if (validName && validEmail && validMessage) {
       emailRequest({
         nombre: name,
@@ -120,6 +136,7 @@ const ContactForm = () => {
                 type="text"
                 placeholder="Name"
                 name="name"
+                ref={nameField}
                 onChange={e => handleChange(updateName, e.target.value, 'name')}
                 isInvalid={invalidName}
                 isValid={validName}
@@ -135,6 +152,7 @@ const ContactForm = () => {
                 type="email"
                 placeholder="Enter your email"
                 name="email"
+                ref={emailField}
                 onChange={e =>
                   handleChange(updateEmail, e.target.value, 'email')
                 }
@@ -156,6 +174,7 @@ const ContactForm = () => {
               name="message"
               rows={textareaRows}
               placeholder="Message"
+              ref={messageField}
               onFocus={() => updateTextarearows(4)}
               onChange={e =>
                 handleChange(updateMessage, e.target.value, 'message')
@@ -164,7 +183,7 @@ const ContactForm = () => {
               isValid={validMessage}
             />
             <Form.Control.Feedback type="invalid">
-              Your message must be at least 15 characters long.
+              Your message must be at least 20 characters long.
             </Form.Control.Feedback>
           </Form.Group>
 
