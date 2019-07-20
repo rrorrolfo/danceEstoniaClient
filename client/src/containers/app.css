@@ -1,5 +1,7 @@
 :root {
   --blue-estonia: #0072ce;
+  --green-success: rgb(29, 167, 1);
+  --red-error: rgb(190, 0, 0);
 }
 
 * {

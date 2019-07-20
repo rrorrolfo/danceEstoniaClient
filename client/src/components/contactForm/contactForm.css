@@ -50,6 +50,27 @@
   padding-top: auto;
 }
 
+/***** Response Messages *****/
+.successMessage {
+  border: 2px solid var(--green-success);
+  margin-top: 25px;
+}
+
+.successMessage h3 {
+  padding-top: 15px;
+  color: var(--green-success);
+  font-size: 20px;
+}
+
+.failedMessage {
+  color: var(--red-error);
+  width: 85%;
+  margin: 25px auto;
+  padding: 25px 25px 10px;
+  border: 2px solid var(--red-error);
+  font-size: 1rem;
+}
+
 /********* Media Queries *********/
 @media (min-width: 992px) {
   .contact-form-container {

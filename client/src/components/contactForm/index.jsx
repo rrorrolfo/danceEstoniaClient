@@ -5,7 +5,7 @@ import { emailRequest } from '../../requests/requests';
 import './contactForm.css';
 
 const ContactForm = () => {
-  // Nanme field
+  // Name field
   const [name, updateName] = useState('');
   const [invalidName, toggleInvalidName] = useState(false);
   const [validName, toggleValidName] = useState(false);
@@ -17,6 +17,10 @@ const ContactForm = () => {
   const [message, updateMessage] = useState('');
   const [invalidMessage, toggleInvalidMessage] = useState(false);
   const [validMessage, toggleValidMessage] = useState(false);
+
+  // Message sent status
+  const [messageSent, toggleMessageStatus] = useState(false);
+  const [messageError, toggleMessageError] = useState(false);
 
   const [textareaRows, updateTextarearows] = useState(1);
 
@@ -78,8 +82,11 @@ const ContactForm = () => {
   };
 
   const handleSubmit = event => {
-    // do validations when user clicks submit
     event.preventDefault();
+    // Reset response messages
+    toggleMessageStatus(false);
+    toggleMessageError(false);
+    // do validations when user clicks submit
     if (validName && validEmail && validMessage) {
       emailRequest({
         nombre: name,
@@ -87,9 +94,17 @@ const ContactForm = () => {
         subject: 'DanceEstonia Contact',
         message
       })
-        // handle responses
-        .then(response => console.log(response))
-        .catch(error => console.log(error));
+        .then(response => {
+          if (response === 'success') {
+            toggleMessageStatus(true);
+          } else {
+            toggleMessageError(true);
+          }
+        })
+        .catch(error => {
+          toggleMessageError(true);
+          console.log(error);
+        });
     }
   };
   return (
@@ -161,6 +176,19 @@ const ContactForm = () => {
             Submit
           </Button>
         </Form>
+        <Container className={messageSent ? 'successMessage' : 'isHidden'}>
+          <h3 className="centered">Your message has been sent successfully!</h3>
+          <p className="centered">
+            Thanks for contacting us, we will get in touch with you as soon as
+            possible.
+          </p>
+        </Container>
+        <Container className={messageError ? 'failedMessage' : 'isHidden'}>
+          <p>
+            Oops! Seems that that there was an error while sending your message,
+            please try again.
+          </p>
+        </Container>
       </Container>
       <Footer />
     </React.Fragment>
