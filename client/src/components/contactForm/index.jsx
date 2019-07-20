@@ -200,7 +200,7 @@ const ContactForm = () => {
             className="contact-form-submit"
             disabled={isSendingMessage}
           >
-            {isSendingMessage ? 'Sending...' : 'Submit'}
+            {isSendingMessage ? 'Sending...' : 'Send Message'}
           </Button>
         </Form>
         <Container className={messageSent ? 'successMessage' : 'isHidden'}>
