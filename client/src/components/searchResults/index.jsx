@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import PropTypes from 'prop-types';
-import ResultCard from '../resultCard';
+import TimeFrameGroup from '../timeframeGroup';
 
 const SearchResults = ({
   results,
@@ -25,19 +25,21 @@ const SearchResults = ({
       fetchFestivals();
     }
   }, []);
-  const displayResults = resultsToDisplay => {
-    return resultsToDisplay.map(result => (
-      <ResultCard
-        result={result}
+
+  const displayTimeFramecontainers = (resultsByGroup, timeFrame = 'month') => {
+    return resultsByGroup.map(group => (
+      <TimeFrameGroup
+        timeFrame={timeFrame === 'week' ? group._id.week : group._id.month}
+        events={group.records}
         category={category}
-        key={result._id}
         match={match}
       />
     ));
   };
+
   return (
     <Container className="results-container">
-      {displayResults(results)}
+      {displayTimeFramecontainers(results)}
     </Container>
   );
 };
@@ -50,12 +52,11 @@ SearchResults.propTypes = {
   category: PropTypes.oneOf(['events', 'festivals']).isRequired,
   results: PropTypes.arrayOf(PropTypes.object),
   // eslint-disable-next-line react/forbid-prop-types
-  match: PropTypes.object
+  match: PropTypes.object.isRequired
 };
 
 SearchResults.defaultProps = {
   results: null,
-  match: null,
   fetchEventsByStyle: null,
   fetchFestivalsByStyle: null
 };
