@@ -3,6 +3,7 @@ import { Container } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import TimeFrameFilter from '../../components/timeFrameFilter';
 import NavigationTabs from '../../components/tabs';
 import SearchResults from '../../components/searchResults';
 
@@ -26,6 +27,7 @@ const ResultsContainer = ({
         fetchFestivals={fetchFestivals}
         fetchFestivalsByStyle={fetchFestivalsByStyle}
       />
+      {category === 'events' ? <TimeFrameFilter /> : null}
       <Switch>
         <Route
           path={`/${category}`}
