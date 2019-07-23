@@ -1,0 +1,42 @@
+.time-frame-nav-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 25px;
+}
+
+.time-frame-nav-container h3 {
+  margin-top: 10px;
+  font-size: 1rem;
+}
+
+.time-frame-nav {
+  display: flex;
+  margin-left: 10px;
+  border-bottom: none;
+}
+
+.time-frame-week,
+.time-frame-month {
+  background-color: var(--blue-estonia);
+  color: rgb(255, 255, 255);
+  padding: 6px 15px 0;
+  border-radius: 10px;
+  border: 1px solid var(--blue-estonia);
+}
+
+.time-frame-week {
+  margin-left: auto;
+  margin-right: 5px;
+}
+
+.time-frame-month {
+  margin-right: auto;
+  margin-left: 5px;
+}
+
+.time-frame-week:hover,
+.time-frame-month:hover {
+  cursor: pointer;
+  color: var(--blue-estonia);
+  background-color: rgb(255, 255, 255);
+}
