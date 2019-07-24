@@ -5,7 +5,7 @@ import axios from 'axios';
  */
 export const apiRequest = params => {
   return axios(`http://localhost:5000${params.endPoint}`, {
-    ...params
+    params: { timeFrame: params.timeFrame }
   }).then(response => response.data);
 };
 
