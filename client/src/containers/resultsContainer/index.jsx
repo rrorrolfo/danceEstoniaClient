@@ -32,6 +32,7 @@ const ResultsContainer = ({
         <TimeFrameFilter
           fetchEvents={fetchEvents}
           topLevelMatch={topLevelMatch}
+          fetchEventsByStyle={fetchEventsByStyle}
         />
       ) : null}
       <Switch>

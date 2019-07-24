@@ -3,7 +3,11 @@ import { Nav, Container } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import './timeFrameFilter.css';
 
-const TimeFrameFilter = ({ fetchEvents, topLevelMatch }) => {
+const TimeFrameFilter = ({
+  fetchEvents,
+  fetchEventsByStyle,
+  topLevelMatch
+}) => {
   return (
     <Container className="time-frame-nav-container">
       <h3>Order events by:</h3>
@@ -13,7 +17,7 @@ const TimeFrameFilter = ({ fetchEvents, topLevelMatch }) => {
           className="time-frame-week"
           onClick={() => {
             if (topLevelMatch.params.category) {
-              return fetchEvents(
+              return fetchEventsByStyle(
                 `/events/${topLevelMatch.params.category}`,
                 'week'
               );
@@ -28,7 +32,7 @@ const TimeFrameFilter = ({ fetchEvents, topLevelMatch }) => {
           className="time-frame-month"
           onClick={() => {
             if (topLevelMatch.params.category) {
-              return fetchEvents(
+              return fetchEventsByStyle(
                 `/events/${topLevelMatch.params.category}`,
                 'month'
               );
@@ -45,6 +49,7 @@ const TimeFrameFilter = ({ fetchEvents, topLevelMatch }) => {
 
 TimeFrameFilter.propTypes = {
   fetchEvents: PropTypes.func.isRequired,
+  fetchEventsByStyle: PropTypes.func.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   topLevelMatch: PropTypes.object.isRequired
 };
