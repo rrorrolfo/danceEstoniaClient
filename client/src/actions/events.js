@@ -42,13 +42,14 @@ export const fetchEventsByStyleSuccess = events => {
   };
 };
 
-export const fetchEventsByStyle = endPoint => {
+export const fetchEventsByStyle = (endPoint, timeFrame = 'week') => {
   return dispatch => {
     dispatch(fetchedStarted());
 
     apiRequest({
       method: 'GET',
-      endPoint
+      endPoint,
+      timeFrame
     })
       .then(events => dispatch(fetchEventsByStyleSuccess(events)))
       .catch(error => dispatch(fetchedFailure(error)));
