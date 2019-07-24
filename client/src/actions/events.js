@@ -21,13 +21,14 @@ export const fetchedFailure = errors => {
   };
 };
 
-export const fetchEvents = (endPoint = '/events') => {
+export const fetchEvents = (endPoint = '/events', timeFrame = 'week') => {
   return dispatch => {
     dispatch(fetchedStarted());
 
     apiRequest({
       method: 'GET',
-      endPoint
+      endPoint,
+      timeFrame
     })
       .then(events => dispatch(fetchedSuccess(events)))
       .catch(error => dispatch(fetchedFailure(error)));
