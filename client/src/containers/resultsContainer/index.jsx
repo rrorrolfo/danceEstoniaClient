@@ -88,7 +88,7 @@ ResultsContainer.propTypes = {
   festivals: PropTypes.arrayOf(PropTypes.object),
   festivalsByStyle: PropTypes.arrayOf(PropTypes.object),
   // eslint-disable-next-line react/forbid-prop-types
-  topLevelMatch: PropTypes.object.isRequired
+  topLevelMatch: PropTypes.object
 };
 
 ResultsContainer.defaultProps = {
@@ -97,7 +97,8 @@ ResultsContainer.defaultProps = {
   fetchEventsByStyle: null,
   festivals: null,
   fetchFestivalsByStyle: null,
-  festivalsByStyle: null
+  festivalsByStyle: null,
+  topLevelMatch: null
 };
 
 export default connect(mapStateToProps)(ResultsContainer);
