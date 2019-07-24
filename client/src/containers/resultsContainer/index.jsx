@@ -16,7 +16,8 @@ const ResultsContainer = ({
   events,
   eventsByStyle,
   festivals,
-  festivalsByStyle
+  festivalsByStyle,
+  topLevelMatch
 }) => {
   return (
     <Container>
@@ -27,7 +28,12 @@ const ResultsContainer = ({
         fetchFestivals={fetchFestivals}
         fetchFestivalsByStyle={fetchFestivalsByStyle}
       />
-      {category === 'events' ? <TimeFrameFilter /> : null}
+      {category === 'events' ? (
+        <TimeFrameFilter
+          fetchEvents={fetchEvents}
+          topLevelMatch={topLevelMatch}
+        />
+      ) : null}
       <Switch>
         <Route
           path={`/${category}`}
@@ -79,7 +85,9 @@ ResultsContainer.propTypes = {
   events: PropTypes.arrayOf(PropTypes.object),
   eventsByStyle: PropTypes.arrayOf(PropTypes.object),
   festivals: PropTypes.arrayOf(PropTypes.object),
-  festivalsByStyle: PropTypes.arrayOf(PropTypes.object)
+  festivalsByStyle: PropTypes.arrayOf(PropTypes.object),
+  // eslint-disable-next-line react/forbid-prop-types
+  topLevelMatch: PropTypes.object.isRequired
 };
 
 ResultsContainer.defaultProps = {

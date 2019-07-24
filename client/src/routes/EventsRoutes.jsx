@@ -26,7 +26,7 @@ const EventsRoutes = ({
               category="events"
             />
             <ResultsContainer
-              match={match}
+              topLevelMatch={match}
               fetchEvents={fetchEvents}
               fetchEventsByStyle={fetchEventsByStyle}
               fetchFestivals={fetchFestivals}
@@ -48,7 +48,7 @@ const EventsRoutes = ({
               match={match}
             />
             <ResultsContainer
-              match={match}
+              topLevelMatch={match}
               fetchEvents={fetchEvents}
               fetchEventsByStyle={fetchEventsByStyle}
               fetchFestivals={fetchFestivals}
