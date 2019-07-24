@@ -14,14 +14,14 @@ const SearchResults = ({
 }) => {
   useEffect(() => {
     if (match.params.style) {
-      if (category === 'events') {
+      if (category === 'events' && !results.length) {
         fetchEventsByStyle(`/events/${match.params.style}`);
-      } else {
+      } else if (category === 'festivals' && !results.length) {
         fetchFestivalsByStyle(`/festivals/${match.params.style}`);
       }
-    } else if (category === 'events') {
+    } else if (category === 'events' && !results.length) {
       fetchEvents();
-    } else {
+    } else if (category === 'festivals' && !results.length) {
       fetchFestivals();
     }
   }, []);
