@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import TimeFrameFilter from '../../components/timeFrameFilter';
+// import TimeFrameFilter from '../../components/timeFrameFilter';
 import NavigationTabs from '../../components/tabs';
 import SearchResults from '../../components/searchResults';
 
@@ -16,9 +16,18 @@ const ResultsContainer = ({
   events,
   eventsByStyle,
   festivals,
-  festivalsByStyle,
-  topLevelMatch
+  festivalsByStyle
+  /* topLevelMatch, */
 }) => {
+  const [currentTimeFrame, updateTimeframe] = useState('');
+  useEffect(() => {
+    if (category === 'events') {
+      updateTimeframe('week');
+    }
+    if (category === 'festivals') {
+      updateTimeframe('month');
+    }
+  }, []);
   return (
     <Container>
       <NavigationTabs
@@ -28,13 +37,12 @@ const ResultsContainer = ({
         fetchFestivals={fetchFestivals}
         fetchFestivalsByStyle={fetchFestivalsByStyle}
       />
-      {category === 'events' ? (
-        <TimeFrameFilter
+      {/* <TimeFrameFilter
           fetchEvents={fetchEvents}
           topLevelMatch={topLevelMatch}
           fetchEventsByStyle={fetchEventsByStyle}
-        />
-      ) : null}
+          updateTimeFrame={updateTimeFrame}
+        /> */}
       <Switch>
         <Route
           path={`/${category}`}
@@ -46,6 +54,7 @@ const ResultsContainer = ({
               category={category}
               fetchEvents={fetchEvents}
               fetchFestivals={fetchFestivals}
+              currentTimeFrame={currentTimeFrame}
             />
           )}
         />
@@ -60,6 +69,7 @@ const ResultsContainer = ({
               fetchEventsByStyle={fetchEventsByStyle}
               fetchFestivals={fetchFestivals}
               fetchFestivalsByStyle={fetchFestivalsByStyle}
+              currentTimeFrame={currentTimeFrame}
             />
           )}
         />
@@ -86,9 +96,9 @@ ResultsContainer.propTypes = {
   events: PropTypes.arrayOf(PropTypes.object),
   eventsByStyle: PropTypes.arrayOf(PropTypes.object),
   festivals: PropTypes.arrayOf(PropTypes.object),
-  festivalsByStyle: PropTypes.arrayOf(PropTypes.object),
+  festivalsByStyle: PropTypes.arrayOf(PropTypes.object)
   // eslint-disable-next-line react/forbid-prop-types
-  topLevelMatch: PropTypes.object
+  // topLevelMatch: PropTypes.object
 };
 
 ResultsContainer.defaultProps = {
@@ -97,8 +107,8 @@ ResultsContainer.defaultProps = {
   fetchEventsByStyle: null,
   festivals: null,
   fetchFestivalsByStyle: null,
-  festivalsByStyle: null,
-  topLevelMatch: null
+  festivalsByStyle: null
+  // topLevelMatch: null
 };
 
 export default connect(mapStateToProps)(ResultsContainer);

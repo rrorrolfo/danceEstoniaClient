@@ -10,7 +10,8 @@ const SearchResults = ({
   fetchEvents,
   fetchEventsByStyle,
   fetchFestivals,
-  fetchFestivalsByStyle
+  fetchFestivalsByStyle,
+  currentTimeFrame
 }) => {
   useEffect(() => {
     if (match.params.style) {
@@ -29,17 +30,19 @@ const SearchResults = ({
   const displayTimeFramecontainers = (resultsByGroup, timeFrame = 'month') => {
     return resultsByGroup.map(group => (
       <TimeFrameGroup
-        timeFrame={timeFrame === 'week' ? group._id.week : group._id.month}
+        dateHappening={timeFrame === 'week' ? group._id.week : group._id.month}
+        timeFrame={timeFrame}
         events={group.records}
         category={category}
         match={match}
+        key={timeFrame === 'week' ? group._id.week : group._id.month}
       />
     ));
   };
 
   return (
     <Container className="results-container">
-      {displayTimeFramecontainers(results)}
+      {displayTimeFramecontainers(results, currentTimeFrame)}
     </Container>
   );
 };
@@ -52,7 +55,8 @@ SearchResults.propTypes = {
   category: PropTypes.oneOf(['events', 'festivals']).isRequired,
   results: PropTypes.arrayOf(PropTypes.object),
   // eslint-disable-next-line react/forbid-prop-types
-  match: PropTypes.object.isRequired
+  match: PropTypes.object.isRequired,
+  currentTimeFrame: PropTypes.oneOf(['week', 'month', '']).isRequired
 };
 
 SearchResults.defaultProps = {
