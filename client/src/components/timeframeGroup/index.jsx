@@ -40,7 +40,7 @@ const TimeFrameGroup = ({
 };
 
 TimeFrameGroup.propTypes = {
-  timeFrame: PropTypes.number.isRequired,
+  timeFrame: PropTypes.string.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   events: PropTypes.arrayOf(PropTypes.object).isRequired,
   category: PropTypes.oneOf(['events', 'festivals']).isRequired,
