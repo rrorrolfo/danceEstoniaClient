@@ -24,7 +24,7 @@ const MainJumbotron = ({ category, fetchEvents, fetchFestivals, match }) => {
   const simpleTitle = () =>
     category === 'events'
       ? 'Find the best dancing events in Estonia'
-      : 'Find the best festivals in Europe';
+      : 'Find the best dancing festivals in Europe';
   return (
     <Jumbotron className="main-jumbotron">
       <div className="overlay" />
