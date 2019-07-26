@@ -1,3 +1,10 @@
+.dateHappening {
+  background-color: var(--blue-estonia);
+  color: #fff;
+  margin-bottom: 20px;
+  padding: 10px 15px;
+}
+
 .result-card {
   margin-bottom: 25px;
   max-height: 430px;

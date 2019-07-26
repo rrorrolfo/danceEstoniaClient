@@ -24,14 +24,18 @@ const TimeFrameGroup = ({
     });
   };
   return (
-    <Container fluid>
-      <h1>
-        {timeFrame === 'month'
-          ? monthToString(dateHappening)
-          : weekToString(dateHappening)}
-      </h1>
-      {displayResults(events)}
-    </Container>
+    <React.Fragment>
+      {timeFrame ? (
+        <Container fluid className="timeGroupContainer">
+          <h3 className="dateHappening">
+            {timeFrame === 'month'
+              ? monthToString(dateHappening)
+              : weekToString(dateHappening)}
+          </h3>
+          {displayResults(events)}
+        </Container>
+      ) : null}
+    </React.Fragment>
   );
 };
 
