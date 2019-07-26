@@ -2,8 +2,15 @@ import React from 'react';
 import { Container } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import ResultCard from '../resultCard';
+import { monthToString, weekToString } from '../../utils';
 
-const TimeFrameGroup = ({ timeFrame, events, category, match }) => {
+const TimeFrameGroup = ({
+  dateHappening,
+  timeFrame,
+  events,
+  category,
+  match
+}) => {
   const displayResults = resultsToDisplay => {
     return resultsToDisplay.map(event => {
       return (
@@ -18,7 +25,11 @@ const TimeFrameGroup = ({ timeFrame, events, category, match }) => {
   };
   return (
     <Container fluid>
-      <h1>{timeFrame}</h1>
+      <h1>
+        {timeFrame === 'month'
+          ? monthToString(dateHappening)
+          : weekToString(dateHappening)}
+      </h1>
       {displayResults(events)}
     </Container>
   );
