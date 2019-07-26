@@ -12,29 +12,29 @@ export const monthToString = monthInNumber => {
   const number = parseInt(monthInNumber, 10);
   switch (number) {
     case 1:
-      return 'January';
+      return 'January, 2019';
     case 2:
-      return 'February';
+      return 'February, 2019';
     case 3:
-      return 'March';
+      return 'March, 2019';
     case 4:
-      return 'April';
+      return 'April, 2019';
     case 5:
-      return 'May';
+      return 'May, 2019';
     case 6:
-      return 'June';
+      return 'June, 2019';
     case 7:
-      return 'July';
+      return 'July, 2019';
     case 8:
-      return 'August';
+      return 'August, 2019';
     case 9:
-      return 'September';
+      return 'September, 2019';
     case 10:
-      return 'October';
+      return 'October, 2019';
     case 11:
-      return 'November';
+      return 'November, 2019';
     case 12:
-      return 'December';
+      return 'December, 2019';
     default:
       return number;
   }
