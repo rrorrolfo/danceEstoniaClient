@@ -11,10 +11,13 @@ const SearchResults = ({
   fetchEventsByStyle,
   fetchFestivals,
   fetchFestivalsByStyle,
-  currentTimeFrame
+  currentTimeFrame,
+  updateDancingStyle
 }) => {
   useEffect(() => {
     if (match.params.style) {
+      console.log(match.params.style);
+      updateDancingStyle(match.params.style);
       if (category === 'events' && !results.length) {
         fetchEventsByStyle(`/events/${match.params.style}`);
       } else if (category === 'festivals' && !results.length) {
@@ -25,7 +28,10 @@ const SearchResults = ({
     } else if (category === 'festivals' && !results.length) {
       fetchFestivals();
     }
-  }, []);
+    if (!match.params.style) {
+      updateDancingStyle('');
+    }
+  }, [match]);
 
   const displayTimeFramecontainers = (resultsByGroup, timeFrame = 'month') => {
     return resultsByGroup.map(group => (
@@ -56,13 +62,15 @@ SearchResults.propTypes = {
   results: PropTypes.arrayOf(PropTypes.object),
   // eslint-disable-next-line react/forbid-prop-types
   match: PropTypes.object.isRequired,
-  currentTimeFrame: PropTypes.oneOf(['week', 'month', '']).isRequired
+  currentTimeFrame: PropTypes.oneOf(['week', 'month', '']).isRequired,
+  updateDancingStyle: PropTypes.func
 };
 
 SearchResults.defaultProps = {
   results: null,
   fetchEventsByStyle: null,
-  fetchFestivalsByStyle: null
+  fetchFestivalsByStyle: null,
+  updateDancingStyle: null
 };
 
 export default SearchResults;

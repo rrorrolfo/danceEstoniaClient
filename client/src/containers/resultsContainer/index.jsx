@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 // import TimeFrameFilter from '../../components/timeFrameFilter';
 import NavigationTabs from '../../components/tabs';
 import SearchResults from '../../components/searchResults';
+import { firstLetterToUppercase } from '../../utils';
 
 const ResultsContainer = ({
   fetchEvents,
@@ -20,6 +21,7 @@ const ResultsContainer = ({
   /* topLevelMatch, */
 }) => {
   const [currentTimeFrame, updateTimeframe] = useState('');
+  const [dancingStyle, updateDancingStyle] = useState('');
   useEffect(() => {
     if (category === 'events') {
       updateTimeframe('week');
@@ -28,8 +30,14 @@ const ResultsContainer = ({
       updateTimeframe('month');
     }
   }, []);
+  const title = `Upcoming ${
+    dancingStyle !== '' ? firstLetterToUppercase(dancingStyle) : ''
+  } ${category === 'events' ? 'Parties and Events' : 'Festivals'} in ${
+    category === 'events' ? 'Estonia' : 'Europe'
+  }`;
   return (
     <Container>
+      <h2 className="results-title centered">{title}</h2>
       <NavigationTabs
         category={category}
         fetchEvents={fetchEvents}
@@ -55,6 +63,7 @@ const ResultsContainer = ({
               fetchEvents={fetchEvents}
               fetchFestivals={fetchFestivals}
               currentTimeFrame={currentTimeFrame}
+              updateDancingStyle={updateDancingStyle}
             />
           )}
         />
@@ -70,6 +79,7 @@ const ResultsContainer = ({
               fetchFestivals={fetchFestivals}
               fetchFestivalsByStyle={fetchFestivalsByStyle}
               currentTimeFrame={currentTimeFrame}
+              updateDancingStyle={updateDancingStyle}
             />
           )}
         />

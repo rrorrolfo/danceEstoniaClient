@@ -58,6 +58,11 @@
   margin-top: 0;
 }
 
+/********* Results Container *********/
+.results-title {
+  margin-bottom: 25px;
+}
+
 /********* Footer *********/
 
 .footer {
