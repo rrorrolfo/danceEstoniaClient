@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './jumbotron.css';
 
-const MainJumbotron = ({ category, fetchEvents, fetchFestivals, match }) => {
+const MainJumbotron = ({ category, match }) => {
   /**
    * @param string cat Category selected, one of ["events", "festivals"]
    * @param string style dancing style selected
@@ -40,14 +40,10 @@ const MainJumbotron = ({ category, fetchEvents, fetchFestivals, match }) => {
           className="justify-content-center"
         >
           <Nav.Item as="li" className="category-cta">
-            <NavLink to="/events" onClick={() => fetchEvents()}>
-              Parties & Events
-            </NavLink>
+            <NavLink to="/events">Parties & Events</NavLink>
           </Nav.Item>
           <Nav.Item as="li" className="category-cta">
-            <NavLink to="/festivals" onClick={() => fetchFestivals()}>
-              Festivals
-            </NavLink>
+            <NavLink to="/festivals">Festivals</NavLink>
           </Nav.Item>
         </Nav>
       </Container>
