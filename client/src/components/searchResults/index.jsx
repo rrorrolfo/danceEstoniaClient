@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import TimeFrameGroup from '../timeframeGroup';
+import PageCTA from '../paginationCTA';
 
 const SearchResults = ({
   results,
@@ -14,9 +15,9 @@ const SearchResults = ({
   currentTimeFrame,
   updateDancingStyle
 }) => {
+  const [pageCount, updatePageCount] = useState(1);
   useEffect(() => {
     if (match.params.style) {
-      console.log(match.params.style);
       updateDancingStyle(match.params.style);
       if (category === 'events' && !results.length) {
         fetchEventsByStyle(`/events/${match.params.style}`);
@@ -35,7 +36,14 @@ const SearchResults = ({
   }, [match]);
 
   const displayTimeFramecontainers = (resultsByGroup, timeFrame = 'month') => {
-    return resultsByGroup.map(group => (
+    const resultsToDisplay = [];
+    resultsByGroup.filter(result => {
+      if (resultsByGroup.indexOf(result) <= pageCount * 3 - 1) {
+        resultsToDisplay.push(result);
+      }
+      return true;
+    });
+    return resultsToDisplay.map(group => (
       <TimeFrameGroup
         dateHappening={timeFrame === 'week' ? group._id.week : group._id.month}
         timeFrame={timeFrame}
@@ -48,9 +56,18 @@ const SearchResults = ({
   };
 
   return (
-    <Container className="results-container">
-      {displayTimeFramecontainers(results, currentTimeFrame)}
-    </Container>
+    <React.Fragment>
+      <Container className="results-container">
+        {displayTimeFramecontainers(results, currentTimeFrame)}
+      </Container>
+      {pageCount * 3 - 1 >= results.length ? (
+        <PageCTA
+          category={category}
+          pageCount={pageCount}
+          updatePageCount={updatePageCount}
+        />
+      ) : null}
+    </React.Fragment>
   );
 };
 
