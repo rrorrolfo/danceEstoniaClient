@@ -35,14 +35,15 @@ export const fetchEvents = (endPoint = '/events', timeFrame = 'week') => {
   };
 };
 
-export const fetchEventsByStyleSuccess = events => {
+export const fetchEventsByStyleSuccess = (events, style) => {
   return {
     type: eventsActionTypes.FETCH_EVENTS_BY_STYLE_SUCCESS,
-    events
+    events,
+    style
   };
 };
 
-export const fetchEventsByStyle = (endPoint, timeFrame = 'week') => {
+export const fetchEventsByStyle = (endPoint, timeFrame = 'week', style) => {
   return dispatch => {
     dispatch(fetchedStarted());
 
@@ -51,7 +52,7 @@ export const fetchEventsByStyle = (endPoint, timeFrame = 'week') => {
       endPoint,
       timeFrame
     })
-      .then(events => dispatch(fetchEventsByStyleSuccess(events)))
+      .then(events => dispatch(fetchEventsByStyleSuccess(events, style)))
       .catch(error => dispatch(fetchedFailure(error)));
   };
 };
