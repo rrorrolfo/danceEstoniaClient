@@ -2,7 +2,7 @@ import * as festivalsActionTypes from '../actionTypes/festivals';
 
 const initialState = {
   festivals: [],
-  festivalsByStyle: [],
+  festivalsByStyle: { salsa: [], bachata: [], kizomba: [] },
   singleFestival: null,
   fetching: false,
   errors: null
@@ -23,12 +23,30 @@ const festivalsReducer = (state = initialState, action) => {
         festivals: action.festivals
       };
 
-    case festivalsActionTypes.FETCH_FESTIVALS_BY_STYLE_SUCCESS:
+    case festivalsActionTypes.FETCH_FESTIVALS_BY_STYLE_SUCCESS: {
+      let selectedStyleFestivals = {};
+      switch (action.style) {
+        case 'salsa':
+          selectedStyleFestivals = { salsa: action.festivals };
+          break;
+        case 'bachata':
+          selectedStyleFestivals = { bachata: action.festivals };
+          break;
+        case 'kizomba':
+          selectedStyleFestivals = { kizomba: action.festivals };
+          break;
+        default:
+          return selectedStyleFestivals;
+      }
       return {
         ...state,
         fetching: false,
-        festivalsByStyle: action.festivals
+        festivalsByStyle: {
+          ...state.festivalsByStyle,
+          ...selectedStyleFestivals
+        }
       };
+    }
 
     case festivalsActionTypes.FETCH_SINGLE_FESTIVAL_SUCCESS:
       return {
