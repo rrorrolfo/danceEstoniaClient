@@ -60,7 +60,7 @@ const SearchResults = ({
       <Container className="results-container">
         {displayTimeFramecontainers(results, currentTimeFrame)}
       </Container>
-      {pageCount * 3 - 1 >= results.length ? (
+      {pageCount * 3 - 1 < results.length ? (
         <PageCTA
           category={category}
           pageCount={pageCount}
