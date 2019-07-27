@@ -6,13 +6,7 @@ import ResultsContainer from '../containers/resultsContainer';
 import EventDetails from '../components/eventDetails';
 import Footer from '../components/footer';
 
-const EventsRoutes = ({
-  fetchEvents,
-  fetchEventsByStyle,
-  fetchFestivals,
-  fetchSingleEvent,
-  singleEvent
-}) => {
+const EventsRoutes = ({ fetchSingleEvent, singleEvent }) => {
   return (
     <Switch>
       <Route
@@ -20,18 +14,8 @@ const EventsRoutes = ({
         exact
         render={({ match }) => (
           <React.Fragment>
-            <MainJumbotron
-              fetchEvents={fetchEvents}
-              fetchFestivals={fetchFestivals}
-              category="events"
-            />
-            <ResultsContainer
-              topLevelMatch={match}
-              fetchEvents={fetchEvents}
-              fetchEventsByStyle={fetchEventsByStyle}
-              fetchFestivals={fetchFestivals}
-              category="events"
-            />
+            <MainJumbotron category="events" />
+            <ResultsContainer topLevelMatch={match} category="events" />
             <Footer />
           </React.Fragment>
         )}
@@ -41,19 +25,8 @@ const EventsRoutes = ({
         exact
         render={({ match }) => (
           <React.Fragment>
-            <MainJumbotron
-              fetchEvents={fetchEvents}
-              fetchFestivals={fetchFestivals}
-              category="events"
-              match={match}
-            />
-            <ResultsContainer
-              topLevelMatch={match}
-              fetchEvents={fetchEvents}
-              fetchEventsByStyle={fetchEventsByStyle}
-              fetchFestivals={fetchFestivals}
-              category="events"
-            />
+            <MainJumbotron category="events" match={match} />
+            <ResultsContainer topLevelMatch={match} category="events" />
             <Footer />
           </React.Fragment>
         )}
@@ -79,9 +52,6 @@ const EventsRoutes = ({
 };
 
 EventsRoutes.propTypes = {
-  fetchEvents: PropTypes.func.isRequired,
-  fetchEventsByStyle: PropTypes.func.isRequired,
-  fetchFestivals: PropTypes.func.isRequired,
   fetchSingleEvent: PropTypes.func.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   singleEvent: PropTypes.object

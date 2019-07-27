@@ -105,7 +105,7 @@ ResultsContainer.propTypes = {
   fetchFestivalsByStyle: PropTypes.func,
   category: PropTypes.oneOf(['events', 'festivals']).isRequired,
   events: PropTypes.arrayOf(PropTypes.object),
-  eventsByStyle: PropTypes.arrayOf(PropTypes.object),
+  eventsByStyle: PropTypes.arrayOf(PropTypes.object) || PropTypes.object,
   festivals: PropTypes.arrayOf(PropTypes.object),
   festivalsByStyle: PropTypes.arrayOf(PropTypes.object)
   // eslint-disable-next-line react/forbid-prop-types
