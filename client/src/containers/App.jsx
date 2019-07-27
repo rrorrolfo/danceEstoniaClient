@@ -30,6 +30,8 @@ const App = ({
 }) => {
   const [isLoading, toggleLoading] = useState(true);
   useEffect(() => {
+    fetchEvents();
+    fetchFestivals();
     setTimeout(() => toggleLoading(!isLoading), 2000);
   }, []);
   return (
