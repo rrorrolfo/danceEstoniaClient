@@ -31,6 +31,7 @@ const SearchResults = ({
     if (!match.params.style) {
       updateDancingStyle('');
     }
+    // eslint-disable-next-line
   }, [match]);
 
   const displayTimeFramecontainers = (resultsByGroup, timeFrame = 'month') => {

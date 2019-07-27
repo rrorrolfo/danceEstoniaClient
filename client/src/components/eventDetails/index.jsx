@@ -26,6 +26,7 @@ const EventDetails = ({
   const { id } = match.params;
   useEffect(() => {
     actionOnMount(`/${category}/${match.params.category}/${id}`);
+    // eslint-disable-next-line
   }, []);
   const selectedEvent = category === 'events' ? singleEvent : singleFestival;
   const formatMapSrc = () => {

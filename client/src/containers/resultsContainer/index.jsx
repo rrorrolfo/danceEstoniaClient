@@ -29,6 +29,7 @@ const ResultsContainer = ({
     if (category === 'festivals') {
       updateTimeframe('month');
     }
+    // eslint-disable-next-line
   }, []);
   const title = `Upcoming ${
     dancingStyle !== '' ? firstLetterToUppercase(dancingStyle) : ''
