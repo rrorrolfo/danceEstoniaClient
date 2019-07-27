@@ -8,10 +8,6 @@ const SearchResults = ({
   results,
   match,
   category,
-  fetchEvents,
-  fetchEventsByStyle,
-  fetchFestivals,
-  fetchFestivalsByStyle,
   currentTimeFrame,
   updateDancingStyle
 }) => {
@@ -19,15 +15,6 @@ const SearchResults = ({
   useEffect(() => {
     if (match.params.style) {
       updateDancingStyle(match.params.style);
-      if (category === 'events' && !results.length) {
-        fetchEventsByStyle(`/events/${match.params.style}`);
-      } else if (category === 'festivals' && !results.length) {
-        fetchFestivalsByStyle(`/festivals/${match.params.style}`);
-      }
-    } else if (category === 'events' && !results.length) {
-      fetchEvents();
-    } else if (category === 'festivals' && !results.length) {
-      fetchFestivals();
     }
     if (!match.params.style) {
       updateDancingStyle('');
@@ -55,10 +42,23 @@ const SearchResults = ({
     ));
   };
 
+  const checkAndDisplayResults = style => {
+    switch (style) {
+      case 'salsa':
+        return displayTimeFramecontainers(results.salsa, currentTimeFrame);
+      case 'bachata':
+        return displayTimeFramecontainers(results.bachata, currentTimeFrame);
+      case 'kizomba':
+        return displayTimeFramecontainers(results.kizomba, currentTimeFrame);
+      default:
+        return displayTimeFramecontainers(results, currentTimeFrame);
+    }
+  };
+
   return (
     <React.Fragment>
       <Container className="results-container">
-        {displayTimeFramecontainers(results, currentTimeFrame)}
+        {checkAndDisplayResults(match.params.style)}
       </Container>
       {pageCount * 3 - 1 < results.length ? (
         <PageCTA
@@ -72,12 +72,8 @@ const SearchResults = ({
 };
 
 SearchResults.propTypes = {
-  fetchEvents: PropTypes.func.isRequired,
-  fetchEventsByStyle: PropTypes.func,
-  fetchFestivals: PropTypes.func.isRequired,
-  fetchFestivalsByStyle: PropTypes.func,
   category: PropTypes.oneOf(['events', 'festivals']).isRequired,
-  results: PropTypes.arrayOf(PropTypes.object),
+  results: PropTypes.arrayOf(PropTypes.object) || PropTypes.object,
   // eslint-disable-next-line react/forbid-prop-types
   match: PropTypes.object.isRequired,
   currentTimeFrame: PropTypes.oneOf(['week', 'month', '']).isRequired,
@@ -86,8 +82,6 @@ SearchResults.propTypes = {
 
 SearchResults.defaultProps = {
   results: null,
-  fetchEventsByStyle: null,
-  fetchFestivalsByStyle: null,
   updateDancingStyle: null
 };
 
