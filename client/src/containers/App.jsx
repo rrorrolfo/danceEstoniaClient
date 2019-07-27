@@ -32,19 +32,22 @@ const App = ({
   useEffect(() => {
     fetchEvents();
     fetchFestivals();
+    fetchEventsByStyle(`/events/salsa`, 'week', 'salsa');
+    fetchEventsByStyle(`/events/bachata`, 'week', 'bachata');
+    fetchEventsByStyle(`/events/kizomba`, 'week', 'kizomba');
+    fetchFestivalsByStyle(`/festivals/salsa`, 'salsa');
+    fetchFestivalsByStyle(`/festivals/bachata`, 'bachata');
+    fetchFestivalsByStyle(`/festivals/kizomba`, 'kizomba');
     setTimeout(() => toggleLoading(!isLoading), 2000);
+    // eslint-disable-next-line
   }, []);
   return (
     <BrowserRouter>
       <div>
         <Header />
         <AppRoutes
-          fetchEvents={fetchEvents}
-          fetchEventsByStyle={fetchEventsByStyle}
-          fetchFestivals={fetchFestivals}
           fetchSingleEvent={fetchSingleEvent}
           singleEvent={singleEvent}
-          fetchFestivalsByStyle={fetchFestivalsByStyle}
           fetchSingleFestival={fetchSingleFestival}
           singleFestival={singleFestival}
         />
