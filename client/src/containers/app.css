@@ -58,6 +58,26 @@
   margin-top: 0;
 }
 
+/********* Welcoming loader *********/
+.main-loader {
+  width: 100vw;
+  height: 100vh;
+  background-color: #fff;
+  color: var(--blue-estonia);
+  position: fixed;
+  top: 56px;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 1000000000;
+}
+
+.loader-logo-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 45vh;
+}
+
 /********* Results Container *********/
 .results-title {
   margin-bottom: 25px;
