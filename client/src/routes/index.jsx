@@ -51,12 +51,12 @@ const AppRoutes = ({
 };
 
 AppRoutes.propTypes = {
-  fetchEvents: PropTypes.func.isRequired,
-  fetchEventsByStyle: PropTypes.func.isRequired,
-  fetchFestivals: PropTypes.func.isRequired,
-  fetchFestivalsByStyle: PropTypes.func.isRequired,
-  fetchSingleEvent: PropTypes.func.isRequired,
-  fetchSingleFestival: PropTypes.func.isRequired,
+  fetchEvents: PropTypes.func,
+  fetchEventsByStyle: PropTypes.func,
+  fetchFestivals: PropTypes.func,
+  fetchFestivalsByStyle: PropTypes.func,
+  fetchSingleEvent: PropTypes.func,
+  fetchSingleFestival: PropTypes.func,
   // eslint-disable-next-line react/forbid-prop-types
   singleEvent: PropTypes.object,
   // eslint-disable-next-line react/forbid-prop-types
@@ -64,6 +64,12 @@ AppRoutes.propTypes = {
 };
 
 AppRoutes.defaultProps = {
+  fetchEvents: null,
+  fetchEventsByStyle: null,
+  fetchFestivals: null,
+  fetchFestivalsByStyle: null,
+  fetchSingleEvent: null,
+  fetchSingleFestival: null,
   singleEvent: null,
   singleFestival: null
 };

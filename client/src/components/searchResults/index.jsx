@@ -73,7 +73,10 @@ const SearchResults = ({
 
 SearchResults.propTypes = {
   category: PropTypes.oneOf(['events', 'festivals']).isRequired,
-  results: PropTypes.arrayOf(PropTypes.object) || PropTypes.object,
+  results: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.arrayOf(PropTypes.object)
+  ]),
   // eslint-disable-next-line react/forbid-prop-types
   match: PropTypes.object.isRequired,
   currentTimeFrame: PropTypes.oneOf(['week', 'month', '']).isRequired,

@@ -99,15 +99,21 @@ const mapStateToProps = state => {
 };
 
 ResultsContainer.propTypes = {
-  fetchEvents: PropTypes.func.isRequired,
+  fetchEvents: PropTypes.func,
   fetchEventsByStyle: PropTypes.func,
-  fetchFestivals: PropTypes.func.isRequired,
+  fetchFestivals: PropTypes.func,
   fetchFestivalsByStyle: PropTypes.func,
   category: PropTypes.oneOf(['events', 'festivals']).isRequired,
   events: PropTypes.arrayOf(PropTypes.object),
-  eventsByStyle: PropTypes.arrayOf(PropTypes.object) || PropTypes.object,
+  eventsByStyle: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.arrayOf(PropTypes.object)
+  ]),
   festivals: PropTypes.arrayOf(PropTypes.object),
-  festivalsByStyle: PropTypes.arrayOf(PropTypes.object)
+  festivalsByStyle: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.arrayOf(PropTypes.object)
+  ])
   // eslint-disable-next-line react/forbid-prop-types
   // topLevelMatch: PropTypes.object
 };
@@ -115,6 +121,8 @@ ResultsContainer.propTypes = {
 ResultsContainer.defaultProps = {
   events: null,
   eventsByStyle: null,
+  fetchEvents: null,
+  fetchFestivals: null,
   fetchEventsByStyle: null,
   festivals: null,
   fetchFestivalsByStyle: null,
