@@ -31,9 +31,9 @@ const EventDetails = ({
   const selectedEvent = category === 'events' ? singleEvent : singleFestival;
   const formatMapSrc = () => {
     const regex = /\s/gi;
-    const mapSRC = `${selectedEvent.venueOfEvent}, ${
-      selectedEvent.venueAddress
-    }, ${selectedEvent.cityOfEvent}, ${selectedEvent.countryOfEvent}`;
+    const mapSRC = `${selectedEvent.venueAddress}, ${
+      selectedEvent.cityOfEvent
+    }, ${selectedEvent.countryOfEvent}`;
     return mapSRC.replace(regex, '+');
   };
 
