@@ -2,11 +2,18 @@
   background-color: var(--blue-estonia);
 }
 
-.dropdown-item:hover {
-  background-color: var(--blue-estonia);
-  color: #fff;
+.custom-dropdown-menu {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0;
 }
 
-.dropdown-menu {
-  padding: 0;
+.dropdown-item:hover {
+  background-color: var(--blue-estonia) !important;
+  color: #fff !important;
+}
+
+.dropdown-item.active {
+  background-color: initial;
+  color: initial;
 }
