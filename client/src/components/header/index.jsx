@@ -31,7 +31,11 @@ const Header = () => {
   };
   return (
     <Navbar expand="md" variant="dark" fixed="top">
-      <Navbar.Brand href="/">DanceEstonia</Navbar.Brand>
+      <Navbar.Brand>
+        <NavLink to="/" className="dance-estonia-logo">
+          DanceEstonia
+        </NavLink>
+      </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
