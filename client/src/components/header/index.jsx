@@ -133,8 +133,12 @@ const Header = () => {
               </li>
             </ul>
           </NavDropdown>
-          <Nav.Link href="#">Shop</Nav.Link>
-          <Nav.Link href="/contact">Contact</Nav.Link>
+          <NavLink to="#" className="main-nav-link">
+            Shop
+          </NavLink>
+          <NavLink to="/contact" className="main-nav-link">
+            Contact
+          </NavLink>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
