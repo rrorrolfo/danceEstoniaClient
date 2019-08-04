@@ -8,9 +8,12 @@ import {
   Tooltip
 } from 'react-bootstrap';
 import { getTodayISODate } from '../../utils';
+import { createEvent } from '../../requests/requests';
 import './createForm.css';
 
 const CreateEvent = () => {
+  const [todayDate, updateDate] = useState('');
+
   // Data of event state
   const [eventType, updateEventType] = useState('events');
   const [isSalsa, toggleIsSalsa] = useState(false);
@@ -19,7 +22,7 @@ const CreateEvent = () => {
   const [nameOfEvent, updateNameOfEvent] = useState('');
   const [ticketPrice, updateTicketPrice] = useState(0);
   const [ticketCurrency, updateTicketCurrency] = useState('EUR');
-  const [todayDate, updateDate] = useState('');
+  const [eventDate, updateEventDate] = useState('');
   const [startingTime, updateStartingTime] = useState('21:00');
   const [venueOfEvent, updateVenue] = useState('');
   const [venueAddress, updateVenueAddress] = useState('');
@@ -32,9 +35,33 @@ const CreateEvent = () => {
     updateDate(getTodayISODate());
   }, []);
 
+  const handleSubmit = event => {
+    event.preventDefault();
+
+    const img = document.querySelector('#event-banner');
+    const eventData = new FormData();
+
+    eventData.append('name', nameOfEvent);
+    eventData.append('styles', isSalsa ? 'salsa' : '');
+    eventData.append('styles', isBachata ? 'bachata' : '');
+    eventData.append('styles', isKizomba ? 'kizomba' : '');
+    eventData.append('venueOfEvent', venueOfEvent);
+    eventData.append('venueAddress', venueAddress);
+    eventData.append('cityOfEvent', city);
+    eventData.append('countryOfEvent', country);
+    eventData.append('dateOfEvent', eventDate);
+    eventData.append('timeOfEvent', startingTime);
+    eventData.append('description', description);
+    eventData.append('fbEvent', fbEvent);
+    eventData.append('ticketPrice', `${ticketPrice} ${ticketCurrency}`);
+    eventData.append('image', img.files[0]);
+
+    createEvent(eventType, eventData);
+  };
+
   return (
     <Container className="create-form-container">
-      <Form>
+      <Form onSubmit={event => handleSubmit(event)}>
         <Form.Row>
           <h4 className="centered">What kind of event you want to create?</h4>
           {['radio'].map(type => (
@@ -193,10 +220,10 @@ const CreateEvent = () => {
                 type="date"
                 id="select-day-of-event"
                 name="day-of-event"
-                value={todayDate}
+                value={eventDate}
                 min={todayDate}
                 max="2022-12-31"
-                onChange={event => updateDate(event.target.value)}
+                onChange={event => updateEventDate(event.target.value)}
               />
             </Form.Group>
 
