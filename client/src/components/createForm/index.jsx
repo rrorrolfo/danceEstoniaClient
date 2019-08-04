@@ -22,6 +22,7 @@ const CreateEvent = () => {
   const [todayDate, updateDate] = useState('');
   const [startingTime, updateStartingTime] = useState('21:00');
   const [venueOfEvent, updateVenue] = useState('');
+  const [venueAddress, updateVenueAddress] = useState('');
   const [city, updateCity] = useState('');
   const [country, updateCountry] = useState('Estonia');
   const [fbEvent, updateFBEvent] = useState('');
@@ -224,6 +225,20 @@ const CreateEvent = () => {
               placeholder="Venue of the event."
               value={venueOfEvent}
               onChange={event => updateVenue(event.target.value)}
+            />
+          </Form.Group>
+        </Form.Row>
+
+        <Form.Row className="margin-on-top">
+          <Form.Group controlId="venue-address">
+            <Form.Label className="bold">Venue address</Form.Label>
+            <Form.Control
+              placeholder={`Address of the ${eventType.slice(
+                0,
+                eventType.length - 1
+              )} venue`}
+              value={venueAddress}
+              onChange={event => updateVenueAddress(event.target.value)}
             />
           </Form.Group>
         </Form.Row>

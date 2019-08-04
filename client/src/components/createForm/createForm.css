@@ -85,16 +85,3 @@
 .tooltip-ticket-price {
   color: var(--blue-estonia);
 }
-
-/* name: text
-styles: radio buttons
-venueOfEvent: text,
-venueAddress: text,
-cityOfEvent: text,
-countryOfEvent: options,
-dateOfEvent: date,
-timeOfEvent: date,
-description: textarea,
-fbEvent: text,
-ticketPrice: text,
-imageURL: img */
