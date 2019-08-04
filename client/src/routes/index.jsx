@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import EventsRoutes from './EventsRoutes';
 import FestivalsRoutes from './FestivalsRoutes';
 import ContactForm from '../components/contactForm';
+import CreateEvent from '../components/createForm';
 import NotFound from '../components/notFound';
 
 const AppRoutes = ({
@@ -44,6 +45,7 @@ const AppRoutes = ({
         )}
       />
       <Route path="/contact" component={ContactForm} />
+      <Route path="/admin/createEvent" component={CreateEvent} />
       <Route path="/notfound" component={NotFound} />
       <Route render={() => <Redirect to="/notfound" />} />
     </Switch>
