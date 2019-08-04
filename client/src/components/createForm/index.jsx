@@ -11,10 +11,26 @@ import { getTodayISODate } from '../../utils';
 import './createForm.css';
 
 const CreateEvent = () => {
+  // Data of event state
+  const [eventType, updateEventType] = useState('events');
+  const [isSalsa, toggleIsSalsa] = useState(false);
+  const [isBachata, toggleIsBachata] = useState(false);
+  const [isKizomba, toggleIsKizomba] = useState(false);
+  const [nameOfEvent, updateNameOfEvent] = useState('');
+  const [ticketPrice, updateTicketPrice] = useState(0);
+  const [ticketCurrency, updateTicketCurrency] = useState('EUR');
   const [todayDate, updateDate] = useState('');
+  const [startingTime, updateStartingTime] = useState('21:00');
+  const [venueOfEvent, updateVenue] = useState('');
+  const [city, updateCity] = useState('');
+  const [country, updateCountry] = useState('Estonia');
+  const [fbEvent, updateFBEvent] = useState('');
+  const [description, updateDescription] = useState('');
+
   useEffect(() => {
     updateDate(getTodayISODate());
   }, []);
+
   return (
     <Container className="create-form-container">
       <Form>
@@ -32,6 +48,8 @@ const CreateEvent = () => {
                 id={`inline-${type}-1`}
                 name="event-type"
                 className="event-label-selection"
+                value="events"
+                onChange={event => updateEventType(event.target.value)}
               />
               <Form.Check
                 inline
@@ -39,12 +57,17 @@ const CreateEvent = () => {
                 type={type}
                 id={`inline-${type}-2`}
                 name="event-type"
+                value="festivals"
+                onChange={event => updateEventType(event.target.value)}
               />
             </div>
           ))}
         </Form.Row>
         <Form.Row>
-          <h4 className="centered">What dancing style is the $Event?</h4>
+          <h4 className="centered">
+            What dancing style is the {eventType.slice(0, eventType.length - 1)}
+            ?
+          </h4>
           {['checkbox'].map(type => (
             <div
               key={`style-${type}`}
@@ -55,18 +78,24 @@ const CreateEvent = () => {
                 label="Salsa"
                 type={type}
                 id={`style-${type}-1`}
+                value="salsa"
+                onChange={() => toggleIsSalsa(!isSalsa)}
               />
               <Form.Check
                 inline
                 label="Bachata"
                 type={type}
                 id={`style-${type}-2`}
+                value="bachata"
+                onChange={() => toggleIsBachata(!isBachata)}
               />
               <Form.Check
                 inline
                 label="Kizomba"
                 type={type}
                 id={`style-${type}-3`}
+                value="kizomba"
+                onChange={() => toggleIsKizomba(!isKizomba)}
               />
             </div>
           ))}
@@ -74,7 +103,11 @@ const CreateEvent = () => {
         <Form.Row className="margin-on-top">
           <Form.Group as={Col} controlId="name-of-event">
             <Form.Label className="bold">Name of the event</Form.Label>
-            <Form.Control placeholder="Name of the event." />
+            <Form.Control
+              placeholder="Name of the event."
+              value={nameOfEvent}
+              onChange={event => updateNameOfEvent(event.target.value)}
+            />
           </Form.Group>
 
           <Form.Group
@@ -88,12 +121,18 @@ const CreateEvent = () => {
                 placeholder="Price in number e.g. 5"
                 className="ticket-price-amount"
                 name="ticket-price-amount"
+                value={ticketPrice}
+                onChange={event => updateTicketPrice(event.target.value)}
               />
             </Form.Row>
             <Form.Row className="ticket-price-input-2">
               <Form.Group>
                 <Form.Label className="bold">Currency</Form.Label>
-                <Form.Control as="select" name="select-country">
+                <Form.Control
+                  as="select"
+                  name="select-country"
+                  onChange={event => updateTicketCurrency(event.target.value)}
+                >
                   <option value="EUR">EUR</option>
                   <option value="BYN">BYN</option>
                   <option value="BAM">BAM</option>
@@ -153,9 +192,10 @@ const CreateEvent = () => {
                 type="date"
                 id="select-day-of-event"
                 name="day-of-event"
-                // value={todayDate} controlled value
+                value={todayDate}
                 min={todayDate}
                 max="2022-12-31"
+                onChange={event => updateDate(event.target.value)}
               />
             </Form.Group>
 
@@ -172,29 +212,43 @@ const CreateEvent = () => {
                 type="time"
                 id="select-time-of-event"
                 name="time-of-event"
-                // value={todayDate} controlled value
+                value={startingTime}
+                onChange={event => updateStartingTime(event.target.value)}
               />
             </Form.Group>
           </Form.Row>
 
           <Form.Group as={Col} controlId="venue">
             <Form.Label className="bold">Venue</Form.Label>
-            <Form.Control placeholder="Venue of the event." />
+            <Form.Control
+              placeholder="Venue of the event."
+              value={venueOfEvent}
+              onChange={event => updateVenue(event.target.value)}
+            />
           </Form.Group>
         </Form.Row>
 
         <Form.Row className="margin-on-top">
           <Form.Group controlId="city">
             <Form.Label className="bold">City</Form.Label>
-            <Form.Control placeholder="e.g. Tallinn" />
+            <Form.Control
+              placeholder="e.g. Tallinn"
+              value={city}
+              onChange={event => updateCity(event.target.value)}
+            />
           </Form.Group>
         </Form.Row>
 
         <Form.Row className="margin-on-top">
           <Form.Group as={Col} controlId="country">
             <Form.Label className="bold">Country</Form.Label>
-            <Form.Control as="select" name="select-country">
-              <option>Choose a country</option>
+            <Form.Control
+              as="select"
+              name="select-country"
+              value={country}
+              onChange={event => updateCountry(event.target.value)}
+            >
+              <option value="default">Choose a country</option>
               <option value="Albania">Albania</option>
               <option value="Andorra">Andorra</option>
               <option value="Armenia">Armenia</option>
@@ -254,7 +308,11 @@ const CreateEvent = () => {
         <Form.Row className="margin-on-top">
           <Form.Group as={Col} controlId="fbEvent">
             <Form.Label className="bold">Facebook event</Form.Label>
-            <Form.Control placeholder="URL of the facebook event." />
+            <Form.Control
+              placeholder="URL of the facebook event."
+              value={fbEvent}
+              onChange={event => updateFBEvent(event.target.value)}
+            />
           </Form.Group>
         </Form.Row>
 
@@ -265,6 +323,8 @@ const CreateEvent = () => {
             rows="5"
             placeholder="Description"
             name="event-description"
+            value={description}
+            onChange={event => updateDescription(event.target.value)}
           />
         </Form.Group>
 
