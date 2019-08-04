@@ -8,6 +8,18 @@ export const arrayToUpperCase = array => {
   return finalarray.join(', ');
 };
 
+export const getTodayISODate = () => {
+  const dateRegex = number => {
+    const evaluation = /^[0-9]{2}/i.test(number);
+    return !evaluation ? `0${number}` : number;
+  };
+  const today = new Date();
+  const month = dateRegex(today.getMonth() + 1);
+  const day = dateRegex(today.getDate());
+  const date = `${today.getFullYear()}-${month}-${day}`;
+  return date;
+};
+
 export const monthToString = monthInNumber => {
   const number = parseInt(monthInNumber, 10);
   switch (number) {
