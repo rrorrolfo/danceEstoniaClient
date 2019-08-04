@@ -12,13 +12,11 @@ import { createEvent } from '../../requests/requests';
 import './createForm.css';
 
 const CreateEvent = () => {
-  const [todayDate, updateDate] = useState('');
-
+  const [requestErrors, updateRequestErrors] = useState([]);
   // Data of event state
+  const [todayDate, updateDate] = useState('');
   const [eventType, updateEventType] = useState('events');
-  const [isSalsa, toggleIsSalsa] = useState(false);
-  const [isBachata, toggleIsBachata] = useState(false);
-  const [isKizomba, toggleIsKizomba] = useState(false);
+  const [dancingStyles, updateDancingStyles] = useState([]);
   const [nameOfEvent, updateNameOfEvent] = useState('');
   const [ticketPrice, updateTicketPrice] = useState(0);
   const [ticketCurrency, updateTicketCurrency] = useState('EUR');
@@ -33,6 +31,7 @@ const CreateEvent = () => {
 
   useEffect(() => {
     updateDate(getTodayISODate());
+    updateEventDate(getTodayISODate());
   }, []);
 
   const handleSubmit = event => {
@@ -42,9 +41,7 @@ const CreateEvent = () => {
     const eventData = new FormData();
 
     eventData.append('name', nameOfEvent);
-    eventData.append('styles', isSalsa ? 'salsa' : '');
-    eventData.append('styles', isBachata ? 'bachata' : '');
-    eventData.append('styles', isKizomba ? 'kizomba' : '');
+    dancingStyles.forEach(style => eventData.append('styles', style));
     eventData.append('venueOfEvent', venueOfEvent);
     eventData.append('venueAddress', venueAddress);
     eventData.append('cityOfEvent', city);
@@ -56,7 +53,7 @@ const CreateEvent = () => {
     eventData.append('ticketPrice', `${ticketPrice} ${ticketCurrency}`);
     eventData.append('image', img.files[0]);
 
-    createEvent(eventType, eventData);
+    createEvent(eventType, eventData, updateRequestErrors);
   };
 
   return (
@@ -107,7 +104,15 @@ const CreateEvent = () => {
                 type={type}
                 id={`style-${type}-1`}
                 value="salsa"
-                onChange={() => toggleIsSalsa(!isSalsa)}
+                onChange={() => {
+                  const hasSalsa = dancingStyles.indexOf('salsa');
+                  if (hasSalsa === -1) {
+                    return updateDancingStyles([...dancingStyles, 'salsa']);
+                  }
+                  const finalArray = dancingStyles;
+                  finalArray.splice(hasSalsa, 1);
+                  return updateDancingStyles([...finalArray]);
+                }}
               />
               <Form.Check
                 inline
@@ -115,7 +120,15 @@ const CreateEvent = () => {
                 type={type}
                 id={`style-${type}-2`}
                 value="bachata"
-                onChange={() => toggleIsBachata(!isBachata)}
+                onChange={() => {
+                  const hasBachata = dancingStyles.indexOf('bachata');
+                  if (hasBachata === -1) {
+                    return updateDancingStyles([...dancingStyles, 'bachata']);
+                  }
+                  const finalArray = dancingStyles;
+                  finalArray.splice(hasBachata, 1);
+                  return updateDancingStyles([...finalArray]);
+                }}
               />
               <Form.Check
                 inline
@@ -123,7 +136,15 @@ const CreateEvent = () => {
                 type={type}
                 id={`style-${type}-3`}
                 value="kizomba"
-                onChange={() => toggleIsKizomba(!isKizomba)}
+                onChange={() => {
+                  const hasKizomba = dancingStyles.indexOf('kizomba');
+                  if (hasKizomba === -1) {
+                    return updateDancingStyles([...dancingStyles, 'kizomba']);
+                  }
+                  const finalArray = dancingStyles;
+                  finalArray.splice(hasKizomba, 1);
+                  return updateDancingStyles([...finalArray]);
+                }}
               />
             </div>
           ))}
