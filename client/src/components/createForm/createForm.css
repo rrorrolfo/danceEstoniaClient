@@ -1,0 +1,100 @@
+.margin-on-top {
+  margin-top: 25px;
+}
+
+.bold {
+  font-weight: 900;
+}
+
+.create-form-container .form-row {
+  display: block;
+}
+
+.create-form-container {
+  margin-top: 56px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.event-type-selection {
+  border: solid 1px var(--blue-estonia);
+  border-radius: 10px;
+  overflow: hidden;
+  max-width: 271px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.event-label-selection label {
+  border-right: 1px solid var(--blue-estonia);
+}
+
+.event-type-selection input[type='radio'],
+.style-selection input[type='radio'] {
+  position: absolute;
+  visibility: hidden;
+  display: none;
+}
+
+.event-type-selection label,
+.style-selection label {
+  color: var(--blue-estonia);
+  cursor: pointer;
+  padding: 5px 20px;
+}
+
+.style-selection label {
+  padding-left: 0;
+}
+
+.event-type-selection input[type='radio']:checked + label {
+  color: #fff;
+  background: var(--blue-estonia);
+}
+
+.event-type-selection label + input[type='radio'] + label {
+  border-left: solid 1px var(--blue-estonia);
+}
+
+.event-type-selection .form-check-inline,
+.style-selection .form-check-inline {
+  margin-right: 0;
+}
+
+.date-of-event-label,
+.time-of-event-label {
+  margin-right: 10px;
+}
+
+#select-day-of-event,
+#select-time-of-event {
+  border: 1px solid var(--blue-estonia);
+  padding-left: 15px;
+}
+
+.ticket-price-input-1 {
+  margin-right: 15px;
+}
+
+.submit-create-form-button {
+  margin: 25px auto;
+  width: 200px;
+  display: block;
+}
+
+.tooltip-ticket-price {
+  color: var(--blue-estonia);
+}
+
+/* name: text
+styles: radio buttons
+venueOfEvent: text,
+venueAddress: text,
+cityOfEvent: text,
+countryOfEvent: options,
+dateOfEvent: date,
+timeOfEvent: date,
+description: textarea,
+fbEvent: text,
+ticketPrice: text,
+imageURL: img */
