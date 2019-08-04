@@ -9,6 +9,21 @@ export const apiRequest = params => {
   }).then(response => response.data);
 };
 
+/**
+ * @param string eventType Type of event that will be created, one of "events", "festivals"
+ * @param object data Data to be used to create the event or festival
+ * @param func errCallback Error handling function
+ */
+export const createEvent = (eventType, data, errCallback) => {
+  return axios({
+    url: `http://localhost:5000/${eventType}`,
+    method: 'post',
+    data
+  })
+    .then(response => response.status)
+    .catch(error => errCallback(error.response.data.error));
+};
+
 const requestOptions = {
   headers: {
     'Content-Type': 'application/json'
