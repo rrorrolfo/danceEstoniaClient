@@ -15,12 +15,16 @@ const CreateEvent = () => {
   const [requestErrors, updateRequestErrors] = useState([]);
   // Data of event state
   const [todayDate, updateDate] = useState('');
-  const [eventType, updateEventType] = useState('events');
+  const [eventType, updateEventType] = useState('');
+  const [noEventTypeselected, toggleNoEventTypeselected] = useState(false);
   const [dancingStyles, updateDancingStyles] = useState([]);
+  const [noStylesSelected, toggleNoStylesSelected] = useState(false);
   const [nameOfEvent, updateNameOfEvent] = useState('');
+  const [invalidName, toggleInvalidName] = useState(false);
   const [ticketPrice, updateTicketPrice] = useState(0);
   const [ticketCurrency, updateTicketCurrency] = useState('EUR');
   const [eventDate, updateEventDate] = useState('');
+  const [invalidDate, toggleInvalidDate] = useState(false);
   const [startingTime, updateStartingTime] = useState('21:00');
   const [venueOfEvent, updateVenue] = useState('');
   const [venueAddress, updateVenueAddress] = useState('');
@@ -28,11 +32,44 @@ const CreateEvent = () => {
   const [country, updateCountry] = useState('Estonia');
   const [fbEvent, updateFBEvent] = useState('');
   const [description, updateDescription] = useState('');
+  const [invalidDescription, toggleInvalidDescription] = useState(false);
+  const [missingBanner, toggleMissingBanner] = useState(false);
 
   useEffect(() => {
     updateDate(getTodayISODate());
     updateEventDate(getTodayISODate());
   }, []);
+
+  useEffect(() => {
+    // this validation can be done better on submit
+    if (eventType === '') {
+      return toggleNoEventTypeselected(true);
+    }
+    return toggleNoEventTypeselected(false);
+  }, [eventType]);
+
+  useEffect(() => {
+    // this validation can be done better on submit
+    if (dancingStyles.length) {
+      return toggleNoStylesSelected(false);
+    }
+    return toggleNoStylesSelected(true);
+  }, [dancingStyles]);
+
+  const customTypeText =
+    eventType === '' ? 'event' : eventType.slice(0, eventType.length - 1);
+
+  const validateDate = date => {
+    const dateRegex = dateToValidate =>
+      /^\d{4}-\d{2}-\d{2}$/i.test(dateToValidate);
+
+    if (dateRegex(date) === false) {
+      toggleInvalidDate(true);
+      return false;
+    }
+    toggleInvalidDate(false);
+    return true;
+  };
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -74,7 +111,9 @@ const CreateEvent = () => {
                 name="event-type"
                 className="event-label-selection"
                 value="events"
-                onChange={event => updateEventType(event.target.value)}
+                onChange={event => {
+                  updateEventType(event.target.value);
+                }}
               />
               <Form.Check
                 inline
@@ -87,11 +126,16 @@ const CreateEvent = () => {
               />
             </div>
           ))}
+          <span
+            style={{ display: noEventTypeselected ? 'block' : 'none' }}
+            className="centered custom-validation-message"
+          >
+            Please select the type of event you want to create.
+          </span>
         </Form.Row>
         <Form.Row>
           <h4 className="centered">
-            What dancing style is the {eventType.slice(0, eventType.length - 1)}
-            ?
+            What dancing style is the {customTypeText}?
           </h4>
           {['checkbox'].map(type => (
             <div
@@ -148,15 +192,40 @@ const CreateEvent = () => {
               />
             </div>
           ))}
+          <span
+            style={{ display: noStylesSelected ? 'block' : 'none' }}
+            className="centered custom-validation-message"
+          >
+            Please select at least one dancing style.
+          </span>
         </Form.Row>
         <Form.Row className="margin-on-top">
           <Form.Group as={Col} controlId="name-of-event">
-            <Form.Label className="bold">Name of the event</Form.Label>
+            <Form.Label className="bold">
+              Name of the event{' '}
+              {eventType === ''
+                ? 'event'
+                : eventType.slice(0, eventType.length - 1)}
+            </Form.Label>
             <Form.Control
-              placeholder="Name of the event."
+              placeholder={
+                eventType === ''
+                  ? 'Name of the event'
+                  : `Name of the ${eventType.slice(0, eventType.length - 1)}`
+              }
               value={nameOfEvent}
-              onChange={event => updateNameOfEvent(event.target.value)}
+              onChange={event => {
+                toggleInvalidName(false);
+                if (event.target.value === '') {
+                  toggleInvalidName(true);
+                }
+                updateNameOfEvent(event.target.value);
+              }}
+              isInvalid={invalidName}
             />
+            <Form.Control.Feedback type="invalid">
+              Please provide a name for the {customTypeText}.
+            </Form.Control.Feedback>
           </Form.Group>
 
           <Form.Group
@@ -244,8 +313,17 @@ const CreateEvent = () => {
                 value={eventDate}
                 min={todayDate}
                 max="2022-12-31"
-                onChange={event => updateEventDate(event.target.value)}
+                onChange={event => {
+                  updateEventDate(event.target.value);
+                  validateDate(event.target.value);
+                }}
               />
+              <Form.Control.Feedback
+                type="invalid"
+                style={{ display: invalidDate ? 'block' : 'none' }}
+              >
+                Please select the date of the {customTypeText}.
+              </Form.Control.Feedback>
             </Form.Group>
 
             <Form.Group
@@ -254,7 +332,7 @@ const CreateEvent = () => {
               className="margin-on-top"
             >
               <Form.Label className="time-of-event-label bold">
-                Time the event starts:
+                Time the {customTypeText} starts:
               </Form.Label>
 
               <input
@@ -270,7 +348,11 @@ const CreateEvent = () => {
           <Form.Group as={Col} controlId="venue">
             <Form.Label className="bold">Venue</Form.Label>
             <Form.Control
-              placeholder="Venue of the event."
+              placeholder={
+                eventType === ''
+                  ? 'Venue of the event'
+                  : `Venue of the ${eventType.slice(0, eventType.length - 1)}`
+              }
               value={venueOfEvent}
               onChange={event => updateVenue(event.target.value)}
             />
@@ -281,10 +363,14 @@ const CreateEvent = () => {
           <Form.Group controlId="venue-address">
             <Form.Label className="bold">Venue address</Form.Label>
             <Form.Control
-              placeholder={`Address of the ${eventType.slice(
-                0,
-                eventType.length - 1
-              )} venue`}
+              placeholder={
+                eventType === ''
+                  ? 'Address of the event venue'
+                  : `Address of the ${eventType.slice(
+                      0,
+                      eventType.length - 1
+                    )} venue`
+              }
               value={venueAddress}
               onChange={event => updateVenueAddress(event.target.value)}
             />
@@ -380,27 +466,50 @@ const CreateEvent = () => {
         </Form.Row>
 
         <Form.Group id="description" className="margin-on-top">
-          <h5 className="centered">Write the description of the event.</h5>
+          <h5 className="centered">
+            Write the description of the {customTypeText}.
+          </h5>
           <Form.Control
             as="textarea"
             rows="5"
             placeholder="Description"
             name="event-description"
             value={description}
-            onChange={event => updateDescription(event.target.value)}
+            onChange={event => {
+              toggleInvalidDescription(false);
+              if (event.target.value.length < 40) {
+                toggleInvalidDescription(true);
+              }
+              updateDescription(event.target.value);
+            }}
+            isInvalid={invalidDescription}
           />
+          <Form.Control.Feedback type="invalid">
+            The description of the {customTypeText} needs to be at least 40
+            characters long.
+          </Form.Control.Feedback>
         </Form.Group>
 
         <Form.Row className="margin-on-top">
           <Form.Group as={Col} controlId="event-banner">
             <Form.Label className="bold">
-              Select an image to be displayed with the event.
+              Select an image to be displayed with the {customTypeText}.
             </Form.Label>
             <Form.Control
               type="file"
               accept=".jpg, .jpeg, .png"
               name="event-banner"
+              onChange={event => {
+                toggleMissingBanner(false);
+                if (event.target.value === '') {
+                  toggleMissingBanner(true);
+                }
+              }}
+              isInvalid={missingBanner}
             />
+            <Form.Control.Feedback type="invalid">
+              Please add an image for the {customTypeText}.
+            </Form.Control.Feedback>
           </Form.Group>
         </Form.Row>
 
@@ -409,7 +518,7 @@ const CreateEvent = () => {
           type="submit"
           className="submit-create-form-button"
         >
-          Create Event
+          Create {customTypeText}
         </Button>
       </Form>
     </Container>
