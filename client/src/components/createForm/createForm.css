@@ -85,3 +85,7 @@
 .tooltip-ticket-price {
   color: var(--blue-estonia);
 }
+
+.custom-validation-message {
+  color: #dc3545;
+}
