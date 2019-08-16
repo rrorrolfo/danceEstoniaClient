@@ -14,14 +14,14 @@ export const apiRequest = params => {
  * @param object data Data to be used to create the event or festival
  * @param func errCallback Error handling function
  */
-export const createEvent = (eventType, data, errCallback) => {
+export const createEvent = (eventType, data) => {
   return axios({
     url: `http://localhost:5000/${eventType}`,
     method: 'post',
     data
   })
     .then(response => response.status)
-    .catch(error => errCallback(error.response.data.error));
+    .catch(error => error.response.data.error);
 };
 
 const requestOptions = {
