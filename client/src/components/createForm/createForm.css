@@ -67,7 +67,8 @@
 }
 
 #select-day-of-event,
-#select-time-of-event {
+#select-time-of-event,
+#select-end-day-of-festival {
   border: 1px solid var(--blue-estonia);
   padding-left: 15px;
 }

@@ -30,13 +30,18 @@ const CreateEvent = () => {
   // Date of event
   const [eventDate, updateEventDate] = useState('');
   const [invalidDate, toggleInvalidDate] = useState(false);
+  // End date of event
+  const [endDate, updateEndDate] = useState('');
+  const [invalidEndDate, toggleInvalidEndDate] = useState(false);
   // General data
   const [startingTime, updateStartingTime] = useState('21:00');
   const [venueOfEvent, updateVenue] = useState('');
   const [venueAddress, updateVenueAddress] = useState('');
   const [city, updateCity] = useState('');
   const [country, updateCountry] = useState('Estonia');
+  // Social Media
   const [fbEvent, updateFBEvent] = useState('');
+  const [website, updateWebsite] = useState('');
   // Description
   const [description, updateDescription] = useState('');
   const [invalidDescription, toggleInvalidDescription] = useState(false);
@@ -51,6 +56,7 @@ const CreateEvent = () => {
   useEffect(() => {
     updateDate(getTodayISODate());
     updateEventDate(getTodayISODate());
+    updateEndDate(getTodayISODate());
   }, []);
 
   useEffect(() => {
@@ -68,15 +74,23 @@ const CreateEvent = () => {
   const customTypeText =
     eventType === '' ? 'event' : eventType.slice(0, eventType.length - 1);
 
-  const validateDate = date => {
+  const validateDate = (date, isEndDate = false) => {
     const dateRegex = dateToValidate =>
       /^\d{4}-\d{2}-\d{2}$/i.test(dateToValidate);
 
     if (dateRegex(date) === false) {
-      toggleInvalidDate(true);
+      if (isEndDate) {
+        toggleInvalidEndDate(true);
+      } else {
+        toggleInvalidDate(true);
+      }
       return false;
     }
-    toggleInvalidDate(false);
+    if (isEndDate) {
+      toggleInvalidEndDate(false);
+    } else {
+      toggleInvalidDate(false);
+    }
     return true;
   };
 
@@ -117,6 +131,14 @@ const CreateEvent = () => {
       errors += 1;
     }
 
+    if (invalidDate) {
+      errors += 1;
+    }
+
+    if (eventType === 'festivals' && invalidEndDate) {
+      errors += 1;
+    }
+
     if (errors !== 0) {
       updateSubmissionMessage(
         'Oops! Seems that some information is missing...'
@@ -140,7 +162,12 @@ const CreateEvent = () => {
     eventData.append('fbEvent', fbEvent);
     eventData.append('ticketPrice', `${ticketPrice} ${ticketCurrency}`);
     eventData.append('image', img.files[0]);
+    if (eventType === 'festivals') {
+      eventData.append('website', website);
+      eventData.append('finishDateOfEvent', endDate);
+    }
 
+    // Create the event or festival
     const submissionStatus = await createEvent(eventType, eventData);
 
     if (submissionStatus !== 201) {
@@ -387,7 +414,7 @@ const CreateEvent = () => {
               className="margin-on-top"
             >
               <Form.Label className="date-of-event-label bold">
-                Date of the event:
+                Date of the {customTypeText}:
               </Form.Label>
 
               <input
@@ -409,6 +436,37 @@ const CreateEvent = () => {
                 Please select the date of the {customTypeText}.
               </Form.Control.Feedback>
             </Form.Group>
+
+            {eventType === 'festivals' ? (
+              <Form.Group
+                as={Col}
+                controlId="select-input-end-day-festival"
+                className="margin-on-top"
+              >
+                <Form.Label className="date-of-event-label bold">
+                  End date of the festival:
+                </Form.Label>
+
+                <input
+                  type="date"
+                  id="select-end-day-of-festival"
+                  name="day-of-event"
+                  value={endDate}
+                  min={todayDate}
+                  max="2022-12-31"
+                  onChange={event => {
+                    updateEndDate(event.target.value);
+                    validateDate(event.target.value, true);
+                  }}
+                />
+                <Form.Control.Feedback
+                  type="invalid"
+                  style={{ display: invalidEndDate ? 'block' : 'none' }}
+                >
+                  Please select the date of the festival.
+                </Form.Control.Feedback>
+              </Form.Group>
+            ) : null}
 
             <Form.Group
               as={Col}
@@ -542,12 +600,25 @@ const CreateEvent = () => {
           <Form.Group as={Col} controlId="fbEvent">
             <Form.Label className="bold">Facebook event</Form.Label>
             <Form.Control
-              placeholder="URL of the facebook event."
+              placeholder="Facebook event URL (e.g www.facebook.com/event)."
               value={fbEvent}
               onChange={event => updateFBEvent(event.target.value)}
             />
           </Form.Group>
         </Form.Row>
+
+        {eventType === 'festivals' ? (
+          <Form.Row className="margin-on-top">
+            <Form.Group as={Col} controlId="website">
+              <Form.Label className="bold">Festival website</Form.Label>
+              <Form.Control
+                placeholder="Website URL (e.g. www.example.com)."
+                value={website}
+                onChange={event => updateWebsite(event.target.value)}
+              />
+            </Form.Group>
+          </Form.Row>
+        ) : null}
 
         <Form.Group id="description" className="margin-on-top">
           <h5 className="centered">
