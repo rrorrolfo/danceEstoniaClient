@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import './eventDetails.css';
 import mapsApiKey from '../../config/config';
 import Breadcrumbs from '../breadcrumbs';
-import { firstLetterToUppercase, arrayToUpperCase } from '../../utils';
+import { arrayToUpperCase } from '../../utils';
 import {
   hotel,
   calendar,
@@ -52,8 +52,8 @@ const EventDetails = ({
         }}
       />
       <Breadcrumbs
-        category={firstLetterToUppercase(category)}
-        dancingStyle={firstLetterToUppercase(match.params.category)}
+        category={category}
+        dancingStyle={match.params.category}
         eventName={selectedEvent.name}
       />
       <Container className="event-details-main-container">
