@@ -5,14 +5,14 @@ import {
   Col,
   Button,
   OverlayTrigger,
-  Tooltip
+  Tooltip,
+  Alert
 } from 'react-bootstrap';
 import { getTodayISODate } from '../../utils';
 import { createEvent } from '../../requests/requests';
 import './createForm.css';
 
 const CreateEvent = () => {
-  const [requestErrors, updateRequestErrors] = useState([]);
   // Data of event state
   const [todayDate, updateDate] = useState('');
   // Event type
@@ -43,6 +43,11 @@ const CreateEvent = () => {
   // Data of event state
   const [missingBanner, toggleMissingBanner] = useState(false);
 
+  // Submission status alert
+  const [showSubmissionStatus, toggleSubmisionStatus] = useState(false);
+  const [alertVariant, updateAlertVariant] = useState('');
+  const [submissionMessage, updateSubmissionMessage] = useState('');
+
   useEffect(() => {
     updateDate(getTodayISODate());
     updateEventDate(getTodayISODate());
@@ -54,6 +59,12 @@ const CreateEvent = () => {
     }
     return toggleNoStylesSelected(true);
   }, [dancingStyles]);
+
+  useEffect(() => {
+    if (showSubmissionStatus) {
+      setTimeout(() => toggleSubmisionStatus(false), 10000);
+    }
+  }, [showSubmissionStatus]);
 
   const customTypeText =
     eventType === '' ? 'event' : eventType.slice(0, eventType.length - 1);
@@ -70,11 +81,12 @@ const CreateEvent = () => {
     return true;
   };
 
-  const handleSubmit = event => {
+  const handleSubmit = async event => {
     event.preventDefault();
     const img = document.querySelector('#event-banner');
     let errors = 0;
 
+    toggleSubmisionStatus(false);
     toggleNoEventTypeselected(false);
     toggleNoStylesSelected(false);
     toggleInvalidName(false);
@@ -107,6 +119,11 @@ const CreateEvent = () => {
     }
 
     if (errors !== 0) {
+      updateSubmissionMessage(
+        'Oops! seems that some information is missing...'
+      );
+      updateAlertVariant('danger');
+      toggleSubmisionStatus(true);
       return false;
     }
 
@@ -125,7 +142,34 @@ const CreateEvent = () => {
     eventData.append('ticketPrice', `${ticketPrice} ${ticketCurrency}`);
     eventData.append('image', img.files[0]);
 
-    return createEvent(eventType, eventData, updateRequestErrors);
+    const submissionStatus = await createEvent(eventType, eventData);
+
+    if (submissionStatus !== 201) {
+      const errorText = (
+        <ol>
+          <span style={{ display: 'block' }}>
+            Oops! seems that there is some information missing:
+          </span>
+          {submissionStatus.map(message => (
+            <li key={message} style={{ marginTop: '10px' }}>
+              {message}
+            </li>
+          ))}
+        </ol>
+      );
+      updateSubmissionMessage(errorText);
+      updateAlertVariant('danger');
+      toggleSubmisionStatus(true);
+      return false;
+    }
+
+    updateSubmissionMessage(
+      `The ${customTypeText} has been created succesfully!`
+    );
+    updateAlertVariant('success');
+    toggleSubmisionStatus(true);
+
+    return true;
   };
 
   return (
@@ -553,6 +597,15 @@ const CreateEvent = () => {
             </Form.Control.Feedback>
           </Form.Group>
         </Form.Row>
+
+        <Alert
+          show={showSubmissionStatus}
+          key="submission-status"
+          variant={alertVariant}
+          onClose={() => toggleSubmisionStatus(false)}
+        >
+          {submissionMessage}
+        </Alert>
 
         <Button
           variant="primary"
