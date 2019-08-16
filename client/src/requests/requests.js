@@ -12,7 +12,6 @@ export const apiRequest = params => {
 /**
  * @param string eventType Type of event that will be created, one of "events", "festivals"
  * @param object data Data to be used to create the event or festival
- * @param func errCallback Error handling function
  */
 export const createEvent = (eventType, data) => {
   return axios({
