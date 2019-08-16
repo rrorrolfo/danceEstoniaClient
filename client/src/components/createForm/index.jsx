@@ -15,24 +15,32 @@ const CreateEvent = () => {
   const [requestErrors, updateRequestErrors] = useState([]);
   // Data of event state
   const [todayDate, updateDate] = useState('');
+  // Event type
   const [eventType, updateEventType] = useState('');
   const [noEventTypeselected, toggleNoEventTypeselected] = useState(false);
+  // Dancing styles
   const [dancingStyles, updateDancingStyles] = useState([]);
   const [noStylesSelected, toggleNoStylesSelected] = useState(false);
+  // Name of event
   const [nameOfEvent, updateNameOfEvent] = useState('');
   const [invalidName, toggleInvalidName] = useState(false);
+  // Ticket data
   const [ticketPrice, updateTicketPrice] = useState(0);
   const [ticketCurrency, updateTicketCurrency] = useState('EUR');
+  // Date of event
   const [eventDate, updateEventDate] = useState('');
   const [invalidDate, toggleInvalidDate] = useState(false);
+  // General data
   const [startingTime, updateStartingTime] = useState('21:00');
   const [venueOfEvent, updateVenue] = useState('');
   const [venueAddress, updateVenueAddress] = useState('');
   const [city, updateCity] = useState('');
   const [country, updateCountry] = useState('Estonia');
   const [fbEvent, updateFBEvent] = useState('');
+  // Description
   const [description, updateDescription] = useState('');
   const [invalidDescription, toggleInvalidDescription] = useState(false);
+  // Data of event state
   const [missingBanner, toggleMissingBanner] = useState(false);
 
   useEffect(() => {
@@ -41,15 +49,6 @@ const CreateEvent = () => {
   }, []);
 
   useEffect(() => {
-    // this validation can be done better on submit
-    if (eventType === '') {
-      return toggleNoEventTypeselected(true);
-    }
-    return toggleNoEventTypeselected(false);
-  }, [eventType]);
-
-  useEffect(() => {
-    // this validation can be done better on submit
     if (dancingStyles.length) {
       return toggleNoStylesSelected(false);
     }
@@ -73,8 +72,44 @@ const CreateEvent = () => {
 
   const handleSubmit = event => {
     event.preventDefault();
-
     const img = document.querySelector('#event-banner');
+    let errors = 0;
+
+    toggleNoEventTypeselected(false);
+    toggleNoStylesSelected(false);
+    toggleInvalidName(false);
+    toggleInvalidDescription(false);
+    toggleMissingBanner(false);
+
+    if (eventType === '') {
+      toggleNoEventTypeselected(true);
+      errors += 1;
+    }
+
+    if (!dancingStyles.length) {
+      toggleNoStylesSelected(true);
+      errors += 1;
+    }
+
+    if (nameOfEvent === '') {
+      toggleInvalidName(true);
+      errors += 1;
+    }
+
+    if (description.length < 40) {
+      toggleInvalidDescription(true);
+      errors += 1;
+    }
+
+    if (!img.files.length) {
+      toggleMissingBanner(true);
+      errors += 1;
+    }
+
+    if (errors !== 0) {
+      return false;
+    }
+
     const eventData = new FormData();
 
     eventData.append('name', nameOfEvent);
@@ -90,7 +125,7 @@ const CreateEvent = () => {
     eventData.append('ticketPrice', `${ticketPrice} ${ticketCurrency}`);
     eventData.append('image', img.files[0]);
 
-    createEvent(eventType, eventData, updateRequestErrors);
+    return createEvent(eventType, eventData, updateRequestErrors);
   };
 
   return (
@@ -112,6 +147,7 @@ const CreateEvent = () => {
                 className="event-label-selection"
                 value="events"
                 onChange={event => {
+                  toggleNoEventTypeselected(false);
                   updateEventType(event.target.value);
                 }}
               />
@@ -122,12 +158,17 @@ const CreateEvent = () => {
                 id={`inline-${type}-2`}
                 name="event-type"
                 value="festivals"
-                onChange={event => updateEventType(event.target.value)}
+                onChange={event => {
+                  toggleNoEventTypeselected(false);
+                  updateEventType(event.target.value);
+                }}
               />
             </div>
           ))}
           <span
-            style={{ display: noEventTypeselected ? 'block' : 'none' }}
+            style={{
+              display: noEventTypeselected ? 'block' : 'none'
+            }}
             className="centered custom-validation-message"
           >
             Please select the type of event you want to create.
