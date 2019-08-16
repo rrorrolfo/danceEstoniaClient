@@ -61,9 +61,8 @@ const CreateEvent = () => {
   }, [dancingStyles]);
 
   useEffect(() => {
-    if (showSubmissionStatus) {
-      setTimeout(() => toggleSubmisionStatus(false), 10000);
-    }
+    const clearMessage = setTimeout(() => toggleSubmisionStatus(false), 10000);
+    return () => clearTimeout(clearMessage);
   }, [showSubmissionStatus]);
 
   const customTypeText =
@@ -120,7 +119,7 @@ const CreateEvent = () => {
 
     if (errors !== 0) {
       updateSubmissionMessage(
-        'Oops! seems that some information is missing...'
+        'Oops! Seems that some information is missing...'
       );
       updateAlertVariant('danger');
       toggleSubmisionStatus(true);
