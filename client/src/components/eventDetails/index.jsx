@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { Container } from 'react-bootstrap';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './eventDetails.css';
 import mapsApiKey from '../../config/config';
@@ -21,13 +22,34 @@ const EventDetails = ({
   category,
   actionOnMount,
   singleEvent,
-  singleFestival
+  singleFestival,
+  error,
+  history,
+  resetErrors,
+  resetFestivalsErrors
 }) => {
   const { id } = match.params;
   useEffect(() => {
     actionOnMount(`/${category}/${match.params.category}/${id}`);
     // eslint-disable-next-line
   }, []);
+
+  useEffect(() => {
+    if (error.status !== 0) {
+      if (category === 'events') {
+        resetErrors();
+      }
+      if (category === 'festivals') {
+        resetFestivalsErrors();
+      }
+      history.push({
+        pathname: '/notFound',
+        state: { errorStatus: error.status }
+      });
+    }
+    // eslint-disable-next-line
+  }, [error]);
+
   const selectedEvent = category === 'events' ? singleEvent : singleFestival;
   const formatMapSrc = () => {
     const regex = /\s/gi;
@@ -117,12 +139,18 @@ EventDetails.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   singleEvent: PropTypes.object,
   // eslint-disable-next-line react/forbid-prop-types
-  singleFestival: PropTypes.object
+  singleFestival: PropTypes.object,
+  // eslint-disable-next-line react/forbid-prop-types
+  error: PropTypes.object.isRequired,
+  resetErrors: PropTypes.func,
+  resetFestivalsErrors: PropTypes.func
 };
 
 EventDetails.defaultProps = {
   singleEvent: null,
-  singleFestival: null
+  singleFestival: null,
+  resetErrors: null,
+  resetFestivalsErrors: null
 };
 
-export default EventDetails;
+export default withRouter(EventDetails);
