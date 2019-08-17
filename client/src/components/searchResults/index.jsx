@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import TimeFrameGroup from '../timeframeGroup';
 import PageCTA from '../paginationCTA';
@@ -9,45 +10,57 @@ const SearchResults = ({
   match,
   category,
   currentTimeFrame,
-  updateDancingStyle
+  updateDancingStyle,
+  history
 }) => {
   const [pageCount, updatePageCount] = useState(1);
+  const { style } = match.params;
   useEffect(() => {
-    if (match.params.style) {
-      updateDancingStyle(match.params.style);
+    if (style) {
+      updateDancingStyle(style);
     }
-    if (!match.params.style) {
+    if (!style) {
       updateDancingStyle('');
     }
-    // eslint-disable-next-line
-  }, [match]);
+  }, [style, updateDancingStyle]);
 
   const displayTimeFramecontainers = (resultsByGroup, timeFrame = 'month') => {
-    const resultsToDisplay = [];
-    resultsByGroup.filter(result => {
-      if (resultsByGroup.indexOf(result) <= pageCount * 3 - 1) {
-        resultsToDisplay.push(result);
-      }
-      return true;
-    });
-    return resultsToDisplay.map(group => (
-      <TimeFrameGroup
-        dateHappening={timeFrame === 'week' ? group._id.week : group._id.month}
-        timeFrame={timeFrame}
-        events={group.records}
-        category={category}
-        match={match}
-        key={
-          timeFrame === 'week'
-            ? `${group._id.week}-${Math.random()}`
-            : `${group._id.month}-${Math.random()}`
+    if (
+      style === undefined ||
+      style === 'salsa' ||
+      style === 'bachata' ||
+      style === 'kizomba'
+    ) {
+      const resultsToDisplay = [];
+      resultsByGroup.filter(result => {
+        if (resultsByGroup.indexOf(result) <= pageCount * 3 - 1) {
+          resultsToDisplay.push(result);
         }
-      />
-    ));
+        return true;
+      });
+      return resultsToDisplay.map(group => (
+        <TimeFrameGroup
+          dateHappening={
+            timeFrame === 'week' ? group._id.week : group._id.month
+          }
+          timeFrame={timeFrame}
+          events={group.records}
+          category={category}
+          match={match}
+          key={
+            timeFrame === 'week'
+              ? `${group._id.week}-${Math.random()}`
+              : `${group._id.month}-${Math.random()}`
+          }
+        />
+      ));
+    }
+    history.push('/notFound', { errorStatus: 404 });
+    return false;
   };
 
-  const checkAndDisplayResults = style => {
-    switch (style) {
+  const checkAndDisplayResults = dancingStyle => {
+    switch (dancingStyle) {
       case 'salsa':
         return displayTimeFramecontainers(results.salsa, currentTimeFrame);
       case 'bachata':
@@ -62,7 +75,7 @@ const SearchResults = ({
   return (
     <React.Fragment>
       <Container className="results-container">
-        {checkAndDisplayResults(match.params.style)}
+        {checkAndDisplayResults(style)}
       </Container>
       {pageCount * 3 - 1 < results.length ? (
         <PageCTA
@@ -92,4 +105,4 @@ SearchResults.defaultProps = {
   updateDancingStyle: null
 };
 
-export default SearchResults;
+export default withRouter(SearchResults);
