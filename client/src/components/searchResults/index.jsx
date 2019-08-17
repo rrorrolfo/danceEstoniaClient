@@ -37,7 +37,11 @@ const SearchResults = ({
         events={group.records}
         category={category}
         match={match}
-        key={timeFrame === 'week' ? group._id.week : group._id.month}
+        key={
+          timeFrame === 'week'
+            ? `${group._id.week}-${Math.random()}`
+            : `${group._id.month}-${Math.random()}`
+        }
       />
     ));
   };
