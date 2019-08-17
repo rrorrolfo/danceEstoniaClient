@@ -6,7 +6,12 @@ import ResultsContainer from '../containers/resultsContainer';
 import EventDetails from '../components/eventDetails';
 import Footer from '../components/footer';
 
-const EventsRoutes = ({ fetchSingleEvent, singleEvent }) => {
+const EventsRoutes = ({
+  fetchSingleEvent,
+  singleEvent,
+  eventError,
+  resetErrors
+}) => {
   return (
     <Switch>
       <Route
@@ -41,6 +46,8 @@ const EventsRoutes = ({ fetchSingleEvent, singleEvent }) => {
               actionOnMount={fetchSingleEvent}
               category="events"
               singleEvent={singleEvent}
+              error={eventError}
+              resetErrors={resetErrors}
             />
             <Footer />
           </React.Fragment>
@@ -54,11 +61,15 @@ const EventsRoutes = ({ fetchSingleEvent, singleEvent }) => {
 EventsRoutes.propTypes = {
   fetchSingleEvent: PropTypes.func.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
-  singleEvent: PropTypes.object
+  singleEvent: PropTypes.object,
+  // eslint-disable-next-line react/forbid-prop-types
+  eventError: PropTypes.object,
+  resetErrors: PropTypes.func.isRequired
 };
 
 EventsRoutes.defaultProps = {
-  singleEvent: null
+  singleEvent: null,
+  eventError: { status: 0 }
 };
 
 export default EventsRoutes;

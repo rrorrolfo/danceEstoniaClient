@@ -6,12 +6,14 @@ import PropTypes from 'prop-types';
 import {
   fetchEvents,
   fetchEventsByStyle,
-  fetchSingleEvent
+  fetchSingleEvent,
+  resetErrors
 } from '../actions/events';
 import {
   fetchFestivals,
   fetchFestivalsByStyle,
-  fetchSingleFestival
+  fetchSingleFestival,
+  resetFestivalsErrors
 } from '../actions/festivals';
 import Header from '../components/header';
 import AppRoutes from '../routes';
@@ -26,7 +28,11 @@ const App = ({
   fetchSingleEvent,
   fetchSingleFestival,
   singleEvent,
-  singleFestival
+  singleFestival,
+  eventError,
+  festivalError,
+  resetErrors,
+  resetFestivalsErrors
 }) => {
   const [isLoading, toggleLoading] = useState(true);
   useEffect(() => {
@@ -50,6 +56,10 @@ const App = ({
           singleEvent={singleEvent}
           fetchSingleFestival={fetchSingleFestival}
           singleFestival={singleFestival}
+          eventError={eventError}
+          festivalError={festivalError}
+          resetErrors={resetErrors}
+          resetFestivalsErrors={resetFestivalsErrors}
         />
         {isLoading ? <Loader /> : null}
       </div>
@@ -60,7 +70,9 @@ const App = ({
 const mapStateToProps = state => {
   return {
     singleEvent: state.events.singleEvent,
-    singleFestival: state.festivals.singleFestival
+    singleFestival: state.festivals.singleFestival,
+    eventError: state.events.errors,
+    festivalError: state.festivals.errors
   };
 };
 
@@ -70,7 +82,9 @@ const mapDispatchToProps = {
   fetchFestivals,
   fetchFestivalsByStyle,
   fetchSingleEvent,
-  fetchSingleFestival
+  fetchSingleFestival,
+  resetErrors,
+  resetFestivalsErrors
 };
 
 App.propTypes = {
@@ -83,12 +97,20 @@ App.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   singleEvent: PropTypes.object,
   // eslint-disable-next-line react/forbid-prop-types
-  singleFestival: PropTypes.object
+  singleFestival: PropTypes.object,
+  // eslint-disable-next-line react/forbid-prop-types
+  eventError: PropTypes.object,
+  // eslint-disable-next-line react/forbid-prop-types
+  festivalError: PropTypes.object,
+  resetErrors: PropTypes.func.isRequired,
+  resetFestivalsErrors: PropTypes.func.isRequired
 };
 
 App.defaultProps = {
   singleEvent: null,
-  singleFestival: null
+  singleFestival: null,
+  eventError: { status: 0 },
+  festivalError: { status: 0 }
 };
 
 export default connect(

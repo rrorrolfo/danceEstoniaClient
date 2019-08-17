@@ -15,7 +15,11 @@ const AppRoutes = ({
   fetchSingleEvent,
   fetchSingleFestival,
   singleEvent,
-  singleFestival
+  singleFestival,
+  eventError,
+  festivalError,
+  resetErrors,
+  resetFestivalsErrors
 }) => {
   return (
     <Switch>
@@ -29,6 +33,8 @@ const AppRoutes = ({
             fetchFestivals={fetchFestivals}
             fetchSingleEvent={fetchSingleEvent}
             singleEvent={singleEvent}
+            eventError={eventError}
+            resetErrors={resetErrors}
           />
         )}
       />
@@ -41,6 +47,8 @@ const AppRoutes = ({
             fetchFestivalsByStyle={fetchFestivalsByStyle}
             fetchSingleFestival={fetchSingleFestival}
             singleFestival={singleFestival}
+            festivalError={festivalError}
+            resetFestivalsErrors={resetFestivalsErrors}
           />
         )}
       />
@@ -62,7 +70,13 @@ AppRoutes.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   singleEvent: PropTypes.object,
   // eslint-disable-next-line react/forbid-prop-types
-  singleFestival: PropTypes.object
+  singleFestival: PropTypes.object,
+  // eslint-disable-next-line react/forbid-prop-types
+  eventError: PropTypes.object,
+  // eslint-disable-next-line react/forbid-prop-types
+  festivalError: PropTypes.object,
+  resetErrors: PropTypes.func.isRequired,
+  resetFestivalsErrors: PropTypes.func.isRequired
 };
 
 AppRoutes.defaultProps = {
@@ -73,7 +87,9 @@ AppRoutes.defaultProps = {
   fetchSingleEvent: null,
   fetchSingleFestival: null,
   singleEvent: null,
-  singleFestival: null
+  singleFestival: null,
+  eventError: { status: 0 },
+  festivalError: { status: 0 }
 };
 
 export default AppRoutes;

@@ -6,7 +6,12 @@ import ResultsContainer from '../containers/resultsContainer';
 import EventDetails from '../components/eventDetails';
 import Footer from '../components/footer';
 
-const FestivalsRoutes = ({ fetchSingleFestival, singleFestival }) => {
+const FestivalsRoutes = ({
+  fetchSingleFestival,
+  singleFestival,
+  festivalError,
+  resetFestivalsErrors
+}) => {
   return (
     <Switch>
       <Route
@@ -42,6 +47,8 @@ const FestivalsRoutes = ({ fetchSingleFestival, singleFestival }) => {
               actionOnMount={fetchSingleFestival}
               category="festivals"
               singleFestival={singleFestival}
+              error={festivalError}
+              resetFestivalsErrors={resetFestivalsErrors}
             />
             <Footer />
           </React.Fragment>
@@ -55,11 +62,15 @@ const FestivalsRoutes = ({ fetchSingleFestival, singleFestival }) => {
 FestivalsRoutes.propTypes = {
   fetchSingleFestival: PropTypes.func.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
-  singleFestival: PropTypes.object
+  singleFestival: PropTypes.object,
+  // eslint-disable-next-line react/forbid-prop-types
+  festivalError: PropTypes.object,
+  resetFestivalsErrors: PropTypes.func.isRequired
 };
 
 FestivalsRoutes.defaultProps = {
-  singleFestival: null
+  singleFestival: null,
+  festivalError: { status: 0 }
 };
 
 export default FestivalsRoutes;
