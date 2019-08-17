@@ -12,3 +12,6 @@ export const FETCH_EVENTS_BY_STYLE_SUCCESS =
 // Fetch a single event
 export const FETCH_SINGLE_EVENT = 'events/FETCH_SINGLE_EVENT';
 export const FETCH_SINGLE_EVENT_SUCCESS = 'events/FETCH_SINGLE_EVENT_SUCCESS';
+
+// Reset errors
+export const RESET_ERRORS = 'events/RESET_ERRORS';

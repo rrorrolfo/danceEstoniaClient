@@ -5,7 +5,7 @@ const initialState = {
   festivalsByStyle: { salsa: [], bachata: [], kizomba: [] },
   singleFestival: null,
   fetching: false,
-  errors: null
+  errors: { status: 0 }
 };
 
 const festivalsReducer = (state = initialState, action) => {
@@ -60,6 +60,12 @@ const festivalsReducer = (state = initialState, action) => {
         ...state,
         fetching: false,
         errors: action.errors
+      };
+
+    case festivalsActionTypes.RESET_ERRORS:
+      return {
+        ...state,
+        errors: { status: 0 }
       };
 
     default:

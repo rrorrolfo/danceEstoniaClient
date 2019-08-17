@@ -21,6 +21,12 @@ export const fetchedFailure = errors => {
   };
 };
 
+export const resetFestivalsErrors = () => {
+  return {
+    type: festivalsActionTypes.RESET_ERRORS
+  };
+};
+
 export const fetchFestivals = (endPoint = '/festivals') => {
   return dispatch => {
     dispatch(fetchedStarted());
@@ -73,6 +79,6 @@ export const fetchSingleFestival = endPoint => {
       endPoint
     })
       .then(festival => dispatch(fetchSingleFestivalSuccess(festival)))
-      .catch(error => dispatch(fetchedFailure(error)));
+      .catch(error => dispatch(fetchedFailure(error.response)));
   };
 };

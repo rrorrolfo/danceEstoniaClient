@@ -21,6 +21,12 @@ export const fetchedFailure = errors => {
   };
 };
 
+export const resetErrors = () => {
+  return {
+    type: eventsActionTypes.RESET_ERRORS
+  };
+};
+
 export const fetchEvents = (endPoint = '/events', timeFrame = 'week') => {
   return dispatch => {
     dispatch(fetchedStarted());
@@ -73,6 +79,6 @@ export const fetchSingleEvent = endPoint => {
       endPoint
     })
       .then(event => dispatch(fetchSingleEventSuccess(event)))
-      .catch(error => dispatch(fetchedFailure(error)));
+      .catch(error => dispatch(fetchedFailure(error.response)));
   };
 };

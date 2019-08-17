@@ -13,3 +13,6 @@ export const FETCH_FESTIVALS_BY_STYLE_SUCCESS =
 export const FETCH_SINGLE_FESTIVAL = 'festivals/FETCH_SINGLE_FESTIVAL';
 export const FETCH_SINGLE_FESTIVAL_SUCCESS =
   'festivals/FETCH_SINGLE_FESTIVAL_SUCCESS';
+
+// Reset errors
+export const RESET_ERRORS = 'festivals/RESET_ERRORS';
