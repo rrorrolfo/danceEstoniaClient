@@ -14,13 +14,12 @@ import {
 } from '../../assets/icons';
 
 const ResultCard = ({ result, match, category }) => {
-  const { style } = match.params;
   return (
     <Card className="result-card">
       <Link
         to={
-          style
-            ? `/${category}/${style}/${result._id}`
+          match
+            ? `/${category}/${match.params.style}/${result._id}`
             : `/${category}/${result.styles[0]}/${result._id}`
         }
       >
