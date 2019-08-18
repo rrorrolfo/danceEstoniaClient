@@ -20,87 +20,111 @@ export const getTodayISODate = () => {
   return date;
 };
 
-export const monthToString = monthInNumber => {
+export const monthToString = (monthInNumber, year = 2019) => {
   const number = parseInt(monthInNumber, 10);
   switch (number) {
     case 1:
-      return 'January, 2019';
+      return `January ${year}`;
     case 2:
-      return 'February, 2019';
+      return `February ${year}`;
     case 3:
-      return 'March, 2019';
+      return `March ${year}`;
     case 4:
-      return 'April, 2019';
+      return `April ${year}`;
     case 5:
-      return 'May, 2019';
+      return `May ${year}`;
     case 6:
-      return 'June, 2019';
+      return `June ${year}`;
     case 7:
-      return 'July, 2019';
+      return `July ${year}`;
     case 8:
-      return 'August, 2019';
+      return `August ${year}`;
     case 9:
-      return 'September, 2019';
+      return `September ${year}`;
     case 10:
-      return 'October, 2019';
+      return `October ${year}`;
     case 11:
-      return 'November, 2019';
+      return `November ${year}`;
     case 12:
-      return 'December, 2019';
+      return `December ${year}`;
     default:
       return number;
   }
 };
 
+export const numberToDay = number => {
+  switch (number) {
+    case 0:
+      return 'Sunday';
+    case 1:
+      return 'Monday';
+    case 2:
+      return 'Tuesday';
+    case 3:
+      return 'Wednesday';
+    case 4:
+      return 'Thursday';
+    case 5:
+      return 'Friday';
+    case 6:
+      return 'Saturday';
+    default:
+      return number;
+  }
+};
+
+export const isoStringToDate = string => {
+  const dateString = new Date(string);
+  const weekDay = numberToDay(dateString.getDay());
+  const monthAndYear = monthToString(dateString.getMonth() + 1);
+  return `${weekDay} ${dateString.getDate()} ${monthAndYear}`;
+};
+
 export const weekToString = weekNumber => {
   const number = parseInt(weekNumber, 10);
   switch (number) {
-    case 30:
-      return 'This week';
-    case 31:
-      return 'July 29	- August 4';
     case 32:
-      return 'August 5 - August 11';
-    case 33:
       return 'August 12 -	August 18';
-    case 34:
+    case 33:
       return 'August 19 -	August 25';
-    case 35:
+    case 34:
       return 'August 26 -	September 1';
-    case 36:
+    case 35:
       return 'September 2 -	September 8';
-    case 37:
+    case 36:
       return 'September 9 -	September 15';
-    case 38:
+    case 37:
       return 'September 16 -	September 22';
-    case 39:
+    case 38:
       return 'September 23 -	September 29';
-    case 40:
+    case 39:
       return 'September 30 -	October 6';
-    case 41:
+    case 40:
       return 'October 7 -	October 13';
-    case 42:
+    case 41:
       return 'October 14 -	October 20';
-    case 43:
+    case 42:
       return 'October 21 -	October 27';
-    case 44:
+    case 43:
       return 'October 28 -	November 3';
-    case 45:
+    case 44:
       return 'November 4 - November 10';
-    case 46:
+    case 45:
       return 'November 11 -	November 17';
-    case 47:
+    case 46:
       return 'November 18 -	November 24';
-    case 48:
+    case 47:
       return 'November 25 -	December 1';
-    case 49:
+    case 48:
       return 'December 2 -	December 8';
-    case 50:
+    case 49:
       return 'December 9 -	December 15';
-    case 51:
+    case 50:
       return 'December 16 -	December 22';
-    case 52:
+    case 51:
       return 'December 23 -	December 29';
+    case 52:
+      return 'December 30 - December 31';
     default:
       return number;
   }
