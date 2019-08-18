@@ -23,6 +23,21 @@ export const createEvent = (eventType, data) => {
     .catch(error => error.response.data.error);
 };
 
+/**
+ * @param object params Contains the parameters that will be sent in the request
+ */
+export const deleteRequest = params => {
+  return axios({
+    url: `http://localhost:5000${params.endPoint}`,
+    method: 'delete'
+  })
+    .then(response => response.data)
+    .catch(error => {
+      console.log(error.response.data.error);
+      return 'There was an error while requesting a deletion';
+    });
+};
+
 const requestOptions = {
   headers: {
     'Content-Type': 'application/json'
