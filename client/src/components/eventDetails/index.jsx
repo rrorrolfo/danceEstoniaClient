@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Container } from 'react-bootstrap';
+import { Container, Table } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './eventDetails.css';
@@ -80,44 +80,56 @@ const EventDetails = ({
       />
       <Container className="event-details-main-container">
         <h1 className="event-title centered">{selectedEvent.name}</h1>
-        <div className="event-info-container">
-          {coupleDancing()}
-          <p className="event-styles">
-            {arrayToUpperCase(selectedEvent.styles)}
-          </p>
-        </div>
-        <div className="event-info-container">
-          {category === 'events' ? venue() : hotel()}
-          <p className="event-venue">{`${selectedEvent.venueOfEvent}`}</p>
-        </div>
-        <div className="event-info-container">
-          {mark()}
-          {`${selectedEvent.venueAddress}, ${selectedEvent.cityOfEvent}, ${
-            selectedEvent.countryOfEvent
-          }`}
-        </div>
-        <div className="event-info-container">
-          {calendar()}
-          <p className="event-date">
-            {isoStringToDate(selectedEvent.dateOfEvent)}
-          </p>
-        </div>
-        <div className="event-info-container">
-          {clock()}
-          <p className="event-time">{selectedEvent.timeOfEvent}</p>
-        </div>
-        <div className="event-info-container">
-          {website()}
-          <p className="event-social-links">
-            {selectedEvent.website
-              ? selectedEvent.website
-              : selectedEvent.fbEvent}
-          </p>
-        </div>
-        <div className="event-info-container">
-          {tickets()}
-          <p className="event-ticket-price">{selectedEvent.ticketPrice}</p>
-        </div>
+        <Table className="event-details-table">
+          <tbody>
+            <tr>
+              <td>{coupleDancing('event-couple')}</td>
+              <td className="event-styles">
+                {arrayToUpperCase(selectedEvent.styles)}
+              </td>
+            </tr>
+            <tr>
+              <td>
+                {category === 'events'
+                  ? venue('event-venue')
+                  : hotel('event-hotel')}
+              </td>
+              <td className="event-venue">{`${selectedEvent.venueOfEvent}`}</td>
+            </tr>
+            <tr>
+              <td>{mark('event-mark')}</td>
+              <td>
+                {`${selectedEvent.venueAddress}, ${
+                  selectedEvent.cityOfEvent
+                }, ${selectedEvent.countryOfEvent}`}
+              </td>
+            </tr>
+            <tr>
+              <td>{calendar('event-calendar')}</td>
+              <td className="event-date">
+                {isoStringToDate(selectedEvent.dateOfEvent)}
+              </td>
+            </tr>
+            <tr>
+              <td>{clock('event-clock')}</td>
+              <td className="event-time">{selectedEvent.timeOfEvent}</td>
+            </tr>
+            <tr>
+              <td>{website('event-website')}</td>
+              <td className="event-social-links">
+                {selectedEvent.website
+                  ? selectedEvent.website
+                  : selectedEvent.fbEvent}
+              </td>
+            </tr>
+            <tr>
+              <td>{tickets('event-ticket')}</td>
+              <td className="event-ticket-price">
+                {selectedEvent.ticketPrice}
+              </td>
+            </tr>
+          </tbody>
+        </Table>
         <p className="event-description">{selectedEvent.description}</p>
         <iframe
           src={`https://www.google.com/maps/embed/v1/place?key=${mapsApiKey}

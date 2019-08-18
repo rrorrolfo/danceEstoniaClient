@@ -4,33 +4,30 @@
 
 .event-details-main-container {
   padding: 0 25px 25px;
-  /* border: 1px solid red; */
 }
 
-.event-info-container {
-  display: flex;
+.calendar.event-calendar,
+.clock.event-clock,
+.tickets.event-ticket,
+.website.event-website,
+.venue.event-venue,
+.hotel.event-hotel,
+.couple-dancing.event-couple {
+  margin-top: 0;
 }
 
-.event-styles,
-.event-venue,
-.event-date,
-.event-time,
-.event-social-links,
-.event-ticket-price {
-  margin: 5px 0;
+.mark.event-mark {
+  margin-top: -1.5px;
 }
 
-/* .event-title {
+.event-details-table td {
+  padding: 3px 3px 6px;
+  border-top: none;
 }
 
-.event-venue {
+.event-details-table td:first-child {
+  width: 25px;
 }
-
-.event-date {
-}
-
-.event-ticket-price {
-} */
 
 .event-description {
   margin: 25px 0;
