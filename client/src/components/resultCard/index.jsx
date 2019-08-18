@@ -18,7 +18,7 @@ const ResultCard = ({ result, match, category }) => {
     <Card className="result-card">
       <Link
         to={
-          match
+          match.params.style
             ? `/${category}/${match.params.style}/${result._id}`
             : `/${category}/${result.styles[0]}/${result._id}`
         }
