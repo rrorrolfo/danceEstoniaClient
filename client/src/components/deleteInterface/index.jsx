@@ -29,6 +29,7 @@ const DeleteInterface = ({ toggleModal }) => {
         timeFrame={timeFrame}
         events={group.records}
         category={category}
+        canDelete
         key={
           timeFrame === 'week'
             ? `${group._id.week}-${Math.random()}`

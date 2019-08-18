@@ -9,7 +9,8 @@ const TimeFrameGroup = ({
   timeFrame,
   events,
   category,
-  match
+  match,
+  canDelete
 }) => {
   const displayResults = resultsToDisplay => {
     return resultsToDisplay.map(event => {
@@ -19,6 +20,7 @@ const TimeFrameGroup = ({
           category={category}
           key={event._id}
           match={match}
+          canDelete={canDelete}
         />
       );
     });
@@ -45,11 +47,13 @@ TimeFrameGroup.propTypes = {
   events: PropTypes.arrayOf(PropTypes.object).isRequired,
   category: PropTypes.oneOf(['events', 'festivals']).isRequired,
   // eslint-disable-next-line react/forbid-prop-types
-  match: PropTypes.object
+  match: PropTypes.object,
+  canDelete: PropTypes.bool
 };
 
 TimeFrameGroup.defaultProps = {
-  match: null
+  match: null,
+  canDelete: false
 };
 
 export default TimeFrameGroup;

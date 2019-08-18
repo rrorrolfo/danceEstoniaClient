@@ -3,6 +3,7 @@ import { Card, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './resultCard.css';
+import { deleteRequest } from '../../requests/requests';
 import { arrayToUpperCase, isoStringToDate } from '../../utils';
 import {
   venue,
@@ -14,11 +15,20 @@ import {
 } from '../../assets/icons';
 
 const ResultCard = ({ result, match, category, canDelete }) => {
+  const deleteRecord = (cat, recordID) => {
+    deleteRequest({
+      endPoint: `/${cat}/${recordID}`
+    })
+      .then(response =>
+        window.alert(`${response} ${cat} erased with id: ${recordID}`)
+      )
+      .catch(error => window.alert(`${error} for event record: ${recordID}`));
+  };
   return (
     <Card className="result-card">
       <Link
         to={
-          match.params.style
+          match && match.params.style
             ? `/${category}/${match.params.style}/${result._id}`
             : `/${category}/${result.styles[0]}/${result._id}`
         }
@@ -64,6 +74,21 @@ const ResultCard = ({ result, match, category, canDelete }) => {
         <ListGroupItem>{result.fbEvent}</ListGroupItem>
       </ListGroup> */}
       </Link>
+      {canDelete ? (
+        <Button
+          style={{
+            margin: '15px auto',
+            position: 'absolute',
+            bottom: '0',
+            right: '25px',
+            zIndex: '10'
+          }}
+          variant="danger"
+          onClick={() => deleteRecord(category, result._id)}
+        >
+          Delete {result.name}
+        </Button>
+      ) : null}
     </Card>
   );
 };
