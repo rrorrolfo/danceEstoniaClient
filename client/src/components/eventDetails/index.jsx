@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import './eventDetails.css';
 import mapsApiKey from '../../config/config';
 import Breadcrumbs from '../breadcrumbs';
-import { arrayToUpperCase } from '../../utils';
+import { arrayToUpperCase, isoStringToDate } from '../../utils';
 import {
   hotel,
   calendar,
@@ -98,7 +98,9 @@ const EventDetails = ({
         </div>
         <div className="event-info-container">
           {calendar()}
-          <p className="event-date">{selectedEvent.dateOfEvent}</p>
+          <p className="event-date">
+            {isoStringToDate(selectedEvent.dateOfEvent)}
+          </p>
         </div>
         <div className="event-info-container">
           {clock()}
