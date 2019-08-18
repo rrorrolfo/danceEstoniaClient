@@ -45,7 +45,11 @@ TimeFrameGroup.propTypes = {
   events: PropTypes.arrayOf(PropTypes.object).isRequired,
   category: PropTypes.oneOf(['events', 'festivals']).isRequired,
   // eslint-disable-next-line react/forbid-prop-types
-  match: PropTypes.object.isRequired
+  match: PropTypes.object
+};
+
+TimeFrameGroup.defaultProps = {
+  match: null
 };
 
 export default TimeFrameGroup;
