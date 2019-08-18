@@ -1,9 +1,9 @@
 import React from 'react';
-import { Card } from 'react-bootstrap';
+import { Card, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './resultCard.css';
-import { arrayToUpperCase } from '../../utils';
+import { arrayToUpperCase, isoStringToDate } from '../../utils';
 import {
   venue,
   clock,
@@ -13,7 +13,7 @@ import {
   hotel
 } from '../../assets/icons';
 
-const ResultCard = ({ result, match, category }) => {
+const ResultCard = ({ result, match, category, canDelete }) => {
   return (
     <Card className="result-card">
       <Link
@@ -31,19 +31,11 @@ const ResultCard = ({ result, match, category }) => {
           />
           <Card.Body className="result-card-body">
             <Card.Title>{result.name}</Card.Title>
-            {category === 'festivals' ? (
-              <Card.Text className="result-card-details">
-                {calendar('no-margin-top')}
-                {result.dateOfEvent}
-              </Card.Text>
-            ) : null}
-            <Card.Text
-              className={
-                category === 'events'
-                  ? 'result-card-details'
-                  : 'result-card-data'
-              }
-            >
+            <Card.Text className="result-card-details">
+              {calendar('no-margin-top')}
+              {isoStringToDate(result.dateOfEvent)}
+            </Card.Text>
+            <Card.Text className="result-card-data">
               {category === 'events'
                 ? venue('no-margin-top')
                 : hotel('no-margin-top')}
@@ -80,12 +72,14 @@ ResultCard.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   result: PropTypes.object,
   // eslint-disable-next-line react/forbid-prop-types
-  match: PropTypes.object
+  match: PropTypes.object,
+  canDelete: PropTypes.bool
 };
 
 ResultCard.defaultProps = {
   result: null,
-  match: null
+  match: null,
+  canDelete: false
 };
 
 export default ResultCard;
