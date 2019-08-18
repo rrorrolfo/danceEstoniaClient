@@ -5,6 +5,7 @@ import EventsRoutes from './EventsRoutes';
 import FestivalsRoutes from './FestivalsRoutes';
 import ContactForm from '../components/contactForm';
 import CreateEvent from '../components/createForm';
+import DeleteInterface from '../components/deleteInterface';
 import NotFound from '../components/notFound';
 
 const AppRoutes = ({
@@ -19,7 +20,8 @@ const AppRoutes = ({
   eventError,
   festivalError,
   resetErrors,
-  resetFestivalsErrors
+  resetFestivalsErrors,
+  toggleModal
 }) => {
   return (
     <Switch>
@@ -54,6 +56,10 @@ const AppRoutes = ({
       />
       <Route path="/contact" component={ContactForm} />
       <Route path="/admin/createEvent" component={CreateEvent} />
+      <Route
+        path="/admin/deleteEvents"
+        render={() => <DeleteInterface toggleModal={toggleModal} />}
+      />
       <Route path="/notfound" component={NotFound} />
       <Route render={() => <Redirect to="/notfound" />} />
     </Switch>

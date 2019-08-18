@@ -18,6 +18,7 @@ import {
 import Header from '../components/header';
 import AppRoutes from '../routes';
 import Loader from '../components/loader';
+import MainModal from '../components/modal';
 import './app.css';
 
 const App = ({
@@ -35,6 +36,11 @@ const App = ({
   resetFestivalsErrors
 }) => {
   const [isLoading, toggleLoading] = useState(true);
+  const [showModal, toggleModal] = useState({
+    show: false,
+    category: '',
+    callback: null
+  });
   useEffect(() => {
     fetchEvents();
     fetchFestivals();
@@ -60,6 +66,13 @@ const App = ({
           festivalError={festivalError}
           resetErrors={resetErrors}
           resetFestivalsErrors={resetFestivalsErrors}
+          toggleModal={toggleModal}
+        />
+        <MainModal
+          show={showModal.show}
+          toggleModal={toggleModal}
+          category={showModal.category}
+          action={showModal.callback}
         />
         {isLoading ? <Loader /> : null}
       </div>
