@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Editor, EditorState, RichUtils, Modifier } from 'draft-js';
+import { Editor, EditorState, RichUtils, CompositeDecorator } from 'draft-js';
 import { Container } from 'react-bootstrap';
-import EditInterface from './editInterface';
+import EditInterface from './EditInterface';
 import '../../../node_modules/draft-js/dist/Draft.css';
 import './textEditor.css';
 
@@ -30,24 +30,52 @@ const TextEditor = () => {
     setEditorState(RichUtils.toggleBlockType(editorState, block));
   };
 
-  /* const createLinkEntity = (url = 'http://google.com') => {
+  const findLinkEntities = (contentBlock, callback, contentState) => {
+    contentBlock.findEntityRanges(character => {
+      const entityKey = character.getEntity();
+      return (
+        entityKey !== null &&
+        contentState.getEntity(entityKey).getType() === 'LINK'
+      );
+    }, callback);
+  };
+
+  const Link = props => {
+    const { children, contentState, entityKey } = props;
+    const { url } = contentState.getEntity(entityKey).getData();
+    return (
+      <a href={url} className="custom-link">
+        {children}
+      </a>
+    );
+  };
+
+  const createLinkEntity = target => {
+    const decorator = new CompositeDecorator([
+      {
+        strategy: findLinkEntities,
+        component: Link
+      }
+    ]);
     const contentState = editorState.getCurrentContent();
     const contentStateWithEntity = contentState.createEntity(
       'LINK',
       'MUTABLE',
-      { url }
+      { url: target }
     );
-    const selectionState = editorState.getSelection();
     const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
-    const contentStateWithLink = Modifier.applyEntity(
-      contentStateWithEntity,
-      selectionState,
-      entityKey
-    );
     const newEditorState = EditorState.set(editorState, {
-      currentContent: contentStateWithLink
+      currentContent: contentStateWithEntity,
+      decorator
     });
-  }; */
+    setEditorState(
+      RichUtils.toggleLink(
+        newEditorState,
+        newEditorState.getSelection(),
+        entityKey
+      )
+    );
+  };
 
   return (
     <React.Fragment>
@@ -56,7 +84,7 @@ const TextEditor = () => {
           toggleBold={toggleBold}
           toggleUnderline={toggleUnderline}
           toggleItalic={toggleItalic}
-          // createLinkEntity={createLinkEntity}
+          createLinkEntity={createLinkEntity}
           selection={selection}
           blockType={blockType}
           toggleBlockType={toggleBlockType}

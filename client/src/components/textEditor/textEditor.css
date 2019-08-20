@@ -15,3 +15,8 @@
 .DraftEditor-editorContainer {
   padding: 15px;
 }
+
+.custom-link {
+  color: var(--blue-estonia);
+  text-decoration: underline;
+}

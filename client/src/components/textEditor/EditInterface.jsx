@@ -44,7 +44,7 @@ const EditInterface = ({
       </Button>
       <Button
         variant="outline-secondary"
-        onClick={createLinkEntity}
+        onClick={() => createLinkEntity('http://google.com')}
         style={{ textDecoration: 'underline', marginRight: '15px' }}
       >
         Link
