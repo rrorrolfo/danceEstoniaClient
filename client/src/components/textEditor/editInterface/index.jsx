@@ -20,7 +20,7 @@ const EditInterface = ({
   ];
 
   return (
-    <Container fluid>
+    <Container fluid className="edit-interface">
       <Button
         variant="outline-secondary"
         onClick={toggleBold}
@@ -38,16 +38,16 @@ const EditInterface = ({
       <Button
         variant="outline-secondary"
         onClick={toggleUnderline}
-        style={{ textDecoration: 'underline' }}
+        style={{ textDecoration: 'underline', marginRight: '15px' }}
       >
         U
       </Button>
       <Button
         variant="outline-secondary"
         onClick={createLinkEntity}
-        style={{ textDecoration: 'underline' }}
+        style={{ textDecoration: 'underline', marginRight: '15px' }}
       >
-        New Link
+        Link
       </Button>
       {BLOCK_TYPES.map(type => (
         <Button

@@ -3,6 +3,7 @@ import { Editor, EditorState, RichUtils, Modifier } from 'draft-js';
 import { Container } from 'react-bootstrap';
 import EditInterface from './editInterface';
 import '../../../node_modules/draft-js/dist/Draft.css';
+import './textEditor.css';
 
 const TextEditor = () => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
@@ -49,20 +50,22 @@ const TextEditor = () => {
   }; */
 
   return (
-    <Container
-      style={{ height: '350px', border: '1px solid grey', cursor: 'text' }}
-    >
-      <EditInterface
-        toggleBold={toggleBold}
-        toggleUnderline={toggleUnderline}
-        toggleItalic={toggleItalic}
-        // createLinkEntity={createLinkEntity}
-        selection={selection}
-        blockType={blockType}
-        toggleBlockType={toggleBlockType}
-      />
-      <Editor editorState={editorState} onChange={setEditorState} />;
-    </Container>
+    <React.Fragment>
+      <Container>
+        <EditInterface
+          toggleBold={toggleBold}
+          toggleUnderline={toggleUnderline}
+          toggleItalic={toggleItalic}
+          // createLinkEntity={createLinkEntity}
+          selection={selection}
+          blockType={blockType}
+          toggleBlockType={toggleBlockType}
+        />
+      </Container>
+      <Container className="text-editor-container">
+        <Editor editorState={editorState} onChange={setEditorState} />;
+      </Container>
+    </React.Fragment>
   );
 };
 
