@@ -11,6 +11,7 @@ import {
 import { getTodayISODate } from '../../utils';
 import { createEvent } from '../../requests/requests';
 import './createForm.css';
+import TextEditor from '../textEditor/index';
 
 const CreateEvent = () => {
   // Data of event state
@@ -624,7 +625,8 @@ const CreateEvent = () => {
           <h5 className="centered">
             Write the description of the {customTypeText}.
           </h5>
-          <Form.Control
+          <TextEditor />
+          {/* <Form.Control
             as="textarea"
             rows="5"
             placeholder="Description"
@@ -642,7 +644,7 @@ const CreateEvent = () => {
           <Form.Control.Feedback type="invalid">
             The description of the {customTypeText} needs to be at least 40
             characters long.
-          </Form.Control.Feedback>
+          </Form.Control.Feedback> */}
         </Form.Group>
 
         <Form.Row className="margin-on-top">
