@@ -70,4 +70,23 @@ const EditInterface = ({
   );
 };
 
+EditInterface.propTypes = {
+  toggleBold: PropTypes.func,
+  toggleItalic: PropTypes.func,
+  toggleUnderline: PropTypes.func,
+  createLinkEntity: PropTypes.func,
+  removeLinkEntity: PropTypes.func,
+  blockType: PropTypes.string.isRequired,
+  toggleBlockType: PropTypes.func
+};
+
+EditInterface.defaultProps = {
+  toggleBold: null,
+  toggleItalic: null,
+  toggleUnderline: null,
+  createLinkEntity: null,
+  removeLinkEntity: null,
+  toggleBlockType: PropTypes.func
+};
+
 export default EditInterface;
