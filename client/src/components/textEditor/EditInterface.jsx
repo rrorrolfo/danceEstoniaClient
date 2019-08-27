@@ -1,11 +1,13 @@
 import React from 'react';
 import { Container, Button } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 
 const EditInterface = ({
   toggleBold,
   toggleItalic,
   toggleUnderline,
   createLinkEntity,
+  removeLinkEntity,
   blockType,
   toggleBlockType
 }) => {
@@ -13,8 +15,6 @@ const EditInterface = ({
     { label: 'H2', style: 'header-two' },
     { label: 'H3', style: 'header-three' },
     { label: 'H4', style: 'header-four' },
-    { label: 'H5', style: 'header-five' },
-    { label: 'H6', style: 'header-six' },
     { label: 'UL', style: 'unordered-list-item' },
     { label: 'OL', style: 'ordered-list-item' }
   ];
@@ -47,7 +47,14 @@ const EditInterface = ({
         onClick={() => createLinkEntity('http://google.com')}
         style={{ textDecoration: 'underline', marginRight: '15px' }}
       >
-        Link
+        Add Link
+      </Button>
+      <Button
+        variant="outline-secondary"
+        onClick={() => removeLinkEntity()}
+        style={{ textDecoration: 'underline', marginRight: '15px' }}
+      >
+        Remove Link
       </Button>
       {BLOCK_TYPES.map(type => (
         <Button
