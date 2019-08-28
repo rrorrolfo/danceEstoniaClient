@@ -8,8 +8,11 @@ const EditInterface = ({
   toggleUnderline,
   createLinkEntity,
   removeLinkEntity,
+  selection,
   blockType,
-  toggleBlockType
+  toggleBlockType,
+  editorState,
+  setEditorState
 }) => {
   const BLOCK_TYPES = [
     { label: 'H2', style: 'header-two' },
@@ -44,14 +47,16 @@ const EditInterface = ({
       </Button>
       <Button
         variant="outline-secondary"
-        onClick={() => createLinkEntity('http://google.com')}
+        onClick={() =>
+          createLinkEntity(editorState, 'http://google.com', setEditorState)
+        }
         style={{ textDecoration: 'underline', marginRight: '15px' }}
       >
         Add Link
       </Button>
       <Button
         variant="outline-secondary"
-        onClick={() => removeLinkEntity()}
+        onClick={() => removeLinkEntity(editorState, selection, setEditorState)}
         style={{ textDecoration: 'underline', marginRight: '15px' }}
       >
         Remove Link
@@ -77,7 +82,12 @@ EditInterface.propTypes = {
   createLinkEntity: PropTypes.func,
   removeLinkEntity: PropTypes.func,
   blockType: PropTypes.string.isRequired,
-  toggleBlockType: PropTypes.func
+  // eslint-disable-next-line react/forbid-prop-types
+  selection: PropTypes.object.isRequired,
+  toggleBlockType: PropTypes.func.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  editorState: PropTypes.object.isRequired,
+  setEditorState: PropTypes.func.isRequired
 };
 
 EditInterface.defaultProps = {
@@ -85,8 +95,7 @@ EditInterface.defaultProps = {
   toggleItalic: null,
   toggleUnderline: null,
   createLinkEntity: null,
-  removeLinkEntity: null,
-  toggleBlockType: PropTypes.func
+  removeLinkEntity: null
 };
 
 export default EditInterface;
