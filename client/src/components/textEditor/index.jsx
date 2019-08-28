@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Editor, EditorState, RichUtils } from 'draft-js';
 import { Container } from 'react-bootstrap';
 import PropTypes from 'prop-types';
@@ -14,6 +14,15 @@ const TextEditor = ({ rawJson, isEvent, eventDescription }) => {
       ? EditorState.createWithContent(eventDescription, linkDecorator())
       : EditorState.createEmpty()
   );
+
+  const editor = React.useRef(null);
+  const focusEditor = () => editor.current.focus();
+
+  useEffect(() => {
+    if (!isEvent) {
+      focusEditor();
+    }
+  }, [isEvent]);
 
   const toggleBold = () => {
     setEditorState(RichUtils.toggleInlineStyle(editorState, 'BOLD'));
@@ -55,7 +64,10 @@ const TextEditor = ({ rawJson, isEvent, eventDescription }) => {
           />
         </Container>
       ) : null}
-      <Container className="text-editor-container">
+      <Container
+        className="text-editor-container"
+        onClick={!isEvent ? focusEditor : null}
+      >
         <Editor
           editorState={editorState}
           onChange={newState => {
@@ -63,8 +75,8 @@ const TextEditor = ({ rawJson, isEvent, eventDescription }) => {
             rawJson(editorState.getCurrentContent());
           }}
           readOnly={isEvent}
+          ref={!isEvent ? editor : null}
         />
-        ;
       </Container>
     </React.Fragment>
   );
