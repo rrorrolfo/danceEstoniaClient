@@ -140,12 +140,13 @@ const EventDetails = ({
         />
         <iframe
           src={`https://www.google.com/maps/embed/v1/place?key=${mapsApiKey}
-    &q=${formatMapSrc()}`}
+      &q=${formatMapSrc()}`}
           title={`${selectedEvent.name} map`}
           width="100%"
           height="400"
           frameBorder="0"
           allowFullScreen
+          className="event-map"
         />
       </Container>
     </React.Fragment>

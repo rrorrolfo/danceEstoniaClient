@@ -33,6 +33,10 @@
   margin: 25px 0;
 }
 
+.event-map {
+  margin-top: 25px;
+}
+
 /*** Breacrumb***/
 .breadcrumb {
   padding-left: 30px;
