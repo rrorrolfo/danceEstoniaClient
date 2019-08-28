@@ -1,12 +1,19 @@
 import React, { useState } from 'react';
-import { Editor, EditorState, RichUtils, CompositeDecorator } from 'draft-js';
+import { Editor, EditorState, RichUtils } from 'draft-js';
 import { Container } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 import EditInterface from './EditInterface';
+import linkDecorator from './LinkDecorator';
+import { createLinkEntity, removeLinkEntity } from './EditorUtils';
 import '../../../node_modules/draft-js/dist/Draft.css';
 import './textEditor.css';
 
-const TextEditor = () => {
-  const [editorState, setEditorState] = useState(EditorState.createEmpty());
+const TextEditor = ({ rawJson, isEvent, eventDescription }) => {
+  const [editorState, setEditorState] = useState(
+    isEvent
+      ? EditorState.createWithContent(eventDescription, linkDecorator())
+      : EditorState.createEmpty()
+  );
 
   const toggleBold = () => {
     setEditorState(RichUtils.toggleInlineStyle(editorState, 'BOLD'));
@@ -30,71 +37,50 @@ const TextEditor = () => {
     setEditorState(RichUtils.toggleBlockType(editorState, block));
   };
 
-  const findLinkEntities = (contentBlock, callback, contentState) => {
-    contentBlock.findEntityRanges(character => {
-      const entityKey = character.getEntity();
-      return (
-        entityKey !== null &&
-        contentState.getEntity(entityKey).getType() === 'LINK'
-      );
-    }, callback);
-  };
-
-  const Link = props => {
-    const { children, contentState, entityKey } = props;
-    const { url } = contentState.getEntity(entityKey).getData();
-    return (
-      <a href={url} className="custom-link">
-        {children}
-      </a>
-    );
-  };
-
-  const createLinkEntity = target => {
-    const decorator = new CompositeDecorator([
-      {
-        strategy: findLinkEntities,
-        component: Link
-      }
-    ]);
-    const contentState = editorState.getCurrentContent();
-    const contentStateWithEntity = contentState.createEntity(
-      'LINK',
-      'MUTABLE',
-      { url: target }
-    );
-    const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
-    const newEditorState = EditorState.set(editorState, {
-      currentContent: contentStateWithEntity,
-      decorator
-    });
-    setEditorState(
-      RichUtils.toggleLink(
-        newEditorState,
-        newEditorState.getSelection(),
-        entityKey
-      )
-    );
-  };
-
   return (
     <React.Fragment>
-      <Container>
-        <EditInterface
-          toggleBold={toggleBold}
-          toggleUnderline={toggleUnderline}
-          toggleItalic={toggleItalic}
-          createLinkEntity={createLinkEntity}
-          selection={selection}
-          blockType={blockType}
-          toggleBlockType={toggleBlockType}
-        />
-      </Container>
+      {!isEvent ? (
+        <Container>
+          <EditInterface
+            toggleBold={toggleBold}
+            toggleUnderline={toggleUnderline}
+            toggleItalic={toggleItalic}
+            createLinkEntity={createLinkEntity}
+            removeLinkEntity={removeLinkEntity}
+            selection={selection}
+            blockType={blockType}
+            toggleBlockType={toggleBlockType}
+            editorState={editorState}
+            setEditorState={setEditorState}
+          />
+        </Container>
+      ) : null}
       <Container className="text-editor-container">
-        <Editor editorState={editorState} onChange={setEditorState} />;
+        <Editor
+          editorState={editorState}
+          onChange={newState => {
+            setEditorState(newState);
+            rawJson(editorState.getCurrentContent());
+          }}
+          readOnly={isEvent}
+        />
+        ;
       </Container>
     </React.Fragment>
   );
+};
+
+TextEditor.propTypes = {
+  rawJson: PropTypes.func,
+  isEvent: PropTypes.bool,
+  // eslint-disable-next-line react/forbid-prop-types
+  eventDescription: PropTypes.object
+};
+
+TextEditor.defaultProps = {
+  rawJson: null,
+  isEvent: false,
+  eventDescription: null
 };
 
 export default TextEditor;
