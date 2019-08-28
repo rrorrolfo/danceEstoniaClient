@@ -133,9 +133,9 @@ const Header = () => {
               </li>
             </ul>
           </NavDropdown>
-          <NavLink to="#" className="main-nav-link">
+          {/* <NavLink to="#" className="main-nav-link">
             Shop
-          </NavLink>
+          </NavLink> */}
           <NavLink to="/contact" className="main-nav-link">
             Contact
           </NavLink>
