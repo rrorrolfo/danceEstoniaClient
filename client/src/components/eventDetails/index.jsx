@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
 import { Container, Table } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
+import { convertFromRaw } from 'draft-js';
 import PropTypes from 'prop-types';
 import './eventDetails.css';
 import mapsApiKey from '../../config/config';
 import Breadcrumbs from '../breadcrumbs';
+import TextEditor from '../textEditor';
 import { arrayToUpperCase, isoStringToDate } from '../../utils';
 import {
   hotel,
@@ -130,7 +132,12 @@ const EventDetails = ({
             </tr>
           </tbody>
         </Table>
-        <p className="event-description">{selectedEvent.description}</p>
+        <TextEditor
+          isEvent
+          eventDescription={convertFromRaw(
+            JSON.parse(selectedEvent.description)
+          )}
+        />
         <iframe
           src={`https://www.google.com/maps/embed/v1/place?key=${mapsApiKey}
     &q=${formatMapSrc()}`}
