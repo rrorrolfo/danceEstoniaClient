@@ -8,6 +8,7 @@ import {
   Tooltip,
   Alert
 } from 'react-bootstrap';
+import { convertToRaw } from 'draft-js';
 import { getTodayISODate } from '../../utils';
 import { createEvent } from '../../requests/requests';
 import './createForm.css';
@@ -45,7 +46,6 @@ const CreateEvent = () => {
   const [website, updateWebsite] = useState('');
   // Description
   const [description, updateDescription] = useState('');
-  const [invalidDescription, toggleInvalidDescription] = useState(false);
   // Data of event state
   const [missingBanner, toggleMissingBanner] = useState(false);
 
@@ -95,16 +95,19 @@ const CreateEvent = () => {
     return true;
   };
 
+  const rawJson = state => {
+    const result = convertToRaw(state);
+    return updateDescription(JSON.stringify(result));
+  };
+
   const handleSubmit = async event => {
     event.preventDefault();
     const img = document.querySelector('#event-banner');
     let errors = 0;
-
     toggleSubmisionStatus(false);
     toggleNoEventTypeselected(false);
     toggleNoStylesSelected(false);
     toggleInvalidName(false);
-    toggleInvalidDescription(false);
     toggleMissingBanner(false);
 
     if (eventType === '') {
@@ -119,11 +122,6 @@ const CreateEvent = () => {
 
     if (nameOfEvent === '') {
       toggleInvalidName(true);
-      errors += 1;
-    }
-
-    if (description.length < 40) {
-      toggleInvalidDescription(true);
       errors += 1;
     }
 
@@ -625,26 +623,7 @@ const CreateEvent = () => {
           <h5 className="centered">
             Write the description of the {customTypeText}.
           </h5>
-          <TextEditor />
-          {/* <Form.Control
-            as="textarea"
-            rows="5"
-            placeholder="Description"
-            name="event-description"
-            value={description}
-            onChange={event => {
-              toggleInvalidDescription(false);
-              if (event.target.value.length < 40) {
-                toggleInvalidDescription(true);
-              }
-              updateDescription(event.target.value);
-            }}
-            isInvalid={invalidDescription}
-          />
-          <Form.Control.Feedback type="invalid">
-            The description of the {customTypeText} needs to be at least 40
-            characters long.
-          </Form.Control.Feedback> */}
+          <TextEditor rawJson={rawJson} />
         </Form.Group>
 
         <Form.Row className="margin-on-top">
