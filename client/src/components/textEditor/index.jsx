@@ -4,7 +4,8 @@ import { Container } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import EditInterface from './EditInterface';
 import linkDecorator from './LinkDecorator';
-import { createLinkEntity, removeLinkEntity } from './EditorUtils';
+import UrlInput from './LinkInput';
+import { promptForLink, confirmLink, removeLinkEntity } from './EditorUtils';
 import '../../../node_modules/draft-js/dist/Draft.css';
 import './textEditor.css';
 
@@ -14,6 +15,8 @@ const TextEditor = ({ rawJson, isEvent, eventDescription }) => {
       ? EditorState.createWithContent(eventDescription, linkDecorator())
       : EditorState.createEmpty()
   );
+  const [showURLInput, toggleShowURLInput] = useState(false);
+  const [urlValue, updateUrlValue] = useState('');
 
   const editor = React.useRef(null);
   const focusEditor = () => editor.current.focus();
@@ -54,14 +57,27 @@ const TextEditor = ({ rawJson, isEvent, eventDescription }) => {
             toggleBold={toggleBold}
             toggleUnderline={toggleUnderline}
             toggleItalic={toggleItalic}
-            createLinkEntity={createLinkEntity}
             removeLinkEntity={removeLinkEntity}
             selection={selection}
             blockType={blockType}
             toggleBlockType={toggleBlockType}
             editorState={editorState}
             setEditorState={setEditorState}
+            promptForLink={promptForLink}
+            toggleShowURLInput={toggleShowURLInput}
+            urlValue={urlValue}
+            updateUrlValue={updateUrlValue}
           />
+          {showURLInput ? (
+            <UrlInput
+              editorState={editorState}
+              setEditorState={setEditorState}
+              toggleShowURLInput={toggleShowURLInput}
+              urlValue={urlValue}
+              updateUrlValue={updateUrlValue}
+              confirmLink={confirmLink}
+            />
+          ) : null}
         </Container>
       ) : null}
       <Container

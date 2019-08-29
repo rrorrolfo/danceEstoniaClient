@@ -6,13 +6,15 @@ const EditInterface = ({
   toggleBold,
   toggleItalic,
   toggleUnderline,
-  createLinkEntity,
   removeLinkEntity,
   selection,
   blockType,
   toggleBlockType,
   editorState,
-  setEditorState
+  setEditorState,
+  promptForLink,
+  toggleShowURLInput,
+  updateUrlValue
 }) => {
   const BLOCK_TYPES = [
     { label: 'H2', style: 'header-two' },
@@ -48,7 +50,12 @@ const EditInterface = ({
       <Button
         variant="outline-secondary"
         onClick={() =>
-          createLinkEntity(editorState, 'http://google.com', setEditorState)
+          promptForLink(
+            selection,
+            editorState,
+            toggleShowURLInput,
+            updateUrlValue
+          )
         }
         style={{ textDecoration: 'underline', marginRight: '15px' }}
       >
@@ -79,7 +86,6 @@ EditInterface.propTypes = {
   toggleBold: PropTypes.func,
   toggleItalic: PropTypes.func,
   toggleUnderline: PropTypes.func,
-  createLinkEntity: PropTypes.func,
   removeLinkEntity: PropTypes.func,
   blockType: PropTypes.string.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
@@ -87,14 +93,16 @@ EditInterface.propTypes = {
   toggleBlockType: PropTypes.func.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   editorState: PropTypes.object.isRequired,
-  setEditorState: PropTypes.func.isRequired
+  setEditorState: PropTypes.func.isRequired,
+  promptForLink: PropTypes.func.isRequired,
+  toggleShowURLInput: PropTypes.func.isRequired,
+  updateUrlValue: PropTypes.func.isRequired
 };
 
 EditInterface.defaultProps = {
   toggleBold: null,
   toggleItalic: null,
   toggleUnderline: null,
-  createLinkEntity: null,
   removeLinkEntity: null
 };
 
