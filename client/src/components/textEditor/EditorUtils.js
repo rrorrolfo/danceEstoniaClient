@@ -21,29 +21,65 @@ const Link = props => {
   );
 };
 
-export const createLinkEntity = (state, target, callback) => {
-  const decorator = new CompositeDecorator([
-    {
-      strategy: findLinkEntities,
-      component: Link
+const decorator = new CompositeDecorator([
+  {
+    strategy: findLinkEntities,
+    component: Link
+  }
+]);
+
+export const promptForLink = (selection, state, displayButton, updateUrl) => {
+  if (!selection.isCollapsed()) {
+    const contentState = state.getCurrentContent();
+    const startKey = state.getSelection().getStartKey();
+    const startOffset = state.getSelection().getStartOffset();
+    const blockWithLinkAtBeginning = contentState.getBlockForKey(startKey);
+    const linkKey = blockWithLinkAtBeginning.getEntityAt(startOffset);
+
+    let url = '';
+    if (linkKey) {
+      const linkInstance = contentState.getEntity(linkKey);
+      // eslint-disable-next-line prefer-destructuring
+      url = linkInstance.getData().url;
     }
-  ]);
+
+    displayButton(true);
+    updateUrl(url);
+    /* () => {
+      setTimeout(() => this.refs.url.focus(), 0);
+    } */
+  }
+};
+
+export const confirmLink = (
+  state,
+  url,
+  updateUrl,
+  updateState,
+  displayButton
+) => {
   const contentState = state.getCurrentContent();
   const contentStateWithEntity = contentState.createEntity('LINK', 'MUTABLE', {
-    url: target
+    url
   });
   const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
   const newEditorState = EditorState.set(state, {
     currentContent: contentStateWithEntity,
     decorator
   });
-  callback(
+
+  updateState(
     RichUtils.toggleLink(
       newEditorState,
       newEditorState.getSelection(),
       entityKey
     )
   );
+  displayButton(false);
+  updateUrl('');
+  /* () => {
+    setTimeout(() => this.refs.editor.focus(), 0);
+  } */
 };
 
 export const removeLinkEntity = (state, selection, callback) => {
