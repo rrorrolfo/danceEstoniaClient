@@ -41,6 +41,7 @@ const App = ({
     category: '',
     callback: null
   });
+
   useEffect(() => {
     fetchEvents();
     fetchFestivals();
@@ -53,6 +54,17 @@ const App = ({
     setTimeout(() => toggleLoading(!isLoading), 2000);
     // eslint-disable-next-line
   }, []);
+
+  useEffect(() => {
+    if (eventError.status !== 0) {
+      resetErrors();
+    }
+
+    if (festivalError.status !== 0) {
+      resetFestivalsErrors();
+    }
+  }, [eventError, festivalError, resetErrors, resetFestivalsErrors]);
+
   return (
     <BrowserRouter>
       <div>
