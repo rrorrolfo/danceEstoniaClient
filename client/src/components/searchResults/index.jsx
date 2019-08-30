@@ -31,29 +31,24 @@ const SearchResults = ({
       style === 'bachata' ||
       style === 'kizomba'
     ) {
-      const resultsToDisplay = [];
-      resultsByGroup.filter(result => {
-        if (resultsByGroup.indexOf(result) <= pageCount * 3 - 1) {
-          resultsToDisplay.push(result);
-        }
-        return true;
-      });
-      return resultsToDisplay.map(group => (
-        <TimeFrameGroup
-          dateHappening={
-            timeFrame === 'week' ? group._id.week : group._id.month
-          }
-          timeFrame={timeFrame}
-          events={group.records}
-          category={category}
-          match={match}
-          key={
-            timeFrame === 'week'
-              ? `${group._id.week}-${Math.random()}`
-              : `${group._id.month}-${Math.random()}`
-          }
-        />
-      ));
+      return resultsByGroup
+        .filter(result => resultsByGroup.indexOf(result) <= pageCount * 3 - 1)
+        .map(group => (
+          <TimeFrameGroup
+            dateHappening={
+              timeFrame === 'week' ? group._id.week : group._id.month
+            }
+            timeFrame={timeFrame}
+            events={group.records}
+            category={category}
+            match={match}
+            key={
+              timeFrame === 'week'
+                ? `${group._id.week}-${Math.random()}`
+                : `${group._id.month}-${Math.random()}`
+            }
+          />
+        ));
     }
     history.push('/notFound', { errorStatus: 404 });
     return false;
