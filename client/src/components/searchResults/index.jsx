@@ -25,6 +25,16 @@ const SearchResults = ({
   }, [style, updateDancingStyle]);
 
   const displayTimeFramecontainers = (resultsByGroup, timeFrame = 'month') => {
+    if (!resultsByGroup.length) {
+      return (
+        <Container className="no-results-message">
+          <h3 className="centered">
+            Sorry!, We couldn´t find any {style} {category}, please check later.
+          </h3>
+        </Container>
+      );
+    }
+
     if (
       style === undefined ||
       style === 'salsa' ||
