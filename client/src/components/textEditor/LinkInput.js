@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { InputGroup, FormControl, Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
@@ -10,13 +10,20 @@ const UrlInput = ({
   updateUrlValue,
   confirmLink
 }) => {
+  const linkInput = React.useRef(null);
+  const focusLinkInput = () => linkInput.current.focus();
+
+  useEffect(() => {
+    focusLinkInput();
+  }, []);
+
   return (
     <InputGroup className="mb-3" style={{ marginTop: '15px', width: '400px' }}>
       <FormControl
         placeholder="Enter a url and click confirm"
         aria-label="Link creation input"
         onChange={event => updateUrlValue(event.target.value)}
-        // ref="url"
+        ref={linkInput}
         type="text"
         value={urlValue}
       />
