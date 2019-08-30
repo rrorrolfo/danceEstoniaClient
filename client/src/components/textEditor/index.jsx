@@ -76,6 +76,7 @@ const TextEditor = ({ rawJson, isEvent, eventDescription }) => {
               urlValue={urlValue}
               updateUrlValue={updateUrlValue}
               confirmLink={confirmLink}
+              focusEditor={focusEditor}
             />
           ) : null}
         </Container>

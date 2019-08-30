@@ -8,7 +8,8 @@ const UrlInput = ({
   toggleShowURLInput,
   urlValue,
   updateUrlValue,
-  confirmLink
+  confirmLink,
+  focusEditor
 }) => {
   const linkInput = React.useRef(null);
   const focusLinkInput = () => linkInput.current.focus();
@@ -30,15 +31,16 @@ const UrlInput = ({
       <InputGroup.Append>
         <Button
           variant="outline-secondary"
-          onClick={() =>
+          onClick={() => {
             confirmLink(
               editorState,
               urlValue,
               updateUrlValue,
               setEditorState,
               toggleShowURLInput
-            )
-          }
+            );
+            setTimeout(() => focusEditor(), 0);
+          }}
         >
           Confirm
         </Button>
@@ -54,7 +56,8 @@ UrlInput.propTypes = {
   toggleShowURLInput: PropTypes.func,
   urlValue: PropTypes.string,
   updateUrlValue: PropTypes.func,
-  confirmLink: PropTypes.func
+  confirmLink: PropTypes.func,
+  focusEditor: PropTypes.func
 };
 
 UrlInput.defaultProps = {
@@ -63,7 +66,8 @@ UrlInput.defaultProps = {
   toggleShowURLInput: null,
   urlValue: '',
   updateUrlValue: null,
-  confirmLink: null
+  confirmLink: null,
+  focusEditor: null
 };
 
 export default UrlInput;
