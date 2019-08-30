@@ -45,9 +45,6 @@ export const promptForLink = (selection, state, displayButton, updateUrl) => {
 
     displayButton(true);
     updateUrl(url);
-    /* () => {
-      setTimeout(() => this.refs.url.focus(), 0);
-    } */
   }
 };
 
@@ -77,9 +74,6 @@ export const confirmLink = (
   );
   displayButton(false);
   updateUrl('');
-  /* () => {
-    setTimeout(() => this.refs.editor.focus(), 0);
-  } */
 };
 
 export const removeLinkEntity = (state, selection, callback) => {
