@@ -8,12 +8,12 @@ const DeleteInterface = ({ toggleModal }) => {
   const [festivalsResults, updateFestivalsResults] = useState([]);
 
   useEffect(() => {
-    apiRequest({ endPoint: '/events', delete: 1 })
+    apiRequest({ endPoint: '/events', delete: 1, all: 1 })
       .then(response => {
         updateEventsResults(response);
       })
       .catch(error => console.log(error));
-    apiRequest({ endPoint: '/festivals', delete: 1 })
+    apiRequest({ endPoint: '/festivals', delete: 1, all: 1 })
       .then(response => updateFestivalsResults(response))
       .catch(error => console.log(error));
   }, []);
