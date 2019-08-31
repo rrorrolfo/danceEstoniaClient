@@ -56,7 +56,10 @@ const AppRoutes = ({
       />
       <Route path="/createEvent" component={CreateEvent} />
       <Route path="/contact" component={ContactForm} />
-      <Route path="/admin/createEvent" component={CreateEvent} />
+      <Route
+        path="/admin/createEvent"
+        render={() => <CreateEvent isUser={false} />}
+      />
       <Route
         path="/admin/deleteEvents"
         render={() => <DeleteInterface toggleModal={toggleModal} />}

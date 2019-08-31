@@ -9,12 +9,13 @@ import {
   Alert
 } from 'react-bootstrap';
 import { convertToRaw } from 'draft-js';
+import PropTypes from 'prop-types';
 import { getTodayISODate } from '../../utils';
 import { createEvent } from '../../requests/requests';
 import './createForm.css';
 import TextEditor from '../textEditor/index';
 
-const CreateEvent = () => {
+const CreateEvent = ({ isUser }) => {
   // Data of event state
   const [todayDate, updateDate] = useState('');
   // Event type
@@ -160,6 +161,11 @@ const CreateEvent = () => {
     eventData.append('description', description);
     eventData.append('fbEvent', fbEvent);
     eventData.append('ticketPrice', `${ticketPrice} ${ticketCurrency}`);
+    if (!isUser) {
+      eventData.append('isAuthorized', true);
+    } else {
+      eventData.append('isAuthorized', false);
+    }
     eventData.append('image', img.files[0]);
     if (eventType === 'festivals') {
       eventData.append('website', website);
@@ -668,6 +674,14 @@ const CreateEvent = () => {
       </Form>
     </Container>
   );
+};
+
+CreateEvent.propTypes = {
+  isUser: PropTypes.bool
+};
+
+CreateEvent.defaultProps = {
+  isUser: true
 };
 
 export default CreateEvent;
