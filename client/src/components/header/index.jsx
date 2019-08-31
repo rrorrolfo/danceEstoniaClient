@@ -136,6 +136,9 @@ const Header = () => {
           {/* <NavLink to="#" className="main-nav-link">
             Shop
           </NavLink> */}
+          <NavLink to="/createEvent" className="main-nav-link">
+            Create Event
+          </NavLink>
           <NavLink to="/contact" className="main-nav-link">
             Contact
           </NavLink>
