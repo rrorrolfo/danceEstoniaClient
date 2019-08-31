@@ -54,6 +54,7 @@ const AppRoutes = ({
           />
         )}
       />
+      <Route path="/createEvent" component={CreateEvent} />
       <Route path="/contact" component={ContactForm} />
       <Route path="/admin/createEvent" component={CreateEvent} />
       <Route
