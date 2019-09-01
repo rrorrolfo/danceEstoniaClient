@@ -69,7 +69,14 @@ const CreateEvent = ({ isUser }) => {
   }, [dancingStyles]);
 
   useEffect(() => {
-    const clearMessage = setTimeout(() => toggleSubmisionStatus(false), 10000);
+    let interval = 10000;
+    if (isUser) {
+      interval = 25000;
+    }
+    const clearMessage = setTimeout(
+      () => toggleSubmisionStatus(false),
+      interval
+    );
     return () => clearTimeout(clearMessage);
   }, [showSubmissionStatus]);
 
@@ -194,9 +201,32 @@ const CreateEvent = ({ isUser }) => {
       return false;
     }
 
-    updateSubmissionMessage(
-      `The ${customTypeText} has been created succesfully!`
-    );
+    if (isUser) {
+      const nextStepsMessage = (
+        <div>
+          <h4 className="centered">{`Thank you for creating a new ${customTypeText}!.`}</h4>
+          <p>{`The ${customTypeText} "${nameOfEvent}" will be reviewed by one of our team members and if everything is ok it will be visible in Dance Estonia.`}</p>{' '}
+          <p>This process should take only a few minutes.</p>
+        </div>
+      );
+      updateSubmissionMessage(nextStepsMessage);
+      updateNameOfEvent('');
+      updateTicketPrice(0);
+      updateEventDate(getTodayISODate());
+      updateEndDate(getTodayISODate());
+      updateStartingTime('21:00');
+      updateVenue('');
+      updateVenueAddress('');
+      updateCity('');
+      updateCountry('Estonia');
+      updateFBEvent('');
+      updateWebsite('');
+    } else {
+      updateSubmissionMessage(
+        `The ${customTypeText} has been created succesfully!`
+      );
+    }
+
     updateAlertVariant('success');
     toggleSubmisionStatus(true);
 
