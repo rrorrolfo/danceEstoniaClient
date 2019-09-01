@@ -78,7 +78,7 @@ const CreateEvent = ({ isUser }) => {
       interval
     );
     return () => clearTimeout(clearMessage);
-  }, [showSubmissionStatus]);
+  }, [showSubmissionStatus, isUser]);
 
   const customTypeText =
     eventType === '' ? 'event' : eventType.slice(0, eventType.length - 1);
