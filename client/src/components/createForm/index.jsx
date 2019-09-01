@@ -366,6 +366,7 @@ const CreateEvent = ({ isUser }) => {
                   as="select"
                   name="select-country"
                   onChange={event => updateTicketCurrency(event.target.value)}
+                  value={ticketCurrency}
                 >
                   <option value="EUR">EUR</option>
                   <option value="BYN">BYN</option>
