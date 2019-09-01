@@ -2,6 +2,10 @@
   margin-top: 25px;
 }
 
+.form-title {
+  color: var(--blue-estonia);
+}
+
 .bold {
   font-weight: 900;
 }

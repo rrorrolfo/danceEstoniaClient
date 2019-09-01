@@ -10,7 +10,7 @@ import {
 } from 'react-bootstrap';
 import { convertToRaw } from 'draft-js';
 import PropTypes from 'prop-types';
-import { getTodayISODate } from '../../utils';
+import { getTodayISODate, firstLetterToUppercase } from '../../utils';
 import { createEvent } from '../../requests/requests';
 import './createForm.css';
 import TextEditor from '../textEditor/index';
@@ -205,7 +205,12 @@ const CreateEvent = ({ isUser }) => {
 
   return (
     <Container className="create-form-container">
-      <Form onSubmit={event => handleSubmit(event)}>
+      <Container className="form-title margin-on-top">
+        <h1 className="centered">
+          Fill the following form to create your event.
+        </h1>
+      </Container>
+      <Form onSubmit={event => handleSubmit(event)} className="margin-on-top">
         <Form.Row>
           <h4 className="centered">What kind of event you want to create?</h4>
           {['radio'].map(type => (
@@ -250,8 +255,8 @@ const CreateEvent = ({ isUser }) => {
           </span>
         </Form.Row>
         <Form.Row>
-          <h4 className="centered">
-            What dancing style is the {customTypeText}?
+          <h4 className="centered margin-on-top">
+            What dancing style(s) is the {customTypeText}?
           </h4>
           {['checkbox'].map(type => (
             <div
@@ -398,8 +403,8 @@ const CreateEvent = ({ isUser }) => {
               <OverlayTrigger
                 overlay={
                   <Tooltip id="tooltip-ticket-price-info">
-                    If the event is free you can leave the ticket price field
-                    empty or just put 0.
+                    If the {customTypeText} is free you can leave &quot;0&quot;
+                    as the ticket price.
                   </Tooltip>
                 }
               >
@@ -407,7 +412,7 @@ const CreateEvent = ({ isUser }) => {
                   className="d-inline-block tooltip-ticket-price"
                   style={{ marginLeft: '50px', marginTop: '35px' }}
                 >
-                  <div>Event is free?</div>
+                  <div>{firstLetterToUppercase(customTypeText)} is free?</div>
                 </span>
               </OverlayTrigger>
             </Form.Row>
@@ -494,7 +499,7 @@ const CreateEvent = ({ isUser }) => {
           </Form.Row>
 
           <Form.Group as={Col} controlId="venue">
-            <Form.Label className="bold">Venue</Form.Label>
+            <Form.Label className="bold">Venue name</Form.Label>
             <Form.Control
               placeholder={
                 eventType === ''
