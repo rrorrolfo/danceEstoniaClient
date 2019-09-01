@@ -1,6 +1,6 @@
 /* eslint-disable no-useless-escape */
-import React, { useEffect } from 'react';
-import { InputGroup, FormControl, Button } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import { InputGroup, Form, Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
 const UrlInput = ({
@@ -12,6 +12,9 @@ const UrlInput = ({
   confirmLink,
   focusEditor
 }) => {
+  const [invalidURL, toggleInvalidUrl] = useState(false);
+  const [isValidURL, toggleValidUrl] = useState(false);
+
   const linkInput = React.useRef(null);
   const focusLinkInput = () => linkInput.current.focus();
 
@@ -43,26 +46,31 @@ const UrlInput = ({
     // check for a domain
     const hasDomain = /^http[s]?:[\/]{2}[w]{3}\.\w+\.[a-z]+/i.test(finalURL);
     if (!hasDomain) {
-      return false;
+      return toggleInvalidUrl(true);
     }
 
+    toggleValidUrl(true);
     return finalURL;
   };
 
   return (
     <InputGroup className="mb-3" style={{ marginTop: '15px', width: '400px' }}>
-      <FormControl
+      <Form.Control
         placeholder="Enter a url and click confirm"
         aria-label="Link creation input"
         onChange={event => updateUrlValue(event.target.value)}
         ref={linkInput}
         type="text"
         value={urlValue}
+        isInvalid={invalidURL}
+        isValid={isValidURL}
       />
       <InputGroup.Append>
         <Button
           variant="outline-secondary"
           onClick={() => {
+            toggleInvalidUrl(false);
+            toggleValidUrl(false);
             const validUrl = linkUrlSanitizer(urlValue);
             if (typeof validUrl === 'string') {
               confirmLink(
@@ -80,6 +88,12 @@ const UrlInput = ({
           Confirm
         </Button>
       </InputGroup.Append>
+      <Form.Control.Feedback type="invalid">
+        The format of the url is not correct.
+      </Form.Control.Feedback>
+      <Form.Control.Feedback type="valid">
+        The link has been created!
+      </Form.Control.Feedback>
     </InputGroup>
   );
 };
