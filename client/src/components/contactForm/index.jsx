@@ -123,10 +123,9 @@ const ContactForm = () => {
             toggleSendingStatus(false);
           }
         })
-        .catch(error => {
+        .catch(() => {
           toggleMessageError(true);
           toggleSendingStatus(false);
-          console.log(error);
         });
     }
   };
