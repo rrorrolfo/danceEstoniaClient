@@ -72,8 +72,10 @@ export const confirmLink = (
       entityKey
     )
   );
-  displayButton(false);
-  updateUrl('');
+  setTimeout(() => {
+    displayButton(false);
+    updateUrl('');
+  }, 1250);
 };
 
 export const removeLinkEntity = (state, selection, callback) => {
