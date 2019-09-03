@@ -8,16 +8,17 @@ import {
   Tooltip,
   Alert
 } from 'react-bootstrap';
-import { convertToRaw } from 'draft-js';
 import PropTypes from 'prop-types';
+import { convertToRaw } from 'draft-js';
+import TextEditor from '../textEditor/index';
+import { createEvent } from '../../requests/requests';
 import {
   getTodayISODate,
   firstLetterToUppercase,
+  isFieldEmpty,
   linkUrlSanitizer
 } from '../../utils';
-import { createEvent } from '../../requests/requests';
 import './createForm.css';
-import TextEditor from '../textEditor/index';
 
 const CreateEvent = ({ isUser }) => {
   // Data of event state
@@ -43,8 +44,10 @@ const CreateEvent = ({ isUser }) => {
   // General data
   const [startingTime, updateStartingTime] = useState('21:00');
   const [venueOfEvent, updateVenue] = useState('');
+  const [invalidVenueName, toggleInvalidVenueName] = useState(false);
   const [venueAddress, updateVenueAddress] = useState('');
   const [city, updateCity] = useState('');
+  const [invalidCity, toggleInvalidCity] = useState(false);
   const [country, updateCountry] = useState('Estonia');
   // Social Media
   const [fbEvent, updateFBEvent] = useState('');
@@ -124,7 +127,7 @@ const CreateEvent = ({ isUser }) => {
     toggleInvalidName(false);
     toggleMissingBanner(false);
 
-    if (eventType === '') {
+    if (isFieldEmpty(eventType)) {
       toggleNoEventTypeselected(true);
       errors += 1;
     }
@@ -134,13 +137,23 @@ const CreateEvent = ({ isUser }) => {
       errors += 1;
     }
 
-    if (nameOfEvent === '') {
+    if (isFieldEmpty(nameOfEvent)) {
       toggleInvalidName(true);
       errors += 1;
     }
 
     if (!img.files.length) {
       toggleMissingBanner(true);
+      errors += 1;
+    }
+
+    if (isFieldEmpty(venueOfEvent)) {
+      toggleInvalidVenueName(true);
+      errors += 1;
+    }
+
+    if (isFieldEmpty(city)) {
+      toggleInvalidCity(true);
       errors += 1;
     }
 
@@ -543,8 +556,15 @@ const CreateEvent = ({ isUser }) => {
                   : `Venue of the ${eventType.slice(0, eventType.length - 1)}`
               }
               value={venueOfEvent}
-              onChange={event => updateVenue(event.target.value)}
+              onChange={event => {
+                updateVenue(event.target.value);
+                toggleInvalidVenueName(isFieldEmpty(event.target.value));
+              }}
+              isInvalid={invalidVenueName}
             />
+            <Form.Control.Feedback type="invalid">
+              Please add the name of the venue.
+            </Form.Control.Feedback>
           </Form.Group>
         </Form.Row>
 
@@ -572,8 +592,15 @@ const CreateEvent = ({ isUser }) => {
             <Form.Control
               placeholder="e.g. Tallinn"
               value={city}
-              onChange={event => updateCity(event.target.value)}
+              onChange={event => {
+                updateCity(event.target.value);
+                toggleInvalidCity(isFieldEmpty(event.target.value));
+              }}
+              isInvalid={invalidCity}
             />
+            <Form.Control.Feedback type="invalid">
+              Please add the city where the event will take place.
+            </Form.Control.Feedback>
           </Form.Group>
         </Form.Row>
 
@@ -586,7 +613,6 @@ const CreateEvent = ({ isUser }) => {
               value={country}
               onChange={event => updateCountry(event.target.value)}
             >
-              <option value="default">Choose a country</option>
               <option value="Albania">Albania</option>
               <option value="Andorra">Andorra</option>
               <option value="Armenia">Armenia</option>
