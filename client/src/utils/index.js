@@ -22,6 +22,16 @@ export const getTodayISODate = () => {
 };
 
 /**
+ * Summary. Checks if a string value has no characters.
+ * @param {string} string String that will be assesed.
+ * @return {bool} false: The value has no characters, true: the value has characters
+ */
+export const isFieldEmpty = string => {
+  const isEmpty = /\w+/i.test(string);
+  return !isEmpty;
+};
+
+/**
  * @param {string} url - name attribute value of the input that will be targeted to be performed the correspondant validation upon.
  * @param {func} callback - Function to be called after the url provided is assesed. Normally a funciton to display an invalid feedback
  * @param {func} callback2 - Function to be called after the url provided is assesed, this is used to display a valid feedback.
