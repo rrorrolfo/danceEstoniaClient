@@ -643,23 +643,25 @@ const CreateEvent = ({ isUser }) => {
           </Form.Group>
         </Form.Row>
 
-        <Form.Row className="margin-on-top">
-          <Form.Group as={Col} controlId="fbEvent">
-            <Form.Label className="bold">Facebook event</Form.Label>
-            <Form.Control
-              placeholder="Facebook event URL (e.g www.facebook.com/event)."
-              value={fbEvent}
-              onChange={event => {
-                updateFBEvent(event.target.value);
-                linkUrlSanitizer(event.target.value, toggleInvalidFBUrl);
-              }}
-              isInvalid={invalidFBUrl}
-            />
-            <Form.Control.Feedback type="invalid">
-              The url format is not valid.
-            </Form.Control.Feedback>
-          </Form.Group>
-        </Form.Row>
+        {eventType !== 'festivals' ? (
+          <Form.Row className="margin-on-top">
+            <Form.Group as={Col} controlId="fbEvent">
+              <Form.Label className="bold">Facebook event</Form.Label>
+              <Form.Control
+                placeholder="Facebook event URL (e.g www.facebook.com/event)."
+                value={fbEvent}
+                onChange={event => {
+                  updateFBEvent(event.target.value);
+                  linkUrlSanitizer(event.target.value, toggleInvalidFBUrl);
+                }}
+                isInvalid={invalidFBUrl}
+              />
+              <Form.Control.Feedback type="invalid">
+                The url format is not valid.
+              </Form.Control.Feedback>
+            </Form.Group>
+          </Form.Row>
+        ) : null}
 
         {eventType === 'festivals' ? (
           <Form.Row className="margin-on-top">
