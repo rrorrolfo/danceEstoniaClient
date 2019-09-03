@@ -10,7 +10,11 @@ import {
 } from 'react-bootstrap';
 import { convertToRaw } from 'draft-js';
 import PropTypes from 'prop-types';
-import { getTodayISODate, firstLetterToUppercase } from '../../utils';
+import {
+  getTodayISODate,
+  firstLetterToUppercase,
+  linkUrlSanitizer
+} from '../../utils';
 import { createEvent } from '../../requests/requests';
 import './createForm.css';
 import TextEditor from '../textEditor/index';
@@ -44,7 +48,9 @@ const CreateEvent = ({ isUser }) => {
   const [country, updateCountry] = useState('Estonia');
   // Social Media
   const [fbEvent, updateFBEvent] = useState('');
+  const [invalidFBUrl, toggleInvalidFBUrl] = useState(false);
   const [website, updateWebsite] = useState('');
+  const [invalidWebsite, toggleInvalidWebsite] = useState(false);
   // Description
   const [description, updateDescription] = useState('');
   // Data of event state
@@ -643,8 +649,15 @@ const CreateEvent = ({ isUser }) => {
             <Form.Control
               placeholder="Facebook event URL (e.g www.facebook.com/event)."
               value={fbEvent}
-              onChange={event => updateFBEvent(event.target.value)}
+              onChange={event => {
+                updateFBEvent(event.target.value);
+                linkUrlSanitizer(event.target.value, toggleInvalidFBUrl);
+              }}
+              isInvalid={invalidFBUrl}
             />
+            <Form.Control.Feedback type="invalid">
+              The url format is not valid.
+            </Form.Control.Feedback>
           </Form.Group>
         </Form.Row>
 
@@ -655,8 +668,15 @@ const CreateEvent = ({ isUser }) => {
               <Form.Control
                 placeholder="Website URL (e.g. www.example.com)."
                 value={website}
-                onChange={event => updateWebsite(event.target.value)}
+                onChange={event => {
+                  updateWebsite(event.target.value);
+                  linkUrlSanitizer(event.target.value, toggleInvalidWebsite);
+                }}
+                isInvalid={invalidWebsite}
               />
+              <Form.Control.Feedback type="invalid">
+                The url format is not valid.
+              </Form.Control.Feedback>
             </Form.Group>
           </Form.Row>
         ) : null}
