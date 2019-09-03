@@ -16,7 +16,8 @@ import {
   website,
   coupleDancing,
   venue,
-  mark
+  mark,
+  facebook
 } from '../../assets/icons';
 
 const EventDetails = ({
@@ -116,14 +117,34 @@ const EventDetails = ({
               <td>{clock('event-clock')}</td>
               <td className="event-time">{selectedEvent.timeOfEvent}</td>
             </tr>
-            <tr>
-              <td>{website('event-website')}</td>
-              <td className="event-social-links">
-                {selectedEvent.website
-                  ? selectedEvent.website
-                  : selectedEvent.fbEvent}
-              </td>
-            </tr>
+            {selectedEvent.fbEvent && category === 'events' ? (
+              <tr>
+                <td>{facebook('event-facebook')}</td>
+                <td className="event-social-links">
+                  <a
+                    href={selectedEvent.fbEvent}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {selectedEvent.fbEvent}
+                  </a>
+                </td>
+              </tr>
+            ) : null}
+            {selectedEvent.website ? (
+              <tr>
+                <td>{website('event-website')}</td>
+                <td className="event-social-links">
+                  <a
+                    href={selectedEvent.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {selectedEvent.website}
+                  </a>
+                </td>
+              </tr>
+            ) : null}
             <tr>
               <td>{tickets('event-ticket')}</td>
               <td className="event-ticket-price">
