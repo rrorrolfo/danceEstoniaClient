@@ -375,7 +375,8 @@ const CreateEvent = ({ isUser }) => {
               Name of the event{' '}
               {eventType === ''
                 ? 'event'
-                : eventType.slice(0, eventType.length - 1)}
+                : eventType.slice(0, eventType.length - 1)}{' '}
+              *
             </Form.Label>
             <Form.Control
               placeholder={
@@ -406,7 +407,7 @@ const CreateEvent = ({ isUser }) => {
             <Form.Row className="ticket-price-input-1">
               <Form.Label className="bold">Ticket Price</Form.Label>
               <Form.Control
-                placeholder="Price in number e.g. 5"
+                placeholder="Price in number (e.g. 5)"
                 className="ticket-price-amount"
                 name="ticket-price-amount"
                 value={ticketPrice}
@@ -474,7 +475,7 @@ const CreateEvent = ({ isUser }) => {
               className="margin-on-top"
             >
               <Form.Label className="date-of-event-label bold">
-                Date of the {customTypeText}:
+                Date of the {customTypeText}: *
               </Form.Label>
 
               <input
@@ -504,7 +505,7 @@ const CreateEvent = ({ isUser }) => {
                 className="margin-on-top"
               >
                 <Form.Label className="date-of-event-label bold">
-                  End date of the festival:
+                  End date of the festival: *
                 </Form.Label>
 
                 <input
@@ -534,7 +535,7 @@ const CreateEvent = ({ isUser }) => {
               className="margin-on-top"
             >
               <Form.Label className="time-of-event-label bold">
-                Time the {customTypeText} starts:
+                Time the {customTypeText} starts: *
               </Form.Label>
 
               <input
@@ -548,7 +549,7 @@ const CreateEvent = ({ isUser }) => {
           </Form.Row>
 
           <Form.Group as={Col} controlId="venue">
-            <Form.Label className="bold">Venue name</Form.Label>
+            <Form.Label className="bold">Venue name *</Form.Label>
             <Form.Control
               placeholder={
                 eventType === ''
@@ -588,7 +589,7 @@ const CreateEvent = ({ isUser }) => {
 
         <Form.Row className="margin-on-top">
           <Form.Group controlId="city">
-            <Form.Label className="bold">City</Form.Label>
+            <Form.Label className="bold">City *</Form.Label>
             <Form.Control
               placeholder="e.g. Tallinn"
               value={city}
@@ -606,7 +607,7 @@ const CreateEvent = ({ isUser }) => {
 
         <Form.Row className="margin-on-top">
           <Form.Group as={Col} controlId="country">
-            <Form.Label className="bold">Country</Form.Label>
+            <Form.Label className="bold">Country *</Form.Label>
             <Form.Control
               as="select"
               name="select-country"
@@ -674,7 +675,7 @@ const CreateEvent = ({ isUser }) => {
             <Form.Group as={Col} controlId="fbEvent">
               <Form.Label className="bold">Facebook event</Form.Label>
               <Form.Control
-                placeholder="Facebook event URL (e.g www.facebook.com/event)."
+                placeholder="Facebook event URL (e.g. www.facebook.com/event)"
                 value={fbEvent}
                 onChange={event => {
                   updateFBEvent(event.target.value);
@@ -694,7 +695,7 @@ const CreateEvent = ({ isUser }) => {
             <Form.Group as={Col} controlId="website">
               <Form.Label className="bold">Festival website</Form.Label>
               <Form.Control
-                placeholder="Website URL (e.g. www.example.com)."
+                placeholder="Website URL (e.g. www.example.com)"
                 value={website}
                 onChange={event => {
                   updateWebsite(event.target.value);
@@ -711,7 +712,7 @@ const CreateEvent = ({ isUser }) => {
 
         <Form.Group id="description" className="margin-on-top">
           <h5 className="centered">
-            Write the description of the {customTypeText}.
+            Write the description of the {customTypeText} *
           </h5>
           <TextEditor rawJson={rawJson} />
         </Form.Group>
@@ -719,7 +720,7 @@ const CreateEvent = ({ isUser }) => {
         <Form.Row className="margin-on-top">
           <Form.Group as={Col} controlId="event-banner">
             <Form.Label className="bold">
-              Select an image to be displayed with the {customTypeText}.
+              Select an image to be displayed with the {customTypeText} *
             </Form.Label>
             <Form.Control
               type="file"
