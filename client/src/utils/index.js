@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 export const firstLetterToUppercase = string => {
   return `${string.charAt(0).toUpperCase()}${string.slice(1)}`;
 };
@@ -18,6 +19,42 @@ export const getTodayISODate = () => {
   const day = dateRegex(today.getDate());
   const date = `${today.getFullYear()}-${month}-${day}`;
   return date;
+};
+
+/**
+ * @param {string} url - name attribute value of the input that will be targeted to be performed the correspondant validation upon.
+ * @param {func} callback - Function to be called after the url provided is assesed. Normally a funciton to display an invalid feedback
+ * @param {func} callback2 - Function to be called after the url provided is assesed, this is used to display a valid feedback.
+ */
+export const linkUrlSanitizer = (url, callback, callback2 = null) => {
+  callback(false);
+  let finalURL = url;
+  // check for "http://"" or "https://""
+  const hasProtocol = /^http[s]?:[\/]{2}/i.test(url);
+  if (!hasProtocol) {
+    finalURL = `http://${url}`;
+  }
+
+  // check for url starting with "www."
+  const hasWWW = /^http[s]?:[\/]{2}[w]{3}\./i.test(finalURL);
+  if (!hasWWW) {
+    const urlBeginning = finalURL.indexOf('//');
+    finalURL = `${finalURL.slice(0, urlBeginning + 2)}www.${finalURL.slice(
+      urlBeginning + 2,
+      finalURL.length
+    )}`;
+  }
+
+  // check for a domain
+  const hasDomain = /^http[s]?:[\/]{2}[w]{3}\.\w+\.[a-z]+/i.test(finalURL);
+  if (!hasDomain) {
+    return callback(true);
+  }
+
+  if (callback2) {
+    callback2(true);
+  }
+  return finalURL;
 };
 
 export const monthToString = (monthInNumber, year = 2019) => {
