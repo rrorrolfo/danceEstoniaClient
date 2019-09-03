@@ -34,7 +34,6 @@ const CreateEvent = ({ isUser }) => {
   const [invalidName, toggleInvalidName] = useState(false);
   // Ticket data
   const [ticketPrice, updateTicketPrice] = useState(0);
-  const [invalidPrice, toggleInvalidPrice] = useState(false);
   const [ticketCurrency, updateTicketCurrency] = useState('EUR');
   // Date of event
   const [eventDate, updateEventDate] = useState('');
@@ -140,11 +139,6 @@ const CreateEvent = ({ isUser }) => {
 
     if (isFieldEmpty(nameOfEvent)) {
       toggleInvalidName(true);
-      errors += 1;
-    }
-
-    if (!/[0-9]+/i.test(ticketPrice)) {
-      toggleInvalidPrice(true);
       errors += 1;
     }
 
@@ -413,23 +407,12 @@ const CreateEvent = ({ isUser }) => {
             <Form.Row className="ticket-price-input-1">
               <Form.Label className="bold">Ticket Price</Form.Label>
               <Form.Control
-                placeholder="Price in number (e.g. 5)"
+                placeholder="Price in numbers (e.g. 10, 5.5, 5 - 25)"
                 className="ticket-price-amount"
                 name="ticket-price-amount"
                 value={ticketPrice}
-                onChange={event => {
-                  updateTicketPrice(event.target.value);
-                  if (!/[0-9]+/i.test(event.target.value)) {
-                    toggleInvalidPrice(true);
-                  } else {
-                    toggleInvalidPrice(false);
-                  }
-                }}
-                isInvalid={invalidPrice}
+                onChange={event => updateTicketPrice(event.target.value)}
               />
-              <Form.Control.Feedback type="invalid">
-                The price must be a number.
-              </Form.Control.Feedback>
             </Form.Row>
             <Form.Row className="ticket-price-input-2">
               <Form.Group>
