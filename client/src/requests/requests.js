@@ -3,18 +3,18 @@ import axios from 'axios';
 /**
  * @param {object.isRequired} params Contains the parameters that will be sent in the request
  * @param {string.isRequired} params.endPoint Determines the endpoint to send the request
- * @param {string} params.timeFrame.oneOf(["week", "month"]) Will return results grouped in the selected filter
- * @param {number} params.delete.oneOf([0, 1]) 1 will return past events from yesterday´s date, 0 will return future events starting from today´s date
- * @param {number} params.unauthorized.oneOf([0, 1]) 1 will return unauthorized events, 0 will return authorized events
- * @param {number} params.all.oneOf([0, 1]) 1 will return authorized and unauthorized events, 0 will return authorized events
+ * @param {string.oneOf(["week", "month"])} params.timeFrame Will return results grouped in the selected filter
+ * @param {number.oneOf([0, 1])} params.delete 1 will return past events from yesterday´s date, 0 will return future events starting from today´s date
+ * @param {number.oneOf([0, 1])} params.unauthorized 1 will return unauthorized events, 0 will return authorized events
+ * @param {number.oneOf([0, 1])} params.all 1 will return authorized and unauthorized events, 0 will return authorized events
  */
 export const apiRequest = params => {
   return axios(`http://localhost:5000${params.endPoint}`, {
     params: {
-      timeFrame: params.timeFrame,
-      delete: params.delete,
-      unauthorized: params.unauthorized,
-      all: params.all
+      timeFrame: params.timeFrame || null,
+      delete: params.delete || 0,
+      unauthorized: params.unauthorized || 0,
+      all: params.all || 0
     }
   }).then(response => response.data);
 };
