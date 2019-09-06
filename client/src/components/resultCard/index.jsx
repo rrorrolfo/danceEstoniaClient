@@ -14,7 +14,7 @@ import {
   hotel
 } from '../../assets/icons';
 
-const ResultCard = ({ result, match, category, isAdmin }) => {
+const ResultCard = ({ result, match, category, isAdmin, canAuth }) => {
   return (
     <Card className="result-card">
       <Link
@@ -65,7 +65,9 @@ const ResultCard = ({ result, match, category, isAdmin }) => {
         <ListGroupItem>{result.fbEvent}</ListGroupItem>
       </ListGroup> */}
       </Link>
-      {isAdmin ? <CTAs category={category} id={result._id} /> : null}
+      {isAdmin ? (
+        <CTAs category={category} id={result._id} canAuth={canAuth} />
+      ) : null}
     </Card>
   );
 };
@@ -75,13 +77,15 @@ ResultCard.propTypes = {
   result: PropTypes.object,
   // eslint-disable-next-line react/forbid-prop-types
   match: PropTypes.object,
-  isAdmin: PropTypes.bool
+  isAdmin: PropTypes.bool,
+  canAuth: PropTypes.bool
 };
 
 ResultCard.defaultProps = {
   result: null,
   match: null,
-  isAdmin: false
+  isAdmin: false,
+  canAuth: false
 };
 
 export default ResultCard;

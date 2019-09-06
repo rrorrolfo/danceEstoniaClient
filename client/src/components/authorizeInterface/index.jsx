@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 import TimeFrameGroup from '../timeframeGroup';
 import { apiRequest } from '../../requests/requests';
 
-const AuthInterface = () => {
+const AuthInterface = ({ canAuth }) => {
   const [eventsResults, updateEventsResults] = useState([]);
   const [festivalsResults, updateFestivalsResults] = useState([]);
 
@@ -30,6 +31,7 @@ const AuthInterface = () => {
         events={group.records}
         category={category}
         isAdmin
+        canAuth={canAuth}
         key={
           timeFrame === 'week'
             ? `${group._id.week}-${Math.random()}`
@@ -67,6 +69,14 @@ const AuthInterface = () => {
       </Container>
     </Container>
   );
+};
+
+AuthInterface.propTypes = {
+  canAuth: PropTypes.bool
+};
+
+AuthInterface.defaultProps = {
+  canAuth: false
 };
 
 export default AuthInterface;

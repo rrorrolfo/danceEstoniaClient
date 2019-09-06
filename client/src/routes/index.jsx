@@ -63,7 +63,7 @@ const AppRoutes = ({
       />
       <Route
         path="/admin/authorizeEvents"
-        render={() => <AuthInterface isAdmin />}
+        render={() => <AuthInterface isAdmin canAuth />}
       />
       <Route
         path="/admin/deleteEvents"
