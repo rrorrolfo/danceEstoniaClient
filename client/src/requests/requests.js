@@ -14,7 +14,7 @@ export const apiRequest = params => {
       timeFrame: params.timeFrame || null,
       delete: params.delete || 0,
       unauthorized: params.unauthorized || 0,
-      all: params.all || 0
+      all: params.all
     }
   }).then(response => response.data);
 };
