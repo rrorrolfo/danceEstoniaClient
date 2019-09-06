@@ -3,7 +3,7 @@ import { Container, Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { deleteRequest } from '../../requests/requests';
 
-const CTAs = ({ category, id }) => {
+const CTAs = ({ category, id, canAuth }) => {
   const deleteRecord = (cat, recordID) => {
     deleteRequest({
       endPoint: `/${cat}/${recordID}`
@@ -15,9 +15,11 @@ const CTAs = ({ category, id }) => {
   };
   return (
     <Container className="admin-CTAs-container">
-      <Button className="admin-cta" variant="success">
-        Authorize
-      </Button>
+      {canAuth ? (
+        <Button className="admin-cta" variant="success">
+          Authorize
+        </Button>
+      ) : null}
       <Button className="admin-cta" variant="warning">
         Edit
       </Button>
@@ -34,7 +36,12 @@ const CTAs = ({ category, id }) => {
 
 CTAs.propTypes = {
   category: PropTypes.oneOf(['events', 'festivals']).isRequired,
-  id: PropTypes.string.isRequired
+  id: PropTypes.string.isRequired,
+  canAuth: PropTypes.bool
+};
+
+CTAs.defaultProps = {
+  canAuth: false
 };
 
 export default CTAs;
