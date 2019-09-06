@@ -62,6 +62,23 @@ p.result-card-details {
   margin-bottom: 5px;
 }
 
+.admin-CTAs-container {
+  width: auto;
+  margin: 15px auto;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 10;
+  background-color: #fff;
+  padding-left: 0;
+  padding-right: 0;
+  border-radius: 5px;
+}
+
+.admin-cta {
+  margin-right: 15px;
+}
+
 /********* Media queries ********/
 
 @media (min-width: 768px) {
