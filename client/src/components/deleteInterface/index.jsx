@@ -130,11 +130,12 @@ const DeleteInterface = ({ toggleModal, isAdmin }) => {
 
 DeleteInterface.propTypes = {
   toggleModal: PropTypes.func,
-  isAdmin: PropTypes.bool.isRequired
+  isAdmin: PropTypes.bool
 };
 
 DeleteInterface.defaultProps = {
-  toggleModal: null
+  toggleModal: null,
+  isAdmin: false
 };
 
 export default DeleteInterface;
