@@ -1,9 +1,9 @@
 import React from 'react';
-import { Card, Button } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import CTAs from './CTAs';
 import './resultCard.css';
-import { deleteRequest } from '../../requests/requests';
 import { arrayToUpperCase, isoStringToDate } from '../../utils';
 import {
   venue,
@@ -14,16 +14,7 @@ import {
   hotel
 } from '../../assets/icons';
 
-const ResultCard = ({ result, match, category, canDelete }) => {
-  const deleteRecord = (cat, recordID) => {
-    deleteRequest({
-      endPoint: `/${cat}/${recordID}`
-    })
-      .then(response =>
-        window.alert(`${response} ${cat} erased with id: ${recordID}`)
-      )
-      .catch(error => window.alert(`${error} for event record: ${recordID}`));
-  };
+const ResultCard = ({ result, match, category, isAdmin }) => {
   return (
     <Card className="result-card">
       <Link
@@ -74,21 +65,7 @@ const ResultCard = ({ result, match, category, canDelete }) => {
         <ListGroupItem>{result.fbEvent}</ListGroupItem>
       </ListGroup> */}
       </Link>
-      {canDelete ? (
-        <Button
-          style={{
-            margin: '15px auto',
-            position: 'absolute',
-            bottom: '0',
-            right: '25px',
-            zIndex: '10'
-          }}
-          variant="danger"
-          onClick={() => deleteRecord(category, result._id)}
-        >
-          Delete {result.name}
-        </Button>
-      ) : null}
+      {isAdmin ? <CTAs category={category} id={result._id} /> : null}
     </Card>
   );
 };
@@ -98,13 +75,13 @@ ResultCard.propTypes = {
   result: PropTypes.object,
   // eslint-disable-next-line react/forbid-prop-types
   match: PropTypes.object,
-  canDelete: PropTypes.bool
+  isAdmin: PropTypes.bool
 };
 
 ResultCard.defaultProps = {
   result: null,
   match: null,
-  canDelete: false
+  isAdmin: false
 };
 
 export default ResultCard;
