@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Button } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 import TimeFrameGroup from '../timeframeGroup';
 import { apiRequest, deleteRequest } from '../../requests/requests';
 
-const DeleteInterface = ({ toggleModal }) => {
+const DeleteInterface = ({ toggleModal, isAdmin }) => {
   const [eventsResults, updateEventsResults] = useState([]);
   const [festivalsResults, updateFestivalsResults] = useState([]);
 
@@ -29,7 +30,7 @@ const DeleteInterface = ({ toggleModal }) => {
         timeFrame={timeFrame}
         events={group.records}
         category={category}
-        canDelete
+        isAdmin={isAdmin}
         key={
           timeFrame === 'week'
             ? `${group._id.week}-${Math.random()}`
@@ -125,6 +126,15 @@ const DeleteInterface = ({ toggleModal }) => {
       </Container>
     </Container>
   );
+};
+
+DeleteInterface.propTypes = {
+  toggleModal: PropTypes.func,
+  isAdmin: PropTypes.bool.isRequired
+};
+
+DeleteInterface.defaultProps = {
+  toggleModal: null
 };
 
 export default DeleteInterface;
