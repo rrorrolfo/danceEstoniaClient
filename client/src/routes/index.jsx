@@ -5,6 +5,7 @@ import EventsRoutes from './EventsRoutes';
 import FestivalsRoutes from './FestivalsRoutes';
 import ContactForm from '../components/contactForm';
 import CreateEvent from '../components/createForm';
+import AuthInterface from '../components/authorizeInterface';
 import DeleteInterface from '../components/deleteInterface';
 import NotFound from '../components/notFound';
 
@@ -61,8 +62,12 @@ const AppRoutes = ({
         render={() => <CreateEvent isUser={false} />}
       />
       <Route
+        path="/admin/authorizeEvents"
+        render={() => <AuthInterface isAdmin />}
+      />
+      <Route
         path="/admin/deleteEvents"
-        render={() => <DeleteInterface toggleModal={toggleModal} />}
+        render={() => <DeleteInterface toggleModal={toggleModal} isAdmin />}
       />
       <Route path="/notfound" component={NotFound} />
       <Route render={() => <Redirect to="/notfound" />} />
