@@ -50,9 +50,11 @@ const ResultCard = ({ result, match, category, isAdmin, canAuth }) => {
             ) : null}
             <Card.Text className="result-card-data">
               {mark('no-margin-top')}
-              {`${result.venueAddress}, ${result.cityOfEvent}, ${
-                result.countryOfEvent
-              }`}
+              {result.venueAddress
+                ? `${result.venueAddress}, ${result.cityOfEvent}, ${
+                    result.countryOfEvent
+                  }`
+                : `${result.cityOfEvent}, ${result.countryOfEvent}`}
             </Card.Text>
             <Card.Text className="result-card-data">
               {coupleDancing('no-margin-top')}

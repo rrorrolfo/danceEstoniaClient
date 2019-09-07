@@ -102,9 +102,13 @@ const EventDetails = ({
             <tr>
               <td>{mark('event-mark')}</td>
               <td>
-                {`${selectedEvent.venueAddress}, ${
-                  selectedEvent.cityOfEvent
-                }, ${selectedEvent.countryOfEvent}`}
+                {selectedEvent.venueAddress
+                  ? `${selectedEvent.venueAddress}, ${
+                      selectedEvent.cityOfEvent
+                    }, ${selectedEvent.countryOfEvent}`
+                  : `${selectedEvent.cityOfEvent}, ${
+                      selectedEvent.countryOfEvent
+                    }`}
               </td>
             </tr>
             <tr>
