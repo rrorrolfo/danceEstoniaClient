@@ -58,7 +58,7 @@ const App = ({
 
   useEffect(() => {
     if (!fetchingEvents && !fetchingFestivals) {
-      toggleLoading(!isLoading);
+      toggleLoading(false);
     }
   }, [fetchingEvents, fetchingFestivals]);
 
