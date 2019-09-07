@@ -37,7 +37,7 @@ const App = ({
   fetchingEvents,
   fetchingFestivals
 }) => {
-  const [isLoading, toggleLoading] = useState(true);
+  const [isLoading, toggleLoader] = useState(true);
   const [showModal, toggleModal] = useState({
     show: false,
     category: '',
@@ -58,7 +58,7 @@ const App = ({
 
   useEffect(() => {
     if (!fetchingEvents && !fetchingFestivals) {
-      toggleLoading(false);
+      toggleLoader(false);
     }
   }, [fetchingEvents, fetchingFestivals]);
 
@@ -85,6 +85,7 @@ const App = ({
           festivalError={festivalError}
           resetErrors={resetErrors}
           resetFestivalsErrors={resetFestivalsErrors}
+          toggleLoader={toggleLoader}
           toggleModal={toggleModal}
         />
         <MainModal
