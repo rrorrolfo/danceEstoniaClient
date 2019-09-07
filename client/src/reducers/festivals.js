@@ -4,7 +4,7 @@ const initialState = {
   festivals: [],
   festivalsByStyle: { salsa: [], bachata: [], kizomba: [] },
   singleFestival: null,
-  fetching: false,
+  fetching: true,
   errors: { status: 0 }
 };
 

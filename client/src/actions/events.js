@@ -72,7 +72,7 @@ export const fetchSingleEventSuccess = event => {
 
 export const fetchSingleEvent = endPoint => {
   return dispatch => {
-    dispatch(fetchedStarted());
+    // dispatch(fetchedStarted());
 
     apiRequest({
       method: 'GET',

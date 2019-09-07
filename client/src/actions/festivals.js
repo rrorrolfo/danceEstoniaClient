@@ -72,7 +72,7 @@ export const fetchSingleFestivalSuccess = festival => {
 
 export const fetchSingleFestival = endPoint => {
   return dispatch => {
-    dispatch(fetchedStarted());
+    // dispatch(fetchedStarted());
 
     apiRequest({
       method: 'GET',

@@ -33,7 +33,9 @@ const App = ({
   eventError,
   festivalError,
   resetErrors,
-  resetFestivalsErrors
+  resetFestivalsErrors,
+  fetchingEvents,
+  fetchingFestivals
 }) => {
   const [isLoading, toggleLoading] = useState(true);
   const [showModal, toggleModal] = useState({
@@ -51,9 +53,14 @@ const App = ({
     fetchFestivalsByStyle(`/festivals/salsa`, 'salsa');
     fetchFestivalsByStyle(`/festivals/bachata`, 'bachata');
     fetchFestivalsByStyle(`/festivals/kizomba`, 'kizomba');
-    setTimeout(() => toggleLoading(!isLoading), 2000);
     // eslint-disable-next-line
   }, []);
+
+  useEffect(() => {
+    if (!fetchingEvents && !fetchingFestivals) {
+      toggleLoading(!isLoading);
+    }
+  }, [fetchingEvents, fetchingFestivals]);
 
   useEffect(() => {
     if (eventError.status !== 0) {
@@ -97,7 +104,9 @@ const mapStateToProps = state => {
     singleEvent: state.events.singleEvent,
     singleFestival: state.festivals.singleFestival,
     eventError: state.events.errors,
-    festivalError: state.festivals.errors
+    festivalError: state.festivals.errors,
+    fetchingEvents: state.events.fetching,
+    fetchingFestivals: state.festivals.fetching
   };
 };
 
