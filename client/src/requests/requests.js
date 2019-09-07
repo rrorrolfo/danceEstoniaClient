@@ -44,7 +44,24 @@ export const deleteRequest = params => {
     .then(response => response.data)
     .catch(error => {
       console.log(error.response.data.error);
-      return 'There was an error while requesting a deletion';
+      return 'There was an error while requesting the deletion.';
+    });
+};
+
+/**
+ * @param {object} params Contains the parameters that will be sent in the request
+ * @param {object} data Data to be used to update the event or festival
+ */
+export const updateRequest = (params, data) => {
+  return axios({
+    url: `http://localhost:5000${params.endPoint}`,
+    method: 'put',
+    data
+  })
+    .then(response => response.data)
+    .catch(error => {
+      console.log(error.response.data.error);
+      return 'There was an error while updating the event.';
     });
 };
 
