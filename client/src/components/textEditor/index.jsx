@@ -10,11 +10,7 @@ import '../../../node_modules/draft-js/dist/Draft.css';
 import './textEditor.css';
 
 const TextEditor = ({ rawJson, isEvent, eventDescription }) => {
-  const [editorState, setEditorState] = useState(
-    isEvent
-      ? EditorState.createWithContent(eventDescription, linkDecorator())
-      : EditorState.createEmpty()
-  );
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const [showURLInput, toggleShowURLInput] = useState(false);
   const [urlValue, updateUrlValue] = useState('');
 
@@ -22,10 +18,12 @@ const TextEditor = ({ rawJson, isEvent, eventDescription }) => {
   const focusEditor = () => editor.current.focus();
 
   useEffect(() => {
-    if (!isEvent) {
-      focusEditor();
+    if (eventDescription && isEvent) {
+      setEditorState(
+        EditorState.createWithContent(eventDescription, linkDecorator())
+      );
     }
-  }, [isEvent]);
+  }, [isEvent, eventDescription]);
 
   const toggleBold = () => {
     setEditorState(RichUtils.toggleInlineStyle(editorState, 'BOLD'));
