@@ -51,7 +51,7 @@ const AuthInterface = ({ canAuth }) => {
           displayTimeFramecontainers(eventsResults, 'week', 'events')
         ) : (
           <h3 className="centered" style={{ marginTop: '25px' }}>
-            No past event results were obtained
+            No unauthorized events were obtained
           </h3>
         )}
       </Container>
@@ -63,7 +63,7 @@ const AuthInterface = ({ canAuth }) => {
           displayTimeFramecontainers(festivalsResults, 'month', 'festivals')
         ) : (
           <h3 className="centered" style={{ marginTop: '25px' }}>
-            No past festival results were obtained
+            No unauthorized festivals were obtained
           </h3>
         )}
       </Container>
