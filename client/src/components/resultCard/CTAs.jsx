@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
-import { deleteRequest } from '../../requests/requests';
+import { deleteRequest, updateRequest } from '../../requests/requests';
 
 const CTAs = ({ category, id, canAuth }) => {
   const deleteRecord = (cat, recordID) => {
@@ -13,10 +13,32 @@ const CTAs = ({ category, id, canAuth }) => {
       )
       .catch(error => window.alert(`${error} for event record: ${recordID}`));
   };
+  const updateRecord = (cat, recordID) => {
+    const eventData = new FormData();
+    eventData.append('isAuthorized', true);
+    updateRequest(
+      {
+        endPoint: `/${cat}/${recordID}`
+      },
+      eventData
+    )
+      .then(response =>
+        window.alert(
+          `${response}, ${cat.slice(0, cat.length - 1)} has been authorized`
+        )
+      )
+      .catch(error =>
+        window.alert(`${error} when trying to update the ${cat}`)
+      );
+  };
   return (
     <Container className="admin-CTAs-container">
       {canAuth ? (
-        <Button className="admin-cta" variant="success">
+        <Button
+          className="admin-cta"
+          variant="success"
+          onClick={() => updateRecord(category, id)}
+        >
           Authorize
         </Button>
       ) : null}
