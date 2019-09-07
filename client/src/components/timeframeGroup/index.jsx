@@ -11,7 +11,8 @@ const TimeFrameGroup = ({
   category,
   match,
   isAdmin,
-  canAuth
+  canAuth,
+  toggleLoader
 }) => {
   const displayResults = resultsToDisplay => {
     return resultsToDisplay.map(event => {
@@ -23,6 +24,7 @@ const TimeFrameGroup = ({
           match={match}
           isAdmin={isAdmin}
           canAuth={canAuth}
+          toggleLoader={toggleLoader}
         />
       );
     });
@@ -51,13 +53,15 @@ TimeFrameGroup.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   match: PropTypes.object,
   isAdmin: PropTypes.bool,
-  canAuth: PropTypes.bool
+  canAuth: PropTypes.bool,
+  toggleLoader: PropTypes.func
 };
 
 TimeFrameGroup.defaultProps = {
   match: null,
   isAdmin: false,
-  canAuth: false
+  canAuth: false,
+  toggleLoader: null
 };
 
 export default TimeFrameGroup;

@@ -22,6 +22,7 @@ const AppRoutes = ({
   festivalError,
   resetErrors,
   resetFestivalsErrors,
+  toggleLoader,
   toggleModal
 }) => {
   return (
@@ -38,6 +39,7 @@ const AppRoutes = ({
             singleEvent={singleEvent}
             eventError={eventError}
             resetErrors={resetErrors}
+            toggleLoader={toggleLoader}
           />
         )}
       />
@@ -52,6 +54,7 @@ const AppRoutes = ({
             singleFestival={singleFestival}
             festivalError={festivalError}
             resetFestivalsErrors={resetFestivalsErrors}
+            toggleLoader={toggleLoader}
           />
         )}
       />
@@ -91,7 +94,9 @@ AppRoutes.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   festivalError: PropTypes.object,
   resetErrors: PropTypes.func.isRequired,
-  resetFestivalsErrors: PropTypes.func.isRequired
+  resetFestivalsErrors: PropTypes.func.isRequired,
+  toggleModal: PropTypes.func,
+  toggleLoader: PropTypes.func.isRequired
 };
 
 AppRoutes.defaultProps = {
@@ -104,7 +109,8 @@ AppRoutes.defaultProps = {
   singleEvent: null,
   singleFestival: null,
   eventError: { status: 0 },
-  festivalError: { status: 0 }
+  festivalError: { status: 0 },
+  toggleModal: null
 };
 
 export default AppRoutes;

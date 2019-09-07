@@ -29,11 +29,13 @@ const EventDetails = ({
   error,
   history,
   resetErrors,
-  resetFestivalsErrors
+  resetFestivalsErrors,
+  toggleLoader
 }) => {
   const { id } = match.params;
   useEffect(() => {
     actionOnMount(`/${category}/${match.params.category}/${id}`);
+    setTimeout(() => toggleLoader(false), 1000);
     // eslint-disable-next-line
   }, []);
 
@@ -190,14 +192,16 @@ EventDetails.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   error: PropTypes.object.isRequired,
   resetErrors: PropTypes.func,
-  resetFestivalsErrors: PropTypes.func
+  resetFestivalsErrors: PropTypes.func,
+  toggleLoader: PropTypes.func
 };
 
 EventDetails.defaultProps = {
   singleEvent: null,
   singleFestival: null,
   resetErrors: null,
-  resetFestivalsErrors: null
+  resetFestivalsErrors: null,
+  toggleLoader: null
 };
 
 export default withRouter(EventDetails);

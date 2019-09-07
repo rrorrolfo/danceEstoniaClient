@@ -10,7 +10,8 @@ const EventsRoutes = ({
   fetchSingleEvent,
   singleEvent,
   eventError,
-  resetErrors
+  resetErrors,
+  toggleLoader
 }) => {
   return (
     <Switch>
@@ -20,7 +21,11 @@ const EventsRoutes = ({
         render={({ match }) => (
           <React.Fragment>
             <MainJumbotron category="events" />
-            <ResultsContainer topLevelMatch={match} category="events" />
+            <ResultsContainer
+              topLevelMatch={match}
+              category="events"
+              toggleLoader={toggleLoader}
+            />
             <Footer />
           </React.Fragment>
         )}
@@ -31,7 +36,11 @@ const EventsRoutes = ({
         render={({ match }) => (
           <React.Fragment>
             <MainJumbotron category="events" match={match} />
-            <ResultsContainer topLevelMatch={match} category="events" />
+            <ResultsContainer
+              topLevelMatch={match}
+              category="events"
+              toggleLoader={toggleLoader}
+            />
             <Footer />
           </React.Fragment>
         )}
@@ -48,6 +57,7 @@ const EventsRoutes = ({
               singleEvent={singleEvent}
               error={eventError}
               resetErrors={resetErrors}
+              toggleLoader={toggleLoader}
             />
             <Footer />
           </React.Fragment>
@@ -64,12 +74,14 @@ EventsRoutes.propTypes = {
   singleEvent: PropTypes.object,
   // eslint-disable-next-line react/forbid-prop-types
   eventError: PropTypes.object,
-  resetErrors: PropTypes.func.isRequired
+  resetErrors: PropTypes.func.isRequired,
+  toggleLoader: PropTypes.func
 };
 
 EventsRoutes.defaultProps = {
   singleEvent: null,
-  eventError: { status: 0 }
+  eventError: { status: 0 },
+  toggleLoader: null
 };
 
 export default EventsRoutes;

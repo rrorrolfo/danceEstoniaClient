@@ -10,7 +10,8 @@ const FestivalsRoutes = ({
   fetchSingleFestival,
   singleFestival,
   festivalError,
-  resetFestivalsErrors
+  resetFestivalsErrors,
+  toggleLoader
 }) => {
   return (
     <Switch>
@@ -20,7 +21,11 @@ const FestivalsRoutes = ({
         render={({ match }) => (
           <React.Fragment>
             <MainJumbotron category="festivals" />
-            <ResultsContainer match={match} category="festivals" />
+            <ResultsContainer
+              match={match}
+              category="festivals"
+              toggleLoader={toggleLoader}
+            />
             <Footer />
           </React.Fragment>
         )}
@@ -31,7 +36,11 @@ const FestivalsRoutes = ({
         render={({ match }) => (
           <React.Fragment>
             <MainJumbotron category="festivals" match={match} />
-            <ResultsContainer match={match} category="festivals" />
+            <ResultsContainer
+              match={match}
+              category="festivals"
+              toggleLoader={toggleLoader}
+            />
             <Footer />
           </React.Fragment>
         )}
@@ -49,6 +58,7 @@ const FestivalsRoutes = ({
               singleFestival={singleFestival}
               error={festivalError}
               resetFestivalsErrors={resetFestivalsErrors}
+              toggleLoader={toggleLoader}
             />
             <Footer />
           </React.Fragment>
@@ -65,12 +75,14 @@ FestivalsRoutes.propTypes = {
   singleFestival: PropTypes.object,
   // eslint-disable-next-line react/forbid-prop-types
   festivalError: PropTypes.object,
-  resetFestivalsErrors: PropTypes.func.isRequired
+  resetFestivalsErrors: PropTypes.func.isRequired,
+  toggleLoader: PropTypes.func
 };
 
 FestivalsRoutes.defaultProps = {
   singleFestival: null,
-  festivalError: { status: 0 }
+  festivalError: { status: 0 },
+  toggleLoader: null
 };
 
 export default FestivalsRoutes;

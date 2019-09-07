@@ -14,9 +14,16 @@ import {
   hotel
 } from '../../assets/icons';
 
-const ResultCard = ({ result, match, category, isAdmin, canAuth }) => {
+const ResultCard = ({
+  result,
+  match,
+  category,
+  isAdmin,
+  canAuth,
+  toggleLoader
+}) => {
   return (
-    <Card className="result-card">
+    <Card className="result-card" onClick={() => toggleLoader(true)}>
       <Link
         to={
           match && match.params.style
@@ -80,14 +87,16 @@ ResultCard.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   match: PropTypes.object,
   isAdmin: PropTypes.bool,
-  canAuth: PropTypes.bool
+  canAuth: PropTypes.bool,
+  toggleLoader: PropTypes.func
 };
 
 ResultCard.defaultProps = {
   result: null,
   match: null,
   isAdmin: false,
-  canAuth: false
+  canAuth: false,
+  toggleLoader: null
 };
 
 export default ResultCard;

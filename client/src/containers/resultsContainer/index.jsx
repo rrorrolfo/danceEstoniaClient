@@ -17,7 +17,8 @@ const ResultsContainer = ({
   events,
   eventsByStyle,
   festivals,
-  festivalsByStyle
+  festivalsByStyle,
+  toggleLoader
   /* topLevelMatch, */
 }) => {
   const [currentTimeFrame, updateTimeframe] = useState('');
@@ -65,6 +66,7 @@ const ResultsContainer = ({
               fetchFestivals={fetchFestivals}
               currentTimeFrame={currentTimeFrame}
               updateDancingStyle={updateDancingStyle}
+              toggleLoader={toggleLoader}
             />
           )}
         />
@@ -81,6 +83,7 @@ const ResultsContainer = ({
               fetchFestivalsByStyle={fetchFestivalsByStyle}
               currentTimeFrame={currentTimeFrame}
               updateDancingStyle={updateDancingStyle}
+              toggleLoader={toggleLoader}
             />
           )}
         />
@@ -113,7 +116,8 @@ ResultsContainer.propTypes = {
   festivalsByStyle: PropTypes.oneOfType([
     PropTypes.object,
     PropTypes.arrayOf(PropTypes.object)
-  ])
+  ]),
+  toggleLoader: PropTypes.func
   // eslint-disable-next-line react/forbid-prop-types
   // topLevelMatch: PropTypes.object
 };
@@ -126,7 +130,8 @@ ResultsContainer.defaultProps = {
   fetchEventsByStyle: null,
   festivals: null,
   fetchFestivalsByStyle: null,
-  festivalsByStyle: null
+  festivalsByStyle: null,
+  toggleLoader: null
   // topLevelMatch: null
 };
 

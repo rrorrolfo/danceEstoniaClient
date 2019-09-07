@@ -11,7 +11,8 @@ const SearchResults = ({
   category,
   currentTimeFrame,
   updateDancingStyle,
-  history
+  history,
+  toggleLoader
 }) => {
   const [pageCount, updatePageCount] = useState(1);
   const { style } = match.params;
@@ -57,6 +58,7 @@ const SearchResults = ({
                 ? `${group._id.week}-${Math.random()}`
                 : `${group._id.month}-${Math.random()}`
             }
+            toggleLoader={toggleLoader}
           />
         ));
     }
@@ -102,12 +104,14 @@ SearchResults.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   match: PropTypes.object.isRequired,
   currentTimeFrame: PropTypes.oneOf(['week', 'month', '']).isRequired,
-  updateDancingStyle: PropTypes.func
+  updateDancingStyle: PropTypes.func,
+  toggleLoader: PropTypes.func
 };
 
 SearchResults.defaultProps = {
   results: null,
-  updateDancingStyle: null
+  updateDancingStyle: null,
+  toggleLoader: null
 };
 
 export default withRouter(SearchResults);
