@@ -23,7 +23,14 @@ const ResultCard = ({
   toggleLoader
 }) => {
   return (
-    <Card className="result-card" onClick={() => toggleLoader(true)}>
+    <Card
+      className="result-card"
+      onClick={() => {
+        if (!isAdmin) {
+          toggleLoader(true);
+        }
+      }}
+    >
       <Link
         to={
           match && match.params.style
