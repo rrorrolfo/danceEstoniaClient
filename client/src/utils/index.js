@@ -130,48 +130,40 @@ export const isoStringToDate = string => {
 export const weekToString = weekNumber => {
   const number = parseInt(weekNumber, 10);
   switch (number) {
-    case 32:
-      return 'August 12 -	August 18';
-    case 33:
-      return 'August 19 -	August 25';
-    case 34:
-      return 'August 26 -	September 1';
-    case 35:
-      return 'September 2 -	September 8';
     case 36:
-      return 'September 9 -	September 15';
+      return 'September 8 -	September 14';
     case 37:
-      return 'September 16 -	September 22';
+      return 'September 15 -	September 21';
     case 38:
-      return 'September 23 -	September 29';
+      return 'September 22 -	September 28';
     case 39:
-      return 'September 30 -	October 6';
+      return 'September 29 -	October 5';
     case 40:
-      return 'October 7 -	October 13';
+      return 'October 6 -	October 12';
     case 41:
-      return 'October 14 -	October 20';
+      return 'October 13 -	October 19';
     case 42:
-      return 'October 21 -	October 27';
+      return 'October 20 -	October 26';
     case 43:
-      return 'October 28 -	November 3';
+      return 'October 27 -	November 2';
     case 44:
-      return 'November 4 - November 10';
+      return 'November 3 - November 9';
     case 45:
-      return 'November 11 -	November 17';
+      return 'November 10 -	November 16';
     case 46:
-      return 'November 18 -	November 24';
+      return 'November 17 -	November 23';
     case 47:
-      return 'November 25 -	December 1';
+      return 'November 24 -	December 30';
     case 48:
-      return 'December 2 -	December 8';
+      return 'December 1 -	December 7';
     case 49:
-      return 'December 9 -	December 15';
+      return 'December 8 -	December 14';
     case 50:
-      return 'December 16 -	December 22';
+      return 'December 15 -	December 21';
     case 51:
-      return 'December 23 -	December 29';
+      return 'December 22 -	December 28';
     case 52:
-      return 'December 30 - December 31';
+      return 'December 29 - December 31';
     default:
       return number;
   }
