@@ -1,5 +1,5 @@
 .main-jumbotron {
-  padding: 6rem 2rem 4rem;
+  padding: 7rem 2rem 4rem;
   background-image: url('../../assets/img/ikiz-festival.jpg');
   background-size: cover;
   background-repeat: no-repeat;
@@ -95,5 +95,11 @@
   }
   .category-cta:last-child {
     margin-left: 0;
+  }
+}
+
+@media (min-width: 992px) {
+  .main-jumbotron {
+    padding-top: 9em;
   }
 }
