@@ -30,10 +30,14 @@ const Header = () => {
     return true;
   };
   return (
-    <Navbar expand="md" variant="dark" fixed="top">
-      <Navbar.Brand>
-        <NavLink to="/" className="dance-estonia-logo">
-          DanceEstonia
+    <Navbar expand="md" variant="dark" fixed="top" className="header-container">
+      <Navbar.Brand className="dance-estonia-logo-container">
+        <NavLink to="/">
+          <img
+            src="./assets/DE-logo-256x75.png"
+            alt="Dance Estonia"
+            title="Dance Estonia"
+          />
         </NavLink>
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
