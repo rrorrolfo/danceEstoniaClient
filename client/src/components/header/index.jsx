@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
+import { Container, Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import './header.css';
 
 const Header = () => {
@@ -31,123 +31,134 @@ const Header = () => {
   };
   return (
     <Navbar expand="md" variant="dark" fixed="top" className="header-container">
-      <Navbar.Brand className="dance-estonia-logo-container">
-        <NavLink to="/">
-          <img
-            src="./assets/DE-logo-256x75.png"
-            alt="Dance Estonia"
-            title="Dance Estonia"
-          />
-        </NavLink>
-      </Navbar.Brand>
-      <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="mr-auto">
-          <NavDropdown
-            title="Events"
-            className="basic-nav-dropdown events"
-            onClick={() => toggleEventsMenu(checkForShowClass('events'))}
-          >
-            <ul
-              className="custom-dropdown-menu"
-              style={{ display: displayEventsMenu ? 'block' : 'none' }}
-            >
-              <li>
-                <NavLink
-                  className="dropdown-item"
-                  to="/events"
-                  onClick={() => handleClick('events')}
-                >
-                  All
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  className="dropdown-item"
-                  onClick={() => handleClick('events')}
-                  to="/events/salsa"
-                >
-                  Salsa
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  className="dropdown-item"
-                  onClick={() => handleClick('events')}
-                  to="/events/bachata"
-                >
-                  Bachata
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  className="dropdown-item"
-                  onClick={() => handleClick('events')}
-                  to="/events/kizomba"
-                >
-                  Kizomba
-                </NavLink>
-              </li>
-            </ul>
-          </NavDropdown>
-          <NavDropdown
-            title="Festivals"
-            className="basic-nav-dropdown festivals"
-            onClick={() => toggleFestivalsMenu(checkForShowClass('festivals'))}
-          >
-            <ul
-              className="custom-dropdown-menu"
-              style={{ display: displayFestivalsMenu ? 'block' : 'none' }}
-            >
-              <li>
-                <NavLink
-                  className="dropdown-item"
-                  onClick={() => handleClick()}
-                  to="/festivals"
-                >
-                  All
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  className="dropdown-item"
-                  onClick={() => handleClick()}
-                  to="/festivals/salsa"
-                >
-                  Salsa
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  className="dropdown-item"
-                  onClick={() => handleClick()}
-                  to="/festivals/bachata"
-                >
-                  Bachata
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  className="dropdown-item"
-                  onClick={() => handleClick()}
-                  to="/festivals/kizomba"
-                >
-                  Kizomba
-                </NavLink>
-              </li>
-            </ul>
-          </NavDropdown>
-          {/* <NavLink to="#" className="main-nav-link">
-            Shop
-          </NavLink> */}
-          <NavLink to="/createEvent" className="main-nav-link">
-            Create Event
+      <Container>
+        <Navbar.Brand className="dance-estonia-logo-container">
+          <NavLink to="/">
+            <img
+              src="./assets/couple-logo-48x75.png"
+              alt="Dance Estonia"
+              title="Dance Estonia"
+              className="dancing-couple-logo"
+            />
+            <img
+              src="./assets/DE-logo-256x75.png"
+              alt="Dance Estonia"
+              title="Dance Estonia"
+              className="dance-estonia-logo"
+            />
           </NavLink>
-          <NavLink to="/contact" className="main-nav-link">
-            Contact
-          </NavLink>
-        </Nav>
-      </Navbar.Collapse>
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="mr-auto main-nav">
+            <NavDropdown
+              title="Events"
+              className="basic-nav-dropdown events"
+              onClick={() => toggleEventsMenu(checkForShowClass('events'))}
+            >
+              <ul
+                className="custom-dropdown-menu"
+                style={{ display: displayEventsMenu ? 'block' : 'none' }}
+              >
+                <li>
+                  <NavLink
+                    className="dropdown-item"
+                    to="/events"
+                    onClick={() => handleClick('events')}
+                  >
+                    All
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    className="dropdown-item"
+                    onClick={() => handleClick('events')}
+                    to="/events/salsa"
+                  >
+                    Salsa
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    className="dropdown-item"
+                    onClick={() => handleClick('events')}
+                    to="/events/bachata"
+                  >
+                    Bachata
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    className="dropdown-item"
+                    onClick={() => handleClick('events')}
+                    to="/events/kizomba"
+                  >
+                    Kizomba
+                  </NavLink>
+                </li>
+              </ul>
+            </NavDropdown>
+            <NavDropdown
+              title="Festivals"
+              className="basic-nav-dropdown festivals"
+              onClick={() =>
+                toggleFestivalsMenu(checkForShowClass('festivals'))
+              }
+            >
+              <ul
+                className="custom-dropdown-menu"
+                style={{ display: displayFestivalsMenu ? 'block' : 'none' }}
+              >
+                <li>
+                  <NavLink
+                    className="dropdown-item"
+                    onClick={() => handleClick()}
+                    to="/festivals"
+                  >
+                    All
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    className="dropdown-item"
+                    onClick={() => handleClick()}
+                    to="/festivals/salsa"
+                  >
+                    Salsa
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    className="dropdown-item"
+                    onClick={() => handleClick()}
+                    to="/festivals/bachata"
+                  >
+                    Bachata
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    className="dropdown-item"
+                    onClick={() => handleClick()}
+                    to="/festivals/kizomba"
+                  >
+                    Kizomba
+                  </NavLink>
+                </li>
+              </ul>
+            </NavDropdown>
+            {/* <NavLink to="#" className="main-nav-link">
+              Shop
+            </NavLink> */}
+            <NavLink to="/createEvent" className="main-nav-link">
+              Create Event
+            </NavLink>
+            <NavLink to="/contact" className="main-nav-link">
+              Contact
+            </NavLink>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
     </Navbar>
   );
 };
