@@ -2,6 +2,7 @@
   padding: 0;
   padding-right: 15px;
   padding-bottom: 5px;
+  height: 75px;
 }
 
 .dance-estonia-logo-container {
@@ -67,6 +68,10 @@
 /********* Media queries ********/
 
 @media (min-width: 768px) {
+  .header-container {
+    padding: 0;
+  }
+
   .menu-container {
     width: auto;
     margin-right: 0;
