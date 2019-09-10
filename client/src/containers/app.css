@@ -27,6 +27,16 @@
 
 /********* Icons *********/
 
+.danceEstoniaWt-container {
+  width: 281px;
+  height: 75px;
+  display: none;
+}
+
+.danceEstoniaWt-logo-group {
+  transform: translate(15px, 17.5px) scale(2.5);
+}
+
 .calendar,
 .clock,
 .tickets,
@@ -70,7 +80,7 @@
   background-color: #fff;
   color: var(--blue-estonia);
   position: fixed;
-  top: 56px;
+  top: 75px;
   left: 0;
   bottom: 0;
   right: 0;
@@ -79,8 +89,26 @@
 
 .loader-logo-container {
   display: flex;
-  justify-content: center;
-  margin-top: 45vh;
+  width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 25vh;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.danceEstoniaBl-container {
+  width: 310px;
+  height: 75px;
+}
+
+.danceEstoniaBl-logo-group {
+  transform: scale(3);
+}
+
+.teaser {
+  font-size: 28px;
+  margin-top: 5vh;
 }
 
 /********* Results Container *********/
@@ -107,4 +135,26 @@
 
 .copyright span {
   margin-left: 5px;
+}
+
+/******** Media queries *******/
+
+@media (min-width: 576px) {
+  .danceEstoniaBl-container {
+    width: 450px;
+  }
+
+  .danceEstoniaBl-logo-group {
+    transform: scale(3.5);
+  }
+}
+
+@media (min-width: 992px) {
+  .danceEstoniaWt-container {
+    display: initial;
+  }
+
+  .danceEstoniaBl-logo-group {
+    transform: scale(4.5);
+  }
 }
