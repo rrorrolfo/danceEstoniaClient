@@ -1,27 +1,25 @@
 import React from 'react';
 
-export const danceEstoniaWt = sizeParams => {
-  const defaultsizeParams = {
-    width: 271,
-    height: 75,
-    scale: 2.5,
-    ...sizeParams
-  };
+/**
+ * @param {string} mainClass Class name that the svg tag will receive.
+ * @param {string} secondaryclass Class name that the group tag will receive.
+ * @returns Dance Estonia white logo.
+ */
+export const danceEstoniaWt = (mainClass, secondaryClass) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       id="SvgjsSvg5444"
-      width={defaultsizeParams.width}
-      height={defaultsizeParams.height}
       version="1.1"
       xmlnsXlink="http://www.w3.org/1999/xlink"
-      xmlnsSvgjs="http://svgjs.com/svgjs"
+      className={mainClass}
     >
       <defs id="SvgjsDefs5445" />
       <g
         id="SvgjsG5446"
-        transform={`translate(15, 17.5) scale(${defaultsizeParams.scale})`}
         opacity="1"
+        transform="translate(15, 17.5)"
+        className={secondaryClass}
       >
         <defs id="SvgjsDefs2022" />
         <g id="SvgjsG2023" transform="scale(0.2039689039789036)" opacity="1">
@@ -49,29 +47,22 @@ export const danceEstoniaWt = sizeParams => {
   );
 };
 
-export const danceEstoniaBl = sizeParams => {
-  const defaultsizeParams = {
-    width: 271,
-    height: 75,
-    scale: 2.5,
-    ...sizeParams
-  };
+/**
+ * @param {string} mainClass Class name that the svg tag will receive.
+ * @param {string} secondaryclass Class name that the group tag will receive.
+ * @returns Dance Estonia blue logo.
+ */
+export const danceEstoniaBl = (mainClass, secondaryClass) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       id="SvgjsSvg5426"
-      width={defaultsizeParams.width}
-      height={defaultsizeParams.height}
       version="1.1"
       xmlnsXlink="http://www.w3.org/1999/xlink"
-      xmlnsSvgjs="http://svgjs.com/svgjs"
+      className={mainClass}
     >
       <defs id="SvgjsDefs5427" />
-      <g
-        id="SvgjsG5428"
-        transform={`translate(15,17.5) scale(${defaultsizeParams.scale})`}
-        opacity="1"
-      >
+      <g id="SvgjsG5428" className={secondaryClass} opacity="1">
         <defs id="SvgjsDefs2010" />
         <g id="SvgjsG2011" transform="scale(0.2039689039789036)" opacity="1">
           <g
