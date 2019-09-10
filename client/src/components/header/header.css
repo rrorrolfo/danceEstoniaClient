@@ -18,6 +18,7 @@
 
 .dancing-couple-logo {
   margin-left: 15px;
+  padding-right: 15px;
 }
 
 .dance-estonia-logo {
@@ -95,9 +96,5 @@
 @media (min-width: 992px) {
   .dancing-couple-logo {
     display: none;
-  }
-
-  .dance-estonia-logo {
-    display: block;
   }
 }
