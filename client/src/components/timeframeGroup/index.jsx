@@ -12,7 +12,8 @@ const TimeFrameGroup = ({
   match,
   isAdmin,
   canAuth,
-  toggleLoader
+  toggleLoader,
+  updateLoaderText
 }) => {
   const displayResults = resultsToDisplay => {
     return resultsToDisplay.map(event => {
@@ -25,6 +26,7 @@ const TimeFrameGroup = ({
           isAdmin={isAdmin}
           canAuth={canAuth}
           toggleLoader={toggleLoader}
+          updateLoaderText={updateLoaderText}
         />
       );
     });

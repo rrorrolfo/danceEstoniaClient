@@ -43,6 +43,7 @@ const App = ({
     category: '',
     callback: null
   });
+  const [loaderText, updateLoaderText] = useState('Ready to dance?');
 
   useEffect(() => {
     fetchEvents();
@@ -87,6 +88,7 @@ const App = ({
           resetFestivalsErrors={resetFestivalsErrors}
           toggleLoader={toggleLoader}
           toggleModal={toggleModal}
+          updateLoaderText={updateLoaderText}
         />
         <MainModal
           show={showModal.show}
@@ -94,7 +96,7 @@ const App = ({
           category={showModal.category}
           action={showModal.callback}
         />
-        {isLoading ? <Loader /> : null}
+        {isLoading ? <Loader text={loaderText} /> : null}
       </div>
     </BrowserRouter>
   );

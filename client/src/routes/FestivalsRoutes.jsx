@@ -11,7 +11,8 @@ const FestivalsRoutes = ({
   singleFestival,
   festivalError,
   resetFestivalsErrors,
-  toggleLoader
+  toggleLoader,
+  updateLoaderText
 }) => {
   return (
     <Switch>
@@ -25,6 +26,7 @@ const FestivalsRoutes = ({
               match={match}
               category="festivals"
               toggleLoader={toggleLoader}
+              updateLoaderText={updateLoaderText}
             />
             <Footer />
           </React.Fragment>
@@ -40,6 +42,7 @@ const FestivalsRoutes = ({
               match={match}
               category="festivals"
               toggleLoader={toggleLoader}
+              updateLoaderText={updateLoaderText}
             />
             <Footer />
           </React.Fragment>

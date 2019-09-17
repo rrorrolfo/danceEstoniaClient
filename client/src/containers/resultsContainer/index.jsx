@@ -18,7 +18,8 @@ const ResultsContainer = ({
   eventsByStyle,
   festivals,
   festivalsByStyle,
-  toggleLoader
+  toggleLoader,
+  updateLoaderText
   /* topLevelMatch, */
 }) => {
   const [currentTimeFrame, updateTimeframe] = useState('');
@@ -67,6 +68,7 @@ const ResultsContainer = ({
               currentTimeFrame={currentTimeFrame}
               updateDancingStyle={updateDancingStyle}
               toggleLoader={toggleLoader}
+              updateLoaderText={updateLoaderText}
             />
           )}
         />
@@ -84,6 +86,7 @@ const ResultsContainer = ({
               currentTimeFrame={currentTimeFrame}
               updateDancingStyle={updateDancingStyle}
               toggleLoader={toggleLoader}
+              updateLoaderText={updateLoaderText}
             />
           )}
         />

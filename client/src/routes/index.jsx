@@ -23,7 +23,8 @@ const AppRoutes = ({
   resetErrors,
   resetFestivalsErrors,
   toggleLoader,
-  toggleModal
+  toggleModal,
+  updateLoaderText
 }) => {
   return (
     <Switch>
@@ -40,6 +41,7 @@ const AppRoutes = ({
             eventError={eventError}
             resetErrors={resetErrors}
             toggleLoader={toggleLoader}
+            updateLoaderText={updateLoaderText}
           />
         )}
       />
@@ -55,6 +57,7 @@ const AppRoutes = ({
             festivalError={festivalError}
             resetFestivalsErrors={resetFestivalsErrors}
             toggleLoader={toggleLoader}
+            updateLoaderText={updateLoaderText}
           />
         )}
       />

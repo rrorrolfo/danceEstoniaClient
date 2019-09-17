@@ -20,13 +20,15 @@ const ResultCard = ({
   category,
   isAdmin,
   canAuth,
-  toggleLoader
+  toggleLoader,
+  updateLoaderText
 }) => {
   return (
     <Card
       className="result-card"
       onClick={() => {
         if (!isAdmin) {
+          updateLoaderText(`Loading ${result.name}...`);
           toggleLoader(true);
         }
       }}

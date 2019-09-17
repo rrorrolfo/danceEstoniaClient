@@ -12,7 +12,8 @@ const SearchResults = ({
   currentTimeFrame,
   updateDancingStyle,
   history,
-  toggleLoader
+  toggleLoader,
+  updateLoaderText
 }) => {
   const [pageCount, updatePageCount] = useState(1);
   const { style } = match.params;
@@ -59,6 +60,7 @@ const SearchResults = ({
                 : `${group._id.month}-${Math.random()}`
             }
             toggleLoader={toggleLoader}
+            updateLoaderText={updateLoaderText}
           />
         ));
     }

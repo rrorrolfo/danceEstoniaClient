@@ -11,7 +11,8 @@ const EventsRoutes = ({
   singleEvent,
   eventError,
   resetErrors,
-  toggleLoader
+  toggleLoader,
+  updateLoaderText
 }) => {
   return (
     <Switch>
@@ -25,6 +26,7 @@ const EventsRoutes = ({
               topLevelMatch={match}
               category="events"
               toggleLoader={toggleLoader}
+              updateLoaderText={updateLoaderText}
             />
             <Footer />
           </React.Fragment>
@@ -40,6 +42,7 @@ const EventsRoutes = ({
               topLevelMatch={match}
               category="events"
               toggleLoader={toggleLoader}
+              updateLoaderText={updateLoaderText}
             />
             <Footer />
           </React.Fragment>
