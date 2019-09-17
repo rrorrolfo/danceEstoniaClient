@@ -92,7 +92,7 @@
   width: 400px;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 25vh;
+  margin-top: 20vh;
   flex-wrap: wrap;
   flex-direction: column;
 }
@@ -108,7 +108,11 @@
 
 .teaser {
   font-size: 28px;
+}
+
+.loading {
   margin-top: 5vh;
+  margin-bottom: 50px;
 }
 
 /********* Results Container *********/
@@ -142,19 +146,24 @@
 @media (min-width: 576px) {
   .danceEstoniaBl-container {
     width: 450px;
+    padding-left: 25px;
   }
 
   .danceEstoniaBl-logo-group {
     transform: scale(3.5);
+  }
+
+  .teaser {
+    font-size: 40px;
+  }
+
+  .loader-logo-container {
+    width: 550px;
   }
 }
 
 @media (min-width: 992px) {
   .danceEstoniaWt-container {
     display: initial;
-  }
-
-  .danceEstoniaBl-logo-group {
-    transform: scale(4.5);
   }
 }
