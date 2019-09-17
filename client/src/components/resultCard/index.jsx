@@ -28,7 +28,7 @@ const ResultCard = ({
       className="result-card"
       onClick={() => {
         if (!isAdmin) {
-          updateLoaderText(`Loading ${result.name}...`);
+          updateLoaderText(result.name);
           toggleLoader(true);
         }
       }}
