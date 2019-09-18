@@ -117,6 +117,9 @@ const EventDetails = ({
               <td>{calendar('event-calendar')}</td>
               <td className="event-date">
                 {isoStringToDate(selectedEvent.dateOfEvent)}
+                {category === 'festivals' && selectedEvent.finishDateOfEvent
+                  ? ` - ${isoStringToDate(selectedEvent.finishDateOfEvent)}`
+                  : null}
               </td>
             </tr>
             <tr>
