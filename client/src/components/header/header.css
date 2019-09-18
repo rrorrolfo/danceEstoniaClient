@@ -26,8 +26,14 @@
 }
 
 #basic-navbar-nav {
-  margin-top: 8px;
-  padding-left: 20px;
+  margin-top: -2px;
+  padding-left: 5%;
+  padding-right: 5%;
+  background-color: var(--blue-estonia);
+  position: absolute;
+  top: 75px;
+  left: 0;
+  width: 100vw !important;
 }
 
 .main-nav {
@@ -68,6 +74,20 @@
 
 /********* Media queries ********/
 
+@media (min-width: 576px) {
+  #basic-navbar-nav {
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+}
+
+@media (min-width: 655px) {
+  #basic-navbar-nav {
+    padding-left: 14%;
+    padding-right: 14%;
+  }
+}
+
 @media (min-width: 768px) {
   .header-container {
     padding: 0;
@@ -84,6 +104,9 @@
 
   #basic-navbar-nav {
     padding-left: 0;
+    padding-right: 0;
+    margin-top: 8px;
+    position: initial;
   }
 
   .basic-nav-dropdown.events,
