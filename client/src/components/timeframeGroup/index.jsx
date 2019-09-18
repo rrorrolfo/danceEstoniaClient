@@ -6,6 +6,7 @@ import { monthToString, weekToString } from '../../utils';
 
 const TimeFrameGroup = ({
   dateHappening,
+  year,
   timeFrame,
   events,
   category,
@@ -37,8 +38,8 @@ const TimeFrameGroup = ({
         <Container fluid className="timeGroupContainer">
           <h3 className="dateHappening">
             {timeFrame === 'month'
-              ? monthToString(dateHappening)
-              : weekToString(dateHappening)}
+              ? monthToString(dateHappening, year)
+              : weekToString(dateHappening, year)}
           </h3>
           {displayResults(events)}
         </Container>
@@ -49,6 +50,7 @@ const TimeFrameGroup = ({
 
 TimeFrameGroup.propTypes = {
   timeFrame: PropTypes.string.isRequired,
+  year: PropTypes.string.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   events: PropTypes.arrayOf(PropTypes.object).isRequired,
   category: PropTypes.oneOf(['events', 'festivals']).isRequired,

@@ -50,6 +50,7 @@ const SearchResults = ({
             dateHappening={
               timeFrame === 'week' ? group._id.week : group._id.month
             }
+            year={group._id.year}
             timeFrame={timeFrame}
             events={group.records}
             category={category}
