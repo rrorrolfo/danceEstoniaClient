@@ -1,3 +1,4 @@
+/* eslint-disable react/forbid-prop-types */
 import React, { useEffect, useState } from 'react';
 import {
   Container,
@@ -14,13 +15,23 @@ import TextEditor from '../textEditor/index';
 import { createEvent } from '../../requests/requests';
 import {
   getTodayISODate,
+  dateToISODate,
   firstLetterToUppercase,
   isFieldEmpty,
   linkUrlSanitizer
 } from '../../utils';
 import './createForm.css';
 
-const CreateEvent = ({ isUser }) => {
+const CreateEvent = ({
+  isUser,
+  match,
+  isAdmin,
+  isEdit,
+  fetchSingleEvent,
+  singleEvent,
+  fetchSingleFestival,
+  singleFestival
+}) => {
   // Data of event state
   const [todayDate, updateDate] = useState('');
   // Event type
@@ -64,11 +75,54 @@ const CreateEvent = ({ isUser }) => {
   const [alertVariant, updateAlertVariant] = useState('');
   const [submissionMessage, updateSubmissionMessage] = useState('');
 
+  // Event to Edit
+  const [eventToEdit, setEventToEdit] = useState(singleEvent || singleFestival);
+
   useEffect(() => {
     updateDate(getTodayISODate());
     updateEventDate(getTodayISODate());
     updateEndDate(getTodayISODate());
+    if (isAdmin) {
+      const { category, style, id } = match.params;
+      if (category === 'events') {
+        fetchSingleEvent(`/${category}/${style}/${id}`);
+      } else {
+        fetchSingleFestival(`/${category}/${style}/${id}`);
+      }
+    }
   }, []);
+
+  useEffect(() => {
+    setEventToEdit(singleEvent || singleFestival);
+  }, [singleEvent, singleFestival]);
+
+  useEffect(() => {
+    if (eventToEdit) {
+      const {
+        cityOfEvent,
+        countryOfEvent,
+        dateOfEvent,
+        finishDateOfEvent,
+        name,
+        styles,
+        timeOfEvent
+      } = eventToEdit;
+      updateEventType(match.params.category);
+      updateDancingStyles(styles);
+      updateNameOfEvent(name);
+      updateTicketPrice(eventToEdit.ticketPrice);
+      updateTicketCurrency(ticketCurrency);
+      updateEventDate(dateToISODate(dateOfEvent));
+      updateEndDate(dateToISODate(finishDateOfEvent));
+      updateStartingTime(timeOfEvent);
+      updateVenue(eventToEdit.venueOfEvent);
+      updateVenueAddress(eventToEdit.venueAddress);
+      updateCity(cityOfEvent);
+      updateCountry(countryOfEvent);
+      updateFBEvent(eventToEdit.fbEvent);
+      updateWebsite(eventToEdit.website);
+    }
+  }, [eventToEdit]);
 
   useEffect(() => {
     if (dancingStyles.length) {
@@ -762,11 +816,25 @@ const CreateEvent = ({ isUser }) => {
 };
 
 CreateEvent.propTypes = {
-  isUser: PropTypes.bool
+  isUser: PropTypes.bool,
+  match: PropTypes.object,
+  isAdmin: PropTypes.bool,
+  isEdit: PropTypes.bool,
+  fetchSingleEvent: PropTypes.func,
+  singleEvent: PropTypes.object,
+  fetchSingleFestival: PropTypes.func,
+  singleFestival: PropTypes.object
 };
 
 CreateEvent.defaultProps = {
-  isUser: true
+  isUser: true,
+  match: null,
+  isAdmin: false,
+  isEdit: false,
+  fetchSingleEvent: null,
+  singleEvent: null,
+  fetchSingleFestival: null,
+  singleFestival: null
 };
 
 export default CreateEvent;
