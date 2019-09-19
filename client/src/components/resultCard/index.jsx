@@ -84,13 +84,20 @@ const ResultCard = ({
       </ListGroup> */}
       </Link>
       {isAdmin ? (
-        <CTAs category={category} id={result._id} canAuth={canAuth} />
+        <CTAs
+          category={category}
+          id={result._id}
+          canAuth={canAuth}
+          style={result.styles[0]}
+          description={result.description}
+        />
       ) : null}
     </Card>
   );
 };
 
 ResultCard.propTypes = {
+  category: PropTypes.oneOf(['events', 'festivals']).isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   result: PropTypes.object,
   // eslint-disable-next-line react/forbid-prop-types

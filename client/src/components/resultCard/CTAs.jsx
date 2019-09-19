@@ -1,9 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Container, Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { deleteRequest, updateRequest } from '../../requests/requests';
 
-const CTAs = ({ category, id, canAuth }) => {
+const CTAs = ({ category, id, canAuth, style, description }) => {
   const deleteRecord = (cat, recordID) => {
     deleteRequest({
       endPoint: `/${cat}/${recordID}`
@@ -43,7 +44,14 @@ const CTAs = ({ category, id, canAuth }) => {
         </Button>
       ) : null}
       <Button className="admin-cta" variant="warning">
-        Edit
+        <Link
+          to={{
+            pathname: `/admin/editEvent/${category}/${style}/${id}`,
+            state: { description }
+          }}
+        >
+          Edit
+        </Link>
       </Button>
       <Button
         className="admin-cta"
@@ -59,11 +67,14 @@ const CTAs = ({ category, id, canAuth }) => {
 CTAs.propTypes = {
   category: PropTypes.oneOf(['events', 'festivals']).isRequired,
   id: PropTypes.string.isRequired,
-  canAuth: PropTypes.bool
+  canAuth: PropTypes.bool,
+  style: PropTypes.string.isRequired,
+  description: PropTypes.string
 };
 
 CTAs.defaultProps = {
-  canAuth: false
+  canAuth: false,
+  description: null
 };
 
 export default CTAs;
