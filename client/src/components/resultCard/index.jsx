@@ -89,7 +89,6 @@ const ResultCard = ({
           id={result._id}
           canAuth={canAuth}
           style={result.styles[0]}
-          description={result.description}
         />
       ) : null}
     </Card>

@@ -1,10 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { Container, Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { deleteRequest, updateRequest } from '../../requests/requests';
 
-const CTAs = ({ category, id, canAuth, style, description }) => {
+const CTAs = ({ category, id, canAuth, style }) => {
   const deleteRecord = (cat, recordID) => {
     deleteRequest({
       endPoint: `/${cat}/${recordID}`
@@ -44,14 +44,9 @@ const CTAs = ({ category, id, canAuth, style, description }) => {
         </Button>
       ) : null}
       <Button className="admin-cta" variant="warning">
-        <Link
-          to={{
-            pathname: `/admin/editEvent/${category}/${style}/${id}`,
-            state: { description }
-          }}
-        >
+        <NavLink to={`/admin/editEvent/${category}/${style}/${id}`}>
           Edit
-        </Link>
+        </NavLink>
       </Button>
       <Button
         className="admin-cta"
@@ -68,13 +63,11 @@ CTAs.propTypes = {
   category: PropTypes.oneOf(['events', 'festivals']).isRequired,
   id: PropTypes.string.isRequired,
   canAuth: PropTypes.bool,
-  style: PropTypes.string.isRequired,
-  description: PropTypes.string
+  style: PropTypes.string.isRequired
 };
 
 CTAs.defaultProps = {
-  canAuth: false,
-  description: null
+  canAuth: false
 };
 
 export default CTAs;
