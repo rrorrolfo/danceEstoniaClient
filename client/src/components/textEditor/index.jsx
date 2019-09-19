@@ -9,7 +9,7 @@ import { promptForLink, confirmLink, removeLinkEntity } from './EditorUtils';
 import '../../../node_modules/draft-js/dist/Draft.css';
 import './textEditor.css';
 
-const TextEditor = ({ rawJson, isEvent, eventDescription }) => {
+const TextEditor = ({ rawJson, isEvent, isEdit, eventDescription }) => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const [showURLInput, toggleShowURLInput] = useState(false);
   const [urlValue, updateUrlValue] = useState('');
@@ -18,7 +18,7 @@ const TextEditor = ({ rawJson, isEvent, eventDescription }) => {
   const focusEditor = () => editor.current.focus();
 
   useEffect(() => {
-    if (eventDescription && isEvent) {
+    if ((eventDescription && isEvent) || (eventDescription && isEdit)) {
       setEditorState(
         EditorState.createWithContent(eventDescription, linkDecorator())
       );
@@ -100,6 +100,7 @@ const TextEditor = ({ rawJson, isEvent, eventDescription }) => {
 TextEditor.propTypes = {
   rawJson: PropTypes.func,
   isEvent: PropTypes.bool,
+  isEdit: PropTypes.bool,
   // eslint-disable-next-line react/forbid-prop-types
   eventDescription: PropTypes.object
 };
@@ -107,6 +108,7 @@ TextEditor.propTypes = {
 TextEditor.defaultProps = {
   rawJson: null,
   isEvent: false,
+  isEdit: false,
   eventDescription: null
 };
 
