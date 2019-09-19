@@ -9,11 +9,20 @@ export const arrayToUpperCase = array => {
   return finalarray.join(', ');
 };
 
+const dateRegex = number => {
+  const evaluation = /^[0-9]{2}/i.test(number);
+  return !evaluation ? `0${number}` : number;
+};
+
+export const dateToISODate = string => {
+  const date = new Date(string);
+  const month = dateRegex(date.getMonth() + 1);
+  const day = dateRegex(date.getDate());
+  const finalDate = `${date.getFullYear()}-${month}-${day}`;
+  return finalDate;
+};
+
 export const getTodayISODate = () => {
-  const dateRegex = number => {
-    const evaluation = /^[0-9]{2}/i.test(number);
-    return !evaluation ? `0${number}` : number;
-  };
   const today = new Date();
   const month = dateRegex(today.getMonth() + 1);
   const day = dateRegex(today.getDate());
