@@ -72,6 +72,20 @@ const AppRoutes = ({
         render={() => <AuthInterface isAdmin canAuth />}
       />
       <Route
+        path="/admin/editEvent/:category/:style/:id"
+        render={({ match }) => (
+          <CreateEvent
+            isAdmin
+            isEdit
+            match={match}
+            fetchSingleEvent={fetchSingleEvent}
+            singleEvent={singleEvent}
+            fetchSingleFestival={fetchSingleFestival}
+            singleFestival={singleFestival}
+          />
+        )}
+      />
+      <Route
         path="/admin/deleteEvents"
         render={() => <DeleteInterface toggleModal={toggleModal} isAdmin />}
       />
