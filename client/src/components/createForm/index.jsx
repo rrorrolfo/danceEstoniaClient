@@ -12,7 +12,7 @@ import {
 import PropTypes from 'prop-types';
 import { convertToRaw } from 'draft-js';
 import TextEditor from '../textEditor/index';
-import { createEvent } from '../../requests/requests';
+import { createEvent, updateRequest } from '../../requests/requests';
 import {
   getTodayISODate,
   dateToISODate,
@@ -82,7 +82,7 @@ const CreateEvent = ({
     updateDate(getTodayISODate());
     updateEventDate(getTodayISODate());
     updateEndDate(getTodayISODate());
-    if (isAdmin) {
+    if (isAdmin && isEdit) {
       const { category, style, id } = match.params;
       if (category === 'events') {
         fetchSingleEvent(`/${category}/${style}/${id}`);
@@ -241,7 +241,7 @@ const CreateEvent = ({
     eventData.append('description', description);
     eventData.append('fbEvent', fbEvent);
     eventData.append('ticketPrice', `${ticketPrice} ${ticketCurrency}`);
-    if (!isUser) {
+    if (isAdmin) {
       eventData.append('isAuthorized', true);
     } else {
       eventData.append('isAuthorized', false);
@@ -252,10 +252,23 @@ const CreateEvent = ({
       eventData.append('finishDateOfEvent', endDate);
     }
 
-    // Create the event or festival
-    const submissionStatus = await createEvent(eventType, eventData);
+    let submissionStatus;
+    if (isAdmin && isEdit) {
+      submissionStatus = await updateRequest(
+        { endPoint: `/${eventType}/${eventToEdit._id}` },
+        eventData
+      );
+    } else {
+      submissionStatus = await createEvent(eventType, eventData);
+    }
 
-    if (submissionStatus !== 201) {
+    if (isAdmin && isEdit && submissionStatus === 200) {
+      updateSubmissionMessage(
+        `${eventToEdit.name} has been updated succesfully`
+      );
+    }
+
+    if (!isEdit && submissionStatus !== 201) {
       const errorText = (
         <ol>
           <span style={{ display: 'block' }}>
@@ -274,7 +287,7 @@ const CreateEvent = ({
       return false;
     }
 
-    if (isUser) {
+    if (isUser && !isEdit) {
       const nextStepsMessage = (
         <div>
           <h4 className="centered">{`Thank you for creating a new ${customTypeText}!.`}</h4>
@@ -294,7 +307,8 @@ const CreateEvent = ({
       updateCountry('Estonia');
       updateFBEvent('');
       updateWebsite('');
-    } else {
+    }
+    if (isAdmin && !isEdit) {
       updateSubmissionMessage(
         `The ${customTypeText} has been created succesfully!`
       );
@@ -322,6 +336,7 @@ const CreateEvent = ({
               className="mb-3 event-type-selection centered"
             >
               <Form.Check
+                checked={eventType === 'events'}
                 inline
                 label="Event or party"
                 type={type}
@@ -335,6 +350,7 @@ const CreateEvent = ({
                 }}
               />
               <Form.Check
+                checked={eventType === 'festivals'}
                 inline
                 label="Festival"
                 type={type}
@@ -367,6 +383,7 @@ const CreateEvent = ({
               className="mb-3 style-selection centered"
             >
               <Form.Check
+                checked={dancingStyles.includes('salsa')}
                 inline
                 label="Salsa"
                 type={type}
@@ -383,6 +400,7 @@ const CreateEvent = ({
                 }}
               />
               <Form.Check
+                checked={dancingStyles.includes('bachata')}
                 inline
                 label="Bachata"
                 type={type}
@@ -399,6 +417,7 @@ const CreateEvent = ({
                 }}
               />
               <Form.Check
+                checked={dancingStyles.includes('kizomba')}
                 inline
                 label="Kizomba"
                 type={type}
@@ -808,7 +827,7 @@ const CreateEvent = ({
           type="submit"
           className="submit-create-form-button"
         >
-          Create {customTypeText}
+          {isEdit ? `Edit ${customTypeText}` : `Create ${customTypeText}`}
         </Button>
       </Form>
     </Container>
