@@ -196,7 +196,7 @@ const CreateEvent = ({
       errors += 1;
     }
 
-    if (!img.files.length) {
+    if (!img.files.length && !isAdmin && !isEdit) {
       toggleMissingBanner(true);
       errors += 1;
     }
