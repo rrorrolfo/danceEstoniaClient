@@ -90,6 +90,7 @@ const CreateEvent = ({
         fetchSingleFestival(`/${category}/${style}/${id}`);
       }
     }
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
@@ -124,6 +125,7 @@ const CreateEvent = ({
       updateFBEvent(eventToEdit.fbEvent);
       updateWebsite(eventToEdit.website);
     }
+    // eslint-disable-next-line
   }, [eventToEdit]);
 
   useEffect(() => {
