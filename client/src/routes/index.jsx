@@ -65,7 +65,7 @@ const AppRoutes = ({
       <Route path="/contact" component={ContactForm} />
       <Route
         path="/admin/createEvent"
-        render={() => <CreateEvent isUser={false} />}
+        render={() => <CreateEvent isUser={false} isAdmin />}
       />
       <Route
         path="/admin/authorizeEvents"
@@ -77,6 +77,7 @@ const AppRoutes = ({
           <CreateEvent
             isAdmin
             isEdit
+            isUser={false}
             match={match}
             fetchSingleEvent={fetchSingleEvent}
             singleEvent={singleEvent}
