@@ -58,7 +58,7 @@ export const updateRequest = (params, data) => {
     method: 'put',
     data
   })
-    .then(response => response.data)
+    .then(response => response.status)
     .catch(error => {
       console.log(error.response.data.error);
       return 'There was an error while updating the event.';
