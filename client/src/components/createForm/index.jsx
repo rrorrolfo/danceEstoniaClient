@@ -110,7 +110,9 @@ const CreateEvent = ({
       updateEventType(match.params.category);
       updateDancingStyles(styles);
       updateNameOfEvent(name);
-      updateTicketPrice(eventToEdit.ticketPrice);
+      updateTicketPrice(
+        eventToEdit.ticketPrice.slice(0, eventToEdit.ticketPrice.length - 3)
+      );
       updateTicketCurrency(ticketCurrency);
       updateEventDate(dateToISODate(dateOfEvent));
       updateEndDate(dateToISODate(finishDateOfEvent));
@@ -308,6 +310,7 @@ const CreateEvent = ({
       updateFBEvent('');
       updateWebsite('');
     }
+
     if (isAdmin && !isEdit) {
       updateSubmissionMessage(
         `The ${customTypeText} has been created succesfully!`
