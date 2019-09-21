@@ -19,7 +19,8 @@ const ResultsContainer = ({
   festivals,
   festivalsByStyle,
   toggleLoader,
-  updateLoaderText
+  updateLoaderText,
+  isAdmin
   /* topLevelMatch, */
 }) => {
   const [currentTimeFrame, updateTimeframe] = useState('');
@@ -41,13 +42,15 @@ const ResultsContainer = ({
   return (
     <Container>
       <h2 className="results-title centered">{title}</h2>
-      <NavigationTabs
-        category={category}
-        fetchEvents={fetchEvents}
-        fetchEventsByStyle={fetchEventsByStyle}
-        fetchFestivals={fetchFestivals}
-        fetchFestivalsByStyle={fetchFestivalsByStyle}
-      />
+      {!isAdmin ? (
+        <NavigationTabs
+          category={category}
+          fetchEvents={fetchEvents}
+          fetchEventsByStyle={fetchEventsByStyle}
+          fetchFestivals={fetchFestivals}
+          fetchFestivalsByStyle={fetchFestivalsByStyle}
+        />
+      ) : null}
       {/* <TimeFrameFilter
           fetchEvents={fetchEvents}
           topLevelMatch={topLevelMatch}
@@ -55,6 +58,24 @@ const ResultsContainer = ({
           updateTimeFrame={updateTimeFrame}
         /> */}
       <Switch>
+        <Route
+          path="/admin/allEvents"
+          exact
+          render={({ match }) => (
+            <SearchResults
+              isAdmin={isAdmin}
+              results={category === 'events' ? events : festivals}
+              match={match}
+              category={category}
+              fetchEvents={fetchEvents}
+              fetchFestivals={fetchFestivals}
+              currentTimeFrame={currentTimeFrame}
+              updateDancingStyle={updateDancingStyle}
+              toggleLoader={toggleLoader}
+              updateLoaderText={updateLoaderText}
+            />
+          )}
+        />
         <Route
           path={`/${category}`}
           exact
@@ -120,7 +141,8 @@ ResultsContainer.propTypes = {
     PropTypes.object,
     PropTypes.arrayOf(PropTypes.object)
   ]),
-  toggleLoader: PropTypes.func
+  toggleLoader: PropTypes.func,
+  isAdmin: PropTypes.bool
   // eslint-disable-next-line react/forbid-prop-types
   // topLevelMatch: PropTypes.object
 };
@@ -134,7 +156,8 @@ ResultsContainer.defaultProps = {
   festivals: null,
   fetchFestivalsByStyle: null,
   festivalsByStyle: null,
-  toggleLoader: null
+  toggleLoader: null,
+  isAdmin: false
   // topLevelMatch: null
 };
 
