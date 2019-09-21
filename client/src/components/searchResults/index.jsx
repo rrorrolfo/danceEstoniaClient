@@ -13,7 +13,8 @@ const SearchResults = ({
   updateDancingStyle,
   history,
   toggleLoader,
-  updateLoaderText
+  updateLoaderText,
+  isAdmin
 }) => {
   const [pageCount, updatePageCount] = useState(1);
   const { style } = match.params;
@@ -47,6 +48,7 @@ const SearchResults = ({
         .filter(result => resultsByGroup.indexOf(result) <= pageCount * 3 - 1)
         .map(group => (
           <TimeFrameGroup
+            isAdmin={isAdmin}
             dateHappening={
               timeFrame === 'week' ? group._id.week : group._id.month
             }
@@ -108,13 +110,15 @@ SearchResults.propTypes = {
   match: PropTypes.object.isRequired,
   currentTimeFrame: PropTypes.oneOf(['week', 'month', '']).isRequired,
   updateDancingStyle: PropTypes.func,
-  toggleLoader: PropTypes.func
+  toggleLoader: PropTypes.func,
+  isAdmin: PropTypes.bool
 };
 
 SearchResults.defaultProps = {
   results: null,
   updateDancingStyle: null,
-  toggleLoader: null
+  toggleLoader: null,
+  isAdmin: false
 };
 
 export default withRouter(SearchResults);
