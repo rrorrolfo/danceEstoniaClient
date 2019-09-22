@@ -26,6 +26,7 @@ const DeleteInterface = ({ toggleModal, isAdmin }) => {
   ) => {
     return resultsByGroup.map(group => (
       <TimeFrameGroup
+        year={group._id.year}
         dateHappening={timeFrame === 'week' ? group._id.week : group._id.month}
         timeFrame={timeFrame}
         events={group.records}
