@@ -32,7 +32,8 @@ const AllEventsManager = ({
 
 AllEventsManager.propTypes = {
   isAdmin: PropTypes.bool,
-  match: PropTypes.bool,
+  // eslint-disable-next-line react/forbid-prop-types
+  match: PropTypes.object,
   toggleLoader: PropTypes.func,
   updateLoaderText: PropTypes.func
 };
