@@ -70,9 +70,7 @@ const EventDetails = ({
         fluid
         className="event-img"
         style={{
-          backgroundImage: `url(http://localhost:5000/${
-            selectedEvent.imageURL
-          })`,
+          backgroundImage: `url(${selectedEvent.imageURL})`,
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'cover',
           backgroundPosition: '50% 50%'
