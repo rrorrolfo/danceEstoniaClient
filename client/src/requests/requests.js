@@ -42,8 +42,7 @@ export const deleteRequest = params => {
     method: 'delete'
   })
     .then(response => response.data)
-    .catch(error => {
-      console.log(error.response.data.error);
+    .catch(() => {
       return 'There was an error while requesting the deletion.';
     });
 };
@@ -59,9 +58,8 @@ export const updateRequest = (params, data) => {
     data
   })
     .then(response => response.status)
-    .catch(error => {
-      console.log(error.response.data.error);
-      return 'There was an error while updating the event.';
+    .catch(() => {
+      return 500;
     });
 };
 
