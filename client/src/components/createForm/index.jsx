@@ -266,10 +266,18 @@ const CreateEvent = ({
       submissionStatus = await createEvent(eventType, eventData);
     }
 
-    if (isAdmin && isEdit && submissionStatus === 200) {
+    if (isEdit && submissionStatus === 200) {
       updateSubmissionMessage(
         `${eventToEdit.name} has been updated succesfully`
       );
+    }
+
+    if (isEdit && submissionStatus !== 200) {
+      const errorText = 'Image file size is too large (max - 5MB)';
+      updateSubmissionMessage(errorText);
+      updateAlertVariant('danger');
+      toggleSubmisionStatus(true);
+      return false;
     }
 
     if (!isEdit && submissionStatus !== 201) {
