@@ -43,7 +43,7 @@ const ResultCard = ({
         <div className="result-card-data-container">
           <Card.Img
             variant="top"
-            src={`http://localhost:5000/${result.imageURL}`}
+            src={result.imageURL}
             className="result-card-img"
           />
           <Card.Body className="result-card-body">
