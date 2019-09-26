@@ -74,9 +74,27 @@ const CreateEvent = ({
   const [showSubmissionStatus, toggleSubmisionStatus] = useState(false);
   const [alertVariant, updateAlertVariant] = useState('');
   const [submissionMessage, updateSubmissionMessage] = useState('');
+  const [requestingAction, toggleRequestingAction] = useState(false);
 
   // Event to Edit
   const [eventToEdit, setEventToEdit] = useState(singleEvent || singleFestival);
+
+  // Submit button text
+  const customTypeText =
+    eventType === '' ? 'event' : eventType.slice(0, eventType.length - 1);
+  const [buttonText, updateButtonText] = useState(`Create ${customTypeText}`);
+  useEffect(() => {
+    if (requestingAction) {
+      return updateButtonText(
+        isEdit
+          ? `Updating ${customTypeText}...`
+          : `Creating ${customTypeText}...`
+      );
+    }
+    return updateButtonText(
+      isEdit ? `Update ${customTypeText}` : `Create ${customTypeText}`
+    );
+  }, [requestingAction, eventType]);
 
   useEffect(() => {
     updateDate(getTodayISODate());
@@ -147,9 +165,6 @@ const CreateEvent = ({
     return () => clearTimeout(clearMessage);
   }, [showSubmissionStatus, isUser]);
 
-  const customTypeText =
-    eventType === '' ? 'event' : eventType.slice(0, eventType.length - 1);
-
   const validateDate = (date, isEndDate = false) => {
     const dateRegex = dateToValidate =>
       /^\d{4}-\d{2}-\d{2}$/i.test(dateToValidate);
@@ -177,6 +192,8 @@ const CreateEvent = ({
 
   const handleSubmit = async event => {
     event.preventDefault();
+    toggleRequestingAction(true);
+
     const img = document.querySelector('#event-banner');
     let errors = 0;
     toggleSubmisionStatus(false);
@@ -224,6 +241,7 @@ const CreateEvent = ({
     }
 
     if (errors !== 0) {
+      toggleRequestingAction(false);
       updateSubmissionMessage(
         'Oops! Seems that some information is missing...'
       );
@@ -266,17 +284,12 @@ const CreateEvent = ({
       submissionStatus = await createEvent(eventType, eventData);
     }
 
-    if (isEdit && submissionStatus === 200) {
-      updateSubmissionMessage(
-        `${eventToEdit.name} has been updated succesfully`
-      );
-    }
-
     if (isEdit && submissionStatus !== 200) {
       const errorText = 'Image file size is too large (max - 5MB)';
       updateSubmissionMessage(errorText);
       updateAlertVariant('danger');
       toggleSubmisionStatus(true);
+      toggleRequestingAction(false);
       return false;
     }
 
@@ -296,7 +309,14 @@ const CreateEvent = ({
       updateSubmissionMessage(errorText);
       updateAlertVariant('danger');
       toggleSubmisionStatus(true);
+      toggleRequestingAction(false);
       return false;
+    }
+
+    if (isEdit && submissionStatus === 200) {
+      updateSubmissionMessage(
+        `${eventToEdit.name} has been updated succesfully`
+      );
     }
 
     if (isUser && !isEdit) {
@@ -329,6 +349,7 @@ const CreateEvent = ({
 
     updateAlertVariant('success');
     toggleSubmisionStatus(true);
+    toggleRequestingAction(false);
 
     return true;
   };
@@ -337,7 +358,9 @@ const CreateEvent = ({
     <Container className="create-form-container">
       <Container className="form-title margin-on-top">
         <h1 className="centered">
-          Fill the following form to create your event.
+          {`Fill the following form to ${
+            isEdit ? 'edit' : 'create'
+          } your ${customTypeText}.`}
         </h1>
       </Container>
       <Form onSubmit={event => handleSubmit(event)} className="margin-on-top">
@@ -839,8 +862,9 @@ const CreateEvent = ({
           variant="primary"
           type="submit"
           className="submit-create-form-button"
+          disabled={requestingAction}
         >
-          {isEdit ? `Edit ${customTypeText}` : `Create ${customTypeText}`}
+          {buttonText}
         </Button>
       </Form>
     </Container>
