@@ -94,7 +94,7 @@ const CreateEvent = ({
     return updateButtonText(
       isEdit ? `Update ${customTypeText}` : `Create ${customTypeText}`
     );
-  }, [requestingAction, eventType]);
+  }, [requestingAction, eventType, isEdit, customTypeText]);
 
   useEffect(() => {
     updateDate(getTodayISODate());
