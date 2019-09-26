@@ -9,7 +9,7 @@ import axios from 'axios';
  * @param {number.oneOf([0, 1])} params.all 1 will return authorized and unauthorized events, 0 will return authorized events
  */
 export const apiRequest = params => {
-  return axios(`http://localhost:5000${params.endPoint}`, {
+  return axios(`https://dance-estonia.herokuapp.com${params.endPoint}`, {
     params: {
       timeFrame: params.timeFrame || null,
       delete: params.delete || 0,
@@ -25,7 +25,7 @@ export const apiRequest = params => {
  */
 export const createEvent = (eventType, data) => {
   return axios({
-    url: `http://localhost:5000/${eventType}`,
+    url: `https://dance-estonia.herokuapp.com/${eventType}`,
     method: 'post',
     data
   })
@@ -38,7 +38,7 @@ export const createEvent = (eventType, data) => {
  */
 export const deleteRequest = params => {
   return axios({
-    url: `http://localhost:5000${params.endPoint}`,
+    url: `https://dance-estonia.herokuapp.com${params.endPoint}`,
     method: 'delete'
   })
     .then(response => response.data)
@@ -53,7 +53,7 @@ export const deleteRequest = params => {
  */
 export const updateRequest = (params, data) => {
   return axios({
-    url: `http://localhost:5000${params.endPoint}`,
+    url: `https://dance-estonia.herokuapp.com${params.endPoint}`,
     method: 'put',
     data
   })
