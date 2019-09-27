@@ -243,7 +243,7 @@ const CreateEvent = ({
       errors += 1;
     }
 
-    if (invalidDate || toggleInvalidFBUrl || invalidTicketURL) {
+    if (invalidDate || invalidFBUrl || invalidTicketURL || invalidWebsite) {
       errors += 1;
     }
 
