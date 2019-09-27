@@ -112,7 +112,12 @@
 
 .loading {
   margin-top: 5vh;
-  margin-bottom: 50px;
+  margin-bottom: 15px;
+}
+
+.dance-couple-loader {
+  height: 200px;
+  width: 200px;
 }
 
 /********* Results Container *********/
