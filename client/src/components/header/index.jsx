@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Container, Navbar, Nav, NavDropdown } from 'react-bootstrap';
-import { danceEstoniaWt } from '../../assets/icons/Logos';
+import { danceEstoniaWt, danceCouple } from '../../assets/icons/Logos';
 import './header.css';
 
 const Header = () => {
@@ -35,12 +35,7 @@ const Header = () => {
       <Container>
         <Navbar.Brand className="dance-estonia-logo-container">
           <NavLink to="/">
-            <img
-              src="./assets/couple-logo-48x75.png"
-              alt="Dance Estonia"
-              title="Dance Estonia"
-              className="dancing-couple-logo"
-            />
+            {danceCouple('dancing-couple-logo', '#fff')}
             {danceEstoniaWt(
               'danceEstoniaWt-container',
               'danceEstoniaWt-logo-group'
