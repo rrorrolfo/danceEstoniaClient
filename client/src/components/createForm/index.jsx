@@ -132,7 +132,9 @@ const CreateEvent = ({
       updateDancingStyles(styles);
       updateNameOfEvent(name);
       updateTicketPrice(
-        eventToEdit.ticketPrice.slice(0, eventToEdit.ticketPrice.length - 3)
+        eventToEdit.ticketPrice === 'Free'
+          ? '0'
+          : eventToEdit.ticketPrice.slice(0, eventToEdit.ticketPrice.length - 3)
       );
       updateTicketCurrency(ticketCurrency);
       updateTicketURL(eventToEdit.ticketURL);
@@ -195,15 +197,21 @@ const CreateEvent = ({
 
   const handleSubmit = async event => {
     event.preventDefault();
-    toggleRequestingAction(true);
 
-    const img = document.querySelector('#event-banner');
-    let errors = 0;
+    toggleRequestingAction(true);
     toggleSubmisionStatus(false);
     toggleNoEventTypeselected(false);
     toggleNoStylesSelected(false);
     toggleInvalidName(false);
     toggleMissingBanner(false);
+
+    const img = document.querySelector('#event-banner');
+    const ticketPriceString =
+      ticketPrice === '' || ticketPrice === 0
+        ? 'Free'
+        : `${ticketPrice} ${ticketCurrency}`;
+
+    let errors = 0;
 
     if (isFieldEmpty(eventType)) {
       toggleNoEventTypeselected(true);
@@ -265,7 +273,7 @@ const CreateEvent = ({
     eventData.append('timeOfEvent', startingTime);
     eventData.append('description', description);
     eventData.append('fbEvent', fbEvent);
-    eventData.append('ticketPrice', `${ticketPrice} ${ticketCurrency}`);
+    eventData.append('ticketPrice', ticketPriceString);
     eventData.append('ticketURL', ticketURL);
     if (isAdmin) {
       eventData.append('isAuthorized', true);
