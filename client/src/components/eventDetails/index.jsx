@@ -36,8 +36,7 @@ const EventDetails = ({
   useEffect(() => {
     actionOnMount(`/${category}/${match.params.category}/${id}`);
     setTimeout(() => toggleLoader(false), 1000);
-    // eslint-disable-next-line
-  }, []);
+  }, [toggleLoader, match, actionOnMount, id, category]);
 
   useEffect(() => {
     if (error.status !== 0) {
@@ -52,8 +51,7 @@ const EventDetails = ({
         state: { errorStatus: error.status }
       });
     }
-    // eslint-disable-next-line
-  }, [error]);
+  }, [error, resetErrors, resetFestivalsErrors, category, history]);
 
   const selectedEvent = category === 'events' ? singleEvent : singleFestival;
   const formatMapSrc = () => {
