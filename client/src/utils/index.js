@@ -46,8 +46,12 @@ export const isFieldEmpty = string => {
  * @param {func} callback2 - Function to be called after the url provided is assesed, this is used to display a valid feedback.
  */
 export const linkUrlSanitizer = (url, callback, callback2 = null) => {
-  callback(false);
   let finalURL = url;
+
+  if (finalURL === '') {
+    return callback(false);
+  }
+
   // check for "http://"" or "https://""
   const hasProtocol = /^http[s]?:[\/]{2}/i.test(url);
   if (!hasProtocol) {
@@ -73,6 +77,8 @@ export const linkUrlSanitizer = (url, callback, callback2 = null) => {
   if (callback2) {
     callback2(true);
   }
+
+  callback(false);
   return finalURL;
 };
 
