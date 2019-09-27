@@ -46,6 +46,8 @@ const CreateEvent = ({
   // Ticket data
   const [ticketPrice, updateTicketPrice] = useState(0);
   const [ticketCurrency, updateTicketCurrency] = useState('EUR');
+  const [ticketURL, updateTicketURL] = useState('');
+  const [invalidTicketURL, toggleInvalidTicketURL] = useState(false);
   // Date of event
   const [eventDate, updateEventDate] = useState('');
   const [invalidDate, toggleInvalidDate] = useState(false);
@@ -133,6 +135,7 @@ const CreateEvent = ({
         eventToEdit.ticketPrice.slice(0, eventToEdit.ticketPrice.length - 3)
       );
       updateTicketCurrency(ticketCurrency);
+      updateTicketURL(eventToEdit.ticketURL);
       updateEventDate(dateToISODate(dateOfEvent));
       updateEndDate(dateToISODate(finishDateOfEvent));
       updateStartingTime(timeOfEvent);
@@ -232,7 +235,7 @@ const CreateEvent = ({
       errors += 1;
     }
 
-    if (invalidDate) {
+    if (invalidDate || toggleInvalidFBUrl || invalidTicketURL) {
       errors += 1;
     }
 
@@ -263,6 +266,7 @@ const CreateEvent = ({
     eventData.append('description', description);
     eventData.append('fbEvent', fbEvent);
     eventData.append('ticketPrice', `${ticketPrice} ${ticketCurrency}`);
+    eventData.append('ticketURL', ticketURL);
     if (isAdmin) {
       eventData.append('isAuthorized', true);
     } else {
@@ -322,7 +326,7 @@ const CreateEvent = ({
     if (isUser && !isEdit) {
       const nextStepsMessage = (
         <div>
-          <h4 className="centered">{`Thank you for creating a new ${customTypeText}!.`}</h4>
+          <h4 className="centered">{`Thank you for creating a new ${customTypeText}!`}</h4>
           <p>{`The ${customTypeText} "${nameOfEvent}" will be reviewed by one of our team members and if everything is ok it will be visible in Dance Estonia.`}</p>{' '}
           <p>This process should take only a few minutes.</p>
         </div>
@@ -330,6 +334,7 @@ const CreateEvent = ({
       updateSubmissionMessage(nextStepsMessage);
       updateNameOfEvent('');
       updateTicketPrice(0);
+      updateTicketURL('');
       updateEventDate(getTodayISODate());
       updateEndDate(getTodayISODate());
       updateStartingTime('21:00');
@@ -510,173 +515,188 @@ const CreateEvent = ({
 
           <Form.Group
             as={Col}
-            controlId="ticket-price"
-            style={{ display: 'flex', paddingLeft: '7.5px' }}
+            controlId="select-input-day-event"
+            className="margin-on-top"
           >
-            <Form.Row className="ticket-price-input-1">
-              <Form.Label className="bold">Ticket Price</Form.Label>
-              <Form.Control
-                placeholder="Price in numbers (e.g. 10, 5.5, 5 - 25)"
-                className="ticket-price-amount"
-                name="ticket-price-amount"
-                value={ticketPrice}
-                onChange={event => updateTicketPrice(event.target.value)}
-              />
-            </Form.Row>
-            <Form.Row className="ticket-price-input-2">
-              <Form.Group>
-                <Form.Label className="bold">Currency</Form.Label>
-                <Form.Control
-                  as="select"
-                  name="select-country"
-                  onChange={event => updateTicketCurrency(event.target.value)}
-                  value={ticketCurrency}
-                >
-                  <option value="EUR">EUR</option>
-                  <option value="BYN">BYN</option>
-                  <option value="BAM">BAM</option>
-                  <option value="BGN">BGN</option>
-                  <option value="HRK">HRK</option>
-                  <option value="CZK">CZK</option>
-                  <option value="DKK">DKK</option>
-                  <option value="GEL">GEL</option>
-                  <option value="HUF">HUF</option>
-                  <option value="ISK">ISK</option>
-                  <option value="CHF">CHF</option>
-                  <option value="MDL">MDL</option>
-                  <option value="MKD">MKD</option>
-                  <option value="NOK">NOK</option>
-                  <option value="PLN">PLN</option>
-                  <option value="RON">RON</option>
-                  <option value="RUB">RUB</option>
-                  <option value="RSD">RSD</option>
-                  <option value="SEK">SEK</option>
-                  <option value="CHF">CHF</option>
-                  <option value="TRY">TRY</option>
-                  <option value="UAH">UAH</option>
-                  <option value="GBP">GBP</option>
-                </Form.Control>
-              </Form.Group>
-            </Form.Row>
-            <Form.Row>
-              <OverlayTrigger
-                overlay={
-                  <Tooltip id="tooltip-ticket-price-info">
-                    If the {customTypeText} is free you can leave &quot;0&quot;
-                    as the ticket price.
-                  </Tooltip>
-                }
-              >
-                <span
-                  className="d-inline-block tooltip-ticket-price"
-                  style={{ marginLeft: '50px', marginTop: '35px' }}
-                >
-                  <div>{firstLetterToUppercase(customTypeText)} is free?</div>
-                </span>
-              </OverlayTrigger>
-            </Form.Row>
+            <Form.Label className="date-of-event-label bold">
+              Date of the {customTypeText}: *
+            </Form.Label>
+
+            <input
+              type="date"
+              id="select-day-of-event"
+              name="day-of-event"
+              value={eventDate}
+              min={todayDate}
+              max="2022-12-31"
+              onChange={event => {
+                updateEventDate(event.target.value);
+                validateDate(event.target.value);
+              }}
+            />
+            <Form.Control.Feedback
+              type="invalid"
+              style={{ display: invalidDate ? 'block' : 'none' }}
+            >
+              Please select the date of the {customTypeText}.
+            </Form.Control.Feedback>
           </Form.Group>
 
-          <Form.Row className="margin-on-top">
+          {eventType === 'festivals' ? (
             <Form.Group
               as={Col}
-              controlId="select-input-day-event"
+              controlId="select-input-end-day-festival"
               className="margin-on-top"
             >
               <Form.Label className="date-of-event-label bold">
-                Date of the {customTypeText}: *
+                End date of the festival: *
               </Form.Label>
 
               <input
                 type="date"
-                id="select-day-of-event"
+                id="select-end-day-of-festival"
                 name="day-of-event"
-                value={eventDate}
+                value={endDate}
                 min={todayDate}
                 max="2022-12-31"
                 onChange={event => {
-                  updateEventDate(event.target.value);
-                  validateDate(event.target.value);
+                  updateEndDate(event.target.value);
+                  validateDate(event.target.value, true);
                 }}
               />
               <Form.Control.Feedback
                 type="invalid"
-                style={{ display: invalidDate ? 'block' : 'none' }}
+                style={{ display: invalidEndDate ? 'block' : 'none' }}
               >
-                Please select the date of the {customTypeText}.
+                Please select the date of the festival.
               </Form.Control.Feedback>
             </Form.Group>
+          ) : null}
 
-            {eventType === 'festivals' ? (
-              <Form.Group
-                as={Col}
-                controlId="select-input-end-day-festival"
-                className="margin-on-top"
-              >
-                <Form.Label className="date-of-event-label bold">
-                  End date of the festival: *
-                </Form.Label>
+          <Form.Group
+            as={Col}
+            controlId="select-time-start-event"
+            className="margin-on-top"
+          >
+            <Form.Label className="time-of-event-label bold">
+              Time the {customTypeText} starts: *
+            </Form.Label>
 
-                <input
-                  type="date"
-                  id="select-end-day-of-festival"
-                  name="day-of-event"
-                  value={endDate}
-                  min={todayDate}
-                  max="2022-12-31"
-                  onChange={event => {
-                    updateEndDate(event.target.value);
-                    validateDate(event.target.value, true);
-                  }}
-                />
-                <Form.Control.Feedback
-                  type="invalid"
-                  style={{ display: invalidEndDate ? 'block' : 'none' }}
-                >
-                  Please select the date of the festival.
-                </Form.Control.Feedback>
-              </Form.Group>
-            ) : null}
-
-            <Form.Group
-              as={Col}
-              controlId="select-time-start-event"
-              className="margin-on-top"
-            >
-              <Form.Label className="time-of-event-label bold">
-                Time the {customTypeText} starts: *
-              </Form.Label>
-
-              <input
-                type="time"
-                id="select-time-of-event"
-                name="time-of-event"
-                value={startingTime}
-                onChange={event => updateStartingTime(event.target.value)}
-              />
-            </Form.Group>
-          </Form.Row>
-
-          <Form.Group as={Col} controlId="venue">
-            <Form.Label className="bold">Venue name *</Form.Label>
-            <Form.Control
-              placeholder={
-                eventType === ''
-                  ? 'Venue of the event'
-                  : `Venue of the ${eventType.slice(0, eventType.length - 1)}`
-              }
-              value={venueOfEvent}
-              onChange={event => {
-                updateVenue(event.target.value);
-                toggleInvalidVenueName(isFieldEmpty(event.target.value));
-              }}
-              isInvalid={invalidVenueName}
+            <input
+              type="time"
+              id="select-time-of-event"
+              name="time-of-event"
+              value={startingTime}
+              onChange={event => updateStartingTime(event.target.value)}
             />
-            <Form.Control.Feedback type="invalid">
-              Please add the name of the venue.
-            </Form.Control.Feedback>
           </Form.Group>
         </Form.Row>
+
+        <Form.Group
+          as={Col}
+          controlId="ticket-price"
+          style={{ display: 'flex', paddingLeft: '7.5px' }}
+          className="margin-on-top"
+        >
+          <Form.Row className="ticket-price-input-1">
+            <Form.Label className="bold">Ticket Price</Form.Label>
+            <Form.Control
+              placeholder="Price in numbers (e.g. 10, 5.5, 5 - 25)"
+              className="ticket-price-amount"
+              name="ticket-price-amount"
+              value={ticketPrice}
+              onChange={event => updateTicketPrice(event.target.value)}
+            />
+          </Form.Row>
+          <Form.Row className="ticket-price-input-2">
+            <Form.Group>
+              <Form.Label className="bold">Currency</Form.Label>
+              <Form.Control
+                as="select"
+                name="select-country"
+                onChange={event => updateTicketCurrency(event.target.value)}
+                value={ticketCurrency}
+              >
+                <option value="EUR">EUR</option>
+                <option value="BYN">BYN</option>
+                <option value="BAM">BAM</option>
+                <option value="BGN">BGN</option>
+                <option value="HRK">HRK</option>
+                <option value="CZK">CZK</option>
+                <option value="DKK">DKK</option>
+                <option value="GEL">GEL</option>
+                <option value="HUF">HUF</option>
+                <option value="ISK">ISK</option>
+                <option value="CHF">CHF</option>
+                <option value="MDL">MDL</option>
+                <option value="MKD">MKD</option>
+                <option value="NOK">NOK</option>
+                <option value="PLN">PLN</option>
+                <option value="RON">RON</option>
+                <option value="RUB">RUB</option>
+                <option value="RSD">RSD</option>
+                <option value="SEK">SEK</option>
+                <option value="CHF">CHF</option>
+                <option value="TRY">TRY</option>
+                <option value="UAH">UAH</option>
+                <option value="GBP">GBP</option>
+              </Form.Control>
+            </Form.Group>
+          </Form.Row>
+          <Form.Row>
+            <OverlayTrigger
+              overlay={
+                <Tooltip id="tooltip-ticket-price-info">
+                  If the {customTypeText} is free you can leave &quot;0&quot; as
+                  the ticket price.
+                </Tooltip>
+              }
+            >
+              <span
+                className="d-inline-block tooltip-ticket-price"
+                style={{ marginLeft: '50px', marginTop: '35px' }}
+              >
+                <div>{firstLetterToUppercase(customTypeText)} is free?</div>
+              </span>
+            </OverlayTrigger>
+          </Form.Row>
+        </Form.Group>
+
+        <Form.Group controlId="venue">
+          <Form.Label className="bold">Link to buy tickets</Form.Label>
+          <Form.Control
+            placeholder={`Url where you can buy tickets for this ${customTypeText}`}
+            value={ticketURL}
+            onChange={event => {
+              updateTicketURL(event.target.value);
+              linkUrlSanitizer(event.target.value, toggleInvalidTicketURL);
+            }}
+            isInvalid={invalidTicketURL}
+          />
+          <Form.Control.Feedback type="invalid">
+            The url format is not valid.
+          </Form.Control.Feedback>
+        </Form.Group>
+
+        <Form.Group controlId="venue">
+          <Form.Label className="bold">Venue name *</Form.Label>
+          <Form.Control
+            placeholder={
+              eventType === ''
+                ? 'Venue of the event'
+                : `Venue of the ${eventType.slice(0, eventType.length - 1)}`
+            }
+            value={venueOfEvent}
+            onChange={event => {
+              updateVenue(event.target.value);
+              toggleInvalidVenueName(isFieldEmpty(event.target.value));
+            }}
+            isInvalid={invalidVenueName}
+          />
+          <Form.Control.Feedback type="invalid">
+            Please add the name of the venue.
+          </Form.Control.Feedback>
+        </Form.Group>
 
         <Form.Row className="margin-on-top">
           <Form.Group controlId="venue-address">
