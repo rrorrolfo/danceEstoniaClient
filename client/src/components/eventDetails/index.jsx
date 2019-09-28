@@ -36,7 +36,8 @@ const EventDetails = ({
   useEffect(() => {
     actionOnMount(`/${category}/${match.params.category}/${id}`);
     setTimeout(() => toggleLoader(false), 1000);
-  }, [toggleLoader, match, actionOnMount, id, category]);
+    // eslint-disable-next-line
+  }, []);
 
   useEffect(() => {
     if (error.status !== 0) {
