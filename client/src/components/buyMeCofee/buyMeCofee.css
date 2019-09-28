@@ -25,6 +25,7 @@
   -moz-transition: 0.3s all linear !important;
   -ms-transition: 0.3s all linear !important;
   transition: 0.3s all linear !important;
+  position: relative;
 }
 
 .bmc-button span {
@@ -35,7 +36,7 @@
 .mobile-cta {
   display: block !important;
   width: 175px;
-  margin: 0 auto 25px !important;
+  margin: 0 auto 50px !important;
 }
 
 .large-screens-cta {
