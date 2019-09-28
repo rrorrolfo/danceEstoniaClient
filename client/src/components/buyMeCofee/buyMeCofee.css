@@ -33,10 +33,15 @@
   font-family: 'Cookie', cursive !important;
 }
 
-.mobile-cta {
+.mobile-cta,
+.contact-coffee {
   display: block !important;
   width: 175px;
   margin: 0 auto 50px !important;
+}
+
+.contact-coffee {
+  margin-top: 65px !important;
 }
 
 .large-screens-cta {
