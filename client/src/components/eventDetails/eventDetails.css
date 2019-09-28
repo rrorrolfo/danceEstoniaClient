@@ -29,6 +29,10 @@
   width: 25px;
 }
 
+.ticket-url {
+  margin-left: 10px;
+}
+
 .event-description {
   margin: 25px 0;
 }

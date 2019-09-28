@@ -155,6 +155,17 @@ const EventDetails = ({
               <td>{tickets('event-ticket')}</td>
               <td className="event-ticket-price">
                 {selectedEvent.ticketPrice}
+                {selectedEvent.ticketURL ? (
+                  <span className="ticket-url">
+                    <a
+                      href={selectedEvent.ticketPrice}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      - Buy tickets here -
+                    </a>
+                  </span>
+                ) : null}
               </td>
             </tr>
           </tbody>
