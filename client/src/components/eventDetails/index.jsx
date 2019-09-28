@@ -82,7 +82,7 @@ const EventDetails = ({
           dancingStyle={match.params.category}
           eventName={selectedEvent.name}
         />
-        <BuyMeCofeeCTA />
+        <BuyMeCofeeCTA customClass="large-screens-cta" />
       </Container>
       <Container className="event-details-main-container">
         <h1 className="event-title centered">{selectedEvent.name}</h1>
@@ -190,6 +190,9 @@ const EventDetails = ({
           allowFullScreen
           className="event-map"
         />
+      </Container>
+      <Container>
+        <BuyMeCofeeCTA customClass="mobile-cta" />
       </Container>
     </React.Fragment>
   ) : null;
