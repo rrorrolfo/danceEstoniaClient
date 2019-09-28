@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import './eventDetails.css';
 import mapsApiKey from '../../config/config';
 import Breadcrumbs from '../breadcrumbs';
+import BuyMeCofeeCTA from '../buyMeCofee';
 import TextEditor from '../textEditor';
 import { arrayToUpperCase, isoStringToDate } from '../../utils';
 import {
@@ -75,11 +76,14 @@ const EventDetails = ({
           backgroundPosition: '50% 50%'
         }}
       />
-      <Breadcrumbs
-        category={category}
-        dancingStyle={match.params.category}
-        eventName={selectedEvent.name}
-      />
+      <Container fluid className="breadcrumbs-container">
+        <Breadcrumbs
+          category={category}
+          dancingStyle={match.params.category}
+          eventName={selectedEvent.name}
+        />
+        <BuyMeCofeeCTA />
+      </Container>
       <Container className="event-details-main-container">
         <h1 className="event-title centered">{selectedEvent.name}</h1>
         <Table className="event-details-table">

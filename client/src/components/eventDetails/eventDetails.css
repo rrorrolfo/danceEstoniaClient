@@ -6,6 +6,12 @@
   padding: 0 25px 25px;
 }
 
+.breadcrumbs-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
 .calendar.event-calendar,
 .clock.event-clock,
 .tickets.event-ticket,
