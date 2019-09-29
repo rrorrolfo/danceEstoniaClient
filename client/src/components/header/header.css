@@ -74,6 +74,10 @@
   color: rgba(255, 255, 255, 0.75);
 }
 
+.lang-selection {
+  margin-left: 25px;
+}
+
 /********* Media queries ********/
 
 @media (min-width: 576px) {

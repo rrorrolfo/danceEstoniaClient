@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Container, Navbar, Nav, NavDropdown } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 import { danceEstoniaWt, danceCouple } from '../../assets/icons/Logos';
 import './header.css';
 
-const Header = () => {
+const Header = ({ translatedText, selectedLang }) => {
   const [displayEventsMenu, toggleEventsMenu] = useState(false);
   const [displayFestivalsMenu, toggleFestivalsMenu] = useState(false);
   const checkForShowClass = element => {
@@ -60,7 +61,7 @@ const Header = () => {
                     to="/events"
                     onClick={() => handleClick('events')}
                   >
-                    All
+                    {translatedText.header.all}
                   </NavLink>
                 </li>
                 <li>
@@ -109,7 +110,7 @@ const Header = () => {
                     onClick={() => handleClick()}
                     to="/festivals"
                   >
-                    All
+                    {translatedText.header.all}
                   </NavLink>
                 </li>
                 <li>
@@ -148,13 +149,31 @@ const Header = () => {
               Create Event
             </NavLink>
             <NavLink to="/contact" className="main-nav-link">
-              Contact
+              {translatedText.header.contact}
             </NavLink>
+            <NavDropdown
+              title={selectedLang.toUpperCase()}
+              className="lang-selection"
+            >
+              <NavDropdown.Item>Eesti Keeles</NavDropdown.Item>
+              <NavDropdown.Item>English</NavDropdown.Item>
+            </NavDropdown>
           </Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>
   );
+};
+
+Header.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
+  translatedText: PropTypes.object,
+  selectedLang: PropTypes.string
+};
+
+Header.defaultProps = {
+  translatedText: {},
+  selectedLang: 'est'
 };
 
 export default Header;
