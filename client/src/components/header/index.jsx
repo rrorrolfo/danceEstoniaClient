@@ -5,13 +5,15 @@ import PropTypes from 'prop-types';
 import { danceEstoniaWt, danceCouple } from '../../assets/icons/Logos';
 import './header.css';
 
-const Header = ({ translatedText, selectedLang }) => {
+const Header = ({ translatedText, selectedLang, setLanguage }) => {
   const [displayEventsMenu, toggleEventsMenu] = useState(false);
   const [displayFestivalsMenu, toggleFestivalsMenu] = useState(false);
+
   const checkForShowClass = element => {
     const node = document.querySelector(`.${element}`);
     return setTimeout(() => node.classList.contains('.show'), 100);
   };
+
   const handleClick = cat => {
     if (cat === 'events') {
       const eventMenu = document.querySelector('.events');
@@ -154,9 +156,14 @@ const Header = ({ translatedText, selectedLang }) => {
             <NavDropdown
               title={selectedLang.toUpperCase()}
               className="lang-selection"
+              onClick={event => {
+                if (event.target.className === 'dropdown-item') {
+                  setLanguage(event.target.dataset.lang);
+                }
+              }}
             >
-              <NavDropdown.Item>Eesti Keeles</NavDropdown.Item>
-              <NavDropdown.Item>English</NavDropdown.Item>
+              <NavDropdown.Item data-lang="est">Eesti Keeles</NavDropdown.Item>
+              <NavDropdown.Item data-lang="eng">English</NavDropdown.Item>
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>

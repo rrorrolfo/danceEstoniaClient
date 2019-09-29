@@ -1,3 +1,4 @@
+/* eslint-disable react/forbid-prop-types */
 /* eslint-disable no-shadow */
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter } from 'react-router-dom';
@@ -15,10 +16,12 @@ import {
   fetchSingleFestival,
   resetFestivalsErrors
 } from '../actions/festivals';
+import { setLanguage } from '../actions/config';
 import Header from '../components/header';
 import AppRoutes from '../routes';
 import Loader from '../components/loader';
 import MainModal from '../components/modal';
+import * as texts from '../translations';
 import './app.css';
 
 const App = ({
@@ -35,7 +38,9 @@ const App = ({
   resetErrors,
   resetFestivalsErrors,
   fetchingEvents,
-  fetchingFestivals
+  fetchingFestivals,
+  selectedLang,
+  setLanguage
 }) => {
   const [isLoading, toggleLoader] = useState(true);
   const [showModal, toggleModal] = useState({
@@ -44,6 +49,7 @@ const App = ({
     callback: null
   });
   const [loaderText, updateLoaderText] = useState('Ready to dance?');
+  const [translatedText, updateTranslatedText] = useState({ ...texts.t__est });
 
   useEffect(() => {
     fetchEvents();
@@ -73,10 +79,18 @@ const App = ({
     }
   }, [eventError, festivalError, resetErrors, resetFestivalsErrors]);
 
+  useEffect(() => {
+    updateTranslatedText(selectedLang === 'est' ? texts.t__est : texts.t__eng);
+  }, [selectedLang]);
+
   return (
     <BrowserRouter>
       <div>
-        <Header />
+        <Header
+          translatedText={translatedText}
+          selectedLang={selectedLang}
+          setLanguage={setLanguage}
+        />
         <AppRoutes
           fetchSingleEvent={fetchSingleEvent}
           singleEvent={singleEvent}
@@ -109,7 +123,8 @@ const mapStateToProps = state => {
     eventError: state.events.errors,
     festivalError: state.festivals.errors,
     fetchingEvents: state.events.fetching,
-    fetchingFestivals: state.festivals.fetching
+    fetchingFestivals: state.festivals.fetching,
+    selectedLang: state.config.lang
   };
 };
 
@@ -121,7 +136,8 @@ const mapDispatchToProps = {
   fetchSingleEvent,
   fetchSingleFestival,
   resetErrors,
-  resetFestivalsErrors
+  resetFestivalsErrors,
+  setLanguage
 };
 
 App.propTypes = {
@@ -131,23 +147,22 @@ App.propTypes = {
   fetchFestivalsByStyle: PropTypes.func.isRequired,
   fetchSingleEvent: PropTypes.func.isRequired,
   fetchSingleFestival: PropTypes.func.isRequired,
-  // eslint-disable-next-line react/forbid-prop-types
   singleEvent: PropTypes.object,
-  // eslint-disable-next-line react/forbid-prop-types
   singleFestival: PropTypes.object,
-  // eslint-disable-next-line react/forbid-prop-types
   eventError: PropTypes.object,
-  // eslint-disable-next-line react/forbid-prop-types
   festivalError: PropTypes.object,
   resetErrors: PropTypes.func.isRequired,
-  resetFestivalsErrors: PropTypes.func.isRequired
+  resetFestivalsErrors: PropTypes.func.isRequired,
+  selectedLang: PropTypes.string,
+  setLanguage: PropTypes.func.isRequired
 };
 
 App.defaultProps = {
   singleEvent: null,
   singleFestival: null,
   eventError: { status: 0 },
-  festivalError: { status: 0 }
+  festivalError: { status: 0 },
+  selectedLang: 'est'
 };
 
 export default connect(
