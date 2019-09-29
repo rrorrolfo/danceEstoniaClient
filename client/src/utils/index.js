@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 /* eslint-disable no-useless-escape */
 export const firstLetterToUppercase = string => {
   return `${string.charAt(0).toUpperCase()}${string.slice(1)}`;
@@ -82,36 +83,79 @@ export const linkUrlSanitizer = (url, callback, callback2 = null) => {
   return finalURL;
 };
 
-export const monthToString = (monthInNumber, year = 2019) => {
-  const number = parseInt(monthInNumber, 10);
+const numberToMonth__Eng = number => {
   switch (number) {
     case 1:
-      return `January ${year}`;
+      return 'January';
     case 2:
-      return `February ${year}`;
+      return 'February';
     case 3:
-      return `March ${year}`;
+      return 'March';
     case 4:
-      return `April ${year}`;
+      return 'April';
     case 5:
-      return `May ${year}`;
+      return 'May';
     case 6:
-      return `June ${year}`;
+      return 'June';
     case 7:
-      return `July ${year}`;
+      return 'July';
     case 8:
-      return `August ${year}`;
+      return 'August';
     case 9:
-      return `September ${year}`;
+      return 'September';
     case 10:
-      return `October ${year}`;
+      return 'October';
     case 11:
-      return `November ${year}`;
+      return 'November';
     case 12:
-      return `December ${year}`;
+      return 'December';
     default:
       return number;
   }
+};
+
+const numberToMonth__Est = number => {
+  switch (number) {
+    case 1:
+      return 'Jaanuar';
+    case 2:
+      return 'Veebruar';
+    case 3:
+      return 'Märts';
+    case 4:
+      return 'Aprill';
+    case 5:
+      return 'Mai';
+    case 6:
+      return 'Juuni';
+    case 7:
+      return 'Juuli';
+    case 8:
+      return 'August';
+    case 9:
+      return 'September';
+    case 10:
+      return 'Oktoober';
+    case 11:
+      return 'November';
+    case 12:
+      return 'Detsember';
+    default:
+      return number;
+  }
+};
+
+export const monthToString = (monthInNumber, year, lang) => {
+  const number = parseInt(monthInNumber, 10);
+  let month;
+
+  if (lang === 'eng') {
+    month = numberToMonth__Eng(number, year);
+    return `${month} ${year}`;
+  }
+
+  month = numberToMonth__Est(number, year);
+  return `${month} ${year}`;
 };
 
 export const numberToDay = number => {
