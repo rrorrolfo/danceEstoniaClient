@@ -35,8 +35,16 @@ const EventDetails = ({
 }) => {
   const { id } = match.params;
   useEffect(() => {
-    actionOnMount(`/${category}/${match.params.category}/${id}`);
-    setTimeout(() => toggleLoader(false), 1000);
+    const promise1 = actionOnMount(
+      `/${category}/${match.params.category}/${id}`
+    );
+    const promise2 = new Promise(resolve =>
+      setTimeout(() => {
+        resolve();
+      }, 1000)
+    );
+
+    Promise.all([promise1, promise2]).then(() => toggleLoader(false));
     // eslint-disable-next-line
   }, []);
 
