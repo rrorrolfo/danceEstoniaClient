@@ -20,7 +20,8 @@ const ResultsContainer = ({
   festivalsByStyle,
   toggleLoader,
   updateLoaderText,
-  isAdmin
+  isAdmin,
+  selectedLang
   /* topLevelMatch, */
 }) => {
   const [currentTimeFrame, updateTimeframe] = useState('');
@@ -73,6 +74,7 @@ const ResultsContainer = ({
               updateDancingStyle={updateDancingStyle}
               toggleLoader={toggleLoader}
               updateLoaderText={updateLoaderText}
+              selectedLang={selectedLang}
             />
           )}
         />
@@ -90,6 +92,7 @@ const ResultsContainer = ({
               updateDancingStyle={updateDancingStyle}
               toggleLoader={toggleLoader}
               updateLoaderText={updateLoaderText}
+              selectedLang={selectedLang}
             />
           )}
         />
@@ -108,6 +111,7 @@ const ResultsContainer = ({
               updateDancingStyle={updateDancingStyle}
               toggleLoader={toggleLoader}
               updateLoaderText={updateLoaderText}
+              selectedLang={selectedLang}
             />
           )}
         />
@@ -121,7 +125,8 @@ const mapStateToProps = state => {
     events: state.events.events,
     eventsByStyle: state.events.eventsByStyle,
     festivals: state.festivals.festivals,
-    festivalsByStyle: state.festivals.festivalsByStyle
+    festivalsByStyle: state.festivals.festivalsByStyle,
+    selectedLang: state.config.lang
   };
 };
 
@@ -142,7 +147,8 @@ ResultsContainer.propTypes = {
     PropTypes.arrayOf(PropTypes.object)
   ]),
   toggleLoader: PropTypes.func,
-  isAdmin: PropTypes.bool
+  isAdmin: PropTypes.bool,
+  selectedLang: PropTypes.oneOf(['est', 'eng'])
   // eslint-disable-next-line react/forbid-prop-types
   // topLevelMatch: PropTypes.object
 };
@@ -157,7 +163,8 @@ ResultsContainer.defaultProps = {
   fetchFestivalsByStyle: null,
   festivalsByStyle: null,
   toggleLoader: null,
-  isAdmin: false
+  isAdmin: false,
+  selectedLang: 'eng'
   // topLevelMatch: null
 };
 

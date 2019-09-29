@@ -14,7 +14,8 @@ const SearchResults = ({
   history,
   toggleLoader,
   updateLoaderText,
-  isAdmin
+  isAdmin,
+  selectedLang
 }) => {
   const [pageCount, updatePageCount] = useState(1);
   const { style } = match.params;
@@ -64,6 +65,7 @@ const SearchResults = ({
             }
             toggleLoader={toggleLoader}
             updateLoaderText={updateLoaderText}
+            selectedLang={selectedLang}
           />
         ));
     }
@@ -111,14 +113,16 @@ SearchResults.propTypes = {
   currentTimeFrame: PropTypes.oneOf(['week', 'month', '']).isRequired,
   updateDancingStyle: PropTypes.func,
   toggleLoader: PropTypes.func,
-  isAdmin: PropTypes.bool
+  isAdmin: PropTypes.bool,
+  selectedLang: PropTypes.oneOf(['est', 'eng'])
 };
 
 SearchResults.defaultProps = {
   results: null,
   updateDancingStyle: null,
   toggleLoader: null,
-  isAdmin: false
+  isAdmin: false,
+  selectedLang: 'eng'
 };
 
 export default withRouter(SearchResults);

@@ -14,7 +14,8 @@ const TimeFrameGroup = ({
   isAdmin,
   canAuth,
   toggleLoader,
-  updateLoaderText
+  updateLoaderText,
+  selectedLang
 }) => {
   const displayResults = resultsToDisplay => {
     return resultsToDisplay.map(event => {
@@ -38,7 +39,7 @@ const TimeFrameGroup = ({
         <Container fluid className="timeGroupContainer">
           <h3 className="dateHappening">
             {timeFrame === 'month'
-              ? monthToString(dateHappening, year)
+              ? monthToString(dateHappening, year, selectedLang)
               : weekToString(dateHappening, year)}
           </h3>
           {displayResults(events)}
@@ -58,7 +59,8 @@ TimeFrameGroup.propTypes = {
   match: PropTypes.object,
   isAdmin: PropTypes.bool,
   canAuth: PropTypes.bool,
-  toggleLoader: PropTypes.func
+  toggleLoader: PropTypes.func,
+  selectedLang: PropTypes.oneOf(['est', 'eng'])
 };
 
 TimeFrameGroup.defaultProps = {
@@ -66,7 +68,8 @@ TimeFrameGroup.defaultProps = {
   match: null,
   isAdmin: false,
   canAuth: false,
-  toggleLoader: null
+  toggleLoader: null,
+  selectedLang: 'eng'
 };
 
 export default TimeFrameGroup;
