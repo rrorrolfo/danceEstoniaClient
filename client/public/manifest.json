@@ -1,15 +1,33 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "manifest_version": 1,
+  "short_name": "Dance Estonia",
+  "name": "Dance Estonia",
+  "dir": "ltr",
+  "lang": "en et",
+  "version": "1.0.0",
+  "description": "Find the next dancing party in Estonia. Dance Salsa, Bachata, and Kizomba in Estonia. Find the next international Salsa, Bachata, or Kizomba festival in Europe.",
+  "authors": [
+    {
+      "name": "Dance Estonia Development",
+      "email": "danceestonia@gmail.com"
+    }
+  ],
+  "version_name": "Dance Estonia Release v1.0.0",
   "icons": [
     {
       "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
+      "sizes": "32x32",
       "type": "image/x-icon"
+    },
+    {
+      "src": "assets/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
     }
   ],
-  "start_url": ".",
+  "start_url": "/",
   "display": "standalone",
   "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "background_color": "#ffffff",
+  "scope": "/"
 }
