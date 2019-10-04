@@ -35,9 +35,10 @@ const EventDetails = ({
 }) => {
   const { id } = match.params;
   useEffect(() => {
-    const promise1 = actionOnMount(
-      `/${category}/${match.params.category}/${id}`
-    );
+    const promise1 = new Promise(async resolve => {
+      await actionOnMount(`/${category}/${match.params.category}/${id}`);
+      resolve();
+    });
     const promise2 = new Promise(resolve =>
       setTimeout(() => {
         resolve();
