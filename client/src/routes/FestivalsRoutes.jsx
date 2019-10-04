@@ -71,6 +71,7 @@ const FestivalsRoutes = ({
               error={festivalError}
               resetFestivalsErrors={resetFestivalsErrors}
               toggleLoader={toggleLoader}
+              translatedText={translatedText}
             />
             <Footer />
           </React.Fragment>

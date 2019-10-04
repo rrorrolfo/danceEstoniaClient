@@ -1,3 +1,4 @@
+/* eslint-disable react/forbid-prop-types */
 import React, { useEffect } from 'react';
 import { Container, Table } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
@@ -31,7 +32,8 @@ const EventDetails = ({
   history,
   resetErrors,
   resetFestivalsErrors,
-  toggleLoader
+  toggleLoader,
+  translatedText
 }) => {
   const { id } = match.params;
   useEffect(() => {
@@ -90,6 +92,7 @@ const EventDetails = ({
           category={category}
           dancingStyle={match.params.category}
           eventName={selectedEvent.name}
+          translatedText={translatedText}
         />
         <BuyMeCofeeCTA customClass="large-screens-cta" />
       </Container>
@@ -208,19 +211,16 @@ const EventDetails = ({
 };
 
 EventDetails.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
   match: PropTypes.object.isRequired,
   category: PropTypes.oneOf(['events', 'festivals']).isRequired,
   actionOnMount: PropTypes.func.isRequired,
-  // eslint-disable-next-line react/forbid-prop-types
   singleEvent: PropTypes.object,
-  // eslint-disable-next-line react/forbid-prop-types
   singleFestival: PropTypes.object,
-  // eslint-disable-next-line react/forbid-prop-types
   error: PropTypes.object.isRequired,
   resetErrors: PropTypes.func,
   resetFestivalsErrors: PropTypes.func,
-  toggleLoader: PropTypes.func
+  toggleLoader: PropTypes.func,
+  translatedText: PropTypes.object
 };
 
 EventDetails.defaultProps = {
@@ -228,7 +228,8 @@ EventDetails.defaultProps = {
   singleFestival: null,
   resetErrors: null,
   resetFestivalsErrors: null,
-  toggleLoader: null
+  toggleLoader: null,
+  translatedText: {}
 };
 
 export default withRouter(EventDetails);

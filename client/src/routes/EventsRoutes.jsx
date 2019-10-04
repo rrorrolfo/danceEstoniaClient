@@ -63,6 +63,7 @@ const EventsRoutes = ({
               error={eventError}
               resetErrors={resetErrors}
               toggleLoader={toggleLoader}
+              translatedText={translatedText}
             />
             <Footer />
           </React.Fragment>
