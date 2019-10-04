@@ -17,7 +17,7 @@ const BuyMeCofeeCTA = ({ customClass }) => {
         />
         <span style={{ marginLeft: '5px' }}>Buy me a coffee</span>
         <span
-          clasName="support-text"
+          className="support-text"
           style={{
             position: 'absolute',
             bottom: '-40px',
