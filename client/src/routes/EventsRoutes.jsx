@@ -39,11 +39,7 @@ const EventsRoutes = ({
         exact
         render={({ match }) => (
           <React.Fragment>
-            <MainJumbotron
-              category="events"
-              match={match}
-              translatedText={translatedText}
-            />
+            <MainJumbotron category="events" translatedText={translatedText} />
             <ResultsContainer
               topLevelMatch={match}
               category="events"
