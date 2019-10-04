@@ -48,8 +48,8 @@ const App = ({
     category: '',
     callback: null
   });
-  const [loaderText, updateLoaderText] = useState('Ready to dance?');
   const [translatedText, updateTranslatedText] = useState({ ...texts.t__est });
+  const [loaderText, updateLoaderText] = useState(translatedText.loader.teaser);
 
   useEffect(() => {
     fetchEvents();
@@ -111,7 +111,9 @@ const App = ({
           category={showModal.category}
           action={showModal.callback}
         />
-        {isLoading ? <Loader text={loaderText} /> : null}
+        {isLoading ? (
+          <Loader text={loaderText} translatedText={translatedText} />
+        ) : null}
       </div>
     </BrowserRouter>
   );
