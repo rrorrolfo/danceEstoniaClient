@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import NavigationTabs from '../../components/tabs';
 import SearchResults from '../../components/searchResults';
 import { firstLetterToUppercase } from '../../utils';
+import * as texts from '../../translations';
 
 const ResultsContainer = ({
   fetchEvents,
@@ -26,6 +27,8 @@ const ResultsContainer = ({
 }) => {
   const [currentTimeFrame, updateTimeframe] = useState('');
   const [dancingStyle, updateDancingStyle] = useState('');
+  const [translatedText, updateTranslatedText] = useState({ ...texts.t__est });
+
   useEffect(() => {
     if (category === 'events') {
       updateTimeframe('week');
@@ -35,11 +38,23 @@ const ResultsContainer = ({
     }
     // eslint-disable-next-line
   }, []);
-  const title = `Upcoming ${
+
+  useEffect(() => {
+    updateTranslatedText(selectedLang === 'est' ? texts.t__est : texts.t__eng);
+  }, [selectedLang]);
+
+  const title = `${translatedText.body.upcoming} ${
     dancingStyle !== '' ? firstLetterToUppercase(dancingStyle) : ''
-  } ${category === 'events' ? 'Parties and Events' : 'Festivals'} in ${
-    category === 'events' ? 'Estonia' : 'Europe'
+  } ${
+    category === 'events'
+      ? translatedText.general.partiesandEvents
+      : translatedText.general.partiesandEvents
+  }${' '}${
+    category === 'events'
+      ? `${translatedText.general.inEstonia}`
+      : `${translatedText.general.inEurope}`
   }`;
+
   return (
     <Container>
       <h2 className="results-title centered">{title}</h2>
@@ -50,6 +65,7 @@ const ResultsContainer = ({
           fetchEventsByStyle={fetchEventsByStyle}
           fetchFestivals={fetchFestivals}
           fetchFestivalsByStyle={fetchFestivalsByStyle}
+          translatedText={translatedText}
         />
       ) : null}
       {/* <TimeFrameFilter
@@ -75,6 +91,7 @@ const ResultsContainer = ({
               toggleLoader={toggleLoader}
               updateLoaderText={updateLoaderText}
               selectedLang={selectedLang}
+              translatedText={translatedText}
             />
           )}
         />
@@ -93,6 +110,7 @@ const ResultsContainer = ({
               toggleLoader={toggleLoader}
               updateLoaderText={updateLoaderText}
               selectedLang={selectedLang}
+              translatedText={translatedText}
             />
           )}
         />
@@ -112,6 +130,7 @@ const ResultsContainer = ({
               toggleLoader={toggleLoader}
               updateLoaderText={updateLoaderText}
               selectedLang={selectedLang}
+              translatedText={translatedText}
             />
           )}
         />

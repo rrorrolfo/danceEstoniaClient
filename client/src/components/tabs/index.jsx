@@ -4,12 +4,12 @@ import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './tabs.css';
 
-const NavigationTabs = ({ category }) => {
+const NavigationTabs = ({ category, translatedText }) => {
   return (
     <Nav justify variant="tabs" as="ul" className="navigation-tabs">
       <Nav.Item as="li" className="tab-link">
         <NavLink exact to={`/${category}`}>
-          All
+          {translatedText.general.all}
         </NavLink>
       </Nav.Item>
       <Nav.Item as="li" className="tab-link">
@@ -26,7 +26,13 @@ const NavigationTabs = ({ category }) => {
 };
 
 NavigationTabs.propTypes = {
-  category: PropTypes.oneOf(['events', 'festivals']).isRequired
+  category: PropTypes.oneOf(['events', 'festivals']).isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  translatedText: PropTypes.object
+};
+
+NavigationTabs.defaultProps = {
+  translatedText: {}
 };
 
 export default NavigationTabs;

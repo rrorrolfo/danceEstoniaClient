@@ -1,3 +1,4 @@
+/* eslint-disable react/forbid-prop-types */
 import React, { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
@@ -15,7 +16,8 @@ const SearchResults = ({
   toggleLoader,
   updateLoaderText,
   isAdmin,
-  selectedLang
+  selectedLang,
+  translatedText
 }) => {
   const [pageCount, updatePageCount] = useState(1);
   const { style } = match.params;
@@ -33,7 +35,9 @@ const SearchResults = ({
       return (
         <Container className="no-results-message">
           <h3 className="centered">
-            Sorry!, We couldn´t find any {style} {category}, please check later.
+            {category === 'events'
+              ? translatedText.body.noResultsEvents
+              : translatedText.body.noResultsFestivals}
           </h3>
         </Container>
       );
@@ -108,13 +112,13 @@ SearchResults.propTypes = {
     PropTypes.object,
     PropTypes.arrayOf(PropTypes.object)
   ]),
-  // eslint-disable-next-line react/forbid-prop-types
   match: PropTypes.object.isRequired,
   currentTimeFrame: PropTypes.oneOf(['week', 'month', '']).isRequired,
   updateDancingStyle: PropTypes.func,
   toggleLoader: PropTypes.func,
   isAdmin: PropTypes.bool,
-  selectedLang: PropTypes.oneOf(['est', 'eng'])
+  selectedLang: PropTypes.oneOf(['est', 'eng']),
+  translatedText: PropTypes.object
 };
 
 SearchResults.defaultProps = {
@@ -122,7 +126,8 @@ SearchResults.defaultProps = {
   updateDancingStyle: null,
   toggleLoader: null,
   isAdmin: false,
-  selectedLang: 'eng'
+  selectedLang: 'est',
+  translatedText: {}
 };
 
 export default withRouter(SearchResults);
