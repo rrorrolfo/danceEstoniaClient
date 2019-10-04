@@ -49,7 +49,7 @@ const Header = ({ translatedText, selectedLang, setLanguage }) => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto main-nav">
             <NavDropdown
-              title="Events"
+              title={translatedText.general.events}
               className="basic-nav-dropdown events"
               onClick={() => toggleEventsMenu(checkForShowClass('events'))}
             >
@@ -96,7 +96,7 @@ const Header = ({ translatedText, selectedLang, setLanguage }) => {
               </ul>
             </NavDropdown>
             <NavDropdown
-              title="Festivals"
+              title={translatedText.general.festivals}
               className="basic-nav-dropdown festivals"
               onClick={() =>
                 toggleFestivalsMenu(checkForShowClass('festivals'))
