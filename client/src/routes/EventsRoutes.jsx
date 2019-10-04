@@ -1,3 +1,4 @@
+/* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -12,7 +13,8 @@ const EventsRoutes = ({
   eventError,
   resetErrors,
   toggleLoader,
-  updateLoaderText
+  updateLoaderText,
+  translatedText
 }) => {
   return (
     <Switch>
@@ -21,7 +23,7 @@ const EventsRoutes = ({
         exact
         render={({ match }) => (
           <React.Fragment>
-            <MainJumbotron category="events" />
+            <MainJumbotron category="events" translatedText={translatedText} />
             <ResultsContainer
               topLevelMatch={match}
               category="events"
@@ -37,7 +39,11 @@ const EventsRoutes = ({
         exact
         render={({ match }) => (
           <React.Fragment>
-            <MainJumbotron category="events" match={match} />
+            <MainJumbotron
+              category="events"
+              match={match}
+              translatedText={translatedText}
+            />
             <ResultsContainer
               topLevelMatch={match}
               category="events"
@@ -73,18 +79,18 @@ const EventsRoutes = ({
 
 EventsRoutes.propTypes = {
   fetchSingleEvent: PropTypes.func.isRequired,
-  // eslint-disable-next-line react/forbid-prop-types
   singleEvent: PropTypes.object,
-  // eslint-disable-next-line react/forbid-prop-types
   eventError: PropTypes.object,
   resetErrors: PropTypes.func.isRequired,
-  toggleLoader: PropTypes.func
+  toggleLoader: PropTypes.func,
+  translatedText: PropTypes.object
 };
 
 EventsRoutes.defaultProps = {
   singleEvent: null,
   eventError: { status: 0 },
-  toggleLoader: null
+  toggleLoader: null,
+  translatedText: {}
 };
 
 export default EventsRoutes;

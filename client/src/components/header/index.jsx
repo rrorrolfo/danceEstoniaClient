@@ -63,7 +63,7 @@ const Header = ({ translatedText, selectedLang, setLanguage }) => {
                     to="/events"
                     onClick={() => handleClick('events')}
                   >
-                    {translatedText.header.all}
+                    {translatedText.general.all}
                   </NavLink>
                 </li>
                 <li>
@@ -112,7 +112,7 @@ const Header = ({ translatedText, selectedLang, setLanguage }) => {
                     onClick={() => handleClick()}
                     to="/festivals"
                   >
-                    {translatedText.header.all}
+                    {translatedText.general.all}
                   </NavLink>
                 </li>
                 <li>
@@ -148,7 +148,7 @@ const Header = ({ translatedText, selectedLang, setLanguage }) => {
               Shop
             </NavLink> */}
             <NavLink to="/createEvent" className="main-nav-link">
-              Create Event
+              {translatedText.header.createEvent}
             </NavLink>
             <NavLink to="/contact" className="main-nav-link">
               {translatedText.header.contact}

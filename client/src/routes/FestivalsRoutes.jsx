@@ -1,3 +1,4 @@
+/* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -12,7 +13,8 @@ const FestivalsRoutes = ({
   festivalError,
   resetFestivalsErrors,
   toggleLoader,
-  updateLoaderText
+  updateLoaderText,
+  translatedText
 }) => {
   return (
     <Switch>
@@ -21,7 +23,10 @@ const FestivalsRoutes = ({
         exact
         render={({ match }) => (
           <React.Fragment>
-            <MainJumbotron category="festivals" />
+            <MainJumbotron
+              category="festivals"
+              translatedText={translatedText}
+            />
             <ResultsContainer
               match={match}
               category="festivals"
@@ -37,7 +42,11 @@ const FestivalsRoutes = ({
         exact
         render={({ match }) => (
           <React.Fragment>
-            <MainJumbotron category="festivals" match={match} />
+            <MainJumbotron
+              category="festivals"
+              match={match}
+              translatedText={translatedText}
+            />
             <ResultsContainer
               match={match}
               category="festivals"
@@ -74,18 +83,18 @@ const FestivalsRoutes = ({
 
 FestivalsRoutes.propTypes = {
   fetchSingleFestival: PropTypes.func.isRequired,
-  // eslint-disable-next-line react/forbid-prop-types
   singleFestival: PropTypes.object,
-  // eslint-disable-next-line react/forbid-prop-types
   festivalError: PropTypes.object,
   resetFestivalsErrors: PropTypes.func.isRequired,
-  toggleLoader: PropTypes.func
+  toggleLoader: PropTypes.func,
+  translatedText: PropTypes.object
 };
 
 FestivalsRoutes.defaultProps = {
   singleFestival: null,
   festivalError: { status: 0 },
-  toggleLoader: null
+  toggleLoader: null,
+  translatedText: {}
 };
 
 export default FestivalsRoutes;
