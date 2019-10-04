@@ -1,3 +1,4 @@
+/* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -25,7 +26,8 @@ const AppRoutes = ({
   resetFestivalsErrors,
   toggleLoader,
   toggleModal,
-  updateLoaderText
+  updateLoaderText,
+  translatedText
 }) => {
   return (
     <Switch>
@@ -43,6 +45,7 @@ const AppRoutes = ({
             resetErrors={resetErrors}
             toggleLoader={toggleLoader}
             updateLoaderText={updateLoaderText}
+            translatedText={translatedText}
           />
         )}
       />
@@ -59,6 +62,7 @@ const AppRoutes = ({
             resetFestivalsErrors={resetFestivalsErrors}
             toggleLoader={toggleLoader}
             updateLoaderText={updateLoaderText}
+            translatedText={translatedText}
           />
         )}
       />
@@ -72,16 +76,21 @@ const AppRoutes = ({
             match={match}
             toggleLoader={toggleLoader}
             updateLoaderText={updateLoaderText}
+            translatedText={translatedText}
           />
         )}
       />
       <Route
         path="/admin/createEvent"
-        render={() => <CreateEvent isUser={false} isAdmin />}
+        render={() => (
+          <CreateEvent isUser={false} isAdmin translatedText={translatedText} />
+        )}
       />
       <Route
         path="/admin/authorizeEvents"
-        render={() => <AuthInterface isAdmin canAuth />}
+        render={() => (
+          <AuthInterface isAdmin canAuth translatedText={translatedText} />
+        )}
       />
       <Route
         path="/admin/editEvent/:category/:style/:id"
@@ -95,12 +104,19 @@ const AppRoutes = ({
             singleEvent={singleEvent}
             fetchSingleFestival={fetchSingleFestival}
             singleFestival={singleFestival}
+            translatedText={translatedText}
           />
         )}
       />
       <Route
         path="/admin/deleteEvents"
-        render={() => <DeleteInterface toggleModal={toggleModal} isAdmin />}
+        render={() => (
+          <DeleteInterface
+            toggleModal={toggleModal}
+            isAdmin
+            translatedText={translatedText}
+          />
+        )}
       />
       <Route path="/notfound" component={NotFound} />
       <Route render={() => <Redirect to="/notfound" />} />
@@ -115,18 +131,15 @@ AppRoutes.propTypes = {
   fetchFestivalsByStyle: PropTypes.func,
   fetchSingleEvent: PropTypes.func,
   fetchSingleFestival: PropTypes.func,
-  // eslint-disable-next-line react/forbid-prop-types
   singleEvent: PropTypes.object,
-  // eslint-disable-next-line react/forbid-prop-types
   singleFestival: PropTypes.object,
-  // eslint-disable-next-line react/forbid-prop-types
   eventError: PropTypes.object,
-  // eslint-disable-next-line react/forbid-prop-types
   festivalError: PropTypes.object,
   resetErrors: PropTypes.func.isRequired,
   resetFestivalsErrors: PropTypes.func.isRequired,
   toggleModal: PropTypes.func,
-  toggleLoader: PropTypes.func.isRequired
+  toggleLoader: PropTypes.func.isRequired,
+  translatedText: PropTypes.object
 };
 
 AppRoutes.defaultProps = {
@@ -140,7 +153,8 @@ AppRoutes.defaultProps = {
   singleFestival: null,
   eventError: { status: 0 },
   festivalError: { status: 0 },
-  toggleModal: null
+  toggleModal: null,
+  translatedText: {}
 };
 
 export default AppRoutes;

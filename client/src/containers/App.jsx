@@ -103,6 +103,7 @@ const App = ({
           toggleLoader={toggleLoader}
           toggleModal={toggleModal}
           updateLoaderText={updateLoaderText}
+          translatedText={translatedText}
         />
         <MainModal
           show={showModal.show}
