@@ -67,7 +67,10 @@ const AppRoutes = ({
         )}
       />
       <Route path="/createEvent" component={CreateEvent} />
-      <Route path="/contact" component={ContactForm} />
+      <Route
+        path="/contact"
+        render={() => <ContactForm translatedText={translatedText} />}
+      />
       <Route
         path="/admin/allEvents"
         render={({ match }) => (

@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { Container, Form, Col, Button } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 import BuyMeCofeeCTA from '../buyMeCofee';
 import Footer from '../footer';
 import { emailRequest } from '../../requests/requests';
 import './contactForm.css';
 
-const ContactForm = () => {
+const ContactForm = ({ translatedText }) => {
   // Name field
   const [name, updateName] = useState('');
   const [invalidName, toggleInvalidName] = useState(false);
@@ -133,15 +134,19 @@ const ContactForm = () => {
   return (
     <React.Fragment>
       <Container className="contact-form-container full-vh-height">
-        <h1 className="centered contact-title">Get in contact with us</h1>
+        <h1 className="centered contact-title">
+          {translatedText.contact.getInContact}
+        </h1>
         <Form className="contact-form" onSubmit={e => handleSubmit(e)}>
           <Form.Row className="contact-data">
             <Form.Group as={Col} controlId="formGridPassword">
-              <Form.Label className="isHidden">Name</Form.Label>
+              <Form.Label className="isHidden">
+                {translatedText.contact.name}
+              </Form.Label>
               <Form.Control
                 className="input-decoration"
                 type="text"
-                placeholder="Name"
+                placeholder={translatedText.contact.name}
                 name="name"
                 ref={nameField}
                 onChange={e => handleChange(updateName, e.target.value, 'name')}
@@ -149,15 +154,17 @@ const ContactForm = () => {
                 isValid={validName}
               />
               <Form.Control.Feedback type="invalid">
-                Please type your name.
+                {translatedText.contact.nameValidation}
               </Form.Control.Feedback>
             </Form.Group>
             <Form.Group as={Col} controlId="formGridEmail">
-              <Form.Label className="isHidden">Email</Form.Label>
+              <Form.Label className="isHidden">
+                {translatedText.contact.email}
+              </Form.Label>
               <Form.Control
                 className="input-decoration"
                 type="email"
-                placeholder="Enter your email"
+                placeholder={translatedText.contact.emailPlaceholder}
                 name="email"
                 ref={emailField}
                 onChange={e =>
@@ -167,20 +174,21 @@ const ContactForm = () => {
                 isValid={validEmail}
               />
               <Form.Control.Feedback type="invalid">
-                You email must have an &apos;@&apos; and a domain (e.g.
-                email@example).
+                {translatedText.contact.emailValidation}
               </Form.Control.Feedback>
             </Form.Group>
           </Form.Row>
 
           <Form.Group controlId="formGridAddress1">
-            <Form.Label className="isHidden">Message</Form.Label>
+            <Form.Label className="isHidden">
+              {translatedText.contact.message}
+            </Form.Label>
             <Form.Control
               className="input-decoration"
               as="textarea"
               name="message"
               rows={textareaRows}
-              placeholder="Message"
+              placeholder={translatedText.contact.message}
               ref={messageField}
               onFocus={() => updateTextarearows(4)}
               onChange={e =>
@@ -190,7 +198,7 @@ const ContactForm = () => {
               isValid={validMessage}
             />
             <Form.Control.Feedback type="invalid">
-              Your message must be at least 20 characters long.
+              {translatedText.contact.messageValidation}
             </Form.Control.Feedback>
           </Form.Group>
 
@@ -200,27 +208,32 @@ const ContactForm = () => {
             className="contact-form-submit"
             disabled={isSendingMessage}
           >
-            {isSendingMessage ? 'Sending...' : 'Send Message'}
+            {isSendingMessage
+              ? translatedText.contact.sending
+              : translatedText.contact.sendMessage}
           </Button>
         </Form>
         <Container className={messageSent ? 'successMessage' : 'isHidden'}>
-          <h3 className="centered">Your message has been sent successfully!</h3>
-          <p className="centered">
-            Thanks for contacting us, we will get in touch with you as soon as
-            possible.
-          </p>
+          <h3 className="centered">{translatedText.contact.messageSent}</h3>
+          <p className="centered">{translatedText.contact.messageSent2}</p>
         </Container>
         <Container className={messageError ? 'failedMessage' : 'isHidden'}>
-          <p>
-            Oops! Seems that that there was an error while sending your message,
-            please try again.
-          </p>
+          <p>{translatedText.contact.messageSentError}</p>
         </Container>
         <BuyMeCofeeCTA customClass="contact-coffee" />
       </Container>
       <Footer />
     </React.Fragment>
   );
+};
+
+ContactForm.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
+  translatedText: PropTypes.object
+};
+
+ContactForm.defaultProps = {
+  translatedText: {}
 };
 
 export default ContactForm;
