@@ -16,7 +16,6 @@ import { createEvent, updateRequest } from '../../requests/requests';
 import {
   getTodayISODate,
   dateToISODate,
-  firstLetterToUppercase,
   isFieldEmpty,
   linkUrlSanitizer
 } from '../../utils';
