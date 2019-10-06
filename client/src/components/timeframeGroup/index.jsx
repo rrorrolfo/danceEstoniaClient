@@ -41,7 +41,7 @@ const TimeFrameGroup = ({
           <h3 className="dateHappening">
             {timeFrame === 'month'
               ? monthToString(dateHappening, year, selectedLang)
-              : weekToString(dateHappening, year)}
+              : weekToString(dateHappening, year, selectedLang)}
           </h3>
           {displayResults(events)}
         </Container>
