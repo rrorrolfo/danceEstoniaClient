@@ -21,7 +21,8 @@ const ResultCard = ({
   isAdmin,
   canAuth,
   toggleLoader,
-  updateLoaderText
+  updateLoaderText,
+  selectedLang
 }) => {
   return (
     <Card
@@ -50,7 +51,7 @@ const ResultCard = ({
             <Card.Title>{result.name}</Card.Title>
             <Card.Text className="result-card-details">
               {calendar('no-margin-top')}
-              {isoStringToDate(result.dateOfEvent)}
+              {isoStringToDate(result.dateOfEvent, selectedLang)}
             </Card.Text>
             <Card.Text className="result-card-data">
               {category === 'events'
@@ -103,7 +104,8 @@ ResultCard.propTypes = {
   match: PropTypes.object,
   isAdmin: PropTypes.bool,
   canAuth: PropTypes.bool,
-  toggleLoader: PropTypes.func
+  toggleLoader: PropTypes.func,
+  selectedLang: PropTypes.oneOf(['eng', 'est'])
 };
 
 ResultCard.defaultProps = {
@@ -111,7 +113,8 @@ ResultCard.defaultProps = {
   match: null,
   isAdmin: false,
   canAuth: false,
-  toggleLoader: null
+  toggleLoader: null,
+  selectedLang: 'est'
 };
 
 export default ResultCard;

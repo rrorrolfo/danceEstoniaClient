@@ -29,6 +29,7 @@ const TimeFrameGroup = ({
           canAuth={canAuth}
           toggleLoader={toggleLoader}
           updateLoaderText={updateLoaderText}
+          selectedLang={selectedLang}
         />
       );
     });
