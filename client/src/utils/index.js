@@ -158,22 +158,48 @@ export const monthToString = (monthInNumber, year, lang) => {
   return `${month} ${year}`;
 };
 
-export const numberToDay = number => {
+/**
+ * @param {number} number - Number equivalent to a day of the week.
+ * @param {string.oneOf(["eng", "est"])} lang - Selected language.
+ * @returns {string} Day of the week.
+ */
+const numberToDay = (number, lang) => {
+  if (lang === 'eng') {
+    switch (number) {
+      case 0:
+        return 'Sunday';
+      case 1:
+        return 'Monday';
+      case 2:
+        return 'Tuesday';
+      case 3:
+        return 'Wednesday';
+      case 4:
+        return 'Thursday';
+      case 5:
+        return 'Friday';
+      case 6:
+        return 'Saturday';
+      default:
+        return number;
+    }
+  }
+
   switch (number) {
     case 0:
-      return 'Sunday';
+      return 'Pühapäev';
     case 1:
-      return 'Monday';
+      return 'Esmaspäev';
     case 2:
-      return 'Tuesday';
+      return 'Teisipäev';
     case 3:
-      return 'Wednesday';
+      return 'Kolmapäev';
     case 4:
-      return 'Thursday';
+      return 'Neljapäev';
     case 5:
-      return 'Friday';
+      return 'Reede';
     case 6:
-      return 'Saturday';
+      return 'Laupäev';
     default:
       return number;
   }
@@ -182,11 +208,11 @@ export const numberToDay = number => {
 /**
  * @param {string} string - Date string in iso format.
  * @param {string.oneOf(["eng", "est"])} lang - Selected language.
- * @returns Date in the format day in string/day in number / month / year
+ * @returns {string} Date in the format day in string/day in number / month / year
  */
 export const isoStringToDate = (string, lang) => {
   const dateString = new Date(string);
-  const weekDay = numberToDay(dateString.getDay());
+  const weekDay = numberToDay(dateString.getDay(), lang);
   const monthAndYear = monthToString(
     dateString.getMonth() + 1,
     dateString.getFullYear(),
