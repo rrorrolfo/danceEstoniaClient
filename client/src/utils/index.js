@@ -179,10 +179,19 @@ export const numberToDay = number => {
   }
 };
 
-export const isoStringToDate = string => {
+/**
+ * @param {string} string - Date string in iso format.
+ * @param {string.oneOf(["eng", "est"])} lang - Selected language.
+ * @returns Date in the format day in string/day in number / month / year
+ */
+export const isoStringToDate = (string, lang) => {
   const dateString = new Date(string);
   const weekDay = numberToDay(dateString.getDay());
-  const monthAndYear = monthToString(dateString.getMonth() + 1);
+  const monthAndYear = monthToString(
+    dateString.getMonth() + 1,
+    dateString.getFullYear(),
+    lang
+  );
   return `${weekDay} ${dateString.getDate()} ${monthAndYear}`;
 };
 
