@@ -66,7 +66,10 @@ const AppRoutes = ({
           />
         )}
       />
-      <Route path="/createEvent" component={CreateEvent} />
+      <Route
+        path="/createEvent"
+        render={() => <CreateEvent translatedText={translatedText} />}
+      />
       <Route
         path="/contact"
         render={() => <ContactForm translatedText={translatedText} />}

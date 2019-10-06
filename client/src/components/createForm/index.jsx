@@ -30,7 +30,8 @@ const CreateEvent = ({
   fetchSingleEvent,
   singleEvent,
   fetchSingleFestival,
-  singleFestival
+  singleFestival,
+  translatedText
 }) => {
   // Data of event state
   const [todayDate, updateDate] = useState('');
@@ -370,15 +371,11 @@ const CreateEvent = ({
   return (
     <Container className="create-form-container">
       <Container className="form-title margin-on-top">
-        <h1 className="centered">
-          {`Fill the following form to ${
-            isEdit ? 'edit' : 'create'
-          } your ${customTypeText}.`}
-        </h1>
+        <h1 className="centered">{translatedText.form.title}</h1>
       </Container>
       <Form onSubmit={event => handleSubmit(event)} className="margin-on-top">
         <Form.Row>
-          <h4 className="centered">What kind of event you want to create?</h4>
+          <h4 className="centered">{translatedText.form.kindOfEvent}</h4>
           {['radio'].map(type => (
             <div
               key={`inline-${type}`}
@@ -387,7 +384,7 @@ const CreateEvent = ({
               <Form.Check
                 checked={eventType === 'events'}
                 inline
-                label="Event or party"
+                label={translatedText.general.eventOrParty}
                 type={type}
                 id={`inline-${type}-1`}
                 name="event-type"
@@ -401,7 +398,7 @@ const CreateEvent = ({
               <Form.Check
                 checked={eventType === 'festivals'}
                 inline
-                label="Festival"
+                label={translatedText.general.festival}
                 type={type}
                 id={`inline-${type}-2`}
                 name="event-type"
@@ -419,12 +416,12 @@ const CreateEvent = ({
             }}
             className="centered custom-validation-message"
           >
-            Please select the type of event you want to create.
+            {translatedText.form.kindOfEventValidation}
           </span>
         </Form.Row>
         <Form.Row>
           <h4 className="centered margin-on-top">
-            What dancing style(s) is the {customTypeText}?
+            {translatedText.form.dancingStyles}
           </h4>
           {['checkbox'].map(type => (
             <div
@@ -488,24 +485,16 @@ const CreateEvent = ({
             style={{ display: noStylesSelected ? 'block' : 'none' }}
             className="centered custom-validation-message"
           >
-            Please select at least one dancing style.
+            {translatedText.form.dancingStylesValidation}
           </span>
         </Form.Row>
         <Form.Row className="margin-on-top">
           <Form.Group as={Col} controlId="name-of-event">
             <Form.Label className="bold">
-              Name of the event{' '}
-              {eventType === ''
-                ? 'event'
-                : eventType.slice(0, eventType.length - 1)}{' '}
-              *
+              Name of the event {translatedText.form.nameOfEvent} *
             </Form.Label>
             <Form.Control
-              placeholder={
-                eventType === ''
-                  ? 'Name of the event'
-                  : `Name of the ${eventType.slice(0, eventType.length - 1)}`
-              }
+              placeholder={translatedText.form.nameOfEvent}
               value={nameOfEvent}
               onChange={event => {
                 toggleInvalidName(false);
@@ -517,7 +506,7 @@ const CreateEvent = ({
               isInvalid={invalidName}
             />
             <Form.Control.Feedback type="invalid">
-              Please provide a name for the {customTypeText}.
+              {translatedText.form.nameOfEventValidation}
             </Form.Control.Feedback>
           </Form.Group>
 
@@ -527,7 +516,7 @@ const CreateEvent = ({
             className="margin-on-top"
           >
             <Form.Label className="date-of-event-label bold">
-              Date of the {customTypeText}: *
+              {translatedText.form.dateOfEvent}
             </Form.Label>
 
             <input
@@ -557,7 +546,7 @@ const CreateEvent = ({
               className="margin-on-top"
             >
               <Form.Label className="date-of-event-label bold">
-                End date of the festival: *
+                {translatedText.form.endDate} *
               </Form.Label>
 
               <input
@@ -587,7 +576,7 @@ const CreateEvent = ({
             className="margin-on-top"
           >
             <Form.Label className="time-of-event-label bold">
-              Time the {customTypeText} starts: *
+              {translatedText.form.startTime}
             </Form.Label>
 
             <input
@@ -607,7 +596,9 @@ const CreateEvent = ({
           className="margin-on-top"
         >
           <Form.Row className="ticket-price-input-1">
-            <Form.Label className="bold">Ticket Price</Form.Label>
+            <Form.Label className="bold">
+              {translatedText.form.ticketPrice}
+            </Form.Label>
             <Form.Control
               placeholder="Price in numbers (e.g. 10, 5.5, 5 - 25)"
               className="ticket-price-amount"
@@ -618,7 +609,9 @@ const CreateEvent = ({
           </Form.Row>
           <Form.Row className="ticket-price-input-2">
             <Form.Group>
-              <Form.Label className="bold">Currency</Form.Label>
+              <Form.Label className="bold">
+                {translatedText.form.currency}
+              </Form.Label>
               <Form.Control
                 as="select"
                 name="select-country"
@@ -664,14 +657,16 @@ const CreateEvent = ({
                 className="d-inline-block tooltip-ticket-price"
                 style={{ marginLeft: '50px', marginTop: '35px' }}
               >
-                <div>{firstLetterToUppercase(customTypeText)} is free?</div>
+                <div>{translatedText.form.freeFestival}</div>
               </span>
             </OverlayTrigger>
           </Form.Row>
         </Form.Group>
 
         <Form.Group controlId="venue">
-          <Form.Label className="bold">Link to buy tickets</Form.Label>
+          <Form.Label className="bold">
+            {translatedText.form.ticketLink}
+          </Form.Label>
           <Form.Control
             placeholder={`Url where you can buy tickets for this ${customTypeText}`}
             value={ticketURL}
@@ -687,13 +682,11 @@ const CreateEvent = ({
         </Form.Group>
 
         <Form.Group controlId="venue">
-          <Form.Label className="bold">Venue name *</Form.Label>
+          <Form.Label className="bold">
+            {translatedText.form.venueName} *
+          </Form.Label>
           <Form.Control
-            placeholder={
-              eventType === ''
-                ? 'Venue of the event'
-                : `Venue of the ${eventType.slice(0, eventType.length - 1)}`
-            }
+            placeholder={translatedText.form.venuePlaceholder}
             value={venueOfEvent}
             onChange={event => {
               updateVenue(event.target.value);
@@ -702,22 +695,17 @@ const CreateEvent = ({
             isInvalid={invalidVenueName}
           />
           <Form.Control.Feedback type="invalid">
-            Please add the name of the venue.
+            {translatedText.form.venueNameValidation}
           </Form.Control.Feedback>
         </Form.Group>
 
         <Form.Row className="margin-on-top">
           <Form.Group controlId="venue-address">
-            <Form.Label className="bold">Venue address</Form.Label>
+            <Form.Label className="bold">
+              {translatedText.form.venueAddress}
+            </Form.Label>
             <Form.Control
-              placeholder={
-                eventType === ''
-                  ? 'Address of the event venue'
-                  : `Address of the ${eventType.slice(
-                      0,
-                      eventType.length - 1
-                    )} venue`
-              }
+              placeholder={translatedText.form.venueAddressPlaceholder}
               value={venueAddress}
               onChange={event => updateVenueAddress(event.target.value)}
             />
@@ -726,9 +714,11 @@ const CreateEvent = ({
 
         <Form.Row className="margin-on-top">
           <Form.Group controlId="city">
-            <Form.Label className="bold">City *</Form.Label>
+            <Form.Label className="bold">
+              {translatedText.form.city} *
+            </Form.Label>
             <Form.Control
-              placeholder="e.g. Tallinn"
+              placeholder={translatedText.form.cityPlaceholder}
               value={city}
               onChange={event => {
                 updateCity(event.target.value);
@@ -737,14 +727,16 @@ const CreateEvent = ({
               isInvalid={invalidCity}
             />
             <Form.Control.Feedback type="invalid">
-              Please add the city where the event will take place.
+              {translatedText.form.cityValidation}
             </Form.Control.Feedback>
           </Form.Group>
         </Form.Row>
 
         <Form.Row className="margin-on-top">
           <Form.Group as={Col} controlId="country">
-            <Form.Label className="bold">Country *</Form.Label>
+            <Form.Label className="bold">
+              {translatedText.form.country} *
+            </Form.Label>
             <Form.Control
               as="select"
               name="select-country"
@@ -810,7 +802,9 @@ const CreateEvent = ({
         {eventType !== 'festivals' ? (
           <Form.Row className="margin-on-top">
             <Form.Group as={Col} controlId="fbEvent">
-              <Form.Label className="bold">Facebook event</Form.Label>
+              <Form.Label className="bold">
+                {translatedText.form.fbEvent}
+              </Form.Label>
               <Form.Control
                 placeholder="Facebook event URL (e.g. www.facebook.com/event)"
                 value={fbEvent}
@@ -830,9 +824,11 @@ const CreateEvent = ({
         {eventType === 'festivals' ? (
           <Form.Row className="margin-on-top">
             <Form.Group as={Col} controlId="website">
-              <Form.Label className="bold">Festival website</Form.Label>
+              <Form.Label className="bold">
+                {translatedText.form.website}
+              </Form.Label>
               <Form.Control
-                placeholder="Website URL (e.g. www.example.com)"
+                placeholder={translatedText.form.websitePlaceholder}
                 value={website}
                 onChange={event => {
                   updateWebsite(event.target.value);
@@ -848,16 +844,14 @@ const CreateEvent = ({
         ) : null}
 
         <Form.Group id="description" className="margin-on-top">
-          <h5 className="centered">
-            Write the description of the {customTypeText} *
-          </h5>
+          <h5 className="centered">{translatedText.form.description} *</h5>
           <TextEditor rawJson={rawJson} />
         </Form.Group>
 
         <Form.Row className="margin-on-top">
           <Form.Group as={Col} controlId="event-banner">
             <Form.Label className="bold">
-              Select an image to be displayed with the {customTypeText} *
+              {translatedText.form.image} *
             </Form.Label>
             <Form.Control
               type="file"
@@ -872,7 +866,7 @@ const CreateEvent = ({
               isInvalid={missingBanner}
             />
             <Form.Control.Feedback type="invalid">
-              Please add an image for the {customTypeText}.
+              {translatedText.form.imageValidation}
             </Form.Control.Feedback>
           </Form.Group>
         </Form.Row>
