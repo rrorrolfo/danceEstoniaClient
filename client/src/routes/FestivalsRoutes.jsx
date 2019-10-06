@@ -14,7 +14,8 @@ const FestivalsRoutes = ({
   resetFestivalsErrors,
   toggleLoader,
   updateLoaderText,
-  translatedText
+  translatedText,
+  selectedLang
 }) => {
   return (
     <Switch>
@@ -72,6 +73,7 @@ const FestivalsRoutes = ({
               resetFestivalsErrors={resetFestivalsErrors}
               toggleLoader={toggleLoader}
               translatedText={translatedText}
+              selectedLang={selectedLang}
             />
             <Footer />
           </React.Fragment>
@@ -88,14 +90,16 @@ FestivalsRoutes.propTypes = {
   festivalError: PropTypes.object,
   resetFestivalsErrors: PropTypes.func.isRequired,
   toggleLoader: PropTypes.func,
-  translatedText: PropTypes.object
+  translatedText: PropTypes.object,
+  selectedLang: PropTypes.oneOf(['eng', 'est'])
 };
 
 FestivalsRoutes.defaultProps = {
   singleFestival: null,
   festivalError: { status: 0 },
   toggleLoader: null,
-  translatedText: {}
+  translatedText: {},
+  selectedLang: 'est'
 };
 
 export default FestivalsRoutes;

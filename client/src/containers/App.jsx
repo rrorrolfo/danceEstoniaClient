@@ -104,6 +104,7 @@ const App = ({
           toggleModal={toggleModal}
           updateLoaderText={updateLoaderText}
           translatedText={translatedText}
+          selectedLang={selectedLang}
         />
         <MainModal
           show={showModal.show}

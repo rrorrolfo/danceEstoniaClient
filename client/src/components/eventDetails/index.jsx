@@ -33,7 +33,8 @@ const EventDetails = ({
   resetErrors,
   resetFestivalsErrors,
   toggleLoader,
-  translatedText
+  translatedText,
+  selectedLang
 }) => {
   const { id } = match.params;
   useEffect(() => {
@@ -129,9 +130,12 @@ const EventDetails = ({
             <tr>
               <td>{calendar('event-calendar')}</td>
               <td className="event-date">
-                {isoStringToDate(selectedEvent.dateOfEvent)}
+                {isoStringToDate(selectedEvent.dateOfEvent, selectedLang)}
                 {category === 'festivals' && selectedEvent.finishDateOfEvent
-                  ? ` - ${isoStringToDate(selectedEvent.finishDateOfEvent)}`
+                  ? ` - ${isoStringToDate(
+                      selectedEvent.finishDateOfEvent,
+                      selectedLang
+                    )}`
                   : null}
               </td>
             </tr>
@@ -220,7 +224,8 @@ EventDetails.propTypes = {
   resetErrors: PropTypes.func,
   resetFestivalsErrors: PropTypes.func,
   toggleLoader: PropTypes.func,
-  translatedText: PropTypes.object
+  translatedText: PropTypes.object,
+  selectedLang: PropTypes.oneOf(['eng', 'est'])
 };
 
 EventDetails.defaultProps = {
@@ -229,7 +234,8 @@ EventDetails.defaultProps = {
   resetErrors: null,
   resetFestivalsErrors: null,
   toggleLoader: null,
-  translatedText: {}
+  translatedText: {},
+  selectedLang: 'est'
 };
 
 export default withRouter(EventDetails);

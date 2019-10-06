@@ -14,7 +14,8 @@ const EventsRoutes = ({
   resetErrors,
   toggleLoader,
   updateLoaderText,
-  translatedText
+  translatedText,
+  selectedLang
 }) => {
   return (
     <Switch>
@@ -64,6 +65,7 @@ const EventsRoutes = ({
               resetErrors={resetErrors}
               toggleLoader={toggleLoader}
               translatedText={translatedText}
+              selectedLang={selectedLang}
             />
             <Footer />
           </React.Fragment>
@@ -80,14 +82,16 @@ EventsRoutes.propTypes = {
   eventError: PropTypes.object,
   resetErrors: PropTypes.func.isRequired,
   toggleLoader: PropTypes.func,
-  translatedText: PropTypes.object
+  translatedText: PropTypes.object,
+  selectedLang: PropTypes.oneOf(['eng', 'est'])
 };
 
 EventsRoutes.defaultProps = {
   singleEvent: null,
   eventError: { status: 0 },
   toggleLoader: null,
-  translatedText: {}
+  translatedText: {},
+  selectedLang: 'est'
 };
 
 export default EventsRoutes;
