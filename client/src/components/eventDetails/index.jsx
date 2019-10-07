@@ -38,19 +38,17 @@ const EventDetails = ({
 }) => {
   const { id } = match.params;
   useEffect(() => {
-    const promise1 = new Promise(async resolve => {
-      await actionOnMount(`/${category}/${match.params.category}/${id}`);
-      resolve();
-    });
-    const promise2 = new Promise(resolve =>
-      setTimeout(() => {
-        resolve();
-      }, 1000)
-    );
-
-    Promise.all([promise1, promise2]).then(() => toggleLoader(false));
+    actionOnMount(`/${category}/${match.params.category}/${id}`);
     // eslint-disable-next-line
   }, []);
+
+  useEffect(() => {
+    if (singleEvent !== null || singleFestival !== null) {
+      setTimeout(() => {
+        toggleLoader(false);
+      }, 1000);
+    }
+  }, [singleFestival, singleEvent, toggleLoader]);
 
   useEffect(() => {
     if (error.status !== 0) {
