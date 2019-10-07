@@ -36,14 +36,11 @@ const MainJumbotron = ({ category, translatedText }) => {
 };
 
 Jumbotron.propTypes = {
-  category: PropTypes.oneOf(['events', 'festivals']),
-  // eslint-disable-next-line react/forbid-prop-types
-  translatedText: PropTypes.object
+  category: PropTypes.oneOf(['events', 'festivals'])
 };
 
 Jumbotron.defaultProps = {
-  category: null,
-  translatedText: {}
+  category: null
 };
 
 export default MainJumbotron;
