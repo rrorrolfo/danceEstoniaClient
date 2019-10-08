@@ -5,7 +5,6 @@ import { withRouter } from 'react-router-dom';
 import { convertFromRaw } from 'draft-js';
 import PropTypes from 'prop-types';
 import './eventDetails.css';
-import mapsApiKey from '../../config/config';
 import Breadcrumbs from '../breadcrumbs';
 import BuyMeCofeeCTA from '../buyMeCofee';
 import TextEditor from '../textEditor';
@@ -195,7 +194,9 @@ const EventDetails = ({
           )}
         />
         <iframe
-          src={`https://www.google.com/maps/embed/v1/place?key=${mapsApiKey}
+          src={`https://www.google.com/maps/embed/v1/place?key=${
+            process.env.REACT_APP_MAPS_API_KEY
+          }
       &q=${formatMapSrc()}`}
           title={`${selectedEvent.name} map`}
           width="100%"
