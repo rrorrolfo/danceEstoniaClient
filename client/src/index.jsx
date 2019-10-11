@@ -11,8 +11,8 @@ import appReducer from './reducers';
 const store = createStore(
   appReducer,
   compose(
-    applyMiddleware(thunk),
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__()
+    applyMiddleware(thunk)
+    // window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__()
   )
 );
 
