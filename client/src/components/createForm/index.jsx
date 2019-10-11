@@ -490,7 +490,7 @@ const CreateEvent = ({
         <Form.Row className="margin-on-top">
           <Form.Group as={Col} controlId="name-of-event">
             <Form.Label className="bold">
-              Name of the event {translatedText.form.nameOfEvent} *
+              {translatedText.form.nameOfEvent} *
             </Form.Label>
             <Form.Control
               placeholder={translatedText.form.nameOfEvent}
