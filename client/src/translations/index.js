@@ -111,7 +111,7 @@ export const t__est = {
   },
   header: {
     createEvent: 'Loo Üritus',
-    contact: 'Kontact'
+    contact: 'Kontakt'
   },
   jumbotron: {
     titleEvents: 'Leia Eesti parimaid tantsupidusid',
