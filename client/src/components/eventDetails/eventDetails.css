@@ -26,9 +26,14 @@
   margin-top: -1.5px;
 }
 
+.event-details-table {
+  table-layout: fixed;
+}
+
 .event-details-table td {
   padding: 3px 3px 6px;
   border-top: none;
+  word-wrap: break-word;
 }
 
 .event-details-table td:first-child {
