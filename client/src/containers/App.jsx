@@ -1,6 +1,6 @@
 /* eslint-disable react/forbid-prop-types */
 /* eslint-disable no-shadow */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -50,6 +50,7 @@ const App = ({
   });
   const [translatedText, updateTranslatedText] = useState({ ...texts.t__est });
   const [loaderText, updateLoaderText] = useState(translatedText.loader.teaser);
+  const scrollTarget = useRef(null);
 
   useEffect(() => {
     fetchEvents();
@@ -90,6 +91,7 @@ const App = ({
           translatedText={translatedText}
           selectedLang={selectedLang}
           setLanguage={setLanguage}
+          scrollTarget={scrollTarget}
         />
         <AppRoutes
           fetchSingleEvent={fetchSingleEvent}
@@ -105,6 +107,7 @@ const App = ({
           updateLoaderText={updateLoaderText}
           translatedText={translatedText}
           selectedLang={selectedLang}
+          scrollTarget={scrollTarget}
         />
         <MainModal
           show={showModal.show}
