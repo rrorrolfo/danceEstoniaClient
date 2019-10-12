@@ -1,11 +1,18 @@
+/* eslint-disable react/forbid-prop-types */
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Container, Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { danceEstoniaWt, danceCouple } from '../../assets/icons/Logos';
+import { scrollToRef } from '../../utils';
 import './header.css';
 
-const Header = ({ translatedText, selectedLang, setLanguage }) => {
+const Header = ({
+  translatedText,
+  selectedLang,
+  setLanguage,
+  scrollTarget
+}) => {
   const [displayEventsMenu, toggleEventsMenu] = useState(false);
   const [displayFestivalsMenu, toggleFestivalsMenu] = useState(false);
 
@@ -15,6 +22,8 @@ const Header = ({ translatedText, selectedLang, setLanguage }) => {
   };
 
   const handleClick = cat => {
+    scrollToRef(0, scrollTarget.current.offsetHeight - 65);
+
     if (cat === 'events') {
       const eventMenu = document.querySelector('.events');
       toggleEventsMenu(false);
@@ -173,14 +182,15 @@ const Header = ({ translatedText, selectedLang, setLanguage }) => {
 };
 
 Header.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
   translatedText: PropTypes.object,
-  selectedLang: PropTypes.string
+  selectedLang: PropTypes.string,
+  scrollTarget: PropTypes.object
 };
 
 Header.defaultProps = {
   translatedText: {},
-  selectedLang: 'est'
+  selectedLang: 'est',
+  scrollTarget: null
 };
 
 export default Header;

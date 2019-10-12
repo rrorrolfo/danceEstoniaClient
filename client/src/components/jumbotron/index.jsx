@@ -3,29 +3,40 @@ import { Jumbotron, Container, Nav } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './jumbotron.css';
+import { scrollToRef } from '../../utils';
 
-const MainJumbotron = ({ category, translatedText }) => {
-  const simpleTitle = () =>
-    category === 'events'
-      ? translatedText.jumbotron.titleEvents
-      : translatedText.jumbotron.titleFestivals;
+const MainJumbotron = ({ category, translatedText, scrollTarget }) => {
   return (
     <Jumbotron className="main-jumbotron">
-      <div className="overlay" />
+      <div className="overlay" ref={scrollTarget} />
       <Container className="welcoming-wrapper">
-        <h1 className="welcoming-title">{simpleTitle()}</h1>
+        <h1 className="welcoming-title">
+          {category === 'events'
+            ? translatedText.jumbotron.titleEvents
+            : translatedText.jumbotron.titleFestivals}
+        </h1>
         <Nav
           activeKey={`/${category}}`}
           as="ul"
           className="justify-content-center"
         >
           <Nav.Item as="li" className="category-cta">
-            <NavLink to="/events">
+            <NavLink
+              to="/events"
+              onClick={() =>
+                scrollToRef(0, scrollTarget.current.offsetHeight - 65)
+              }
+            >
               {translatedText.general.partiesandEvents}
             </NavLink>
           </Nav.Item>
           <Nav.Item as="li" className="category-cta">
-            <NavLink to="/festivals">
+            <NavLink
+              to="/festivals"
+              onClick={() =>
+                scrollToRef(0, scrollTarget.current.offsetHeight - 65)
+              }
+            >
               {translatedText.general.festivals}
             </NavLink>
           </Nav.Item>
@@ -36,11 +47,14 @@ const MainJumbotron = ({ category, translatedText }) => {
 };
 
 Jumbotron.propTypes = {
-  category: PropTypes.oneOf(['events', 'festivals'])
+  category: PropTypes.oneOf(['events', 'festivals']),
+  // eslint-disable-next-line react/forbid-prop-types
+  scrollTarget: PropTypes.object
 };
 
 Jumbotron.defaultProps = {
-  category: null
+  category: null,
+  scrollTarget: null
 };
 
 export default MainJumbotron;
