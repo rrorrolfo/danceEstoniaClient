@@ -12,6 +12,10 @@
   margin-top: 15px;
 }
 
+.event-title {
+  margin-top: 15px;
+}
+
 .calendar.event-calendar,
 .clock.event-clock,
 .tickets.event-ticket,
@@ -40,6 +44,10 @@
   width: 25px;
 }
 
+.event-details-table td:last-child {
+  padding-left: 10px;
+}
+
 .ticket-url {
   margin-left: 10px;
 }
@@ -63,6 +71,14 @@
 @media (min-width: 992px) {
   .event-img {
     height: 55vh;
+  }
+
+  .event-title {
+    margin-top: 35px;
+  }
+
+  .event-details-table td:last-child {
+    padding-left: 15px;
   }
 
   /*** Breacrumb***/
