@@ -15,7 +15,8 @@ const EventsRoutes = ({
   toggleLoader,
   updateLoaderText,
   translatedText,
-  selectedLang
+  selectedLang,
+  scrollTarget
 }) => {
   return (
     <Switch>
@@ -24,7 +25,11 @@ const EventsRoutes = ({
         exact
         render={({ match }) => (
           <React.Fragment>
-            <MainJumbotron category="events" translatedText={translatedText} />
+            <MainJumbotron
+              category="events"
+              translatedText={translatedText}
+              scrollTarget={scrollTarget}
+            />
             <ResultsContainer
               topLevelMatch={match}
               category="events"
@@ -40,7 +45,11 @@ const EventsRoutes = ({
         exact
         render={({ match }) => (
           <React.Fragment>
-            <MainJumbotron category="events" translatedText={translatedText} />
+            <MainJumbotron
+              category="events"
+              translatedText={translatedText}
+              scrollTarget={scrollTarget}
+            />
             <ResultsContainer
               topLevelMatch={match}
               category="events"
@@ -83,7 +92,8 @@ EventsRoutes.propTypes = {
   resetErrors: PropTypes.func.isRequired,
   toggleLoader: PropTypes.func,
   translatedText: PropTypes.object,
-  selectedLang: PropTypes.oneOf(['eng', 'est'])
+  selectedLang: PropTypes.oneOf(['eng', 'est']),
+  scrollTarget: PropTypes.object
 };
 
 EventsRoutes.defaultProps = {
@@ -91,7 +101,8 @@ EventsRoutes.defaultProps = {
   eventError: { status: 0 },
   toggleLoader: null,
   translatedText: {},
-  selectedLang: 'est'
+  selectedLang: 'est',
+  scrollTarget: null
 };
 
 export default EventsRoutes;

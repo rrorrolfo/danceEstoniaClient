@@ -28,7 +28,8 @@ const AppRoutes = ({
   toggleModal,
   updateLoaderText,
   translatedText,
-  selectedLang
+  selectedLang,
+  scrollTarget
 }) => {
   return (
     <Switch>
@@ -48,6 +49,7 @@ const AppRoutes = ({
             updateLoaderText={updateLoaderText}
             translatedText={translatedText}
             selectedLang={selectedLang}
+            scrollTarget={scrollTarget}
           />
         )}
       />
@@ -66,6 +68,7 @@ const AppRoutes = ({
             updateLoaderText={updateLoaderText}
             translatedText={translatedText}
             selectedLang={selectedLang}
+            scrollTarget={scrollTarget}
           />
         )}
       />
@@ -149,7 +152,8 @@ AppRoutes.propTypes = {
   toggleModal: PropTypes.func,
   toggleLoader: PropTypes.func.isRequired,
   translatedText: PropTypes.object,
-  selectedLang: PropTypes.oneOf(['eng', 'est'])
+  selectedLang: PropTypes.oneOf(['eng', 'est']),
+  scrollTarget: PropTypes.object
 };
 
 AppRoutes.defaultProps = {
@@ -165,7 +169,8 @@ AppRoutes.defaultProps = {
   festivalError: { status: 0 },
   toggleModal: null,
   translatedText: {},
-  selectedLang: 'est'
+  selectedLang: 'est',
+  scrollTarget: null
 };
 
 export default AppRoutes;

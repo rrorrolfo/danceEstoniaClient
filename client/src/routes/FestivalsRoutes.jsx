@@ -15,7 +15,8 @@ const FestivalsRoutes = ({
   toggleLoader,
   updateLoaderText,
   translatedText,
-  selectedLang
+  selectedLang,
+  scrollTarget
 }) => {
   return (
     <Switch>
@@ -27,6 +28,7 @@ const FestivalsRoutes = ({
             <MainJumbotron
               category="festivals"
               translatedText={translatedText}
+              scrollTarget={scrollTarget}
             />
             <ResultsContainer
               match={match}
@@ -47,6 +49,7 @@ const FestivalsRoutes = ({
               category="festivals"
               match={match}
               translatedText={translatedText}
+              scrollTarget={scrollTarget}
             />
             <ResultsContainer
               match={match}
@@ -91,7 +94,8 @@ FestivalsRoutes.propTypes = {
   resetFestivalsErrors: PropTypes.func.isRequired,
   toggleLoader: PropTypes.func,
   translatedText: PropTypes.object,
-  selectedLang: PropTypes.oneOf(['eng', 'est'])
+  selectedLang: PropTypes.oneOf(['eng', 'est']),
+  scrollTarget: PropTypes.object
 };
 
 FestivalsRoutes.defaultProps = {
@@ -99,7 +103,8 @@ FestivalsRoutes.defaultProps = {
   festivalError: { status: 0 },
   toggleLoader: null,
   translatedText: {},
-  selectedLang: 'est'
+  selectedLang: 'est',
+  scrollTarget: null
 };
 
 export default FestivalsRoutes;
