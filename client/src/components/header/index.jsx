@@ -21,6 +21,15 @@ const Header = ({
     return setTimeout(() => node.classList.contains('.show'), 100);
   };
 
+  const hideCollapsedMenu = () => {
+    const collapsedMenuButton = document.querySelector(
+      '.navbar-toggler.collapsed'
+    );
+    if (collapsedMenuButton !== null) {
+      collapsedMenuButton.click();
+    }
+  };
+
   const handleClick = cat => {
     if (scrollTarget.current !== null) {
       scrollToRef(0, scrollTarget.current.offsetHeight - 65);
@@ -32,7 +41,7 @@ const Header = ({
       eventMenu.click();
       eventMenu.classList.remove('show');
       document.querySelector('.events .dropdown-menu').classList.remove('show');
-      return true;
+      return hideCollapsedMenu();
     }
 
     const festivalsMenu = document.querySelector('.festivals');
@@ -42,7 +51,7 @@ const Header = ({
     document
       .querySelector('.festivals .dropdown-menu')
       .classList.remove('show');
-    return true;
+    return hideCollapsedMenu();
   };
   return (
     <Navbar expand="md" variant="dark" fixed="top" className="header-container">
@@ -158,10 +167,18 @@ const Header = ({
             {/* <NavLink to="#" className="main-nav-link">
               Shop
             </NavLink> */}
-            <NavLink to="/createEvent" className="main-nav-link">
+            <NavLink
+              to="/createEvent"
+              className="main-nav-link"
+              onClick={() => hideCollapsedMenu()}
+            >
               {translatedText.header.createEvent}
             </NavLink>
-            <NavLink to="/contact" className="main-nav-link">
+            <NavLink
+              to="/contact"
+              className="main-nav-link"
+              onClick={() => hideCollapsedMenu()}
+            >
               {translatedText.header.contact}
             </NavLink>
             <NavDropdown
