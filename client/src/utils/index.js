@@ -32,7 +32,15 @@ export const getTodayISODate = () => {
 };
 
 /**
- * Summary. Checks if a string value has no characters.
+ * Scrolls the window to the specified coordenates.
+ * @param {number} x X coordenate where the window will scroll.
+ * @param {number} y Y coordenate where the window will scroll.
+ * @return {void}
+ */
+export const scrollToRef = (x = 0, y = 0) => window.scrollTo(x, y);
+
+/**
+ * Checks if a string value has no characters.
  * @param {string} string String that will be assesed.
  * @return {bool} false: The value has no characters, true: the value has characters
  */
