@@ -22,7 +22,9 @@ const Header = ({
   };
 
   const handleClick = cat => {
-    scrollToRef(0, scrollTarget.current.offsetHeight - 65);
+    if (scrollTarget.current !== null) {
+      scrollToRef(0, scrollTarget.current.offsetHeight - 65);
+    }
 
     if (cat === 'events') {
       const eventMenu = document.querySelector('.events');
