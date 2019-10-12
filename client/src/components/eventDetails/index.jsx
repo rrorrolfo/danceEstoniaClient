@@ -1,5 +1,5 @@
 /* eslint-disable react/forbid-prop-types */
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Container, Table } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
 import { convertFromRaw } from 'draft-js';
@@ -36,10 +36,19 @@ const EventDetails = ({
   selectedLang
 }) => {
   const { id } = match.params;
+  const scrollToRef = () => window.scrollTo(0, 0);
+  const target = useRef(null);
+
   useEffect(() => {
     actionOnMount(`/${category}/${match.params.category}/${id}`);
     // eslint-disable-next-line
   }, []);
+
+  useEffect(() => {
+    if (target.current !== null) {
+      scrollToRef(target);
+    }
+  }, [target]);
 
   useEffect(() => {
     if (singleEvent !== null || singleFestival !== null) {
@@ -77,6 +86,7 @@ const EventDetails = ({
     <React.Fragment>
       <Container
         fluid
+        ref={target}
         className="event-img"
         style={{
           backgroundImage: `url(${selectedEvent.imageURL})`,
