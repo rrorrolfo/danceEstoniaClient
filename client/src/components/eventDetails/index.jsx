@@ -1,5 +1,5 @@
 /* eslint-disable react/forbid-prop-types */
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import { Container, Table } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
 import { convertFromRaw } from 'draft-js';
@@ -8,7 +8,7 @@ import './eventDetails.css';
 import Breadcrumbs from '../breadcrumbs';
 import BuyMeCofeeCTA from '../buyMeCofee';
 import TextEditor from '../textEditor';
-import { arrayToUpperCase, isoStringToDate } from '../../utils';
+import { arrayToUpperCase, isoStringToDate, scrollToRef } from '../../utils';
 import {
   hotel,
   calendar,
@@ -36,19 +36,11 @@ const EventDetails = ({
   selectedLang
 }) => {
   const { id } = match.params;
-  const scrollToRef = () => window.scrollTo(0, 0);
-  const target = useRef(null);
-
   useEffect(() => {
     actionOnMount(`/${category}/${match.params.category}/${id}`);
+    scrollToRef();
     // eslint-disable-next-line
   }, []);
-
-  useEffect(() => {
-    if (target.current !== null) {
-      scrollToRef(target);
-    }
-  }, [target]);
 
   useEffect(() => {
     if (singleEvent !== null || singleFestival !== null) {
@@ -86,7 +78,6 @@ const EventDetails = ({
     <React.Fragment>
       <Container
         fluid
-        ref={target}
         className="event-img"
         style={{
           backgroundImage: `url(${selectedEvent.imageURL})`,
