@@ -47,14 +47,11 @@ const MainJumbotron = ({ category, translatedText, scrollTarget }) => {
 };
 
 Jumbotron.propTypes = {
-  category: PropTypes.oneOf(['events', 'festivals']),
-  // eslint-disable-next-line react/forbid-prop-types
-  scrollTarget: PropTypes.object
+  category: PropTypes.oneOf(['events', 'festivals'])
 };
 
 Jumbotron.defaultProps = {
-  category: null,
-  scrollTarget: null
+  category: null
 };
 
 export default MainJumbotron;
