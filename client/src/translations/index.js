@@ -102,8 +102,8 @@ export const t__est = {
     all: 'Kõik',
     estonia: 'Eesti',
     inEstonia: 'Eestis',
-    europe: 'Europa',
-    inEurope: 'Europas'
+    europe: 'Euroopa',
+    inEurope: 'Euroopas'
   },
   loader: {
     loading: 'Loading',
