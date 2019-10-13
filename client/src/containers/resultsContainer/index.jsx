@@ -48,7 +48,7 @@ const ResultsContainer = ({
   } ${
     category === 'events'
       ? translatedText.general.partiesandEvents
-      : translatedText.general.partiesandEvents
+      : translatedText.general.festivals
   }${' '}${
     category === 'events'
       ? `${translatedText.general.inEstonia}`
