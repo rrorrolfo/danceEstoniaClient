@@ -5,7 +5,7 @@ const Footer = () => {
     <div className="footer centered">
       <p className="copyright">
         &copy; 2019 DanceEstonia. All rights reserved |
-        <span>Crafted by DanceEstonia Dev.</span>
+        <span>Crafted by Rodolfo del Rio.</span>
       </p>
     </div>
   );
