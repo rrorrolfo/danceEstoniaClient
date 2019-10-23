@@ -95,7 +95,9 @@ const SearchResults = ({
       <Container className="results-container">
         {checkAndDisplayResults(style)}
       </Container>
-      {pageCount * 3 - 1 < results.length ? (
+      {pageCount * 3 - 1 < results.length ||
+      (results[`${style}`] &&
+        pageCount * 3 - 1 < results[`${style}`].length) ? (
         <PageCTA
           category={category}
           pageCount={pageCount}
