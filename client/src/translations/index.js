@@ -24,7 +24,7 @@ export const t__eng = {
   },
   jumbotron: {
     titleEvents: 'Find the best dancing events in Estonia',
-    titleFestivals: 'Find the best dancing festivals in Estonia'
+    titleFestivals: 'Find the best dancing festivals in Europe'
   },
   body: {
     upcoming: 'Upcoming',
@@ -115,7 +115,7 @@ export const t__est = {
   },
   jumbotron: {
     titleEvents: 'Leia Eesti parimaid tantsupidusid',
-    titleFestivals: 'Leia Eesti parimaid tantsufestivalid'
+    titleFestivals: 'Leia Euroopa parimaid tantsufestivalid'
   },
   body: {
     upcoming: 'Tulevased',
