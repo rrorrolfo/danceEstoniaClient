@@ -30,7 +30,7 @@
 }
 
 .welcoming-title {
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 .category-cta {
@@ -46,7 +46,7 @@
 .category-cta a {
   display: block;
   padding: 10px 0;
-  font-size: 1.15rem;
+  font-size: 1rem;
   color: #fff;
   text-decoration: none;
 }
@@ -88,6 +88,10 @@
 
   .category-cta {
     max-width: 329px;
+  }
+
+  .category-cta a {
+    font-size: 1.15rem;
   }
 
   .category-cta:first-child {
