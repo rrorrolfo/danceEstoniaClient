@@ -4,7 +4,7 @@
   "name": "Dance Estonia",
   "dir": "ltr",
   "lang": "en et",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Find the next dancing party in Estonia. Dance Salsa, Bachata, and Kizomba in Estonia. Find the next international Salsa, Bachata, or Kizomba festival in Europe.",
   "authors": [
     {
@@ -12,7 +12,7 @@
       "email": "danceestonia@gmail.com"
     }
   ],
-  "version_name": "Added GA.",
+  "version_name": "Fixed festivals title",
   "icons": [
     {
       "src": "favicon.ico",
