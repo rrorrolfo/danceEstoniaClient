@@ -1,0 +1,22 @@
+@startuml Erply Wizard
+participant "React Client" as Client
+participant "REST API" as API
+database "Mongo DB" as MongoDB
+database "Google Cloud Storage" as GCS
+
+title DE
+
+Client -> API: CRUD Request
+activate API
+API -> MongoDB: Request Data
+activate MongoDB
+API -> GCS: Assets to Store
+activate GCS
+MongoDB -> API: Response Data
+deactivate MongoDB
+API -> Client: Response
+deactivate API
+GCS -> Client: Assets
+deactivate GCS
+
+@enduml
