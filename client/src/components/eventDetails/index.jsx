@@ -150,7 +150,7 @@ const EventDetails = ({
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    {selectedEvent.fbEvent}
+                    Facebook event
                   </a>
                 </td>
               </tr>
