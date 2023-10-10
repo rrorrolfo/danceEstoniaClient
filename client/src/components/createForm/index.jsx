@@ -524,7 +524,7 @@ const CreateEvent = ({
               name="day-of-event"
               value={eventDate}
               min={todayDate}
-              max="2022-12-31"
+              max="2025-12-31"
               onChange={event => {
                 updateEventDate(event.target.value);
                 validateDate(event.target.value);
@@ -554,7 +554,7 @@ const CreateEvent = ({
                 name="day-of-event"
                 value={endDate}
                 min={todayDate}
-                max="2022-12-31"
+                max="2025-12-31"
                 onChange={event => {
                   updateEndDate(event.target.value);
                   validateDate(event.target.value, true);
