@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+const danceEstoniaAPIURL = 'https://dance-estonia-api.onrender.com';
+
 /**
  * @param {object.isRequired} params Contains the parameters that will be sent in the request
  * @param {string.isRequired} params.endPoint Determines the endpoint to send the request
@@ -9,7 +11,7 @@ import axios from 'axios';
  * @param {number.oneOf([0, 1])} params.all 1 will return authorized and unauthorized events, 0 will return authorized events
  */
 export const apiRequest = params => {
-  return axios(`https://dance-estonia.herokuapp.com${params.endPoint}`, {
+  return axios(`${danceEstoniaAPIURL}${params.endPoint}`, {
     params: {
       timeFrame: params.timeFrame || null,
       delete: params.delete || 0,
@@ -25,7 +27,7 @@ export const apiRequest = params => {
  */
 export const createEvent = (eventType, data) => {
   return axios({
-    url: `https://dance-estonia.herokuapp.com/${eventType}`,
+    url: `${danceEstoniaAPIURL}${eventType}`,
     method: 'post',
     data
   })
@@ -38,7 +40,7 @@ export const createEvent = (eventType, data) => {
  */
 export const deleteRequest = params => {
   return axios({
-    url: `https://dance-estonia.herokuapp.com${params.endPoint}`,
+    url: `${danceEstoniaAPIURL}${params.endPoint}`,
     method: 'delete'
   })
     .then(response => response.data)
@@ -53,7 +55,7 @@ export const deleteRequest = params => {
  */
 export const updateRequest = (params, data) => {
   return axios({
-    url: `https://dance-estonia.herokuapp.com${params.endPoint}`,
+    url: `${danceEstoniaAPIURL}${params.endPoint}`,
     method: 'put',
     data
   })
@@ -73,10 +75,6 @@ const requestOptions = {
  */
 export const emailRequest = data => {
   return axios
-    .post(
-      'https://node-mailer-rcph.herokuapp.com/contact',
-      data,
-      requestOptions
-    )
+    .post('https://ctm-mailer.onrender.com/contact', data, requestOptions)
     .then(response => response.data);
 };
