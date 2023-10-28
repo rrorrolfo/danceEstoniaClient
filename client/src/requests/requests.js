@@ -27,7 +27,7 @@ export const apiRequest = params => {
  */
 export const createEvent = (eventType, data) => {
   return axios({
-    url: `${danceEstoniaAPIURL}${eventType}`,
+    url: `${danceEstoniaAPIURL}/${eventType}`,
     method: 'post',
     data
   })
