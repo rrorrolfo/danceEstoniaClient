@@ -1,10 +1,10 @@
-@startuml Erply Wizard
+@startuml Dance Estonia Client
 participant "React Client" as Client
 participant "REST API" as API
 database "Mongo DB" as MongoDB
 database "Google Cloud Storage" as GCS
 
-title DE
+title Dance Estonia Architecture
 
 Client -> API: CRUD Request
 activate API
